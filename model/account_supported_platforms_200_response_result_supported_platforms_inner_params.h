@@ -1,0 +1,41 @@
+/*
+ * account_supported_platforms_200_response_result_supported_platforms_inner_params.h
+ *
+ * 
+ */
+
+#ifndef _account_supported_platforms_200_response_result_supported_platforms_inner_params_H_
+#define _account_supported_platforms_200_response_result_supported_platforms_inner_params_H_
+
+#include <string.h>
+#include "../external/cJSON.h"
+#include "../include/list.h"
+#include "../include/keyValuePair.h"
+#include "../include/binary.h"
+
+typedef struct account_supported_platforms_200_response_result_supported_platforms_inner_params_t account_supported_platforms_200_response_result_supported_platforms_inner_params_t;
+
+#include "account_supported_platforms_200_response_result_supported_platforms_inner_params_required_inner_inner.h"
+
+
+
+typedef struct account_supported_platforms_200_response_result_supported_platforms_inner_params_t {
+    list_t *required; //primitive container
+    list_t *additional; //nonprimitive container
+
+    int _library_owned; // Is the library responsible for freeing this object?
+} account_supported_platforms_200_response_result_supported_platforms_inner_params_t;
+
+__attribute__((deprecated)) account_supported_platforms_200_response_result_supported_platforms_inner_params_t *account_supported_platforms_200_response_result_supported_platforms_inner_params_create(
+    list_t *required,
+    list_t *additional
+);
+
+void account_supported_platforms_200_response_result_supported_platforms_inner_params_free(account_supported_platforms_200_response_result_supported_platforms_inner_params_t *account_supported_platforms_200_response_result_supported_platforms_inner_params);
+
+account_supported_platforms_200_response_result_supported_platforms_inner_params_t *account_supported_platforms_200_response_result_supported_platforms_inner_params_parseFromJSON(cJSON *account_supported_platforms_200_response_result_supported_platforms_inner_paramsJSON);
+
+cJSON *account_supported_platforms_200_response_result_supported_platforms_inner_params_convertToJSON(account_supported_platforms_200_response_result_supported_platforms_inner_params_t *account_supported_platforms_200_response_result_supported_platforms_inner_params);
+
+#endif /* _account_supported_platforms_200_response_result_supported_platforms_inner_params_H_ */
+

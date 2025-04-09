@@ -1,0 +1,60 @@
+#ifndef account_supported_platforms_200_response_result_supported_platforms_inner_params_TEST
+#define account_supported_platforms_200_response_result_supported_platforms_inner_params_TEST
+
+// the following is to include only the main from the first c file
+#ifndef TEST_MAIN
+#define TEST_MAIN
+#define account_supported_platforms_200_response_result_supported_platforms_inner_params_MAIN
+#endif // TEST_MAIN
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "../external/cJSON.h"
+
+#include "../model/account_supported_platforms_200_response_result_supported_platforms_inner_params.h"
+account_supported_platforms_200_response_result_supported_platforms_inner_params_t* instantiate_account_supported_platforms_200_response_result_supported_platforms_inner_params(int include_optional);
+
+
+
+account_supported_platforms_200_response_result_supported_platforms_inner_params_t* instantiate_account_supported_platforms_200_response_result_supported_platforms_inner_params(int include_optional) {
+  account_supported_platforms_200_response_result_supported_platforms_inner_params_t* account_supported_platforms_200_response_result_supported_platforms_inner_params = NULL;
+  if (include_optional) {
+    account_supported_platforms_200_response_result_supported_platforms_inner_params = account_supported_platforms_200_response_result_supported_platforms_inner_params_create(
+      list_createList(),
+      list_createList()
+    );
+  } else {
+    account_supported_platforms_200_response_result_supported_platforms_inner_params = account_supported_platforms_200_response_result_supported_platforms_inner_params_create(
+      list_createList(),
+      list_createList()
+    );
+  }
+
+  return account_supported_platforms_200_response_result_supported_platforms_inner_params;
+}
+
+
+#ifdef account_supported_platforms_200_response_result_supported_platforms_inner_params_MAIN
+
+void test_account_supported_platforms_200_response_result_supported_platforms_inner_params(int include_optional) {
+    account_supported_platforms_200_response_result_supported_platforms_inner_params_t* account_supported_platforms_200_response_result_supported_platforms_inner_params_1 = instantiate_account_supported_platforms_200_response_result_supported_platforms_inner_params(include_optional);
+
+	cJSON* jsonaccount_supported_platforms_200_response_result_supported_platforms_inner_params_1 = account_supported_platforms_200_response_result_supported_platforms_inner_params_convertToJSON(account_supported_platforms_200_response_result_supported_platforms_inner_params_1);
+	printf("account_supported_platforms_200_response_result_supported_platforms_inner_params :\n%s\n", cJSON_Print(jsonaccount_supported_platforms_200_response_result_supported_platforms_inner_params_1));
+	account_supported_platforms_200_response_result_supported_platforms_inner_params_t* account_supported_platforms_200_response_result_supported_platforms_inner_params_2 = account_supported_platforms_200_response_result_supported_platforms_inner_params_parseFromJSON(jsonaccount_supported_platforms_200_response_result_supported_platforms_inner_params_1);
+	cJSON* jsonaccount_supported_platforms_200_response_result_supported_platforms_inner_params_2 = account_supported_platforms_200_response_result_supported_platforms_inner_params_convertToJSON(account_supported_platforms_200_response_result_supported_platforms_inner_params_2);
+	printf("repeating account_supported_platforms_200_response_result_supported_platforms_inner_params:\n%s\n", cJSON_Print(jsonaccount_supported_platforms_200_response_result_supported_platforms_inner_params_2));
+}
+
+int main() {
+  test_account_supported_platforms_200_response_result_supported_platforms_inner_params(1);
+  test_account_supported_platforms_200_response_result_supported_platforms_inner_params(0);
+
+  printf("Hello world \n");
+  return 0;
+}
+
+#endif // account_supported_platforms_200_response_result_supported_platforms_inner_params_MAIN
+#endif // account_supported_platforms_200_response_result_supported_platforms_inner_params_TEST

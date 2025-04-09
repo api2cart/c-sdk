@@ -1,0 +1,23 @@
+# order_shipment_add_t
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**order_id** | **char \*** | Defines the order for which the shipment will be created | [optional] 
+**store_id** | **char \*** | Store Id | [optional] 
+**warehouse_id** | **char \*** | This parameter is used for selecting a warehouse where you need to set/modify a product quantity. | [optional] 
+**shipment_provider** | **char \*** | Defines company name that provide tracking of shipment | [optional] 
+**shipping_method** | **char \*** | Define shipping method | [optional] 
+**items** | [**list_t**](order_shipment_add_items_inner.md) \* | Defines items in the order that will be shipped | [optional] 
+**send_notifications** | **int** | Send notifications to customer after shipment was created | [optional] [default to false]
+**tracking_numbers** | [**list_t**](order_shipment_add_tracking_numbers_inner.md) \* | Defines shipment&#39;s tracking numbers that have to be added&lt;/br&gt; How set tracking numbers to appropriate carrier:&lt;ul&gt;&lt;li&gt;tracking_numbers[]&#x3D;a2c.demo1,a2c.demo2 - set default carrier&lt;/li&gt;&lt;li&gt;tracking_numbers[&lt;b&gt;carrier_id&lt;/b&gt;]&#x3D;a2c.demo - set appropriate carrier&lt;/li&gt;&lt;/ul&gt;To get the list of carriers IDs that are available in your store, use the &lt;a href &#x3D; \&quot;https://api2cart.com/docs/#/cart/CartInfo\&quot;&gt;cart.info&lt;/a &gt; method | [optional] 
+**adjust_stock** | **int** | This parameter is used for adjust stock. | [optional] [default to false]
+**enable_cache** | **int** | If the value is &#39;true&#39; and order exist in our cache, we will use order.info from cache to prepare shipment items. | [optional] [default to false]
+**tracking_link** | **char \*** | Defines custom tracking link | [optional] 
+**is_shipped** | **int** | Defines shipment&#39;s status | [optional] [default to true]
+**check_process_status** | **int** | Disable or enable check process status. Please note that the response will be slower due to additional requests to the store. | [optional] [default to false]
+**use_latest_api_version** | **int** | Use the latest platform API version | [optional] [default to false]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

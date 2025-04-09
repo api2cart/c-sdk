@@ -1,0 +1,40 @@
+/*
+ * order_financial_status_list_200_response_result_order_financial_statuses_inner.h
+ *
+ * 
+ */
+
+#ifndef _order_financial_status_list_200_response_result_order_financial_statuses_inner_H_
+#define _order_financial_status_list_200_response_result_order_financial_statuses_inner_H_
+
+#include <string.h>
+#include "../external/cJSON.h"
+#include "../include/list.h"
+#include "../include/keyValuePair.h"
+#include "../include/binary.h"
+
+typedef struct order_financial_status_list_200_response_result_order_financial_statuses_inner_t order_financial_status_list_200_response_result_order_financial_statuses_inner_t;
+
+
+
+
+typedef struct order_financial_status_list_200_response_result_order_financial_statuses_inner_t {
+    char *id; // string
+    char *name; // string
+
+    int _library_owned; // Is the library responsible for freeing this object?
+} order_financial_status_list_200_response_result_order_financial_statuses_inner_t;
+
+__attribute__((deprecated)) order_financial_status_list_200_response_result_order_financial_statuses_inner_t *order_financial_status_list_200_response_result_order_financial_statuses_inner_create(
+    char *id,
+    char *name
+);
+
+void order_financial_status_list_200_response_result_order_financial_statuses_inner_free(order_financial_status_list_200_response_result_order_financial_statuses_inner_t *order_financial_status_list_200_response_result_order_financial_statuses_inner);
+
+order_financial_status_list_200_response_result_order_financial_statuses_inner_t *order_financial_status_list_200_response_result_order_financial_statuses_inner_parseFromJSON(cJSON *order_financial_status_list_200_response_result_order_financial_statuses_innerJSON);
+
+cJSON *order_financial_status_list_200_response_result_order_financial_statuses_inner_convertToJSON(order_financial_status_list_200_response_result_order_financial_statuses_inner_t *order_financial_status_list_200_response_result_order_financial_statuses_inner);
+
+#endif /* _order_financial_status_list_200_response_result_order_financial_statuses_inner_H_ */
+
