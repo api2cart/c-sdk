@@ -84,7 +84,8 @@ static product_update_t *product_update_create_internal(
     int is_supply,
     int downloadable,
     list_t *materials,
-    int auto_renew
+    int auto_renew,
+    int on_sale
     ) {
     product_update_t *product_update_local_var = malloc(sizeof(product_update_t));
     if (!product_update_local_var) {
@@ -169,6 +170,7 @@ static product_update_t *product_update_create_internal(
     product_update_local_var->downloadable = downloadable;
     product_update_local_var->materials = materials;
     product_update_local_var->auto_renew = auto_renew;
+    product_update_local_var->on_sale = on_sale;
 
     product_update_local_var->_library_owned = 1;
     return product_update_local_var;
@@ -253,7 +255,8 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     int is_supply,
     int downloadable,
     list_t *materials,
-    int auto_renew
+    int auto_renew,
+    int on_sale
     ) {
     return product_update_create_internal (
         id,
@@ -334,7 +337,8 @@ __attribute__((deprecated)) product_update_t *product_update_create(
         is_supply,
         downloadable,
         materials,
-        auto_renew
+        auto_renew,
+        on_sale
         );
 }
 
@@ -1194,6 +1198,14 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     // product_update->auto_renew
     if(product_update->auto_renew) {
     if(cJSON_AddBoolToObject(item, "auto_renew", product_update->auto_renew) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // product_update->on_sale
+    if(product_update->on_sale) {
+    if(cJSON_AddBoolToObject(item, "on_sale", product_update->on_sale) == NULL) {
     goto fail; //Bool
     }
     }
@@ -2171,6 +2183,18 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
+    // product_update->on_sale
+    cJSON *on_sale = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "on_sale");
+    if (cJSON_IsNull(on_sale)) {
+        on_sale = NULL;
+    }
+    if (on_sale) { 
+    if(!cJSON_IsBool(on_sale))
+    {
+    goto end; //Bool
+    }
+    }
+
 
     product_update_local_var = product_update_create_internal (
         id && !cJSON_IsNull(id) ? strdup(id->valuestring) : NULL,
@@ -2251,7 +2275,8 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
         is_supply ? is_supply->valueint : 0,
         downloadable ? downloadable->valueint : 0,
         materials ? materialsList : NULL,
-        auto_renew ? auto_renew->valueint : 0
+        auto_renew ? auto_renew->valueint : 0,
+        on_sale ? on_sale->valueint : 0
         );
 
     return product_update_local_var;

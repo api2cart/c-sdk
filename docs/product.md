@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **weight_unit** | **char \*** |  | [optional] 
 **sort_order** | **int** |  | [optional] 
 **in_stock** | **int** |  | [optional] 
+**on_sale** | **int** |  | [optional] 
 **backorders** | **char \*** |  | [optional] 
 **manage_stock** | **char \*** |  | [optional] 
 **is_stock_managed** | **int** |  | [optional] 

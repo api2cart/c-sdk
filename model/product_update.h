@@ -100,6 +100,7 @@ typedef struct product_update_t {
     int downloadable; //boolean
     list_t *materials; //primitive container
     int auto_renew; //boolean
+    int on_sale; //boolean
 
     int _library_owned; // Is the library responsible for freeing this object?
 } product_update_t;
@@ -183,7 +184,8 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     int is_supply,
     int downloadable,
     list_t *materials,
-    int auto_renew
+    int auto_renew,
+    int on_sale
 );
 
 void product_update_free(product_update_t *product_update);

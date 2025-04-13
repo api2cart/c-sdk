@@ -104,6 +104,7 @@ product_update_t* instantiate_product_update(int include_optional) {
       false,
       true,
       materials[0]=Aluminum&materials[1]=Brass,
+      false,
       false
     );
   } else {
@@ -186,6 +187,7 @@ product_update_t* instantiate_product_update(int include_optional) {
       false,
       true,
       materials[0]=Aluminum&materials[1]=Brass,
+      false,
       false
     );
   }
