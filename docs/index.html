@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API2Cart Android SDK � Integration Overview</title>
+    <title>API2Cart C SDK — Integration Overview</title>
 
-    <!-- Google Font & Basic Styles -->
+    <!-- Example Google Font (Open Sans) -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
+    <!-- Inline styles mimicking API2Cart-like design -->
     <style>
         /* Base reset / setup */
         * {
@@ -163,13 +164,12 @@
             }
         }
     </style>
-
 </head>
 <body>
 
     <!-- HEADER -->
     <header>
-        <div class="logo">API2Cart Android SDK</div>
+        <div class="logo">API2Cart C SDK</div>
         <nav class="nav-links">
             <ul>
                 <li><a href="#description">Overview</a></li>
@@ -180,13 +180,13 @@
         </nav>
     </header>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section class="hero">
-        <h1>API2Cart Android SDK for eCommerce Integration</h1>
+        <h1>API2Cart C SDK for eCommerce Integration</h1>
         <p>
-            Easily integrate Android apps with top eCommerce platforms through a single, unified API.
+            Easily integrate C applications with multiple eCommerce platforms via a single API endpoint.
         </p>
-        <a href="https://api2cart.com/book-a-demo/?utm_source=github&utm_medium=referral&utm_campaign=android-sdk"
+        <a href="https://api2cart.com/book-a-demo/?utm_source=github&utm_medium=referral&utm_campaign=c-sdk"
            class="cta-btn"
            target="_blank"
            rel="noopener noreferrer">
@@ -196,58 +196,86 @@
 
     <!-- MAIN CONTENT -->
     <main>
-        <!-- Overview -->
+        <!-- Section 1: Description -->
         <section id="description">
             <h2>Overview</h2>
             <p>
-                The <strong>API2Cart Android SDK</strong> streamlines communication between your Android app
-                and multiple eCommerce platforms (Shopify, WooCommerce, Magento, etc.). Designed for the
-                Android environment (Java/Kotlin), this SDK lets you manage products, orders, and more
-                through one API endpoint.
+                The <strong>API2Cart C SDK</strong> allows developers to interact with a variety of eCommerce platforms
+                (Shopify, WooCommerce, Magento, PrestaShop, BigCommerce, and more) via a single API. This SDK is designed
+                for C applications and provides easy integration for managing orders, products, and other eCommerce data.
+            </p>
+            <p>
+                Built with simplicity and flexibility in mind, the C SDK provides all the necessary tools to integrate API2Cart
+                with your C-based projects efficiently. Whether you’re building a desktop application, command-line tool, or backend
+                service, this SDK provides a reliable way to interface with multiple eCommerce stores.
             </p>
         </section>
 
-        <!-- Benefits -->
+        <!-- Section 2: Benefits -->
         <section style="background: #fafafa; padding: 2rem;" id="benefits">
             <h2>Key Benefits</h2>
             <ul class="benefits-list">
-                <li><strong>Unified API Access:</strong> Multiple platforms in a single integration.</li>
-                <li><strong>Mobile-Friendly:</strong> Optimized for Android apps built in Java or Kotlin.</li>
-                <li><strong>Scalability:</strong> Seamlessly add or remove stores without heavy refactoring.</li>
-                <li><strong>Security:</strong> Use HTTPS and OAuth (if needed) to keep data secure.</li>
+                <li><strong>Unified API Access:</strong> Easily connect to multiple eCommerce platforms through one endpoint.</li>
+                <li><strong>Flexible Integration:</strong> Designed to work seamlessly with C applications, no additional dependencies.</li>
+                <li><strong>Efficient Data Handling:</strong> Retrieve and manage orders, products, and customers from multiple stores.</li>
+                <li><strong>High Performance:</strong> Optimized for speed and low resource usage, perfect for high-volume applications.</li>
             </ul>
         </section>
 
-        <!-- Quick Start -->
+        <!-- Section 3: Quick Start (Code Example) -->
         <section id="quickstart">
             <h2>Quick Start</h2>
-            <p>Add the SDK to your Android project and make an HTTP call to the �status� endpoint:</p>
-            <pre><code>// Example Kotlin code using OkHttp:
-val apiKey = "YOUR_API2CART_KEY"
-val url = "https://api.api2cart.com/v1.0/status?api_key=$apiKey"
+            <p>
+                Below is a simple C code snippet using the <code>libcurl</code> library to make a GET request to the
+                API2Cart "status" endpoint. Replace the placeholder values with your actual API key.
+            </p>
+            <pre><code>#include <stdio.h>
+#include <curl /curl.h>
 
-val request = Request.Builder()
-    .url(url)
-    .build()
+int main() {
+    CURL *curl;
+    CURLcode res;
+    
+    // Replace with your API key
+    const char* api_key = "YOUR_API2CART_KEY";
+    char url[256];
+    snprintf(url, sizeof(url), "https://api.api2cart.com/v1.0/status?api_key=%s", api_key);
 
-OkHttpClient().newCall(request).execute().use { response ->
-    if (response.isSuccessful) {
-        println("Response: ${response.body?.string()}")
-    } else {
-        println("Error: ${response.code}")
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if(curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        res = curl_easy_perform(curl);
+        
+        if(res != CURLE_OK)
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+        else
+            printf("Request was successful\n");
+
+        curl_easy_cleanup(curl);
     }
+    curl_global_cleanup();
+
+    return 0;
 }
 </code></pre>
+            <p>
+                This example demonstrates how to use the C SDK with <code>libcurl</code> to query the API2Cart status endpoint. You can
+                adapt it to interact with other API2Cart endpoints such as orders, products, or customer data.
+            </p>
         </section>
 
-        <!-- Docs -->
+        <!-- Section 4: Documentation -->
         <section id="docs">
             <h2>Documentation</h2>
             <p>
-                For more details, see
-                <a href="https://api2cart.com/docs/?utm_source=github&utm_medium=referral&utm_campaign=android-sdk"
-                   target="_blank"
-                   rel="noopener noreferrer">API2Cart Documentation</a>.
+                For more details on how to set up and use the API2Cart C SDK, check the
+                <a href="https://api2cart.com/docs/?utm_source=github&utm_medium=referral&utm_campaign=c-sdk"
+                   target="_blank" rel="noopener noreferrer">API2Cart Documentation</a>.
+            </p>
+            <p>
+                You can also explore other examples and libraries provided in the official SDK repository on GitHub.
             </p>
         </section>
     </main>
