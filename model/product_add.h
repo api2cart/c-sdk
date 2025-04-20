@@ -19,6 +19,7 @@ typedef struct product_add_t product_add_t;
 #include "product_add_certifications_inner.h"
 #include "product_add_files_inner.h"
 #include "product_add_group_prices_inner.h"
+#include "product_add_logistic_info_inner.h"
 #include "product_add_manufacturer_info.h"
 #include "product_add_package_details.h"
 #include "product_add_sales_tax.h"
@@ -99,10 +100,12 @@ typedef struct product_add_t {
     list_t *specifics; //nonprimitive container
     char *image_url; // string
     char *image_name; // string
+    list_t *additional_image_urls; //primitive container
     double reserve_price; //numeric
     double buyitnow_price; //numeric
     char *condition_description; // string
     char *auction_confidentiality_level; // string
+    list_t *logistic_info; //nonprimitive container
     char *avail_from; // string
     char *tags; // string
     int clear_cache; //boolean
@@ -214,10 +217,12 @@ __attribute__((deprecated)) product_add_t *product_add_create(
     list_t *specifics,
     char *image_url,
     char *image_name,
+    list_t *additional_image_urls,
     double reserve_price,
     double buyitnow_price,
     char *condition_description,
     char *auction_confidentiality_level,
+    list_t *logistic_info,
     char *avail_from,
     char *tags,
     int clear_cache,

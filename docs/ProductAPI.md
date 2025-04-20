@@ -245,7 +245,7 @@ Name | Type | Description  | Notes
 //
 // Get list of brands from your store.
 //
-model_response_product_brand_list_t* ProductAPI_productBrandList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *params, char *brand_ids, char *exclude, char *store_id, char *lang_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *parent_id, char *response_fields, char *find_where, char *find_value);
+model_response_product_brand_list_t* ProductAPI_productBrandList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *params, char *brand_ids, char *exclude, char *category_id, char *store_id, char *lang_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *parent_id, char *response_fields, char *find_where, char *find_value);
 ```
 
 ### Parameters
@@ -258,6 +258,7 @@ Name | Type | Description  | Notes
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,short_description,active,url&#39;]
 **brand_ids** | **char \*** | Retrieves brands specified by brand ids | [optional] 
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
+**category_id** | **char \*** | Retrieves product brands specified by category id | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 

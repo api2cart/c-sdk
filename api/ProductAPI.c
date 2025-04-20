@@ -1096,7 +1096,7 @@ end:
 // Get list of brands from your store.
 //
 model_response_product_brand_list_t*
-ProductAPI_productBrandList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *params, char *brand_ids, char *exclude, char *store_id, char *lang_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *parent_id, char *response_fields, char *find_where, char *find_value)
+ProductAPI_productBrandList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *params, char *brand_ids, char *exclude, char *category_id, char *store_id, char *lang_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *parent_id, char *response_fields, char *find_where, char *find_value)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1188,6 +1188,18 @@ ProductAPI_productBrandList(apiClient_t *apiClient, int *start, int *count, char
         valueQuery_exclude = strdup((exclude));
         keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
         list_addElement(localVarQueryParameters,keyPairQuery_exclude);
+    }
+
+    // query parameters
+    char *keyQuery_category_id = NULL;
+    char * valueQuery_category_id = NULL;
+    keyValuePair_t *keyPairQuery_category_id = 0;
+    if (category_id)
+    {
+        keyQuery_category_id = strdup("category_id");
+        valueQuery_category_id = strdup((category_id));
+        keyPairQuery_category_id = keyValuePair_create(keyQuery_category_id, valueQuery_category_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_category_id);
     }
 
     // query parameters
@@ -1419,6 +1431,18 @@ ProductAPI_productBrandList(apiClient_t *apiClient, int *start, int *count, char
     if(keyPairQuery_exclude){
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
+    }
+    if(keyQuery_category_id){
+        free(keyQuery_category_id);
+        keyQuery_category_id = NULL;
+    }
+    if(valueQuery_category_id){
+        free(valueQuery_category_id);
+        valueQuery_category_id = NULL;
+    }
+    if(keyPairQuery_category_id){
+        keyValuePair_free(keyPairQuery_category_id);
+        keyPairQuery_category_id = NULL;
     }
     if(keyQuery_store_id){
         free(keyQuery_store_id);

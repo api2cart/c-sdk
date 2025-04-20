@@ -516,6 +516,7 @@ Category | Method | HTTP request | Description
  - [product_add_certifications_inner_images_inner_t](docs/product_add_certifications_inner_images_inner.md)
  - [product_add_files_inner_t](docs/product_add_files_inner.md)
  - [product_add_group_prices_inner_t](docs/product_add_group_prices_inner.md)
+ - [product_add_logistic_info_inner_t](docs/product_add_logistic_info_inner.md)
  - [product_add_manufacturer_info_t](docs/product_add_manufacturer_info.md)
  - [product_add_package_details_t](docs/product_add_package_details.md)
  - [product_add_sales_tax_t](docs/product_add_sales_tax.md)

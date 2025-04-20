@@ -74,10 +74,12 @@ static product_add_t *product_add_create_internal(
     list_t *specifics,
     char *image_url,
     char *image_name,
+    list_t *additional_image_urls,
     double reserve_price,
     double buyitnow_price,
     char *condition_description,
     char *auction_confidentiality_level,
+    list_t *logistic_info,
     char *avail_from,
     char *tags,
     int clear_cache,
@@ -189,10 +191,12 @@ static product_add_t *product_add_create_internal(
     product_add_local_var->specifics = specifics;
     product_add_local_var->image_url = image_url;
     product_add_local_var->image_name = image_name;
+    product_add_local_var->additional_image_urls = additional_image_urls;
     product_add_local_var->reserve_price = reserve_price;
     product_add_local_var->buyitnow_price = buyitnow_price;
     product_add_local_var->condition_description = condition_description;
     product_add_local_var->auction_confidentiality_level = auction_confidentiality_level;
+    product_add_local_var->logistic_info = logistic_info;
     product_add_local_var->avail_from = avail_from;
     product_add_local_var->tags = tags;
     product_add_local_var->clear_cache = clear_cache;
@@ -305,10 +309,12 @@ __attribute__((deprecated)) product_add_t *product_add_create(
     list_t *specifics,
     char *image_url,
     char *image_name,
+    list_t *additional_image_urls,
     double reserve_price,
     double buyitnow_price,
     char *condition_description,
     char *auction_confidentiality_level,
+    list_t *logistic_info,
     char *avail_from,
     char *tags,
     int clear_cache,
@@ -417,10 +423,12 @@ __attribute__((deprecated)) product_add_t *product_add_create(
         specifics,
         image_url,
         image_name,
+        additional_image_urls,
         reserve_price,
         buyitnow_price,
         condition_description,
         auction_confidentiality_level,
+        logistic_info,
         avail_from,
         tags,
         clear_cache,
@@ -686,6 +694,13 @@ void product_add_free(product_add_t *product_add) {
         free(product_add->image_name);
         product_add->image_name = NULL;
     }
+    if (product_add->additional_image_urls) {
+        list_ForEach(listEntry, product_add->additional_image_urls) {
+            free(listEntry->data);
+        }
+        list_freeList(product_add->additional_image_urls);
+        product_add->additional_image_urls = NULL;
+    }
     if (product_add->condition_description) {
         free(product_add->condition_description);
         product_add->condition_description = NULL;
@@ -693,6 +708,13 @@ void product_add_free(product_add_t *product_add) {
     if (product_add->auction_confidentiality_level) {
         free(product_add->auction_confidentiality_level);
         product_add->auction_confidentiality_level = NULL;
+    }
+    if (product_add->logistic_info) {
+        list_ForEach(listEntry, product_add->logistic_info) {
+            product_add_logistic_info_inner_free(listEntry->data);
+        }
+        list_freeList(product_add->logistic_info);
+        product_add->logistic_info = NULL;
     }
     if (product_add->avail_from) {
         free(product_add->avail_from);
@@ -1438,6 +1460,23 @@ cJSON *product_add_convertToJSON(product_add_t *product_add) {
     }
 
 
+    // product_add->additional_image_urls
+    if(product_add->additional_image_urls) {
+    cJSON *additional_image_urls = cJSON_AddArrayToObject(item, "additional_image_urls");
+    if(additional_image_urls == NULL) {
+        goto fail; //primitive container
+    }
+
+    listEntry_t *additional_image_urlsListEntry;
+    list_ForEach(additional_image_urlsListEntry, product_add->additional_image_urls) {
+    if(cJSON_AddStringToObject(additional_image_urls, "", additional_image_urlsListEntry->data) == NULL)
+    {
+        goto fail;
+    }
+    }
+    }
+
+
     // product_add->reserve_price
     if(product_add->reserve_price) {
     if(cJSON_AddNumberToObject(item, "reserve_price", product_add->reserve_price) == NULL) {
@@ -1466,6 +1505,26 @@ cJSON *product_add_convertToJSON(product_add_t *product_add) {
     if(product_add->auction_confidentiality_level) {
     if(cJSON_AddStringToObject(item, "auction_confidentiality_level", product_add->auction_confidentiality_level) == NULL) {
     goto fail; //String
+    }
+    }
+
+
+    // product_add->logistic_info
+    if(product_add->logistic_info) {
+    cJSON *logistic_info = cJSON_AddArrayToObject(item, "logistic_info");
+    if(logistic_info == NULL) {
+    goto fail; //nonprimitive container
+    }
+
+    listEntry_t *logistic_infoListEntry;
+    if (product_add->logistic_info) {
+    list_ForEach(logistic_infoListEntry, product_add->logistic_info) {
+    cJSON *itemLocal = product_add_logistic_info_inner_convertToJSON(logistic_infoListEntry->data);
+    if(itemLocal == NULL) {
+    goto fail;
+    }
+    cJSON_AddItemToArray(logistic_info, itemLocal);
+    }
     }
     }
 
@@ -1854,6 +1913,12 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
 
     // define the local list for product_add->specifics
     list_t *specificsList = NULL;
+
+    // define the local list for product_add->additional_image_urls
+    list_t *additional_image_urlsList = NULL;
+
+    // define the local list for product_add->logistic_info
+    list_t *logistic_infoList = NULL;
 
     // define the local list for product_add->files
     list_t *filesList = NULL;
@@ -2744,6 +2809,28 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
     }
     }
 
+    // product_add->additional_image_urls
+    cJSON *additional_image_urls = cJSON_GetObjectItemCaseSensitive(product_addJSON, "additional_image_urls");
+    if (cJSON_IsNull(additional_image_urls)) {
+        additional_image_urls = NULL;
+    }
+    if (additional_image_urls) { 
+    cJSON *additional_image_urls_local = NULL;
+    if(!cJSON_IsArray(additional_image_urls)) {
+        goto end;//primitive container
+    }
+    additional_image_urlsList = list_createList();
+
+    cJSON_ArrayForEach(additional_image_urls_local, additional_image_urls)
+    {
+        if(!cJSON_IsString(additional_image_urls_local))
+        {
+            goto end;
+        }
+        list_addElement(additional_image_urlsList , strdup(additional_image_urls_local->valuestring));
+    }
+    }
+
     // product_add->reserve_price
     cJSON *reserve_price = cJSON_GetObjectItemCaseSensitive(product_addJSON, "reserve_price");
     if (cJSON_IsNull(reserve_price)) {
@@ -2789,6 +2876,30 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
     if(!cJSON_IsString(auction_confidentiality_level) && !cJSON_IsNull(auction_confidentiality_level))
     {
     goto end; //String
+    }
+    }
+
+    // product_add->logistic_info
+    cJSON *logistic_info = cJSON_GetObjectItemCaseSensitive(product_addJSON, "logistic_info");
+    if (cJSON_IsNull(logistic_info)) {
+        logistic_info = NULL;
+    }
+    if (logistic_info) { 
+    cJSON *logistic_info_local_nonprimitive = NULL;
+    if(!cJSON_IsArray(logistic_info)){
+        goto end; //nonprimitive container
+    }
+
+    logistic_infoList = list_createList();
+
+    cJSON_ArrayForEach(logistic_info_local_nonprimitive,logistic_info )
+    {
+        if(!cJSON_IsObject(logistic_info_local_nonprimitive)){
+            goto end;
+        }
+        product_add_logistic_info_inner_t *logistic_infoItem = product_add_logistic_info_inner_parseFromJSON(logistic_info_local_nonprimitive);
+
+        list_addElement(logistic_infoList, logistic_infoItem);
     }
     }
 
@@ -3346,10 +3457,12 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
         specifics ? specificsList : NULL,
         image_url && !cJSON_IsNull(image_url) ? strdup(image_url->valuestring) : NULL,
         image_name && !cJSON_IsNull(image_name) ? strdup(image_name->valuestring) : NULL,
+        additional_image_urls ? additional_image_urlsList : NULL,
         reserve_price ? reserve_price->valuedouble : 0,
         buyitnow_price ? buyitnow_price->valuedouble : 0,
         condition_description && !cJSON_IsNull(condition_description) ? strdup(condition_description->valuestring) : NULL,
         auction_confidentiality_level && !cJSON_IsNull(auction_confidentiality_level) ? strdup(auction_confidentiality_level->valuestring) : NULL,
+        logistic_info ? logistic_infoList : NULL,
         avail_from && !cJSON_IsNull(avail_from) ? strdup(avail_from->valuestring) : NULL,
         tags && !cJSON_IsNull(tags) ? strdup(tags->valuestring) : NULL,
         clear_cache ? clear_cache->valueint : 0,
@@ -3452,6 +3565,24 @@ end:
         }
         list_freeList(specificsList);
         specificsList = NULL;
+    }
+    if (additional_image_urlsList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, additional_image_urlsList) {
+            free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(additional_image_urlsList);
+        additional_image_urlsList = NULL;
+    }
+    if (logistic_infoList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, logistic_infoList) {
+            product_add_logistic_info_inner_free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(logistic_infoList);
+        logistic_infoList = NULL;
     }
     if (filesList) {
         listEntry_t *listEntry = NULL;

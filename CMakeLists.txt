@@ -319,6 +319,7 @@ set(SRCS
     model/product_add_certifications_inner_images_inner.c
     model/product_add_files_inner.c
     model/product_add_group_prices_inner.c
+    model/product_add_logistic_info_inner.c
     model/product_add_manufacturer_info.c
     model/product_add_package_details.c
     model/product_add_sales_tax.c
@@ -781,6 +782,7 @@ set(HDRS
     model/product_add_certifications_inner_images_inner.h
     model/product_add_files_inner.h
     model/product_add_group_prices_inner.h
+    model/product_add_logistic_info_inner.h
     model/product_add_manufacturer_info.h
     model/product_add_package_details.h
     model/product_add_sales_tax.h
