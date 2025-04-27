@@ -98,18 +98,6 @@ AttributeAPI_attributeAdd(apiClient_t *apiClient, api2cart_openapi_attributeAdd_
     }
 
     // query parameters
-    char *keyQuery_code = NULL;
-    char * valueQuery_code = NULL;
-    keyValuePair_t *keyPairQuery_code = 0;
-    if (code)
-    {
-        keyQuery_code = strdup("code");
-        valueQuery_code = strdup((code));
-        keyPairQuery_code = keyValuePair_create(keyQuery_code, valueQuery_code);
-        list_addElement(localVarQueryParameters,keyPairQuery_code);
-    }
-
-    // query parameters
     char *keyQuery_name = NULL;
     char * valueQuery_name = NULL;
     keyValuePair_t *keyPairQuery_name = 0;
@@ -119,6 +107,18 @@ AttributeAPI_attributeAdd(apiClient_t *apiClient, api2cart_openapi_attributeAdd_
         valueQuery_name = strdup((name));
         keyPairQuery_name = keyValuePair_create(keyQuery_name, valueQuery_name);
         list_addElement(localVarQueryParameters,keyPairQuery_name);
+    }
+
+    // query parameters
+    char *keyQuery_code = NULL;
+    char * valueQuery_code = NULL;
+    keyValuePair_t *keyPairQuery_code = 0;
+    if (code)
+    {
+        keyQuery_code = strdup("code");
+        valueQuery_code = strdup((code));
+        keyPairQuery_code = keyValuePair_create(keyQuery_code, valueQuery_code);
+        list_addElement(localVarQueryParameters,keyPairQuery_code);
     }
 
     // query parameters
@@ -395,18 +395,6 @@ AttributeAPI_attributeAdd(apiClient_t *apiClient, api2cart_openapi_attributeAdd_
         keyValuePair_free(keyPairQuery_type);
         keyPairQuery_type = NULL;
     }
-    if(keyQuery_code){
-        free(keyQuery_code);
-        keyQuery_code = NULL;
-    }
-    if(valueQuery_code){
-        free(valueQuery_code);
-        valueQuery_code = NULL;
-    }
-    if(keyPairQuery_code){
-        keyValuePair_free(keyPairQuery_code);
-        keyPairQuery_code = NULL;
-    }
     if(keyQuery_name){
         free(keyQuery_name);
         keyQuery_name = NULL;
@@ -418,6 +406,18 @@ AttributeAPI_attributeAdd(apiClient_t *apiClient, api2cart_openapi_attributeAdd_
     if(keyPairQuery_name){
         keyValuePair_free(keyPairQuery_name);
         keyPairQuery_name = NULL;
+    }
+    if(keyQuery_code){
+        free(keyQuery_code);
+        keyQuery_code = NULL;
+    }
+    if(valueQuery_code){
+        free(valueQuery_code);
+        valueQuery_code = NULL;
+    }
+    if(keyPairQuery_code){
+        keyValuePair_free(keyPairQuery_code);
+        keyPairQuery_code = NULL;
     }
     if(keyQuery_store_id){
         free(keyQuery_store_id);
@@ -931,7 +931,7 @@ end:
 // Get attribute_set list
 //
 model_response_attribute_attributeset_list_t*
-AttributeAPI_attributeAttributesetList(apiClient_t *apiClient, int *start, int *count, char *params, char *exclude, char *response_fields)
+AttributeAPI_attributeAttributesetList(apiClient_t *apiClient, int *start, int *count, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -978,6 +978,18 @@ AttributeAPI_attributeAttributesetList(apiClient_t *apiClient, int *start, int *
     }
 
     // query parameters
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
+    {
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+    }
+
+    // query parameters
     char *keyQuery_params = NULL;
     char * valueQuery_params = NULL;
     keyValuePair_t *keyPairQuery_params = 0;
@@ -999,18 +1011,6 @@ AttributeAPI_attributeAttributesetList(apiClient_t *apiClient, int *start, int *
         valueQuery_exclude = strdup((exclude));
         keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
         list_addElement(localVarQueryParameters,keyPairQuery_exclude);
-    }
-
-    // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
-    {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -1075,6 +1075,18 @@ AttributeAPI_attributeAttributesetList(apiClient_t *apiClient, int *start, int *
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
     }
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
+    }
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
+    }
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
+    }
     if(keyQuery_params){
         free(keyQuery_params);
         keyQuery_params = NULL;
@@ -1098,18 +1110,6 @@ AttributeAPI_attributeAttributesetList(apiClient_t *apiClient, int *start, int *
     if(keyPairQuery_exclude){
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
-    }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
-    }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
-    }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
     }
     return elementToReturn;
 end:
@@ -1385,18 +1385,6 @@ AttributeAPI_attributeDelete(apiClient_t *apiClient, char *id, char *store_id)
 
 
     // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
-
-    // query parameters
     char *keyQuery_id = NULL;
     char * valueQuery_id = NULL;
     keyValuePair_t *keyPairQuery_id = 0;
@@ -1406,6 +1394,18 @@ AttributeAPI_attributeDelete(apiClient_t *apiClient, char *id, char *store_id)
         valueQuery_id = strdup((id));
         keyPairQuery_id = keyValuePair_create(keyQuery_id, valueQuery_id);
         list_addElement(localVarQueryParameters,keyPairQuery_id);
+    }
+
+    // query parameters
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
+    {
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -1446,18 +1446,6 @@ AttributeAPI_attributeDelete(apiClient_t *apiClient, char *id, char *store_id)
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
     if(keyQuery_id){
         free(keyQuery_id);
         keyQuery_id = NULL;
@@ -1469,6 +1457,18 @@ AttributeAPI_attributeDelete(apiClient_t *apiClient, char *id, char *store_id)
     if(keyPairQuery_id){
         keyValuePair_free(keyPairQuery_id);
         keyPairQuery_id = NULL;
+    }
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
+    }
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
+    }
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     return elementToReturn;
 end:
@@ -1482,7 +1482,7 @@ end:
 // Get attribute group list
 //
 model_response_attribute_group_list_t*
-AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, char *lang_id, char *params, char *exclude, char *response_fields, char *attribute_set_id)
+AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, char *attribute_set_id, char *lang_id, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1529,6 +1529,18 @@ AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, 
     }
 
     // query parameters
+    char *keyQuery_attribute_set_id = NULL;
+    char * valueQuery_attribute_set_id = NULL;
+    keyValuePair_t *keyPairQuery_attribute_set_id = 0;
+    if (attribute_set_id)
+    {
+        keyQuery_attribute_set_id = strdup("attribute_set_id");
+        valueQuery_attribute_set_id = strdup((attribute_set_id));
+        keyPairQuery_attribute_set_id = keyValuePair_create(keyQuery_attribute_set_id, valueQuery_attribute_set_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_attribute_set_id);
+    }
+
+    // query parameters
     char *keyQuery_lang_id = NULL;
     char * valueQuery_lang_id = NULL;
     keyValuePair_t *keyPairQuery_lang_id = 0;
@@ -1538,6 +1550,18 @@ AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, 
         valueQuery_lang_id = strdup((lang_id));
         keyPairQuery_lang_id = keyValuePair_create(keyQuery_lang_id, valueQuery_lang_id);
         list_addElement(localVarQueryParameters,keyPairQuery_lang_id);
+    }
+
+    // query parameters
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
+    {
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -1562,30 +1586,6 @@ AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, 
         valueQuery_exclude = strdup((exclude));
         keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
         list_addElement(localVarQueryParameters,keyPairQuery_exclude);
-    }
-
-    // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
-    {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
-    }
-
-    // query parameters
-    char *keyQuery_attribute_set_id = NULL;
-    char * valueQuery_attribute_set_id = NULL;
-    keyValuePair_t *keyPairQuery_attribute_set_id = 0;
-    if (attribute_set_id)
-    {
-        keyQuery_attribute_set_id = strdup("attribute_set_id");
-        valueQuery_attribute_set_id = strdup((attribute_set_id));
-        keyPairQuery_attribute_set_id = keyValuePair_create(keyQuery_attribute_set_id, valueQuery_attribute_set_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_attribute_set_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -1650,6 +1650,18 @@ AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, 
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
     }
+    if(keyQuery_attribute_set_id){
+        free(keyQuery_attribute_set_id);
+        keyQuery_attribute_set_id = NULL;
+    }
+    if(valueQuery_attribute_set_id){
+        free(valueQuery_attribute_set_id);
+        valueQuery_attribute_set_id = NULL;
+    }
+    if(keyPairQuery_attribute_set_id){
+        keyValuePair_free(keyPairQuery_attribute_set_id);
+        keyPairQuery_attribute_set_id = NULL;
+    }
     if(keyQuery_lang_id){
         free(keyQuery_lang_id);
         keyQuery_lang_id = NULL;
@@ -1661,6 +1673,18 @@ AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, 
     if(keyPairQuery_lang_id){
         keyValuePair_free(keyPairQuery_lang_id);
         keyPairQuery_lang_id = NULL;
+    }
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
+    }
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
+    }
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_params){
         free(keyQuery_params);
@@ -1686,30 +1710,6 @@ AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, 
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
     }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
-    }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
-    }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
-    }
-    if(keyQuery_attribute_set_id){
-        free(keyQuery_attribute_set_id);
-        keyQuery_attribute_set_id = NULL;
-    }
-    if(valueQuery_attribute_set_id){
-        free(valueQuery_attribute_set_id);
-        valueQuery_attribute_set_id = NULL;
-    }
-    if(keyPairQuery_attribute_set_id){
-        keyValuePair_free(keyPairQuery_attribute_set_id);
-        keyPairQuery_attribute_set_id = NULL;
-    }
     return elementToReturn;
 end:
     free(localVarPath);
@@ -1722,7 +1722,7 @@ end:
 // Get information about a specific global attribute by its ID.
 //
 attribute_info_200_response_t*
-AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set_id, char *store_id, char *lang_id, char *params, char *exclude, char *response_fields)
+AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set_id, char *store_id, char *lang_id, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1791,6 +1791,18 @@ AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set
     }
 
     // query parameters
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
+    {
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+    }
+
+    // query parameters
     char *keyQuery_params = NULL;
     char * valueQuery_params = NULL;
     keyValuePair_t *keyPairQuery_params = 0;
@@ -1812,18 +1824,6 @@ AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set
         valueQuery_exclude = strdup((exclude));
         keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
         list_addElement(localVarQueryParameters,keyPairQuery_exclude);
-    }
-
-    // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
-    {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -1912,6 +1912,18 @@ AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set
         keyValuePair_free(keyPairQuery_lang_id);
         keyPairQuery_lang_id = NULL;
     }
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
+    }
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
+    }
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
+    }
     if(keyQuery_params){
         free(keyQuery_params);
         keyQuery_params = NULL;
@@ -1936,18 +1948,6 @@ AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
     }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
-    }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
-    }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
-    }
     return elementToReturn;
 end:
     free(localVarPath);
@@ -1960,7 +1960,7 @@ end:
 // Get a list of global attributes.
 //
 model_response_attribute_list_t*
-AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char *type, char *attribute_ids, char *attribute_set_id, char *store_id, char *lang_id, char *params, char *exclude, char *response_fields, int *visible, int *required, int *system)
+AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char *attribute_ids, char *attribute_set_id, char *store_id, char *lang_id, char *type, int *visible, int *required, int *system, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -2004,18 +2004,6 @@ AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char 
         snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
         keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
         list_addElement(localVarQueryParameters,keyPairQuery_count);
-    }
-
-    // query parameters
-    char *keyQuery_type = NULL;
-    char * valueQuery_type = NULL;
-    keyValuePair_t *keyPairQuery_type = 0;
-    if (type)
-    {
-        keyQuery_type = strdup("type");
-        valueQuery_type = strdup((type));
-        keyPairQuery_type = keyValuePair_create(keyQuery_type, valueQuery_type);
-        list_addElement(localVarQueryParameters,keyPairQuery_type);
     }
 
     // query parameters
@@ -2067,39 +2055,15 @@ AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char 
     }
 
     // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
+    char *keyQuery_type = NULL;
+    char * valueQuery_type = NULL;
+    keyValuePair_t *keyPairQuery_type = 0;
+    if (type)
     {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
-    }
-
-    // query parameters
-    char *keyQuery_exclude = NULL;
-    char * valueQuery_exclude = NULL;
-    keyValuePair_t *keyPairQuery_exclude = 0;
-    if (exclude)
-    {
-        keyQuery_exclude = strdup("exclude");
-        valueQuery_exclude = strdup((exclude));
-        keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
-        list_addElement(localVarQueryParameters,keyPairQuery_exclude);
-    }
-
-    // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
-    {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+        keyQuery_type = strdup("type");
+        valueQuery_type = strdup((type));
+        keyPairQuery_type = keyValuePair_create(keyQuery_type, valueQuery_type);
+        list_addElement(localVarQueryParameters,keyPairQuery_type);
     }
 
     // query parameters
@@ -2139,6 +2103,42 @@ AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char 
         snprintf(valueQuery_system, MAX_NUMBER_LENGTH, "%d", *system);
         keyPairQuery_system = keyValuePair_create(keyQuery_system, valueQuery_system);
         list_addElement(localVarQueryParameters,keyPairQuery_system);
+    }
+
+    // query parameters
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
+    {
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+    }
+
+    // query parameters
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
+    {
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
+    }
+
+    // query parameters
+    char *keyQuery_exclude = NULL;
+    char * valueQuery_exclude = NULL;
+    keyValuePair_t *keyPairQuery_exclude = 0;
+    if (exclude)
+    {
+        keyQuery_exclude = strdup("exclude");
+        valueQuery_exclude = strdup((exclude));
+        keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
+        list_addElement(localVarQueryParameters,keyPairQuery_exclude);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -2203,18 +2203,6 @@ AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char 
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
     }
-    if(keyQuery_type){
-        free(keyQuery_type);
-        keyQuery_type = NULL;
-    }
-    if(valueQuery_type){
-        free(valueQuery_type);
-        valueQuery_type = NULL;
-    }
-    if(keyPairQuery_type){
-        keyValuePair_free(keyPairQuery_type);
-        keyPairQuery_type = NULL;
-    }
     if(keyQuery_attribute_ids){
         free(keyQuery_attribute_ids);
         keyQuery_attribute_ids = NULL;
@@ -2263,41 +2251,17 @@ AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char 
         keyValuePair_free(keyPairQuery_lang_id);
         keyPairQuery_lang_id = NULL;
     }
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
+    if(keyQuery_type){
+        free(keyQuery_type);
+        keyQuery_type = NULL;
     }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
+    if(valueQuery_type){
+        free(valueQuery_type);
+        valueQuery_type = NULL;
     }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
-    }
-    if(keyQuery_exclude){
-        free(keyQuery_exclude);
-        keyQuery_exclude = NULL;
-    }
-    if(valueQuery_exclude){
-        free(valueQuery_exclude);
-        valueQuery_exclude = NULL;
-    }
-    if(keyPairQuery_exclude){
-        keyValuePair_free(keyPairQuery_exclude);
-        keyPairQuery_exclude = NULL;
-    }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
-    }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
-    }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
+    if(keyPairQuery_type){
+        keyValuePair_free(keyPairQuery_type);
+        keyPairQuery_type = NULL;
     }
     if(keyQuery_visible){
         free(keyQuery_visible);
@@ -2334,6 +2298,42 @@ AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char 
     if(keyPairQuery_system){
         keyValuePair_free(keyPairQuery_system);
         keyPairQuery_system = NULL;
+    }
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
+    }
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
+    }
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
+    }
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
+    }
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
+    }
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
+    }
+    if(keyQuery_exclude){
+        free(keyQuery_exclude);
+        keyQuery_exclude = NULL;
+    }
+    if(valueQuery_exclude){
+        free(valueQuery_exclude);
+        valueQuery_exclude = NULL;
+    }
+    if(keyPairQuery_exclude){
+        keyValuePair_free(keyPairQuery_exclude);
+        keyPairQuery_exclude = NULL;
     }
     return elementToReturn;
 end:

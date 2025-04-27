@@ -96,6 +96,7 @@ static account_cart_add_t *account_cart_add_create_internal(
     char *shopline_access_token,
     char *shopline_app_key,
     char *shopline_app_secret,
+    char *shopline_shared_secret,
     char *shopify_access_token,
     char *shopify_api_key,
     char *shopify_api_password,
@@ -249,6 +250,7 @@ static account_cart_add_t *account_cart_add_create_internal(
     account_cart_add_local_var->shopline_access_token = shopline_access_token;
     account_cart_add_local_var->shopline_app_key = shopline_app_key;
     account_cart_add_local_var->shopline_app_secret = shopline_app_secret;
+    account_cart_add_local_var->shopline_shared_secret = shopline_shared_secret;
     account_cart_add_local_var->shopify_access_token = shopify_access_token;
     account_cart_add_local_var->shopify_api_key = shopify_api_key;
     account_cart_add_local_var->shopify_api_password = shopify_api_password;
@@ -403,6 +405,7 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     char *shopline_access_token,
     char *shopline_app_key,
     char *shopline_app_secret,
+    char *shopline_shared_secret,
     char *shopify_access_token,
     char *shopify_api_key,
     char *shopify_api_password,
@@ -553,6 +556,7 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
         shopline_access_token,
         shopline_app_key,
         shopline_app_secret,
+        shopline_shared_secret,
         shopify_access_token,
         shopify_api_key,
         shopify_api_password,
@@ -907,6 +911,10 @@ void account_cart_add_free(account_cart_add_t *account_cart_add) {
     if (account_cart_add->shopline_app_secret) {
         free(account_cart_add->shopline_app_secret);
         account_cart_add->shopline_app_secret = NULL;
+    }
+    if (account_cart_add->shopline_shared_secret) {
+        free(account_cart_add->shopline_shared_secret);
+        account_cart_add->shopline_shared_secret = NULL;
     }
     if (account_cart_add->shopify_access_token) {
         free(account_cart_add->shopify_access_token);
@@ -1790,6 +1798,14 @@ cJSON *account_cart_add_convertToJSON(account_cart_add_t *account_cart_add) {
     // account_cart_add->shopline_app_secret
     if(account_cart_add->shopline_app_secret) {
     if(cJSON_AddStringToObject(item, "shopline_app_secret", account_cart_add->shopline_app_secret) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // account_cart_add->shopline_shared_secret
+    if(account_cart_add->shopline_shared_secret) {
+    if(cJSON_AddStringToObject(item, "shopline_shared_secret", account_cart_add->shopline_shared_secret) == NULL) {
     goto fail; //String
     }
     }
@@ -3304,6 +3320,18 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     }
     }
 
+    // account_cart_add->shopline_shared_secret
+    cJSON *shopline_shared_secret = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "shopline_shared_secret");
+    if (cJSON_IsNull(shopline_shared_secret)) {
+        shopline_shared_secret = NULL;
+    }
+    if (shopline_shared_secret) { 
+    if(!cJSON_IsString(shopline_shared_secret) && !cJSON_IsNull(shopline_shared_secret))
+    {
+    goto end; //String
+    }
+    }
+
     // account_cart_add->shopify_access_token
     cJSON *shopify_access_token = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "shopify_access_token");
     if (cJSON_IsNull(shopify_access_token)) {
@@ -4297,6 +4325,7 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
         shopline_access_token && !cJSON_IsNull(shopline_access_token) ? strdup(shopline_access_token->valuestring) : NULL,
         shopline_app_key && !cJSON_IsNull(shopline_app_key) ? strdup(shopline_app_key->valuestring) : NULL,
         shopline_app_secret && !cJSON_IsNull(shopline_app_secret) ? strdup(shopline_app_secret->valuestring) : NULL,
+        shopline_shared_secret && !cJSON_IsNull(shopline_shared_secret) ? strdup(shopline_shared_secret->valuestring) : NULL,
         shopify_access_token && !cJSON_IsNull(shopify_access_token) ? strdup(shopify_access_token->valuestring) : NULL,
         shopify_api_key && !cJSON_IsNull(shopify_api_key) ? strdup(shopify_api_key->valuestring) : NULL,
         shopify_api_password && !cJSON_IsNull(shopify_api_password) ? strdup(shopify_api_password->valuestring) : NULL,

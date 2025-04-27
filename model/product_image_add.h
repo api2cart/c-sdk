@@ -27,38 +27,38 @@ api2cart_openapi_product_image_add_TYPE_e product_image_add_type_FromString(char
 
 
 typedef struct product_image_add_t {
-    char *product_id; // string
-    char *image_name; // string
     api2cart_openapi_product_image_add_TYPE_e type; //enum
-    char *url; // string
-    char *label; // string
-    char *mime; // string
-    int position; //numeric
-    char *content; // string
+    char *image_name; // string
+    char *product_id; // string
     char *product_variant_id; // string
     char *variant_ids; // string
     char *option_value_ids; // string
     char *store_id; // string
     char *lang_id; // string
+    char *url; // string
+    char *content; // string
+    char *label; // string
+    char *mime; // string
+    int position; //numeric
     int use_latest_api_version; //boolean
 
     int _library_owned; // Is the library responsible for freeing this object?
 } product_image_add_t;
 
 __attribute__((deprecated)) product_image_add_t *product_image_add_create(
-    char *product_id,
-    char *image_name,
     api2cart_openapi_product_image_add_TYPE_e type,
-    char *url,
-    char *label,
-    char *mime,
-    int position,
-    char *content,
+    char *image_name,
+    char *product_id,
     char *product_variant_id,
     char *variant_ids,
     char *option_value_ids,
     char *store_id,
     char *lang_id,
+    char *url,
+    char *content,
+    char *label,
+    char *mime,
+    int position,
     int use_latest_api_version
 );
 

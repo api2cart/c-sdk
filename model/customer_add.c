@@ -12,22 +12,22 @@ static customer_add_t *customer_add_create_internal(
     char *password,
     char *group,
     char *group_ids,
+    char *status,
     char *created_time,
     char *modified_time,
     char *login,
     char *last_login,
     char *birth_day,
-    char *status,
     int news_letter_subscription,
     list_t *consents,
     char *gender,
     char *website,
-    char *store_id,
     char *fax,
     char *company,
     char *phone,
     char *note,
     char *country,
+    char *store_id,
     list_t *address
     ) {
     customer_add_t *customer_add_local_var = malloc(sizeof(customer_add_t));
@@ -40,22 +40,22 @@ static customer_add_t *customer_add_create_internal(
     customer_add_local_var->password = password;
     customer_add_local_var->group = group;
     customer_add_local_var->group_ids = group_ids;
+    customer_add_local_var->status = status;
     customer_add_local_var->created_time = created_time;
     customer_add_local_var->modified_time = modified_time;
     customer_add_local_var->login = login;
     customer_add_local_var->last_login = last_login;
     customer_add_local_var->birth_day = birth_day;
-    customer_add_local_var->status = status;
     customer_add_local_var->news_letter_subscription = news_letter_subscription;
     customer_add_local_var->consents = consents;
     customer_add_local_var->gender = gender;
     customer_add_local_var->website = website;
-    customer_add_local_var->store_id = store_id;
     customer_add_local_var->fax = fax;
     customer_add_local_var->company = company;
     customer_add_local_var->phone = phone;
     customer_add_local_var->note = note;
     customer_add_local_var->country = country;
+    customer_add_local_var->store_id = store_id;
     customer_add_local_var->address = address;
 
     customer_add_local_var->_library_owned = 1;
@@ -69,22 +69,22 @@ __attribute__((deprecated)) customer_add_t *customer_add_create(
     char *password,
     char *group,
     char *group_ids,
+    char *status,
     char *created_time,
     char *modified_time,
     char *login,
     char *last_login,
     char *birth_day,
-    char *status,
     int news_letter_subscription,
     list_t *consents,
     char *gender,
     char *website,
-    char *store_id,
     char *fax,
     char *company,
     char *phone,
     char *note,
     char *country,
+    char *store_id,
     list_t *address
     ) {
     return customer_add_create_internal (
@@ -94,22 +94,22 @@ __attribute__((deprecated)) customer_add_t *customer_add_create(
         password,
         group,
         group_ids,
+        status,
         created_time,
         modified_time,
         login,
         last_login,
         birth_day,
-        status,
         news_letter_subscription,
         consents,
         gender,
         website,
-        store_id,
         fax,
         company,
         phone,
         note,
         country,
+        store_id,
         address
         );
 }
@@ -147,6 +147,10 @@ void customer_add_free(customer_add_t *customer_add) {
         free(customer_add->group_ids);
         customer_add->group_ids = NULL;
     }
+    if (customer_add->status) {
+        free(customer_add->status);
+        customer_add->status = NULL;
+    }
     if (customer_add->created_time) {
         free(customer_add->created_time);
         customer_add->created_time = NULL;
@@ -167,10 +171,6 @@ void customer_add_free(customer_add_t *customer_add) {
         free(customer_add->birth_day);
         customer_add->birth_day = NULL;
     }
-    if (customer_add->status) {
-        free(customer_add->status);
-        customer_add->status = NULL;
-    }
     if (customer_add->consents) {
         list_ForEach(listEntry, customer_add->consents) {
             customer_add_consents_inner_free(listEntry->data);
@@ -185,10 +185,6 @@ void customer_add_free(customer_add_t *customer_add) {
     if (customer_add->website) {
         free(customer_add->website);
         customer_add->website = NULL;
-    }
-    if (customer_add->store_id) {
-        free(customer_add->store_id);
-        customer_add->store_id = NULL;
     }
     if (customer_add->fax) {
         free(customer_add->fax);
@@ -209,6 +205,10 @@ void customer_add_free(customer_add_t *customer_add) {
     if (customer_add->country) {
         free(customer_add->country);
         customer_add->country = NULL;
+    }
+    if (customer_add->store_id) {
+        free(customer_add->store_id);
+        customer_add->store_id = NULL;
     }
     if (customer_add->address) {
         list_ForEach(listEntry, customer_add->address) {
@@ -233,20 +233,18 @@ cJSON *customer_add_convertToJSON(customer_add_t *customer_add) {
 
 
     // customer_add->first_name
-    if (!customer_add->first_name) {
-        goto fail;
-    }
+    if(customer_add->first_name) {
     if(cJSON_AddStringToObject(item, "first_name", customer_add->first_name) == NULL) {
     goto fail; //String
+    }
     }
 
 
     // customer_add->last_name
-    if (!customer_add->last_name) {
-        goto fail;
-    }
+    if(customer_add->last_name) {
     if(cJSON_AddStringToObject(item, "last_name", customer_add->last_name) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -269,6 +267,14 @@ cJSON *customer_add_convertToJSON(customer_add_t *customer_add) {
     // customer_add->group_ids
     if(customer_add->group_ids) {
     if(cJSON_AddStringToObject(item, "group_ids", customer_add->group_ids) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // customer_add->status
+    if(customer_add->status) {
+    if(cJSON_AddStringToObject(item, "status", customer_add->status) == NULL) {
     goto fail; //String
     }
     }
@@ -309,14 +315,6 @@ cJSON *customer_add_convertToJSON(customer_add_t *customer_add) {
     // customer_add->birth_day
     if(customer_add->birth_day) {
     if(cJSON_AddStringToObject(item, "birth_day", customer_add->birth_day) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // customer_add->status
-    if(customer_add->status) {
-    if(cJSON_AddStringToObject(item, "status", customer_add->status) == NULL) {
     goto fail; //String
     }
     }
@@ -366,14 +364,6 @@ cJSON *customer_add_convertToJSON(customer_add_t *customer_add) {
     }
 
 
-    // customer_add->store_id
-    if(customer_add->store_id) {
-    if(cJSON_AddStringToObject(item, "store_id", customer_add->store_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
     // customer_add->fax
     if(customer_add->fax) {
     if(cJSON_AddStringToObject(item, "fax", customer_add->fax) == NULL) {
@@ -409,6 +399,14 @@ cJSON *customer_add_convertToJSON(customer_add_t *customer_add) {
     // customer_add->country
     if(customer_add->country) {
     if(cJSON_AddStringToObject(item, "country", customer_add->country) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // customer_add->store_id
+    if(customer_add->store_id) {
+    if(cJSON_AddStringToObject(item, "store_id", customer_add->store_id) == NULL) {
     goto fail; //String
     }
     }
@@ -471,14 +469,11 @@ customer_add_t *customer_add_parseFromJSON(cJSON *customer_addJSON){
     if (cJSON_IsNull(first_name)) {
         first_name = NULL;
     }
-    if (!first_name) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(first_name))
+    if (first_name) { 
+    if(!cJSON_IsString(first_name) && !cJSON_IsNull(first_name))
     {
     goto end; //String
+    }
     }
 
     // customer_add->last_name
@@ -486,14 +481,11 @@ customer_add_t *customer_add_parseFromJSON(cJSON *customer_addJSON){
     if (cJSON_IsNull(last_name)) {
         last_name = NULL;
     }
-    if (!last_name) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(last_name))
+    if (last_name) { 
+    if(!cJSON_IsString(last_name) && !cJSON_IsNull(last_name))
     {
     goto end; //String
+    }
     }
 
     // customer_add->password
@@ -527,6 +519,18 @@ customer_add_t *customer_add_parseFromJSON(cJSON *customer_addJSON){
     }
     if (group_ids) { 
     if(!cJSON_IsString(group_ids) && !cJSON_IsNull(group_ids))
+    {
+    goto end; //String
+    }
+    }
+
+    // customer_add->status
+    cJSON *status = cJSON_GetObjectItemCaseSensitive(customer_addJSON, "status");
+    if (cJSON_IsNull(status)) {
+        status = NULL;
+    }
+    if (status) { 
+    if(!cJSON_IsString(status) && !cJSON_IsNull(status))
     {
     goto end; //String
     }
@@ -592,18 +596,6 @@ customer_add_t *customer_add_parseFromJSON(cJSON *customer_addJSON){
     }
     }
 
-    // customer_add->status
-    cJSON *status = cJSON_GetObjectItemCaseSensitive(customer_addJSON, "status");
-    if (cJSON_IsNull(status)) {
-        status = NULL;
-    }
-    if (status) { 
-    if(!cJSON_IsString(status) && !cJSON_IsNull(status))
-    {
-    goto end; //String
-    }
-    }
-
     // customer_add->news_letter_subscription
     cJSON *news_letter_subscription = cJSON_GetObjectItemCaseSensitive(customer_addJSON, "news_letter_subscription");
     if (cJSON_IsNull(news_letter_subscription)) {
@@ -659,18 +651,6 @@ customer_add_t *customer_add_parseFromJSON(cJSON *customer_addJSON){
     }
     if (website) { 
     if(!cJSON_IsString(website) && !cJSON_IsNull(website))
-    {
-    goto end; //String
-    }
-    }
-
-    // customer_add->store_id
-    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(customer_addJSON, "store_id");
-    if (cJSON_IsNull(store_id)) {
-        store_id = NULL;
-    }
-    if (store_id) { 
-    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
     {
     goto end; //String
     }
@@ -736,6 +716,18 @@ customer_add_t *customer_add_parseFromJSON(cJSON *customer_addJSON){
     }
     }
 
+    // customer_add->store_id
+    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(customer_addJSON, "store_id");
+    if (cJSON_IsNull(store_id)) {
+        store_id = NULL;
+    }
+    if (store_id) { 
+    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
+    {
+    goto end; //String
+    }
+    }
+
     // customer_add->address
     cJSON *address = cJSON_GetObjectItemCaseSensitive(customer_addJSON, "address");
     if (cJSON_IsNull(address)) {
@@ -763,27 +755,27 @@ customer_add_t *customer_add_parseFromJSON(cJSON *customer_addJSON){
 
     customer_add_local_var = customer_add_create_internal (
         strdup(email->valuestring),
-        strdup(first_name->valuestring),
-        strdup(last_name->valuestring),
+        first_name && !cJSON_IsNull(first_name) ? strdup(first_name->valuestring) : NULL,
+        last_name && !cJSON_IsNull(last_name) ? strdup(last_name->valuestring) : NULL,
         password && !cJSON_IsNull(password) ? strdup(password->valuestring) : NULL,
         group && !cJSON_IsNull(group) ? strdup(group->valuestring) : NULL,
         group_ids && !cJSON_IsNull(group_ids) ? strdup(group_ids->valuestring) : NULL,
+        status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
         created_time && !cJSON_IsNull(created_time) ? strdup(created_time->valuestring) : NULL,
         modified_time && !cJSON_IsNull(modified_time) ? strdup(modified_time->valuestring) : NULL,
         login && !cJSON_IsNull(login) ? strdup(login->valuestring) : NULL,
         last_login && !cJSON_IsNull(last_login) ? strdup(last_login->valuestring) : NULL,
         birth_day && !cJSON_IsNull(birth_day) ? strdup(birth_day->valuestring) : NULL,
-        status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
         news_letter_subscription ? news_letter_subscription->valueint : 0,
         consents ? consentsList : NULL,
         gender && !cJSON_IsNull(gender) ? strdup(gender->valuestring) : NULL,
         website && !cJSON_IsNull(website) ? strdup(website->valuestring) : NULL,
-        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         fax && !cJSON_IsNull(fax) ? strdup(fax->valuestring) : NULL,
         company && !cJSON_IsNull(company) ? strdup(company->valuestring) : NULL,
         phone && !cJSON_IsNull(phone) ? strdup(phone->valuestring) : NULL,
         note && !cJSON_IsNull(note) ? strdup(note->valuestring) : NULL,
         country && !cJSON_IsNull(country) ? strdup(country->valuestring) : NULL,
+        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         address ? addressList : NULL
         );
 

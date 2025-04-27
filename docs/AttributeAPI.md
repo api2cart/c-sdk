@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 //
 // Get attribute_set list
 //
-model_response_attribute_attributeset_list_t* AttributeAPI_attributeAttributesetList(apiClient_t *apiClient, int *start, int *count, char *params, char *exclude, char *response_fields);
+model_response_attribute_attributeset_list_t* AttributeAPI_attributeAttributesetList(apiClient_t *apiClient, int *start, int *count, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -154,9 +154,9 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -249,7 +249,7 @@ Name | Type | Description  | Notes
 //
 // Get attribute group list
 //
-model_response_attribute_group_list_t* AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, char *lang_id, char *params, char *exclude, char *response_fields, char *attribute_set_id);
+model_response_attribute_group_list_t* AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, char *attribute_set_id, char *lang_id, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -258,11 +258,11 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**attribute_set_id** | **char \*** | Attribute set id | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**attribute_set_id** | **char \*** | Attribute set id | [optional] 
 
 ### Return type
 
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 //
 // Get information about a specific global attribute by its ID.
 //
-attribute_info_200_response_t* AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set_id, char *store_id, char *lang_id, char *params, char *exclude, char *response_fields);
+attribute_info_200_response_t* AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set_id, char *store_id, char *lang_id, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -297,9 +297,9 @@ Name | Type | Description  | Notes
 **attribute_set_id** | **char \*** | Attribute set id | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;force_all&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -323,7 +323,7 @@ Name | Type | Description  | Notes
 //
 // Get a list of global attributes.
 //
-model_response_attribute_list_t* AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char *type, char *attribute_ids, char *attribute_set_id, char *store_id, char *lang_id, char *params, char *exclude, char *response_fields, int *visible, int *required, int *system);
+model_response_attribute_list_t* AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char *attribute_ids, char *attribute_set_id, char *store_id, char *lang_id, char *type, int *visible, int *required, int *system, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -332,17 +332,17 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
-**type** | **char \*** | Defines attribute&#39;s type | [optional] 
 **attribute_ids** | **char \*** | Filter attributes by ids | [optional] 
 **attribute_set_id** | **char \*** | Filter items by attribute set id | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
 **lang_id** | **char \*** | Retrieves attributes on specified language id | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,code,type&#39;]
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**type** | **char \*** | Defines attribute&#39;s type | [optional] 
 **visible** | **int \*** | Filter items by visibility status | [optional] 
 **required** | **int \*** | Defines if the option is required | [optional] 
 **system** | **int \*** | True if attribute is system | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,code,type&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 

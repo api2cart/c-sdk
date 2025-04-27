@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 //
 // Get list of attributes and values.
 //
-model_response_product_attribute_list_t* ProductAPI_productAttributeList(apiClient_t *apiClient, char *product_id, char *attribute_id, char *variant_id, char *page_cursor, int *start, int *count, char *attribute_group_id, char *set_name, char *lang_id, char *store_id, char *sort_by, char *sort_direction, char *params, char *response_fields, char *exclude);
+model_response_product_attribute_list_t* ProductAPI_productAttributeList(apiClient_t *apiClient, char *product_id, int *start, int *count, char *page_cursor, char *attribute_id, char *variant_id, char *attribute_group_id, char *lang_id, char *store_id, char *set_name, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -134,19 +134,19 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **product_id** | **char \*** | Retrieves attributes specified by product id | 
-**attribute_id** | **char \*** | Retrieves info for specified attribute_id | [optional] 
-**variant_id** | **char \*** | Defines product&#39;s variants specified by variant id | [optional] 
-**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+**attribute_id** | **char \*** | Retrieves info for specified attribute_id | [optional] 
+**variant_id** | **char \*** | Defines product&#39;s variants specified by variant id | [optional] 
 **attribute_group_id** | **char \*** | Filter by attribute_group_id | [optional] 
-**set_name** | **char \*** | Retrieves attributes specified by set_name in Magento | [optional] 
 **lang_id** | **char \*** | Retrieves attributes specified by language id | [optional] 
 **store_id** | **char \*** | Retrieves attributes specified by store id | [optional] 
+**set_name** | **char \*** | Retrieves attributes specified by set_name in Magento | [optional] 
 **sort_by** | **char \*** | Set field to sort by | [optional] [default to &#39;attribute_id&#39;]
 **sort_direction** | **char \*** | Set sorting direction | [optional] [default to &#39;asc&#39;]
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;attribute_id,name&#39;]
 **response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;attribute_id,name&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -245,7 +245,7 @@ Name | Type | Description  | Notes
 //
 // Get list of brands from your store.
 //
-model_response_product_brand_list_t* ProductAPI_productBrandList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *params, char *brand_ids, char *exclude, char *category_id, char *store_id, char *lang_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *parent_id, char *response_fields, char *find_where, char *find_value);
+model_response_product_brand_list_t* ProductAPI_productBrandList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *brand_ids, char *category_id, char *parent_id, char *store_id, char *lang_id, char *find_where, char *find_value, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -255,20 +255,20 @@ Name | Type | Description  | Notes
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
 **page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,short_description,active,url&#39;]
 **brand_ids** | **char \*** | Retrieves brands specified by brand ids | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **category_id** | **char \*** | Retrieves product brands specified by category id | [optional] 
+**parent_id** | **char \*** | Retrieves brands specified by parent id | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
+**find_where** | **char \*** | Entity search that is specified by the comma-separated unique fields | [optional] 
+**find_value** | **char \*** | Entity search that is specified by some value | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**parent_id** | **char \*** | Retrieves brands specified by parent id | [optional] 
 **response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**find_where** | **char \*** | Entity search that is specified by the comma-separated unique fields | [optional] 
-**find_value** | **char \*** | Entity search that is specified by some value | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,short_description,active,url&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 //
 // Get child for specific product.
 //
-product_child_item_info_200_response_t* ProductAPI_productChildItemInfo(apiClient_t *apiClient, char *product_id, char *id, char *params, char *response_fields, char *exclude, char *store_id, char *lang_id, char *currency_id, int *use_latest_api_version);
+product_child_item_info_200_response_t* ProductAPI_productChildItemInfo(apiClient_t *apiClient, char *product_id, char *id, char *store_id, char *lang_id, char *currency_id, char *response_fields, char *params, char *exclude, int *use_latest_api_version);
 ```
 
 ### Parameters
@@ -335,12 +335,12 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **product_id** | **char \*** | Filter by parent product id | 
 **id** | **char \*** | Entity id | 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;force_all&#39;]
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
 **currency_id** | **char \*** | Currency Id | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;force_all&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **use_latest_api_version** | **int \*** | Use the latest platform API version | [optional] [default to false]
 
 ### Return type
@@ -365,23 +365,16 @@ Name | Type | Description  | Notes
 //
 // Get a list of a product's child items, such as variants or bundle components. The total_count field in the response indicates the total number of items in the context of the current filter.
 //
-model_response_product_child_item_list_t* ProductAPI_productChildItemList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *params, char *response_fields, char *exclude, char *created_from, char *created_to, char *modified_from, char *modified_to, char *product_id, char *product_ids, char *sku, char *store_id, char *lang_id, char *currency_id, int *avail_sale, char *find_value, char *find_where, char *report_request_id, int *disable_report_cache, int *use_latest_api_version, int *return_global);
+model_response_product_child_item_list_t* ProductAPI_productChildItemList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_id, char *product_ids, char *sku, char *store_id, char *lang_id, char *currency_id, int *avail_sale, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to, int *return_global, char *response_fields, char *params, char *exclude, char *report_request_id, int *disable_report_cache, int *use_latest_api_version);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**page_cursor** | **char \*** | Used to retrieve products child items via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;force_all&#39;]
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
-**created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
-**modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
-**modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
+**page_cursor** | **char \*** | Used to retrieve products child items via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **product_id** | **char \*** | Filter by parent product id | [optional] 
 **product_ids** | **char \*** | Filter by parent product ids | [optional] 
 **sku** | **char \*** | Filter by products variant&#39;s sku | [optional] 
@@ -391,10 +384,17 @@ Name | Type | Description  | Notes
 **avail_sale** | **int \*** | Specifies the set of available/not available products for sale | [optional] 
 **find_value** | **char \*** | Entity search that is specified by some value | [optional] 
 **find_where** | **char \*** | Child products search that is specified by field | [optional] 
+**created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
+**created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
+**modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
+**modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
+**return_global** | **int \*** | Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. | [optional] [default to false]
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;force_all&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **report_request_id** | **char \*** | Report request id | [optional] 
 **disable_report_cache** | **int \*** | Disable report cache for current request | [optional] [default to false]
 **use_latest_api_version** | **int \*** | Use the latest platform API version | [optional] [default to false]
-**return_global** | **int \*** | Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. | [optional] [default to false]
 
 ### Return type
 
@@ -418,35 +418,35 @@ Name | Type | Description  | Notes
 //
 // Count products in store.
 //
-product_count_200_response_t* ProductAPI_productCount(apiClient_t *apiClient, char *category_id, char *created_from, char *created_to, char *modified_from, char *modified_to, int *avail_view, int *avail_sale, char *store_id, char *lang_id, char *product_ids, char *since_id, char *report_request_id, int *disable_report_cache, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, int *use_latest_api_version, int *return_global, char *categories_ids);
+product_count_200_response_t* ProductAPI_productCount(apiClient_t *apiClient, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, char *report_request_id, int *return_global, int *disable_report_cache, int *use_latest_api_version);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
+**product_ids** | **char \*** | Counts products specified by product ids | [optional] 
+**since_id** | **char \*** | Retrieve entities starting from the specified id. | [optional] 
+**categories_ids** | **char \*** | Defines product add that is specified by comma-separated categories id | [optional] 
 **category_id** | **char \*** | Counts products specified by category id | [optional] 
+**store_id** | **char \*** | Counts products specified by store id | [optional] 
+**lang_id** | **char \*** | Counts products specified by language id | [optional] 
+**avail_view** | **int \*** | Specifies the set of visible/invisible products | [optional] 
+**avail_sale** | **int \*** | Specifies the set of available/not available products for sale | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**avail_view** | **int \*** | Specifies the set of visible/invisible products | [optional] 
-**avail_sale** | **int \*** | Specifies the set of available/not available products for sale | [optional] 
-**store_id** | **char \*** | Counts products specified by store id | [optional] 
-**lang_id** | **char \*** | Counts products specified by language id | [optional] 
-**product_ids** | **char \*** | Counts products specified by product ids | [optional] 
-**since_id** | **char \*** | Retrieve entities starting from the specified id. | [optional] 
-**report_request_id** | **char \*** | Report request id | [optional] 
-**disable_report_cache** | **int \*** | Disable report cache for current request | [optional] [default to false]
 **brand_name** | **char \*** | Retrieves brands specified by brand name | [optional] 
 **product_attributes** | **[list_t](char.md) \*** | Defines product attributes | [optional] 
 **status** | **char \*** | Defines product&#39;s status | [optional] 
 **type** | **char \*** | Defines products&#39;s type | [optional] 
 **find_value** | **char \*** | Entity search that is specified by some value | [optional] 
 **find_where** | **char \*** | Counts products that are searched specified by field | [optional] 
-**use_latest_api_version** | **int \*** | Use the latest platform API version | [optional] [default to false]
+**report_request_id** | **char \*** | Report request id | [optional] 
 **return_global** | **int \*** | Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. | [optional] [default to false]
-**categories_ids** | **char \*** | Defines product add that is specified by comma-separated categories id | [optional] 
+**disable_report_cache** | **int \*** | Disable report cache for current request | [optional] [default to false]
+**use_latest_api_version** | **int \*** | Use the latest platform API version | [optional] [default to false]
 
 ### Return type
 
@@ -507,7 +507,7 @@ Name | Type | Description  | Notes
 //
 // Get list of currencies
 //
-model_response_product_currency_list_t* ProductAPI_productCurrencyList(apiClient_t *apiClient, int *start, int *count, char *params, char *page_cursor, char *exclude, char *response_fields, int *_default, int *avail);
+model_response_product_currency_list_t* ProductAPI_productCurrencyList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, int *_default, int *avail, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -516,12 +516,12 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;name,iso3,default,avail&#39;]
 **page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **_default** | **int \*** | Specifies the set of default/not default currencies | [optional] 
 **avail** | **int \*** | Specifies the set of available/not available currencies | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;name,iso3,default,avail&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -738,7 +738,7 @@ Name | Type | Description  | Notes
 //
 // Update details of image
 //
-product_image_update_200_response_t* ProductAPI_productImageUpdate(apiClient_t *apiClient, char *product_id, char *id, char *variant_ids, char *image_name, char *type, char *label, int *position, char *store_id, char *lang_id, int *hidden);
+product_image_update_200_response_t* ProductAPI_productImageUpdate(apiClient_t *apiClient, char *product_id, char *id, char *variant_ids, char *store_id, char *lang_id, char *image_name, char *type, char *label, int *position, int *hidden);
 ```
 
 ### Parameters
@@ -748,12 +748,12 @@ Name | Type | Description  | Notes
 **product_id** | **char \*** | Defines product id where the image should be updated | 
 **id** | **char \*** | Defines image update specified by image id | 
 **variant_ids** | **char \*** | Defines product&#39;s variants ids | [optional] 
+**store_id** | **char \*** | Store Id | [optional] 
+**lang_id** | **char \*** | Language id | [optional] 
 **image_name** | **char \*** | Defines image&#39;s name | [optional] 
 **type** | **char \*** | Defines image&#39;s types that are specified by comma-separated list | [optional] [default to &#39;additional&#39;]
 **label** | **char \*** | Defines alternative text that has to be attached to the picture | [optional] 
 **position** | **int \*** | Defines image’s position in the list | [optional] 
-**store_id** | **char \*** | Store Id | [optional] 
-**lang_id** | **char \*** | Language id | [optional] 
 **hidden** | **int \*** | Define is hide image | [optional] 
 
 ### Return type
@@ -778,7 +778,7 @@ Name | Type | Description  | Notes
 //
 // Get information about a specific product by its ID. In the case of a multistore configuration, use the store_id filter to get a response in the context of a specific store.
 //
-product_info_200_response_t* ProductAPI_productInfo(apiClient_t *apiClient, char *id, char *params, char *response_fields, char *exclude, char *store_id, char *lang_id, char *currency_id, char *report_request_id, int *disable_report_cache, int *use_latest_api_version);
+product_info_200_response_t* ProductAPI_productInfo(apiClient_t *apiClient, char *id, char *store_id, char *lang_id, char *currency_id, char *response_fields, char *params, char *exclude, char *report_request_id, int *disable_report_cache, int *use_latest_api_version);
 ```
 
 ### Parameters
@@ -786,12 +786,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **id** | **char \*** | Retrieves product&#39;s info specified by product id | 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description,price,categories_ids&#39;]
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **store_id** | **char \*** | Retrieves product info specified by store id | [optional] 
 **lang_id** | **char \*** | Retrieves product info specified by language id | [optional] 
 **currency_id** | **char \*** | Currency Id | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description,price,categories_ids&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **report_request_id** | **char \*** | Report request id | [optional] 
 **disable_report_cache** | **int \*** | Disable report cache for current request | [optional] [default to false]
 **use_latest_api_version** | **int \*** | Use the latest platform API version | [optional] [default to false]
@@ -818,46 +818,46 @@ Name | Type | Description  | Notes
 //
 // Get list of products from your store. Returns 10 products by default.
 //
-model_response_product_list_t* ProductAPI_productList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *params, char *response_fields, char *exclude, char *category_id, char *created_from, char *created_to, char *modified_from, char *modified_to, int *avail_view, int *avail_sale, char *store_id, char *lang_id, char *currency_id, char *product_ids, char *since_id, char *report_request_id, int *disable_report_cache, char *sort_by, char *sort_direction, char *sku, int *disable_cache, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, int *use_latest_api_version, int *return_global, char *categories_ids);
+model_response_product_list_t* ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, char *currency_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sku, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, int *return_global, char *params, char *response_fields, char *exclude, char *sort_by, char *sort_direction, char *report_request_id, int *disable_cache, int *disable_report_cache, int *use_latest_api_version);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**page_cursor** | **char \*** | Used to retrieve products via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description,price,categories_ids&#39;]
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
+**page_cursor** | **char \*** | Used to retrieve products via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+**product_ids** | **char \*** | Retrieves products specified by product ids | [optional] 
+**since_id** | **char \*** | Retrieve entities starting from the specified id. | [optional] 
+**categories_ids** | **char \*** | Retrieves products specified by categories ids | [optional] 
 **category_id** | **char \*** | Retrieves products specified by category id | [optional] 
+**store_id** | **char \*** | Retrieves products specified by store id | [optional] 
+**lang_id** | **char \*** | Retrieves products specified by language id | [optional] 
+**currency_id** | **char \*** | Currency Id | [optional] 
+**avail_view** | **int \*** | Specifies the set of visible/invisible products | [optional] 
+**avail_sale** | **int \*** | Specifies the set of available/not available products for sale | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**avail_view** | **int \*** | Specifies the set of visible/invisible products | [optional] 
-**avail_sale** | **int \*** | Specifies the set of available/not available products for sale | [optional] 
-**store_id** | **char \*** | Retrieves products specified by store id | [optional] 
-**lang_id** | **char \*** | Retrieves products specified by language id | [optional] 
-**currency_id** | **char \*** | Currency Id | [optional] 
-**product_ids** | **char \*** | Retrieves products specified by product ids | [optional] 
-**since_id** | **char \*** | Retrieve entities starting from the specified id. | [optional] 
-**report_request_id** | **char \*** | Report request id | [optional] 
-**disable_report_cache** | **int \*** | Disable report cache for current request | [optional] [default to false]
-**sort_by** | **char \*** | Set field to sort by | [optional] [default to &#39;id&#39;]
-**sort_direction** | **char \*** | Set sorting direction | [optional] [default to &#39;asc&#39;]
 **sku** | **char \*** | Filter by product&#39;s sku | [optional] 
-**disable_cache** | **int \*** | Disable cache for current request | [optional] [default to false]
 **brand_name** | **char \*** | Retrieves brands specified by brand name | [optional] 
 **product_attributes** | **[list_t](char.md) \*** | Defines product attributes | [optional] 
 **status** | **char \*** | Defines product&#39;s status | [optional] 
 **type** | **char \*** | Defines products&#39;s type | [optional] 
 **find_value** | **char \*** | Entity search that is specified by some value | [optional] 
 **find_where** | **char \*** | Product search that is specified by field | [optional] 
-**use_latest_api_version** | **int \*** | Use the latest platform API version | [optional] [default to false]
 **return_global** | **int \*** | Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. | [optional] [default to false]
-**categories_ids** | **char \*** | Retrieves products specified by categories ids | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description,price,categories_ids&#39;]
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
+**sort_by** | **char \*** | Set field to sort by | [optional] [default to &#39;id&#39;]
+**sort_direction** | **char \*** | Set sorting direction | [optional] [default to &#39;asc&#39;]
+**report_request_id** | **char \*** | Report request id | [optional] 
+**disable_cache** | **int \*** | Disable cache for current request | [optional] [default to false]
+**disable_report_cache** | **int \*** | Disable report cache for current request | [optional] [default to false]
+**use_latest_api_version** | **int \*** | Use the latest platform API version | [optional] [default to false]
 
 ### Return type
 
@@ -1014,7 +1014,7 @@ Name | Type | Description  | Notes
 //
 // Get list of options.
 //
-model_response_product_option_list_t* ProductAPI_productOptionList(apiClient_t *apiClient, int *start, int *count, char *params, char *exclude, char *response_fields, char *product_id, char *lang_id, char *store_id);
+model_response_product_option_list_t* ProductAPI_productOptionList(apiClient_t *apiClient, int *start, int *count, char *product_id, char *lang_id, char *store_id, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -1023,12 +1023,12 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description&#39;]
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **product_id** | **char \*** | Retrieves products&#39; options specified by product id | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -1289,7 +1289,7 @@ Name | Type | Description  | Notes
 //
 // Get reviews of a specific product.
 //
-model_response_product_review_list_t* ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *start, char *page_cursor, int *count, char *ids, char *store_id, char *status, char *params, char *exclude, char *response_fields);
+model_response_product_review_list_t* ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *start, int *count, char *page_cursor, char *ids, char *store_id, char *status, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -1298,14 +1298,14 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **product_id** | **char \*** | Product id | 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
-**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **ids** | **char \*** | Retrieves reviews specified by ids | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
 **status** | **char \*** | Defines status | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -1516,7 +1516,7 @@ Name | Type | Description  | Notes
 //
 // Get count variants.
 //
-product_variant_count_200_response_t* ProductAPI_productVariantCount(apiClient_t *apiClient, char *product_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *category_id, char *store_id);
+product_variant_count_200_response_t* ProductAPI_productVariantCount(apiClient_t *apiClient, char *product_id, char *category_id, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to);
 ```
 
 ### Parameters
@@ -1524,12 +1524,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **product_id** | **char \*** | Retrieves products&#39; variants specified by product id | 
+**category_id** | **char \*** | Counts products’ variants specified by category id | [optional] 
+**store_id** | **char \*** | Retrieves variants specified by store id | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**category_id** | **char \*** | Counts products’ variants specified by category id | [optional] 
-**store_id** | **char \*** | Retrieves variants specified by store id | [optional] 
 
 ### Return type
 
@@ -1682,7 +1682,7 @@ Name | Type | Description  | Notes
 //
 // Get variant info. This method is deprecated, and its development is stopped. Please use \"product.child_item.info\" instead.
 //
-product_info_200_response_t* ProductAPI_productVariantInfo(apiClient_t *apiClient, char *id, char *params, char *exclude, char *store_id);
+product_info_200_response_t* ProductAPI_productVariantInfo(apiClient_t *apiClient, char *id, char *store_id, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -1690,9 +1690,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **id** | **char \*** | Retrieves variant&#39;s info specified by variant id | 
+**store_id** | **char \*** | Retrieves variant info specified by store id | [optional] 
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description,price&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**store_id** | **char \*** | Retrieves variant info specified by store id | [optional] 
 
 ### Return type
 
@@ -1716,7 +1716,7 @@ Name | Type | Description  | Notes
 //
 // Get a list of variants. This method is deprecated, and its development is stopped. Please use \"product.child_item.list\" instead.
 //
-product_variant_list_200_response_t* ProductAPI_productVariantList(apiClient_t *apiClient, int *start, int *count, char *params, char *exclude, char *created_from, char *created_to, char *modified_from, char *modified_to, char *category_id, char *product_id, char *store_id);
+product_variant_list_200_response_t* ProductAPI_productVariantList(apiClient_t *apiClient, int *start, int *count, char *product_id, char *category_id, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -1725,15 +1725,15 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description,price&#39;]
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
+**product_id** | **char \*** | Retrieves products&#39; variants specified by product id | [optional] 
+**category_id** | **char \*** | Retrieves products’ variants specified by category id | [optional] 
+**store_id** | **char \*** | Retrieves variants specified by store id | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**category_id** | **char \*** | Retrieves products’ variants specified by category id | [optional] 
-**product_id** | **char \*** | Retrieves products&#39; variants specified by product id | [optional] 
-**store_id** | **char \*** | Retrieves variants specified by store id | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description,price&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 

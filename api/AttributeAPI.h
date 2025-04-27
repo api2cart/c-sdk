@@ -51,7 +51,7 @@ AttributeAPI_attributeAssignSet(apiClient_t *apiClient, char *id, char *attribut
 // Get attribute_set list
 //
 model_response_attribute_attributeset_list_t*
-AttributeAPI_attributeAttributesetList(apiClient_t *apiClient, int *start, int *count, char *params, char *exclude, char *response_fields);
+AttributeAPI_attributeAttributesetList(apiClient_t *apiClient, int *start, int *count, char *response_fields, char *params, char *exclude);
 
 
 // attribute.count
@@ -75,7 +75,7 @@ AttributeAPI_attributeDelete(apiClient_t *apiClient, char *id, char *store_id);
 // Get attribute group list
 //
 model_response_attribute_group_list_t*
-AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, char *lang_id, char *params, char *exclude, char *response_fields, char *attribute_set_id);
+AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, char *attribute_set_id, char *lang_id, char *response_fields, char *params, char *exclude);
 
 
 // attribute.info
@@ -83,7 +83,7 @@ AttributeAPI_attributeGroupList(apiClient_t *apiClient, int *start, int *count, 
 // Get information about a specific global attribute by its ID.
 //
 attribute_info_200_response_t*
-AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set_id, char *store_id, char *lang_id, char *params, char *exclude, char *response_fields);
+AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set_id, char *store_id, char *lang_id, char *response_fields, char *params, char *exclude);
 
 
 // attribute.list
@@ -91,7 +91,7 @@ AttributeAPI_attributeInfo(apiClient_t *apiClient, char *id, char *attribute_set
 // Get a list of global attributes.
 //
 model_response_attribute_list_t*
-AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char *type, char *attribute_ids, char *attribute_set_id, char *store_id, char *lang_id, char *params, char *exclude, char *response_fields, int *visible, int *required, int *system);
+AttributeAPI_attributeList(apiClient_t *apiClient, int *start, int *count, char *attribute_ids, char *attribute_set_id, char *store_id, char *lang_id, char *type, int *visible, int *required, int *system, char *response_fields, char *params, char *exclude);
 
 
 // attribute.type.list

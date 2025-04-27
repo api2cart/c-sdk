@@ -22,17 +22,17 @@ typedef struct order_shipment_add_t order_shipment_add_t;
 
 typedef struct order_shipment_add_t {
     char *order_id; // string
-    char *store_id; // string
     char *warehouse_id; // string
+    char *store_id; // string
     char *shipment_provider; // string
     char *shipping_method; // string
     list_t *items; //nonprimitive container
-    int send_notifications; //boolean
     list_t *tracking_numbers; //nonprimitive container
-    int adjust_stock; //boolean
-    int enable_cache; //boolean
     char *tracking_link; // string
     int is_shipped; //boolean
+    int send_notifications; //boolean
+    int adjust_stock; //boolean
+    int enable_cache; //boolean
     int check_process_status; //boolean
     int use_latest_api_version; //boolean
 
@@ -41,17 +41,17 @@ typedef struct order_shipment_add_t {
 
 __attribute__((deprecated)) order_shipment_add_t *order_shipment_add_create(
     char *order_id,
-    char *store_id,
     char *warehouse_id,
+    char *store_id,
     char *shipment_provider,
     char *shipping_method,
     list_t *items,
-    int send_notifications,
     list_t *tracking_numbers,
-    int adjust_stock,
-    int enable_cache,
     char *tracking_link,
     int is_shipped,
+    int send_notifications,
+    int adjust_stock,
+    int enable_cache,
     int check_process_status,
     int use_latest_api_version
 );

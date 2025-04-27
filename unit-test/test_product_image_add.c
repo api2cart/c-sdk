@@ -22,36 +22,36 @@ product_image_add_t* instantiate_product_image_add(int include_optional) {
   product_image_add_t* product_image_add = NULL;
   if (include_optional) {
     product_image_add = product_image_add_create(
-      "10",
-      "bag-gray.png",
       api2cart_openapi_product_image_add_TYPE_"base,small",
-      "http://docs.api2cart.com/img/logo.png",
-      "This cool image",
-      "image/jpeg",
-      5,
-      "/9j/4AAQSkZ...gD/2Q==",
+      "bag-gray.png",
+      "10",
       "45",
       "1,2,3,4,5",
       "1,2,3,4,5",
       "1",
       "3",
+      "http://docs.api2cart.com/img/logo.png",
+      "/9j/4AAQSkZ...gD/2Q==",
+      "This cool image",
+      "image/jpeg",
+      5,
       true
     );
   } else {
     product_image_add = product_image_add_create(
-      "10",
-      "bag-gray.png",
       api2cart_openapi_product_image_add_TYPE_"base,small",
-      "http://docs.api2cart.com/img/logo.png",
-      "This cool image",
-      "image/jpeg",
-      5,
-      "/9j/4AAQSkZ...gD/2Q==",
+      "bag-gray.png",
+      "10",
       "45",
       "1,2,3,4,5",
       "1,2,3,4,5",
       "1",
       "3",
+      "http://docs.api2cart.com/img/logo.png",
+      "/9j/4AAQSkZ...gD/2Q==",
+      "This cool image",
+      "image/jpeg",
+      5,
       true
     );
   }

@@ -12,7 +12,7 @@
 // Get subscribers list
 //
 model_response_subscriber_list_t*
-SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, int *subscribed, char *store_id, char *email, char *params, char *exclude, char *created_from, char *created_to, char *modified_from, char *modified_to, char *page_cursor, char *response_fields)
+SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, int *subscribed, char *store_id, char *email, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -59,6 +59,18 @@ SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, int
     }
 
     // query parameters
+    char *keyQuery_page_cursor = NULL;
+    char * valueQuery_page_cursor = NULL;
+    keyValuePair_t *keyPairQuery_page_cursor = 0;
+    if (page_cursor)
+    {
+        keyQuery_page_cursor = strdup("page_cursor");
+        valueQuery_page_cursor = strdup((page_cursor));
+        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
+        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
+    }
+
+    // query parameters
     char *keyQuery_subscribed = NULL;
     char * valueQuery_subscribed = NULL;
     keyValuePair_t *keyPairQuery_subscribed = 0;
@@ -93,30 +105,6 @@ SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, int
         valueQuery_email = strdup((email));
         keyPairQuery_email = keyValuePair_create(keyQuery_email, valueQuery_email);
         list_addElement(localVarQueryParameters,keyPairQuery_email);
-    }
-
-    // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
-    {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
-    }
-
-    // query parameters
-    char *keyQuery_exclude = NULL;
-    char * valueQuery_exclude = NULL;
-    keyValuePair_t *keyPairQuery_exclude = 0;
-    if (exclude)
-    {
-        keyQuery_exclude = strdup("exclude");
-        valueQuery_exclude = strdup((exclude));
-        keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
-        list_addElement(localVarQueryParameters,keyPairQuery_exclude);
     }
 
     // query parameters
@@ -168,18 +156,6 @@ SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, int
     }
 
     // query parameters
-    char *keyQuery_page_cursor = NULL;
-    char * valueQuery_page_cursor = NULL;
-    keyValuePair_t *keyPairQuery_page_cursor = 0;
-    if (page_cursor)
-    {
-        keyQuery_page_cursor = strdup("page_cursor");
-        valueQuery_page_cursor = strdup((page_cursor));
-        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
-        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
-    }
-
-    // query parameters
     char *keyQuery_response_fields = NULL;
     char * valueQuery_response_fields = NULL;
     keyValuePair_t *keyPairQuery_response_fields = 0;
@@ -189,6 +165,30 @@ SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, int
         valueQuery_response_fields = strdup((response_fields));
         keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
         list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+    }
+
+    // query parameters
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
+    {
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
+    }
+
+    // query parameters
+    char *keyQuery_exclude = NULL;
+    char * valueQuery_exclude = NULL;
+    keyValuePair_t *keyPairQuery_exclude = 0;
+    if (exclude)
+    {
+        keyQuery_exclude = strdup("exclude");
+        valueQuery_exclude = strdup((exclude));
+        keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
+        list_addElement(localVarQueryParameters,keyPairQuery_exclude);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -253,6 +253,18 @@ SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, int
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
     }
+    if(keyQuery_page_cursor){
+        free(keyQuery_page_cursor);
+        keyQuery_page_cursor = NULL;
+    }
+    if(valueQuery_page_cursor){
+        free(valueQuery_page_cursor);
+        valueQuery_page_cursor = NULL;
+    }
+    if(keyPairQuery_page_cursor){
+        keyValuePair_free(keyPairQuery_page_cursor);
+        keyPairQuery_page_cursor = NULL;
+    }
     if(keyQuery_subscribed){
         free(keyQuery_subscribed);
         keyQuery_subscribed = NULL;
@@ -288,30 +300,6 @@ SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, int
     if(keyPairQuery_email){
         keyValuePair_free(keyPairQuery_email);
         keyPairQuery_email = NULL;
-    }
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
-    }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
-    }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
-    }
-    if(keyQuery_exclude){
-        free(keyQuery_exclude);
-        keyQuery_exclude = NULL;
-    }
-    if(valueQuery_exclude){
-        free(valueQuery_exclude);
-        valueQuery_exclude = NULL;
-    }
-    if(keyPairQuery_exclude){
-        keyValuePair_free(keyPairQuery_exclude);
-        keyPairQuery_exclude = NULL;
     }
     if(keyQuery_created_from){
         free(keyQuery_created_from);
@@ -361,18 +349,6 @@ SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, int
         keyValuePair_free(keyPairQuery_modified_to);
         keyPairQuery_modified_to = NULL;
     }
-    if(keyQuery_page_cursor){
-        free(keyQuery_page_cursor);
-        keyQuery_page_cursor = NULL;
-    }
-    if(valueQuery_page_cursor){
-        free(valueQuery_page_cursor);
-        valueQuery_page_cursor = NULL;
-    }
-    if(keyPairQuery_page_cursor){
-        keyValuePair_free(keyPairQuery_page_cursor);
-        keyPairQuery_page_cursor = NULL;
-    }
     if(keyQuery_response_fields){
         free(keyQuery_response_fields);
         keyQuery_response_fields = NULL;
@@ -384,6 +360,30 @@ SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, int
     if(keyPairQuery_response_fields){
         keyValuePair_free(keyPairQuery_response_fields);
         keyPairQuery_response_fields = NULL;
+    }
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
+    }
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
+    }
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
+    }
+    if(keyQuery_exclude){
+        free(keyQuery_exclude);
+        keyQuery_exclude = NULL;
+    }
+    if(valueQuery_exclude){
+        free(valueQuery_exclude);
+        valueQuery_exclude = NULL;
+    }
+    if(keyPairQuery_exclude){
+        keyValuePair_free(keyPairQuery_exclude);
+        keyPairQuery_exclude = NULL;
     }
     return elementToReturn;
 end:

@@ -20,29 +20,29 @@ typedef struct order_shipment_update_t order_shipment_update_t;
 
 
 typedef struct order_shipment_update_t {
-    char *store_id; // string
     char *shipment_id; // string
     char *order_id; // string
-    list_t *tracking_numbers; //nonprimitive container
-    int replace; //boolean
-    int is_shipped; //boolean
-    char *tracking_link; // string
-    char *delivered_at; // string
+    char *store_id; // string
     char *shipment_provider; // string
+    list_t *tracking_numbers; //nonprimitive container
+    char *tracking_link; // string
+    int is_shipped; //boolean
+    char *delivered_at; // string
+    int replace; //boolean
 
     int _library_owned; // Is the library responsible for freeing this object?
 } order_shipment_update_t;
 
 __attribute__((deprecated)) order_shipment_update_t *order_shipment_update_create(
-    char *store_id,
     char *shipment_id,
     char *order_id,
+    char *store_id,
+    char *shipment_provider,
     list_t *tracking_numbers,
-    int replace,
-    int is_shipped,
     char *tracking_link,
+    int is_shipped,
     char *delivered_at,
-    char *shipment_provider
+    int replace
 );
 
 void order_shipment_update_free(order_shipment_update_t *order_shipment_update);

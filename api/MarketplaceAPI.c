@@ -12,7 +12,7 @@
 // Search product in global catalog.
 //
 model_response_marketplace_product_find_t*
-MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, int *count, char *page_cursor, char *categories_ids, char *keyword, char *asin, char *ean, char *gtin, char *upc, char *mpn, char *isbn, char *params, char *exclude, char *response_fields)
+MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, int *count, char *page_cursor, char *keyword, char *categories_ids, char *store_id, char *asin, char *ean, char *gtin, char *upc, char *mpn, char *isbn, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -31,18 +31,6 @@ MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, in
 
 
 
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
 
     // query parameters
     char *keyQuery_count = NULL;
@@ -70,6 +58,18 @@ MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, in
     }
 
     // query parameters
+    char *keyQuery_keyword = NULL;
+    char * valueQuery_keyword = NULL;
+    keyValuePair_t *keyPairQuery_keyword = 0;
+    if (keyword)
+    {
+        keyQuery_keyword = strdup("keyword");
+        valueQuery_keyword = strdup((keyword));
+        keyPairQuery_keyword = keyValuePair_create(keyQuery_keyword, valueQuery_keyword);
+        list_addElement(localVarQueryParameters,keyPairQuery_keyword);
+    }
+
+    // query parameters
     char *keyQuery_categories_ids = NULL;
     char * valueQuery_categories_ids = NULL;
     keyValuePair_t *keyPairQuery_categories_ids = 0;
@@ -82,15 +82,15 @@ MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, in
     }
 
     // query parameters
-    char *keyQuery_keyword = NULL;
-    char * valueQuery_keyword = NULL;
-    keyValuePair_t *keyPairQuery_keyword = 0;
-    if (keyword)
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
     {
-        keyQuery_keyword = strdup("keyword");
-        valueQuery_keyword = strdup((keyword));
-        keyPairQuery_keyword = keyValuePair_create(keyQuery_keyword, valueQuery_keyword);
-        list_addElement(localVarQueryParameters,keyPairQuery_keyword);
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
 
     // query parameters
@@ -166,6 +166,18 @@ MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, in
     }
 
     // query parameters
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
+    {
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+    }
+
+    // query parameters
     char *keyQuery_params = NULL;
     char * valueQuery_params = NULL;
     keyValuePair_t *keyPairQuery_params = 0;
@@ -187,18 +199,6 @@ MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, in
         valueQuery_exclude = strdup((exclude));
         keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
         list_addElement(localVarQueryParameters,keyPairQuery_exclude);
-    }
-
-    // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
-    {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -239,18 +239,6 @@ MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, in
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
     if(keyQuery_count){
         free(keyQuery_count);
         keyQuery_count = NULL;
@@ -275,6 +263,18 @@ MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, in
         keyValuePair_free(keyPairQuery_page_cursor);
         keyPairQuery_page_cursor = NULL;
     }
+    if(keyQuery_keyword){
+        free(keyQuery_keyword);
+        keyQuery_keyword = NULL;
+    }
+    if(valueQuery_keyword){
+        free(valueQuery_keyword);
+        valueQuery_keyword = NULL;
+    }
+    if(keyPairQuery_keyword){
+        keyValuePair_free(keyPairQuery_keyword);
+        keyPairQuery_keyword = NULL;
+    }
     if(keyQuery_categories_ids){
         free(keyQuery_categories_ids);
         keyQuery_categories_ids = NULL;
@@ -287,17 +287,17 @@ MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, in
         keyValuePair_free(keyPairQuery_categories_ids);
         keyPairQuery_categories_ids = NULL;
     }
-    if(keyQuery_keyword){
-        free(keyQuery_keyword);
-        keyQuery_keyword = NULL;
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
     }
-    if(valueQuery_keyword){
-        free(valueQuery_keyword);
-        valueQuery_keyword = NULL;
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
     }
-    if(keyPairQuery_keyword){
-        keyValuePair_free(keyPairQuery_keyword);
-        keyPairQuery_keyword = NULL;
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     if(keyQuery_asin){
         free(keyQuery_asin);
@@ -371,6 +371,18 @@ MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, in
         keyValuePair_free(keyPairQuery_isbn);
         keyPairQuery_isbn = NULL;
     }
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
+    }
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
+    }
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
+    }
     if(keyQuery_params){
         free(keyQuery_params);
         keyQuery_params = NULL;
@@ -394,18 +406,6 @@ MarketplaceAPI_marketplaceProductFind(apiClient_t *apiClient, char *store_id, in
     if(keyPairQuery_exclude){
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
-    }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
-    }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
-    }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
     }
     return elementToReturn;
 end:

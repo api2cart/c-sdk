@@ -14,7 +14,7 @@
 // Get list of recent jobs
 //
 model_response_batch_job_list_t*
-BatchAPI_batchJobList(apiClient_t *apiClient, int *count, char *page_cursor, char *created_from, char *created_to, char *processed_from, char *processed_to, char *ids, char *response_fields);
+BatchAPI_batchJobList(apiClient_t *apiClient, int *count, char *page_cursor, char *ids, char *created_from, char *created_to, char *processed_from, char *processed_to, char *response_fields);
 
 
 // batch.job.result

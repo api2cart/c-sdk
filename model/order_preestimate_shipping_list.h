@@ -20,10 +20,10 @@ typedef struct order_preestimate_shipping_list_t order_preestimate_shipping_list
 
 
 typedef struct order_preestimate_shipping_list_t {
-    char *store_id; // string
     char *warehouse_id; // string
-    char *customer_email; // string
     char *customer_id; // string
+    char *customer_email; // string
+    char *store_id; // string
     char *shipp_address_1; // string
     char *shipp_city; // string
     char *shipp_postcode; // string
@@ -37,10 +37,10 @@ typedef struct order_preestimate_shipping_list_t {
 } order_preestimate_shipping_list_t;
 
 __attribute__((deprecated)) order_preestimate_shipping_list_t *order_preestimate_shipping_list_create(
-    char *store_id,
     char *warehouse_id,
-    char *customer_email,
     char *customer_id,
+    char *customer_email,
+    char *store_id,
     char *shipp_address_1,
     char *shipp_city,
     char *shipp_postcode,

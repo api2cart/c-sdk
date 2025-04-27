@@ -29,11 +29,11 @@ typedef struct order_add_order_item_inner_t {
     double order_item_weight; //numeric
     char *order_item_variant_id; // string
     double order_item_tax; //numeric
+    int order_item_price_includes_tax; //boolean
     int order_item_parent; //numeric
     char *order_item_parent_option_name; // string
     int order_item_allow_refund_items_separately; //boolean
     int order_item_allow_ship_items_separately; //boolean
-    int order_item_price_includes_tax; //boolean
     list_t *order_item_option; //nonprimitive container
     list_t *order_item_property; //nonprimitive container
 
@@ -49,11 +49,11 @@ __attribute__((deprecated)) order_add_order_item_inner_t *order_add_order_item_i
     double order_item_weight,
     char *order_item_variant_id,
     double order_item_tax,
+    int order_item_price_includes_tax,
     int order_item_parent,
     char *order_item_parent_option_name,
     int order_item_allow_refund_items_separately,
     int order_item_allow_ship_items_separately,
-    int order_item_price_includes_tax,
     list_t *order_item_option,
     list_t *order_item_property
 );

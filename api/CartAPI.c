@@ -256,7 +256,7 @@ end:
 // Get cart catalog price rules discounts.
 //
 model_response_cart_catalog_price_rules_list_t*
-CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *ids, char *params, char *response_fields, char *exclude)
+CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -275,18 +275,6 @@ CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, char *page_cursor, int
 
 
 
-
-    // query parameters
-    char *keyQuery_page_cursor = NULL;
-    char * valueQuery_page_cursor = NULL;
-    keyValuePair_t *keyPairQuery_page_cursor = 0;
-    if (page_cursor)
-    {
-        keyQuery_page_cursor = strdup("page_cursor");
-        valueQuery_page_cursor = strdup((page_cursor));
-        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
-        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
-    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -315,6 +303,18 @@ CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, char *page_cursor, int
     }
 
     // query parameters
+    char *keyQuery_page_cursor = NULL;
+    char * valueQuery_page_cursor = NULL;
+    keyValuePair_t *keyPairQuery_page_cursor = 0;
+    if (page_cursor)
+    {
+        keyQuery_page_cursor = strdup("page_cursor");
+        valueQuery_page_cursor = strdup((page_cursor));
+        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
+        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
+    }
+
+    // query parameters
     char *keyQuery_ids = NULL;
     char * valueQuery_ids = NULL;
     keyValuePair_t *keyPairQuery_ids = 0;
@@ -327,18 +327,6 @@ CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, char *page_cursor, int
     }
 
     // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
-    {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
-    }
-
-    // query parameters
     char *keyQuery_response_fields = NULL;
     char * valueQuery_response_fields = NULL;
     keyValuePair_t *keyPairQuery_response_fields = 0;
@@ -348,6 +336,18 @@ CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, char *page_cursor, int
         valueQuery_response_fields = strdup((response_fields));
         keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
         list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+    }
+
+    // query parameters
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
+    {
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
     }
 
     // query parameters
@@ -400,18 +400,6 @@ CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, char *page_cursor, int
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_page_cursor){
-        free(keyQuery_page_cursor);
-        keyQuery_page_cursor = NULL;
-    }
-    if(valueQuery_page_cursor){
-        free(valueQuery_page_cursor);
-        valueQuery_page_cursor = NULL;
-    }
-    if(keyPairQuery_page_cursor){
-        keyValuePair_free(keyPairQuery_page_cursor);
-        keyPairQuery_page_cursor = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -436,6 +424,18 @@ CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, char *page_cursor, int
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
     }
+    if(keyQuery_page_cursor){
+        free(keyQuery_page_cursor);
+        keyQuery_page_cursor = NULL;
+    }
+    if(valueQuery_page_cursor){
+        free(valueQuery_page_cursor);
+        valueQuery_page_cursor = NULL;
+    }
+    if(keyPairQuery_page_cursor){
+        keyValuePair_free(keyPairQuery_page_cursor);
+        keyPairQuery_page_cursor = NULL;
+    }
     if(keyQuery_ids){
         free(keyQuery_ids);
         keyQuery_ids = NULL;
@@ -448,18 +448,6 @@ CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, char *page_cursor, int
         keyValuePair_free(keyPairQuery_ids);
         keyPairQuery_ids = NULL;
     }
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
-    }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
-    }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
-    }
     if(keyQuery_response_fields){
         free(keyQuery_response_fields);
         keyQuery_response_fields = NULL;
@@ -471,6 +459,18 @@ CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, char *page_cursor, int
     if(keyPairQuery_response_fields){
         keyValuePair_free(keyPairQuery_response_fields);
         keyPairQuery_response_fields = NULL;
+    }
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
+    }
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
+    }
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
     }
     if(keyQuery_exclude){
         free(keyQuery_exclude);
@@ -880,7 +880,7 @@ end:
 // Use this method to add additional conditions for coupon application.
 //
 basket_live_shipping_service_delete_200_response_t*
-CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart_openapi_cartCouponConditionAdd_entity_e entity, api2cart_openapi_cartCouponConditionAdd_key_e key, char *_operator, char *value, char *store_id, char *target, int *include_tax, int *include_shipping)
+CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart_openapi_cartCouponConditionAdd_entity_e entity, api2cart_openapi_cartCouponConditionAdd_key_e key, char *_operator, char *value, char *target, int *include_tax, int *include_shipping, char *store_id)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -901,18 +901,6 @@ CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart
 
 
     // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
-
-    // query parameters
     char *keyQuery_coupon_id = NULL;
     char * valueQuery_coupon_id = NULL;
     keyValuePair_t *keyPairQuery_coupon_id = 0;
@@ -922,18 +910,6 @@ CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart
         valueQuery_coupon_id = strdup((coupon_id));
         keyPairQuery_coupon_id = keyValuePair_create(keyQuery_coupon_id, valueQuery_coupon_id);
         list_addElement(localVarQueryParameters,keyPairQuery_coupon_id);
-    }
-
-    // query parameters
-    char *keyQuery_target = NULL;
-    char * valueQuery_target = NULL;
-    keyValuePair_t *keyPairQuery_target = 0;
-    if (target)
-    {
-        keyQuery_target = strdup("target");
-        valueQuery_target = strdup((target));
-        keyPairQuery_target = keyValuePair_create(keyQuery_target, valueQuery_target);
-        list_addElement(localVarQueryParameters,keyPairQuery_target);
     }
 
     // query parameters
@@ -987,6 +963,18 @@ CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart
     }
 
     // query parameters
+    char *keyQuery_target = NULL;
+    char * valueQuery_target = NULL;
+    keyValuePair_t *keyPairQuery_target = 0;
+    if (target)
+    {
+        keyQuery_target = strdup("target");
+        valueQuery_target = strdup((target));
+        keyPairQuery_target = keyValuePair_create(keyQuery_target, valueQuery_target);
+        list_addElement(localVarQueryParameters,keyPairQuery_target);
+    }
+
+    // query parameters
     char *keyQuery_include_tax = NULL;
     char * valueQuery_include_tax = NULL;
     keyValuePair_t *keyPairQuery_include_tax = 0;
@@ -1010,6 +998,18 @@ CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart
         snprintf(valueQuery_include_shipping, MAX_NUMBER_LENGTH, "%d", *include_shipping);
         keyPairQuery_include_shipping = keyValuePair_create(keyQuery_include_shipping, valueQuery_include_shipping);
         list_addElement(localVarQueryParameters,keyPairQuery_include_shipping);
+    }
+
+    // query parameters
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
+    {
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -1050,18 +1050,6 @@ CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
     if(keyQuery_coupon_id){
         free(keyQuery_coupon_id);
         keyQuery_coupon_id = NULL;
@@ -1073,18 +1061,6 @@ CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart
     if(keyPairQuery_coupon_id){
         keyValuePair_free(keyPairQuery_coupon_id);
         keyPairQuery_coupon_id = NULL;
-    }
-    if(keyQuery_target){
-        free(keyQuery_target);
-        keyQuery_target = NULL;
-    }
-    if(valueQuery_target){
-        free(valueQuery_target);
-        valueQuery_target = NULL;
-    }
-    if(keyPairQuery_target){
-        keyValuePair_free(keyPairQuery_target);
-        keyPairQuery_target = NULL;
     }
     if(keyQuery_entity){
         free(keyQuery_entity);
@@ -1126,6 +1102,18 @@ CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart
         keyValuePair_free(keyPairQuery_value);
         keyPairQuery_value = NULL;
     }
+    if(keyQuery_target){
+        free(keyQuery_target);
+        keyQuery_target = NULL;
+    }
+    if(valueQuery_target){
+        free(valueQuery_target);
+        valueQuery_target = NULL;
+    }
+    if(keyPairQuery_target){
+        keyValuePair_free(keyPairQuery_target);
+        keyPairQuery_target = NULL;
+    }
     if(keyQuery_include_tax){
         free(keyQuery_include_tax);
         keyQuery_include_tax = NULL;
@@ -1150,6 +1138,18 @@ CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart
         keyValuePair_free(keyPairQuery_include_shipping);
         keyPairQuery_include_shipping = NULL;
     }
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
+    }
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
+    }
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
+    }
     return elementToReturn;
 end:
     free(localVarPath);
@@ -1162,7 +1162,7 @@ end:
 // This method allows you to get the number of coupons. On some platforms, you can filter the coupons by the date they were active.
 //
 cart_coupon_count_200_response_t*
-CartAPI_cartCouponCount(apiClient_t *apiClient, char *store_id, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, int *avail)
+CartAPI_cartCouponCount(apiClient_t *apiClient, char *store_id, int *avail, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1192,6 +1192,19 @@ CartAPI_cartCouponCount(apiClient_t *apiClient, char *store_id, char *date_start
         valueQuery_store_id = strdup((store_id));
         keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
         list_addElement(localVarQueryParameters,keyPairQuery_store_id);
+    }
+
+    // query parameters
+    char *keyQuery_avail = NULL;
+    char * valueQuery_avail = NULL;
+    keyValuePair_t *keyPairQuery_avail = 0;
+    if (avail)
+    {
+        keyQuery_avail = strdup("avail");
+        valueQuery_avail = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_avail, MAX_NUMBER_LENGTH, "%d", *avail);
+        keyPairQuery_avail = keyValuePair_create(keyQuery_avail, valueQuery_avail);
+        list_addElement(localVarQueryParameters,keyPairQuery_avail);
     }
 
     // query parameters
@@ -1240,19 +1253,6 @@ CartAPI_cartCouponCount(apiClient_t *apiClient, char *store_id, char *date_start
         valueQuery_date_end_to = strdup((date_end_to));
         keyPairQuery_date_end_to = keyValuePair_create(keyQuery_date_end_to, valueQuery_date_end_to);
         list_addElement(localVarQueryParameters,keyPairQuery_date_end_to);
-    }
-
-    // query parameters
-    char *keyQuery_avail = NULL;
-    char * valueQuery_avail = NULL;
-    keyValuePair_t *keyPairQuery_avail = 0;
-    if (avail)
-    {
-        keyQuery_avail = strdup("avail");
-        valueQuery_avail = calloc(1,MAX_NUMBER_LENGTH);
-        snprintf(valueQuery_avail, MAX_NUMBER_LENGTH, "%d", *avail);
-        keyPairQuery_avail = keyValuePair_create(keyQuery_avail, valueQuery_avail);
-        list_addElement(localVarQueryParameters,keyPairQuery_avail);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -1305,6 +1305,18 @@ CartAPI_cartCouponCount(apiClient_t *apiClient, char *store_id, char *date_start
         keyValuePair_free(keyPairQuery_store_id);
         keyPairQuery_store_id = NULL;
     }
+    if(keyQuery_avail){
+        free(keyQuery_avail);
+        keyQuery_avail = NULL;
+    }
+    if(valueQuery_avail){
+        free(valueQuery_avail);
+        valueQuery_avail = NULL;
+    }
+    if(keyPairQuery_avail){
+        keyValuePair_free(keyPairQuery_avail);
+        keyPairQuery_avail = NULL;
+    }
     if(keyQuery_date_start_from){
         free(keyQuery_date_start_from);
         keyQuery_date_start_from = NULL;
@@ -1352,18 +1364,6 @@ CartAPI_cartCouponCount(apiClient_t *apiClient, char *store_id, char *date_start
     if(keyPairQuery_date_end_to){
         keyValuePair_free(keyPairQuery_date_end_to);
         keyPairQuery_date_end_to = NULL;
-    }
-    if(keyQuery_avail){
-        free(keyQuery_avail);
-        keyQuery_avail = NULL;
-    }
-    if(valueQuery_avail){
-        free(valueQuery_avail);
-        valueQuery_avail = NULL;
-    }
-    if(keyPairQuery_avail){
-        keyValuePair_free(keyPairQuery_avail);
-        keyPairQuery_avail = NULL;
     }
     return elementToReturn;
 end:
@@ -1495,7 +1495,7 @@ end:
 // Get cart coupon discounts.
 //
 model_response_cart_coupon_list_t*
-CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *coupons_ids, char *store_id, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, int *avail, char *lang_id, char *params, char *response_fields, char *exclude)
+CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *coupons_ids, char *store_id, char *lang_id, int *avail, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1514,18 +1514,6 @@ CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, in
 
 
 
-
-    // query parameters
-    char *keyQuery_page_cursor = NULL;
-    char * valueQuery_page_cursor = NULL;
-    keyValuePair_t *keyPairQuery_page_cursor = 0;
-    if (page_cursor)
-    {
-        keyQuery_page_cursor = strdup("page_cursor");
-        valueQuery_page_cursor = strdup((page_cursor));
-        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
-        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
-    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -1554,6 +1542,18 @@ CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, in
     }
 
     // query parameters
+    char *keyQuery_page_cursor = NULL;
+    char * valueQuery_page_cursor = NULL;
+    keyValuePair_t *keyPairQuery_page_cursor = 0;
+    if (page_cursor)
+    {
+        keyQuery_page_cursor = strdup("page_cursor");
+        valueQuery_page_cursor = strdup((page_cursor));
+        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
+        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
+    }
+
+    // query parameters
     char *keyQuery_coupons_ids = NULL;
     char * valueQuery_coupons_ids = NULL;
     keyValuePair_t *keyPairQuery_coupons_ids = 0;
@@ -1575,6 +1575,31 @@ CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, in
         valueQuery_store_id = strdup((store_id));
         keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
         list_addElement(localVarQueryParameters,keyPairQuery_store_id);
+    }
+
+    // query parameters
+    char *keyQuery_lang_id = NULL;
+    char * valueQuery_lang_id = NULL;
+    keyValuePair_t *keyPairQuery_lang_id = 0;
+    if (lang_id)
+    {
+        keyQuery_lang_id = strdup("lang_id");
+        valueQuery_lang_id = strdup((lang_id));
+        keyPairQuery_lang_id = keyValuePair_create(keyQuery_lang_id, valueQuery_lang_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_lang_id);
+    }
+
+    // query parameters
+    char *keyQuery_avail = NULL;
+    char * valueQuery_avail = NULL;
+    keyValuePair_t *keyPairQuery_avail = 0;
+    if (avail)
+    {
+        keyQuery_avail = strdup("avail");
+        valueQuery_avail = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_avail, MAX_NUMBER_LENGTH, "%d", *avail);
+        keyPairQuery_avail = keyValuePair_create(keyQuery_avail, valueQuery_avail);
+        list_addElement(localVarQueryParameters,keyPairQuery_avail);
     }
 
     // query parameters
@@ -1626,28 +1651,15 @@ CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, in
     }
 
     // query parameters
-    char *keyQuery_avail = NULL;
-    char * valueQuery_avail = NULL;
-    keyValuePair_t *keyPairQuery_avail = 0;
-    if (avail)
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
     {
-        keyQuery_avail = strdup("avail");
-        valueQuery_avail = calloc(1,MAX_NUMBER_LENGTH);
-        snprintf(valueQuery_avail, MAX_NUMBER_LENGTH, "%d", *avail);
-        keyPairQuery_avail = keyValuePair_create(keyQuery_avail, valueQuery_avail);
-        list_addElement(localVarQueryParameters,keyPairQuery_avail);
-    }
-
-    // query parameters
-    char *keyQuery_lang_id = NULL;
-    char * valueQuery_lang_id = NULL;
-    keyValuePair_t *keyPairQuery_lang_id = 0;
-    if (lang_id)
-    {
-        keyQuery_lang_id = strdup("lang_id");
-        valueQuery_lang_id = strdup((lang_id));
-        keyPairQuery_lang_id = keyValuePair_create(keyQuery_lang_id, valueQuery_lang_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_lang_id);
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -1660,18 +1672,6 @@ CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, in
         valueQuery_params = strdup((params));
         keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
         list_addElement(localVarQueryParameters,keyPairQuery_params);
-    }
-
-    // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
-    {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -1724,18 +1724,6 @@ CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, in
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_page_cursor){
-        free(keyQuery_page_cursor);
-        keyQuery_page_cursor = NULL;
-    }
-    if(valueQuery_page_cursor){
-        free(valueQuery_page_cursor);
-        valueQuery_page_cursor = NULL;
-    }
-    if(keyPairQuery_page_cursor){
-        keyValuePair_free(keyPairQuery_page_cursor);
-        keyPairQuery_page_cursor = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -1760,6 +1748,18 @@ CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, in
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
     }
+    if(keyQuery_page_cursor){
+        free(keyQuery_page_cursor);
+        keyQuery_page_cursor = NULL;
+    }
+    if(valueQuery_page_cursor){
+        free(valueQuery_page_cursor);
+        valueQuery_page_cursor = NULL;
+    }
+    if(keyPairQuery_page_cursor){
+        keyValuePair_free(keyPairQuery_page_cursor);
+        keyPairQuery_page_cursor = NULL;
+    }
     if(keyQuery_coupons_ids){
         free(keyQuery_coupons_ids);
         keyQuery_coupons_ids = NULL;
@@ -1783,6 +1783,30 @@ CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, in
     if(keyPairQuery_store_id){
         keyValuePair_free(keyPairQuery_store_id);
         keyPairQuery_store_id = NULL;
+    }
+    if(keyQuery_lang_id){
+        free(keyQuery_lang_id);
+        keyQuery_lang_id = NULL;
+    }
+    if(valueQuery_lang_id){
+        free(valueQuery_lang_id);
+        valueQuery_lang_id = NULL;
+    }
+    if(keyPairQuery_lang_id){
+        keyValuePair_free(keyPairQuery_lang_id);
+        keyPairQuery_lang_id = NULL;
+    }
+    if(keyQuery_avail){
+        free(keyQuery_avail);
+        keyQuery_avail = NULL;
+    }
+    if(valueQuery_avail){
+        free(valueQuery_avail);
+        valueQuery_avail = NULL;
+    }
+    if(keyPairQuery_avail){
+        keyValuePair_free(keyPairQuery_avail);
+        keyPairQuery_avail = NULL;
     }
     if(keyQuery_date_start_from){
         free(keyQuery_date_start_from);
@@ -1832,29 +1856,17 @@ CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, in
         keyValuePair_free(keyPairQuery_date_end_to);
         keyPairQuery_date_end_to = NULL;
     }
-    if(keyQuery_avail){
-        free(keyQuery_avail);
-        keyQuery_avail = NULL;
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
     }
-    if(valueQuery_avail){
-        free(valueQuery_avail);
-        valueQuery_avail = NULL;
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
     }
-    if(keyPairQuery_avail){
-        keyValuePair_free(keyPairQuery_avail);
-        keyPairQuery_avail = NULL;
-    }
-    if(keyQuery_lang_id){
-        free(keyQuery_lang_id);
-        keyQuery_lang_id = NULL;
-    }
-    if(valueQuery_lang_id){
-        free(valueQuery_lang_id);
-        valueQuery_lang_id = NULL;
-    }
-    if(keyPairQuery_lang_id){
-        keyValuePair_free(keyPairQuery_lang_id);
-        keyPairQuery_lang_id = NULL;
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_params){
         free(keyQuery_params);
@@ -1867,18 +1879,6 @@ CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, in
     if(keyPairQuery_params){
         keyValuePair_free(keyPairQuery_params);
         keyPairQuery_params = NULL;
-    }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
-    }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
-    }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_exclude){
         free(keyQuery_exclude);
@@ -2578,7 +2578,7 @@ end:
 // Get gift cards list.
 //
 model_response_cart_gift_card_list_t*
-CartAPI_cartGiftcardList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *store_id, char *params, char *response_fields, char *exclude)
+CartAPI_cartGiftcardList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *store_id, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -2597,18 +2597,6 @@ CartAPI_cartGiftcardList(apiClient_t *apiClient, char *page_cursor, int *start, 
 
 
 
-
-    // query parameters
-    char *keyQuery_page_cursor = NULL;
-    char * valueQuery_page_cursor = NULL;
-    keyValuePair_t *keyPairQuery_page_cursor = 0;
-    if (page_cursor)
-    {
-        keyQuery_page_cursor = strdup("page_cursor");
-        valueQuery_page_cursor = strdup((page_cursor));
-        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
-        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
-    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -2637,6 +2625,18 @@ CartAPI_cartGiftcardList(apiClient_t *apiClient, char *page_cursor, int *start, 
     }
 
     // query parameters
+    char *keyQuery_page_cursor = NULL;
+    char * valueQuery_page_cursor = NULL;
+    keyValuePair_t *keyPairQuery_page_cursor = 0;
+    if (page_cursor)
+    {
+        keyQuery_page_cursor = strdup("page_cursor");
+        valueQuery_page_cursor = strdup((page_cursor));
+        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
+        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
+    }
+
+    // query parameters
     char *keyQuery_store_id = NULL;
     char * valueQuery_store_id = NULL;
     keyValuePair_t *keyPairQuery_store_id = 0;
@@ -2649,18 +2649,6 @@ CartAPI_cartGiftcardList(apiClient_t *apiClient, char *page_cursor, int *start, 
     }
 
     // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
-    {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
-    }
-
-    // query parameters
     char *keyQuery_response_fields = NULL;
     char * valueQuery_response_fields = NULL;
     keyValuePair_t *keyPairQuery_response_fields = 0;
@@ -2670,6 +2658,18 @@ CartAPI_cartGiftcardList(apiClient_t *apiClient, char *page_cursor, int *start, 
         valueQuery_response_fields = strdup((response_fields));
         keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
         list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+    }
+
+    // query parameters
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
+    {
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
     }
 
     // query parameters
@@ -2722,18 +2722,6 @@ CartAPI_cartGiftcardList(apiClient_t *apiClient, char *page_cursor, int *start, 
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_page_cursor){
-        free(keyQuery_page_cursor);
-        keyQuery_page_cursor = NULL;
-    }
-    if(valueQuery_page_cursor){
-        free(valueQuery_page_cursor);
-        valueQuery_page_cursor = NULL;
-    }
-    if(keyPairQuery_page_cursor){
-        keyValuePair_free(keyPairQuery_page_cursor);
-        keyPairQuery_page_cursor = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -2758,6 +2746,18 @@ CartAPI_cartGiftcardList(apiClient_t *apiClient, char *page_cursor, int *start, 
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
     }
+    if(keyQuery_page_cursor){
+        free(keyQuery_page_cursor);
+        keyQuery_page_cursor = NULL;
+    }
+    if(valueQuery_page_cursor){
+        free(valueQuery_page_cursor);
+        valueQuery_page_cursor = NULL;
+    }
+    if(keyPairQuery_page_cursor){
+        keyValuePair_free(keyPairQuery_page_cursor);
+        keyPairQuery_page_cursor = NULL;
+    }
     if(keyQuery_store_id){
         free(keyQuery_store_id);
         keyQuery_store_id = NULL;
@@ -2770,18 +2770,6 @@ CartAPI_cartGiftcardList(apiClient_t *apiClient, char *page_cursor, int *start, 
         keyValuePair_free(keyPairQuery_store_id);
         keyPairQuery_store_id = NULL;
     }
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
-    }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
-    }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
-    }
     if(keyQuery_response_fields){
         free(keyQuery_response_fields);
         keyQuery_response_fields = NULL;
@@ -2793,6 +2781,18 @@ CartAPI_cartGiftcardList(apiClient_t *apiClient, char *page_cursor, int *start, 
     if(keyPairQuery_response_fields){
         keyValuePair_free(keyPairQuery_response_fields);
         keyPairQuery_response_fields = NULL;
+    }
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
+    }
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
+    }
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
     }
     if(keyQuery_exclude){
         free(keyQuery_exclude);
@@ -2818,7 +2818,7 @@ end:
 // This method allows you to get various information about the store, including a list of stores (in the case of a multistore configuration), a list of supported languages, currencies, carriers, warehouses, and many other information. This information contains data that is relatively stable and rarely changes, so API2Cart can cache certain data to reduce the load on the store and speed up the execution of the request. We also recommend that you cache the response of this method on your side to save requests. If you need to clear the cache for a specific store, then use the cart.validate method.
 //
 cart_info_200_response_t*
-CartAPI_cartInfo(apiClient_t *apiClient, char *params, char *response_fields, char *exclude, char *store_id)
+CartAPI_cartInfo(apiClient_t *apiClient, char *store_id, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -2839,15 +2839,15 @@ CartAPI_cartInfo(apiClient_t *apiClient, char *params, char *response_fields, ch
 
 
     // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
     {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
 
     // query parameters
@@ -2863,6 +2863,18 @@ CartAPI_cartInfo(apiClient_t *apiClient, char *params, char *response_fields, ch
     }
 
     // query parameters
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
+    {
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
+    }
+
+    // query parameters
     char *keyQuery_exclude = NULL;
     char * valueQuery_exclude = NULL;
     keyValuePair_t *keyPairQuery_exclude = 0;
@@ -2872,18 +2884,6 @@ CartAPI_cartInfo(apiClient_t *apiClient, char *params, char *response_fields, ch
         valueQuery_exclude = strdup((exclude));
         keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
         list_addElement(localVarQueryParameters,keyPairQuery_exclude);
-    }
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -2924,17 +2924,17 @@ CartAPI_cartInfo(apiClient_t *apiClient, char *params, char *response_fields, ch
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
     }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
     }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     if(keyQuery_response_fields){
         free(keyQuery_response_fields);
@@ -2948,6 +2948,18 @@ CartAPI_cartInfo(apiClient_t *apiClient, char *params, char *response_fields, ch
         keyValuePair_free(keyPairQuery_response_fields);
         keyPairQuery_response_fields = NULL;
     }
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
+    }
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
+    }
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
+    }
     if(keyQuery_exclude){
         free(keyQuery_exclude);
         keyQuery_exclude = NULL;
@@ -2959,18 +2971,6 @@ CartAPI_cartInfo(apiClient_t *apiClient, char *params, char *response_fields, ch
     if(keyPairQuery_exclude){
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
-    }
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
     }
     return elementToReturn;
 end:
@@ -3054,7 +3054,7 @@ end:
 // Using this method, you can get a list of metadata for various entities (products, options, customers, orders). Usually this is data created by third-party plugins.
 //
 model_response_cart_meta_data_list_t*
-CartAPI_cartMetaDataList(apiClient_t *apiClient, char *entity_id, char *entity, char *store_id, char *lang_id, char *key, int *count, char *page_cursor, char *params, char *response_fields, char *exclude)
+CartAPI_cartMetaDataList(apiClient_t *apiClient, char *entity_id, int *count, char *page_cursor, char *entity, char *store_id, char *lang_id, char *key, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -3073,6 +3073,31 @@ CartAPI_cartMetaDataList(apiClient_t *apiClient, char *entity_id, char *entity, 
 
 
 
+
+    // query parameters
+    char *keyQuery_count = NULL;
+    char * valueQuery_count = NULL;
+    keyValuePair_t *keyPairQuery_count = 0;
+    if (count)
+    {
+        keyQuery_count = strdup("count");
+        valueQuery_count = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
+        keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
+        list_addElement(localVarQueryParameters,keyPairQuery_count);
+    }
+
+    // query parameters
+    char *keyQuery_page_cursor = NULL;
+    char * valueQuery_page_cursor = NULL;
+    keyValuePair_t *keyPairQuery_page_cursor = 0;
+    if (page_cursor)
+    {
+        keyQuery_page_cursor = strdup("page_cursor");
+        valueQuery_page_cursor = strdup((page_cursor));
+        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
+        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
+    }
 
     // query parameters
     char *keyQuery_entity_id = NULL;
@@ -3135,28 +3160,15 @@ CartAPI_cartMetaDataList(apiClient_t *apiClient, char *entity_id, char *entity, 
     }
 
     // query parameters
-    char *keyQuery_count = NULL;
-    char * valueQuery_count = NULL;
-    keyValuePair_t *keyPairQuery_count = 0;
-    if (count)
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
     {
-        keyQuery_count = strdup("count");
-        valueQuery_count = calloc(1,MAX_NUMBER_LENGTH);
-        snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
-        keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
-        list_addElement(localVarQueryParameters,keyPairQuery_count);
-    }
-
-    // query parameters
-    char *keyQuery_page_cursor = NULL;
-    char * valueQuery_page_cursor = NULL;
-    keyValuePair_t *keyPairQuery_page_cursor = 0;
-    if (page_cursor)
-    {
-        keyQuery_page_cursor = strdup("page_cursor");
-        valueQuery_page_cursor = strdup((page_cursor));
-        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
-        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -3169,18 +3181,6 @@ CartAPI_cartMetaDataList(apiClient_t *apiClient, char *entity_id, char *entity, 
         valueQuery_params = strdup((params));
         keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
         list_addElement(localVarQueryParameters,keyPairQuery_params);
-    }
-
-    // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
-    {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -3233,6 +3233,30 @@ CartAPI_cartMetaDataList(apiClient_t *apiClient, char *entity_id, char *entity, 
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
+    if(keyQuery_count){
+        free(keyQuery_count);
+        keyQuery_count = NULL;
+    }
+    if(valueQuery_count){
+        free(valueQuery_count);
+        valueQuery_count = NULL;
+    }
+    if(keyPairQuery_count){
+        keyValuePair_free(keyPairQuery_count);
+        keyPairQuery_count = NULL;
+    }
+    if(keyQuery_page_cursor){
+        free(keyQuery_page_cursor);
+        keyQuery_page_cursor = NULL;
+    }
+    if(valueQuery_page_cursor){
+        free(valueQuery_page_cursor);
+        valueQuery_page_cursor = NULL;
+    }
+    if(keyPairQuery_page_cursor){
+        keyValuePair_free(keyPairQuery_page_cursor);
+        keyPairQuery_page_cursor = NULL;
+    }
     if(keyQuery_entity_id){
         free(keyQuery_entity_id);
         keyQuery_entity_id = NULL;
@@ -3293,29 +3317,17 @@ CartAPI_cartMetaDataList(apiClient_t *apiClient, char *entity_id, char *entity, 
         keyValuePair_free(keyPairQuery_key);
         keyPairQuery_key = NULL;
     }
-    if(keyQuery_count){
-        free(keyQuery_count);
-        keyQuery_count = NULL;
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
     }
-    if(valueQuery_count){
-        free(valueQuery_count);
-        valueQuery_count = NULL;
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
     }
-    if(keyPairQuery_count){
-        keyValuePair_free(keyPairQuery_count);
-        keyPairQuery_count = NULL;
-    }
-    if(keyQuery_page_cursor){
-        free(keyQuery_page_cursor);
-        keyQuery_page_cursor = NULL;
-    }
-    if(valueQuery_page_cursor){
-        free(valueQuery_page_cursor);
-        valueQuery_page_cursor = NULL;
-    }
-    if(keyPairQuery_page_cursor){
-        keyValuePair_free(keyPairQuery_page_cursor);
-        keyPairQuery_page_cursor = NULL;
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_params){
         free(keyQuery_params);
@@ -3328,18 +3340,6 @@ CartAPI_cartMetaDataList(apiClient_t *apiClient, char *entity_id, char *entity, 
     if(keyPairQuery_params){
         keyValuePair_free(keyPairQuery_params);
         keyPairQuery_params = NULL;
-    }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
-    }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
-    }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_exclude){
         free(keyQuery_exclude);
@@ -3398,42 +3398,6 @@ CartAPI_cartMetaDataSet(apiClient_t *apiClient, char *entity_id, char *key, char
     }
 
     // query parameters
-    char *keyQuery_entity = NULL;
-    char * valueQuery_entity = NULL;
-    keyValuePair_t *keyPairQuery_entity = 0;
-    if (entity)
-    {
-        keyQuery_entity = strdup("entity");
-        valueQuery_entity = strdup((entity));
-        keyPairQuery_entity = keyValuePair_create(keyQuery_entity, valueQuery_entity);
-        list_addElement(localVarQueryParameters,keyPairQuery_entity);
-    }
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
-
-    // query parameters
-    char *keyQuery_lang_id = NULL;
-    char * valueQuery_lang_id = NULL;
-    keyValuePair_t *keyPairQuery_lang_id = 0;
-    if (lang_id)
-    {
-        keyQuery_lang_id = strdup("lang_id");
-        valueQuery_lang_id = strdup((lang_id));
-        keyPairQuery_lang_id = keyValuePair_create(keyQuery_lang_id, valueQuery_lang_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_lang_id);
-    }
-
-    // query parameters
     char *keyQuery_key = NULL;
     char * valueQuery_key = NULL;
     keyValuePair_t *keyPairQuery_key = 0;
@@ -3467,6 +3431,42 @@ CartAPI_cartMetaDataSet(apiClient_t *apiClient, char *entity_id, char *key, char
         valueQuery__namespace = strdup((_namespace));
         keyPairQuery__namespace = keyValuePair_create(keyQuery__namespace, valueQuery__namespace);
         list_addElement(localVarQueryParameters,keyPairQuery__namespace);
+    }
+
+    // query parameters
+    char *keyQuery_entity = NULL;
+    char * valueQuery_entity = NULL;
+    keyValuePair_t *keyPairQuery_entity = 0;
+    if (entity)
+    {
+        keyQuery_entity = strdup("entity");
+        valueQuery_entity = strdup((entity));
+        keyPairQuery_entity = keyValuePair_create(keyQuery_entity, valueQuery_entity);
+        list_addElement(localVarQueryParameters,keyPairQuery_entity);
+    }
+
+    // query parameters
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
+    {
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
+    }
+
+    // query parameters
+    char *keyQuery_lang_id = NULL;
+    char * valueQuery_lang_id = NULL;
+    keyValuePair_t *keyPairQuery_lang_id = 0;
+    if (lang_id)
+    {
+        keyQuery_lang_id = strdup("lang_id");
+        valueQuery_lang_id = strdup((lang_id));
+        keyPairQuery_lang_id = keyValuePair_create(keyQuery_lang_id, valueQuery_lang_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_lang_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -3519,42 +3519,6 @@ CartAPI_cartMetaDataSet(apiClient_t *apiClient, char *entity_id, char *key, char
         keyValuePair_free(keyPairQuery_entity_id);
         keyPairQuery_entity_id = NULL;
     }
-    if(keyQuery_entity){
-        free(keyQuery_entity);
-        keyQuery_entity = NULL;
-    }
-    if(valueQuery_entity){
-        free(valueQuery_entity);
-        valueQuery_entity = NULL;
-    }
-    if(keyPairQuery_entity){
-        keyValuePair_free(keyPairQuery_entity);
-        keyPairQuery_entity = NULL;
-    }
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
-    if(keyQuery_lang_id){
-        free(keyQuery_lang_id);
-        keyQuery_lang_id = NULL;
-    }
-    if(valueQuery_lang_id){
-        free(valueQuery_lang_id);
-        valueQuery_lang_id = NULL;
-    }
-    if(keyPairQuery_lang_id){
-        keyValuePair_free(keyPairQuery_lang_id);
-        keyPairQuery_lang_id = NULL;
-    }
     if(keyQuery_key){
         free(keyQuery_key);
         keyQuery_key = NULL;
@@ -3590,6 +3554,42 @@ CartAPI_cartMetaDataSet(apiClient_t *apiClient, char *entity_id, char *key, char
     if(keyPairQuery__namespace){
         keyValuePair_free(keyPairQuery__namespace);
         keyPairQuery__namespace = NULL;
+    }
+    if(keyQuery_entity){
+        free(keyQuery_entity);
+        keyQuery_entity = NULL;
+    }
+    if(valueQuery_entity){
+        free(valueQuery_entity);
+        valueQuery_entity = NULL;
+    }
+    if(keyPairQuery_entity){
+        keyValuePair_free(keyPairQuery_entity);
+        keyPairQuery_entity = NULL;
+    }
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
+    }
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
+    }
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
+    }
+    if(keyQuery_lang_id){
+        free(keyQuery_lang_id);
+        keyQuery_lang_id = NULL;
+    }
+    if(valueQuery_lang_id){
+        free(valueQuery_lang_id);
+        valueQuery_lang_id = NULL;
+    }
+    if(keyPairQuery_lang_id){
+        keyValuePair_free(keyPairQuery_lang_id);
+        keyPairQuery_lang_id = NULL;
     }
     return elementToReturn;
 end:
@@ -3636,30 +3636,6 @@ CartAPI_cartMetaDataUnset(apiClient_t *apiClient, char *entity_id, char *key, ch
     }
 
     // query parameters
-    char *keyQuery_entity = NULL;
-    char * valueQuery_entity = NULL;
-    keyValuePair_t *keyPairQuery_entity = 0;
-    if (entity)
-    {
-        keyQuery_entity = strdup("entity");
-        valueQuery_entity = strdup((entity));
-        keyPairQuery_entity = keyValuePair_create(keyQuery_entity, valueQuery_entity);
-        list_addElement(localVarQueryParameters,keyPairQuery_entity);
-    }
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
-
-    // query parameters
     char *keyQuery_key = NULL;
     char * valueQuery_key = NULL;
     keyValuePair_t *keyPairQuery_key = 0;
@@ -3681,6 +3657,30 @@ CartAPI_cartMetaDataUnset(apiClient_t *apiClient, char *entity_id, char *key, ch
         valueQuery_id = strdup((id));
         keyPairQuery_id = keyValuePair_create(keyQuery_id, valueQuery_id);
         list_addElement(localVarQueryParameters,keyPairQuery_id);
+    }
+
+    // query parameters
+    char *keyQuery_entity = NULL;
+    char * valueQuery_entity = NULL;
+    keyValuePair_t *keyPairQuery_entity = 0;
+    if (entity)
+    {
+        keyQuery_entity = strdup("entity");
+        valueQuery_entity = strdup((entity));
+        keyPairQuery_entity = keyValuePair_create(keyQuery_entity, valueQuery_entity);
+        list_addElement(localVarQueryParameters,keyPairQuery_entity);
+    }
+
+    // query parameters
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
+    {
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -3733,30 +3733,6 @@ CartAPI_cartMetaDataUnset(apiClient_t *apiClient, char *entity_id, char *key, ch
         keyValuePair_free(keyPairQuery_entity_id);
         keyPairQuery_entity_id = NULL;
     }
-    if(keyQuery_entity){
-        free(keyQuery_entity);
-        keyQuery_entity = NULL;
-    }
-    if(valueQuery_entity){
-        free(valueQuery_entity);
-        valueQuery_entity = NULL;
-    }
-    if(keyPairQuery_entity){
-        keyValuePair_free(keyPairQuery_entity);
-        keyPairQuery_entity = NULL;
-    }
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
     if(keyQuery_key){
         free(keyQuery_key);
         keyQuery_key = NULL;
@@ -3780,6 +3756,30 @@ CartAPI_cartMetaDataUnset(apiClient_t *apiClient, char *entity_id, char *key, ch
     if(keyPairQuery_id){
         keyValuePair_free(keyPairQuery_id);
         keyPairQuery_id = NULL;
+    }
+    if(keyQuery_entity){
+        free(keyQuery_entity);
+        keyQuery_entity = NULL;
+    }
+    if(valueQuery_entity){
+        free(valueQuery_entity);
+        valueQuery_entity = NULL;
+    }
+    if(keyPairQuery_entity){
+        keyValuePair_free(keyPairQuery_entity);
+        keyPairQuery_entity = NULL;
+    }
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
+    }
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
+    }
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     return elementToReturn;
 end:
@@ -3863,7 +3863,7 @@ end:
 // Get a list of third-party plugins installed on the store.
 //
 cart_plugin_list_200_response_t*
-CartAPI_cartPluginList(apiClient_t *apiClient, char *store_id, int *start, int *count)
+CartAPI_cartPluginList(apiClient_t *apiClient, int *start, int *count, char *store_id)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -3882,18 +3882,6 @@ CartAPI_cartPluginList(apiClient_t *apiClient, char *store_id, int *start, int *
 
 
 
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -3919,6 +3907,18 @@ CartAPI_cartPluginList(apiClient_t *apiClient, char *store_id, int *start, int *
         snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
         keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
         list_addElement(localVarQueryParameters,keyPairQuery_count);
+    }
+
+    // query parameters
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
+    {
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -3959,18 +3959,6 @@ CartAPI_cartPluginList(apiClient_t *apiClient, char *store_id, int *start, int *
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -3994,6 +3982,18 @@ CartAPI_cartPluginList(apiClient_t *apiClient, char *store_id, int *start, int *
     if(keyPairQuery_count){
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
+    }
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
+    }
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
+    }
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     return elementToReturn;
 end:
@@ -4387,7 +4387,7 @@ end:
 // Get scripts installed to the storefront
 //
 model_response_cart_script_list_t*
-CartAPI_cartScriptList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *created_from, char *created_to, char *modified_from, char *modified_to, char *script_ids, char *store_id, char *params, char *response_fields, char *exclude)
+CartAPI_cartScriptList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *script_ids, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -4406,18 +4406,6 @@ CartAPI_cartScriptList(apiClient_t *apiClient, char *page_cursor, int *start, in
 
 
 
-
-    // query parameters
-    char *keyQuery_page_cursor = NULL;
-    char * valueQuery_page_cursor = NULL;
-    keyValuePair_t *keyPairQuery_page_cursor = 0;
-    if (page_cursor)
-    {
-        keyQuery_page_cursor = strdup("page_cursor");
-        valueQuery_page_cursor = strdup((page_cursor));
-        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
-        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
-    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -4443,6 +4431,42 @@ CartAPI_cartScriptList(apiClient_t *apiClient, char *page_cursor, int *start, in
         snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
         keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
         list_addElement(localVarQueryParameters,keyPairQuery_count);
+    }
+
+    // query parameters
+    char *keyQuery_page_cursor = NULL;
+    char * valueQuery_page_cursor = NULL;
+    keyValuePair_t *keyPairQuery_page_cursor = 0;
+    if (page_cursor)
+    {
+        keyQuery_page_cursor = strdup("page_cursor");
+        valueQuery_page_cursor = strdup((page_cursor));
+        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
+        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
+    }
+
+    // query parameters
+    char *keyQuery_script_ids = NULL;
+    char * valueQuery_script_ids = NULL;
+    keyValuePair_t *keyPairQuery_script_ids = 0;
+    if (script_ids)
+    {
+        keyQuery_script_ids = strdup("script_ids");
+        valueQuery_script_ids = strdup((script_ids));
+        keyPairQuery_script_ids = keyValuePair_create(keyQuery_script_ids, valueQuery_script_ids);
+        list_addElement(localVarQueryParameters,keyPairQuery_script_ids);
+    }
+
+    // query parameters
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
+    {
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
 
     // query parameters
@@ -4494,27 +4518,15 @@ CartAPI_cartScriptList(apiClient_t *apiClient, char *page_cursor, int *start, in
     }
 
     // query parameters
-    char *keyQuery_script_ids = NULL;
-    char * valueQuery_script_ids = NULL;
-    keyValuePair_t *keyPairQuery_script_ids = 0;
-    if (script_ids)
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
     {
-        keyQuery_script_ids = strdup("script_ids");
-        valueQuery_script_ids = strdup((script_ids));
-        keyPairQuery_script_ids = keyValuePair_create(keyQuery_script_ids, valueQuery_script_ids);
-        list_addElement(localVarQueryParameters,keyPairQuery_script_ids);
-    }
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -4527,18 +4539,6 @@ CartAPI_cartScriptList(apiClient_t *apiClient, char *page_cursor, int *start, in
         valueQuery_params = strdup((params));
         keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
         list_addElement(localVarQueryParameters,keyPairQuery_params);
-    }
-
-    // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
-    {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -4591,18 +4591,6 @@ CartAPI_cartScriptList(apiClient_t *apiClient, char *page_cursor, int *start, in
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_page_cursor){
-        free(keyQuery_page_cursor);
-        keyQuery_page_cursor = NULL;
-    }
-    if(valueQuery_page_cursor){
-        free(valueQuery_page_cursor);
-        valueQuery_page_cursor = NULL;
-    }
-    if(keyPairQuery_page_cursor){
-        keyValuePair_free(keyPairQuery_page_cursor);
-        keyPairQuery_page_cursor = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -4626,6 +4614,42 @@ CartAPI_cartScriptList(apiClient_t *apiClient, char *page_cursor, int *start, in
     if(keyPairQuery_count){
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
+    }
+    if(keyQuery_page_cursor){
+        free(keyQuery_page_cursor);
+        keyQuery_page_cursor = NULL;
+    }
+    if(valueQuery_page_cursor){
+        free(valueQuery_page_cursor);
+        valueQuery_page_cursor = NULL;
+    }
+    if(keyPairQuery_page_cursor){
+        keyValuePair_free(keyPairQuery_page_cursor);
+        keyPairQuery_page_cursor = NULL;
+    }
+    if(keyQuery_script_ids){
+        free(keyQuery_script_ids);
+        keyQuery_script_ids = NULL;
+    }
+    if(valueQuery_script_ids){
+        free(valueQuery_script_ids);
+        valueQuery_script_ids = NULL;
+    }
+    if(keyPairQuery_script_ids){
+        keyValuePair_free(keyPairQuery_script_ids);
+        keyPairQuery_script_ids = NULL;
+    }
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
+    }
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
+    }
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     if(keyQuery_created_from){
         free(keyQuery_created_from);
@@ -4675,29 +4699,17 @@ CartAPI_cartScriptList(apiClient_t *apiClient, char *page_cursor, int *start, in
         keyValuePair_free(keyPairQuery_modified_to);
         keyPairQuery_modified_to = NULL;
     }
-    if(keyQuery_script_ids){
-        free(keyQuery_script_ids);
-        keyQuery_script_ids = NULL;
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
     }
-    if(valueQuery_script_ids){
-        free(valueQuery_script_ids);
-        valueQuery_script_ids = NULL;
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
     }
-    if(keyPairQuery_script_ids){
-        keyValuePair_free(keyPairQuery_script_ids);
-        keyPairQuery_script_ids = NULL;
-    }
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_params){
         free(keyQuery_params);
@@ -4710,18 +4722,6 @@ CartAPI_cartScriptList(apiClient_t *apiClient, char *page_cursor, int *start, in
     if(keyPairQuery_params){
         keyValuePair_free(keyPairQuery_params);
         keyPairQuery_params = NULL;
-    }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
-    }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
-    }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_exclude){
         free(keyQuery_exclude);
@@ -4747,7 +4747,7 @@ end:
 // Get list of shipping zones
 //
 model_response_cart_shipping_zones_list_t*
-CartAPI_cartShippingZonesList(apiClient_t *apiClient, char *store_id, int *start, int *count, char *params, char *response_fields, char *exclude)
+CartAPI_cartShippingZonesList(apiClient_t *apiClient, int *start, int *count, char *store_id, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -4766,18 +4766,6 @@ CartAPI_cartShippingZonesList(apiClient_t *apiClient, char *store_id, int *start
 
 
 
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -4806,15 +4794,15 @@ CartAPI_cartShippingZonesList(apiClient_t *apiClient, char *store_id, int *start
     }
 
     // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
     {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
 
     // query parameters
@@ -4827,6 +4815,18 @@ CartAPI_cartShippingZonesList(apiClient_t *apiClient, char *store_id, int *start
         valueQuery_response_fields = strdup((response_fields));
         keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
         list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+    }
+
+    // query parameters
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
+    {
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
     }
 
     // query parameters
@@ -4879,18 +4879,6 @@ CartAPI_cartShippingZonesList(apiClient_t *apiClient, char *store_id, int *start
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -4915,17 +4903,17 @@ CartAPI_cartShippingZonesList(apiClient_t *apiClient, char *store_id, int *start
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
     }
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
     }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
     }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     if(keyQuery_response_fields){
         free(keyQuery_response_fields);
@@ -4938,6 +4926,18 @@ CartAPI_cartShippingZonesList(apiClient_t *apiClient, char *store_id, int *start
     if(keyPairQuery_response_fields){
         keyValuePair_free(keyPairQuery_response_fields);
         keyPairQuery_response_fields = NULL;
+    }
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
+    }
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
+    }
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
     }
     if(keyQuery_exclude){
         free(keyQuery_exclude);

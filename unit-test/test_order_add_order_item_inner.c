@@ -30,11 +30,11 @@ order_add_order_item_inner_t* instantiate_order_add_order_item_inner(int include
       5, where {x} - 1,2,3,... etc,
       "52",
       5.5,
+      1,
       2,
       "Internal Memory Storage",
       true,
       true,
-      1,
       list_createList(),
       list_createList()
     );
@@ -48,11 +48,11 @@ order_add_order_item_inner_t* instantiate_order_add_order_item_inner(int include
       5, where {x} - 1,2,3,... etc,
       "52",
       5.5,
+      1,
       2,
       "Internal Memory Storage",
       true,
       true,
-      1,
       list_createList(),
       list_createList()
     );

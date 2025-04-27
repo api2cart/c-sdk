@@ -6,10 +6,10 @@
 
 
 static order_preestimate_shipping_list_t *order_preestimate_shipping_list_create_internal(
-    char *store_id,
     char *warehouse_id,
-    char *customer_email,
     char *customer_id,
+    char *customer_email,
+    char *store_id,
     char *shipp_address_1,
     char *shipp_city,
     char *shipp_postcode,
@@ -23,10 +23,10 @@ static order_preestimate_shipping_list_t *order_preestimate_shipping_list_create
     if (!order_preestimate_shipping_list_local_var) {
         return NULL;
     }
-    order_preestimate_shipping_list_local_var->store_id = store_id;
     order_preestimate_shipping_list_local_var->warehouse_id = warehouse_id;
-    order_preestimate_shipping_list_local_var->customer_email = customer_email;
     order_preestimate_shipping_list_local_var->customer_id = customer_id;
+    order_preestimate_shipping_list_local_var->customer_email = customer_email;
+    order_preestimate_shipping_list_local_var->store_id = store_id;
     order_preestimate_shipping_list_local_var->shipp_address_1 = shipp_address_1;
     order_preestimate_shipping_list_local_var->shipp_city = shipp_city;
     order_preestimate_shipping_list_local_var->shipp_postcode = shipp_postcode;
@@ -41,10 +41,10 @@ static order_preestimate_shipping_list_t *order_preestimate_shipping_list_create
 }
 
 __attribute__((deprecated)) order_preestimate_shipping_list_t *order_preestimate_shipping_list_create(
-    char *store_id,
     char *warehouse_id,
-    char *customer_email,
     char *customer_id,
+    char *customer_email,
+    char *store_id,
     char *shipp_address_1,
     char *shipp_city,
     char *shipp_postcode,
@@ -55,10 +55,10 @@ __attribute__((deprecated)) order_preestimate_shipping_list_t *order_preestimate
     list_t *order_item
     ) {
     return order_preestimate_shipping_list_create_internal (
-        store_id,
         warehouse_id,
-        customer_email,
         customer_id,
+        customer_email,
+        store_id,
         shipp_address_1,
         shipp_city,
         shipp_postcode,
@@ -79,21 +79,21 @@ void order_preestimate_shipping_list_free(order_preestimate_shipping_list_t *ord
         return ;
     }
     listEntry_t *listEntry;
-    if (order_preestimate_shipping_list->store_id) {
-        free(order_preestimate_shipping_list->store_id);
-        order_preestimate_shipping_list->store_id = NULL;
-    }
     if (order_preestimate_shipping_list->warehouse_id) {
         free(order_preestimate_shipping_list->warehouse_id);
         order_preestimate_shipping_list->warehouse_id = NULL;
+    }
+    if (order_preestimate_shipping_list->customer_id) {
+        free(order_preestimate_shipping_list->customer_id);
+        order_preestimate_shipping_list->customer_id = NULL;
     }
     if (order_preestimate_shipping_list->customer_email) {
         free(order_preestimate_shipping_list->customer_email);
         order_preestimate_shipping_list->customer_email = NULL;
     }
-    if (order_preestimate_shipping_list->customer_id) {
-        free(order_preestimate_shipping_list->customer_id);
-        order_preestimate_shipping_list->customer_id = NULL;
+    if (order_preestimate_shipping_list->store_id) {
+        free(order_preestimate_shipping_list->store_id);
+        order_preestimate_shipping_list->store_id = NULL;
     }
     if (order_preestimate_shipping_list->shipp_address_1) {
         free(order_preestimate_shipping_list->shipp_address_1);
@@ -136,17 +136,17 @@ void order_preestimate_shipping_list_free(order_preestimate_shipping_list_t *ord
 cJSON *order_preestimate_shipping_list_convertToJSON(order_preestimate_shipping_list_t *order_preestimate_shipping_list) {
     cJSON *item = cJSON_CreateObject();
 
-    // order_preestimate_shipping_list->store_id
-    if(order_preestimate_shipping_list->store_id) {
-    if(cJSON_AddStringToObject(item, "store_id", order_preestimate_shipping_list->store_id) == NULL) {
+    // order_preestimate_shipping_list->warehouse_id
+    if(order_preestimate_shipping_list->warehouse_id) {
+    if(cJSON_AddStringToObject(item, "warehouse_id", order_preestimate_shipping_list->warehouse_id) == NULL) {
     goto fail; //String
     }
     }
 
 
-    // order_preestimate_shipping_list->warehouse_id
-    if(order_preestimate_shipping_list->warehouse_id) {
-    if(cJSON_AddStringToObject(item, "warehouse_id", order_preestimate_shipping_list->warehouse_id) == NULL) {
+    // order_preestimate_shipping_list->customer_id
+    if(order_preestimate_shipping_list->customer_id) {
+    if(cJSON_AddStringToObject(item, "customer_id", order_preestimate_shipping_list->customer_id) == NULL) {
     goto fail; //String
     }
     }
@@ -160,9 +160,9 @@ cJSON *order_preestimate_shipping_list_convertToJSON(order_preestimate_shipping_
     }
 
 
-    // order_preestimate_shipping_list->customer_id
-    if(order_preestimate_shipping_list->customer_id) {
-    if(cJSON_AddStringToObject(item, "customer_id", order_preestimate_shipping_list->customer_id) == NULL) {
+    // order_preestimate_shipping_list->store_id
+    if(order_preestimate_shipping_list->store_id) {
+    if(cJSON_AddStringToObject(item, "store_id", order_preestimate_shipping_list->store_id) == NULL) {
     goto fail; //String
     }
     }
@@ -260,18 +260,6 @@ order_preestimate_shipping_list_t *order_preestimate_shipping_list_parseFromJSON
     // define the local list for order_preestimate_shipping_list->order_item
     list_t *order_itemList = NULL;
 
-    // order_preestimate_shipping_list->store_id
-    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(order_preestimate_shipping_listJSON, "store_id");
-    if (cJSON_IsNull(store_id)) {
-        store_id = NULL;
-    }
-    if (store_id) { 
-    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
-    {
-    goto end; //String
-    }
-    }
-
     // order_preestimate_shipping_list->warehouse_id
     cJSON *warehouse_id = cJSON_GetObjectItemCaseSensitive(order_preestimate_shipping_listJSON, "warehouse_id");
     if (cJSON_IsNull(warehouse_id)) {
@@ -279,6 +267,18 @@ order_preestimate_shipping_list_t *order_preestimate_shipping_list_parseFromJSON
     }
     if (warehouse_id) { 
     if(!cJSON_IsString(warehouse_id) && !cJSON_IsNull(warehouse_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // order_preestimate_shipping_list->customer_id
+    cJSON *customer_id = cJSON_GetObjectItemCaseSensitive(order_preestimate_shipping_listJSON, "customer_id");
+    if (cJSON_IsNull(customer_id)) {
+        customer_id = NULL;
+    }
+    if (customer_id) { 
+    if(!cJSON_IsString(customer_id) && !cJSON_IsNull(customer_id))
     {
     goto end; //String
     }
@@ -296,13 +296,13 @@ order_preestimate_shipping_list_t *order_preestimate_shipping_list_parseFromJSON
     }
     }
 
-    // order_preestimate_shipping_list->customer_id
-    cJSON *customer_id = cJSON_GetObjectItemCaseSensitive(order_preestimate_shipping_listJSON, "customer_id");
-    if (cJSON_IsNull(customer_id)) {
-        customer_id = NULL;
+    // order_preestimate_shipping_list->store_id
+    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(order_preestimate_shipping_listJSON, "store_id");
+    if (cJSON_IsNull(store_id)) {
+        store_id = NULL;
     }
-    if (customer_id) { 
-    if(!cJSON_IsString(customer_id) && !cJSON_IsNull(customer_id))
+    if (store_id) { 
+    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
     {
     goto end; //String
     }
@@ -424,10 +424,10 @@ order_preestimate_shipping_list_t *order_preestimate_shipping_list_parseFromJSON
 
 
     order_preestimate_shipping_list_local_var = order_preestimate_shipping_list_create_internal (
-        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         warehouse_id && !cJSON_IsNull(warehouse_id) ? strdup(warehouse_id->valuestring) : NULL,
-        customer_email && !cJSON_IsNull(customer_email) ? strdup(customer_email->valuestring) : NULL,
         customer_id && !cJSON_IsNull(customer_id) ? strdup(customer_id->valuestring) : NULL,
+        customer_email && !cJSON_IsNull(customer_email) ? strdup(customer_email->valuestring) : NULL,
+        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         shipp_address_1 && !cJSON_IsNull(shipp_address_1) ? strdup(shipp_address_1->valuestring) : NULL,
         shipp_city && !cJSON_IsNull(shipp_city) ? strdup(shipp_city->valuestring) : NULL,
         shipp_postcode && !cJSON_IsNull(shipp_postcode) ? strdup(shipp_postcode->valuestring) : NULL,

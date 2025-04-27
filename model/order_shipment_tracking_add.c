@@ -6,10 +6,10 @@
 
 
 static order_shipment_tracking_add_t *order_shipment_tracking_add_create_internal(
-    char *store_id,
     char *order_id,
     char *shipment_id,
     char *carrier_id,
+    char *store_id,
     char *tracking_provider,
     char *tracking_number,
     char *tracking_link,
@@ -19,10 +19,10 @@ static order_shipment_tracking_add_t *order_shipment_tracking_add_create_interna
     if (!order_shipment_tracking_add_local_var) {
         return NULL;
     }
-    order_shipment_tracking_add_local_var->store_id = store_id;
     order_shipment_tracking_add_local_var->order_id = order_id;
     order_shipment_tracking_add_local_var->shipment_id = shipment_id;
     order_shipment_tracking_add_local_var->carrier_id = carrier_id;
+    order_shipment_tracking_add_local_var->store_id = store_id;
     order_shipment_tracking_add_local_var->tracking_provider = tracking_provider;
     order_shipment_tracking_add_local_var->tracking_number = tracking_number;
     order_shipment_tracking_add_local_var->tracking_link = tracking_link;
@@ -33,20 +33,20 @@ static order_shipment_tracking_add_t *order_shipment_tracking_add_create_interna
 }
 
 __attribute__((deprecated)) order_shipment_tracking_add_t *order_shipment_tracking_add_create(
-    char *store_id,
     char *order_id,
     char *shipment_id,
     char *carrier_id,
+    char *store_id,
     char *tracking_provider,
     char *tracking_number,
     char *tracking_link,
     int send_notifications
     ) {
     return order_shipment_tracking_add_create_internal (
-        store_id,
         order_id,
         shipment_id,
         carrier_id,
+        store_id,
         tracking_provider,
         tracking_number,
         tracking_link,
@@ -63,10 +63,6 @@ void order_shipment_tracking_add_free(order_shipment_tracking_add_t *order_shipm
         return ;
     }
     listEntry_t *listEntry;
-    if (order_shipment_tracking_add->store_id) {
-        free(order_shipment_tracking_add->store_id);
-        order_shipment_tracking_add->store_id = NULL;
-    }
     if (order_shipment_tracking_add->order_id) {
         free(order_shipment_tracking_add->order_id);
         order_shipment_tracking_add->order_id = NULL;
@@ -78,6 +74,10 @@ void order_shipment_tracking_add_free(order_shipment_tracking_add_t *order_shipm
     if (order_shipment_tracking_add->carrier_id) {
         free(order_shipment_tracking_add->carrier_id);
         order_shipment_tracking_add->carrier_id = NULL;
+    }
+    if (order_shipment_tracking_add->store_id) {
+        free(order_shipment_tracking_add->store_id);
+        order_shipment_tracking_add->store_id = NULL;
     }
     if (order_shipment_tracking_add->tracking_provider) {
         free(order_shipment_tracking_add->tracking_provider);
@@ -96,14 +96,6 @@ void order_shipment_tracking_add_free(order_shipment_tracking_add_t *order_shipm
 
 cJSON *order_shipment_tracking_add_convertToJSON(order_shipment_tracking_add_t *order_shipment_tracking_add) {
     cJSON *item = cJSON_CreateObject();
-
-    // order_shipment_tracking_add->store_id
-    if(order_shipment_tracking_add->store_id) {
-    if(cJSON_AddStringToObject(item, "store_id", order_shipment_tracking_add->store_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
 
     // order_shipment_tracking_add->order_id
     if(order_shipment_tracking_add->order_id) {
@@ -125,6 +117,14 @@ cJSON *order_shipment_tracking_add_convertToJSON(order_shipment_tracking_add_t *
     // order_shipment_tracking_add->carrier_id
     if(order_shipment_tracking_add->carrier_id) {
     if(cJSON_AddStringToObject(item, "carrier_id", order_shipment_tracking_add->carrier_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // order_shipment_tracking_add->store_id
+    if(order_shipment_tracking_add->store_id) {
+    if(cJSON_AddStringToObject(item, "store_id", order_shipment_tracking_add->store_id) == NULL) {
     goto fail; //String
     }
     }
@@ -174,18 +174,6 @@ order_shipment_tracking_add_t *order_shipment_tracking_add_parseFromJSON(cJSON *
 
     order_shipment_tracking_add_t *order_shipment_tracking_add_local_var = NULL;
 
-    // order_shipment_tracking_add->store_id
-    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(order_shipment_tracking_addJSON, "store_id");
-    if (cJSON_IsNull(store_id)) {
-        store_id = NULL;
-    }
-    if (store_id) { 
-    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
-    {
-    goto end; //String
-    }
-    }
-
     // order_shipment_tracking_add->order_id
     cJSON *order_id = cJSON_GetObjectItemCaseSensitive(order_shipment_tracking_addJSON, "order_id");
     if (cJSON_IsNull(order_id)) {
@@ -220,6 +208,18 @@ order_shipment_tracking_add_t *order_shipment_tracking_add_parseFromJSON(cJSON *
     }
     if (carrier_id) { 
     if(!cJSON_IsString(carrier_id) && !cJSON_IsNull(carrier_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // order_shipment_tracking_add->store_id
+    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(order_shipment_tracking_addJSON, "store_id");
+    if (cJSON_IsNull(store_id)) {
+        store_id = NULL;
+    }
+    if (store_id) { 
+    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
     {
     goto end; //String
     }
@@ -278,10 +278,10 @@ order_shipment_tracking_add_t *order_shipment_tracking_add_parseFromJSON(cJSON *
 
 
     order_shipment_tracking_add_local_var = order_shipment_tracking_add_create_internal (
-        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         order_id && !cJSON_IsNull(order_id) ? strdup(order_id->valuestring) : NULL,
         strdup(shipment_id->valuestring),
         carrier_id && !cJSON_IsNull(carrier_id) ? strdup(carrier_id->valuestring) : NULL,
+        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         tracking_provider && !cJSON_IsNull(tracking_provider) ? strdup(tracking_provider->valuestring) : NULL,
         strdup(tracking_number->valuestring),
         tracking_link && !cJSON_IsNull(tracking_link) ? strdup(tracking_link->valuestring) : NULL,

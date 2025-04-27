@@ -12,7 +12,7 @@
 // Get list of recent jobs
 //
 model_response_batch_job_list_t*
-BatchAPI_batchJobList(apiClient_t *apiClient, int *count, char *page_cursor, char *created_from, char *created_to, char *processed_from, char *processed_to, char *ids, char *response_fields)
+BatchAPI_batchJobList(apiClient_t *apiClient, int *count, char *page_cursor, char *ids, char *created_from, char *created_to, char *processed_from, char *processed_to, char *response_fields)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -55,6 +55,18 @@ BatchAPI_batchJobList(apiClient_t *apiClient, int *count, char *page_cursor, cha
         valueQuery_page_cursor = strdup((page_cursor));
         keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
         list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
+    }
+
+    // query parameters
+    char *keyQuery_ids = NULL;
+    char * valueQuery_ids = NULL;
+    keyValuePair_t *keyPairQuery_ids = 0;
+    if (ids)
+    {
+        keyQuery_ids = strdup("ids");
+        valueQuery_ids = strdup((ids));
+        keyPairQuery_ids = keyValuePair_create(keyQuery_ids, valueQuery_ids);
+        list_addElement(localVarQueryParameters,keyPairQuery_ids);
     }
 
     // query parameters
@@ -103,18 +115,6 @@ BatchAPI_batchJobList(apiClient_t *apiClient, int *count, char *page_cursor, cha
         valueQuery_processed_to = strdup((processed_to));
         keyPairQuery_processed_to = keyValuePair_create(keyQuery_processed_to, valueQuery_processed_to);
         list_addElement(localVarQueryParameters,keyPairQuery_processed_to);
-    }
-
-    // query parameters
-    char *keyQuery_ids = NULL;
-    char * valueQuery_ids = NULL;
-    keyValuePair_t *keyPairQuery_ids = 0;
-    if (ids)
-    {
-        keyQuery_ids = strdup("ids");
-        valueQuery_ids = strdup((ids));
-        keyPairQuery_ids = keyValuePair_create(keyQuery_ids, valueQuery_ids);
-        list_addElement(localVarQueryParameters,keyPairQuery_ids);
     }
 
     // query parameters
@@ -191,6 +191,18 @@ BatchAPI_batchJobList(apiClient_t *apiClient, int *count, char *page_cursor, cha
         keyValuePair_free(keyPairQuery_page_cursor);
         keyPairQuery_page_cursor = NULL;
     }
+    if(keyQuery_ids){
+        free(keyQuery_ids);
+        keyQuery_ids = NULL;
+    }
+    if(valueQuery_ids){
+        free(valueQuery_ids);
+        valueQuery_ids = NULL;
+    }
+    if(keyPairQuery_ids){
+        keyValuePair_free(keyPairQuery_ids);
+        keyPairQuery_ids = NULL;
+    }
     if(keyQuery_created_from){
         free(keyQuery_created_from);
         keyQuery_created_from = NULL;
@@ -238,18 +250,6 @@ BatchAPI_batchJobList(apiClient_t *apiClient, int *count, char *page_cursor, cha
     if(keyPairQuery_processed_to){
         keyValuePair_free(keyPairQuery_processed_to);
         keyPairQuery_processed_to = NULL;
-    }
-    if(keyQuery_ids){
-        free(keyQuery_ids);
-        keyQuery_ids = NULL;
-    }
-    if(valueQuery_ids){
-        free(valueQuery_ids);
-        valueQuery_ids = NULL;
-    }
-    if(keyPairQuery_ids){
-        keyValuePair_free(keyPairQuery_ids);
-        keyPairQuery_ids = NULL;
     }
     if(keyQuery_response_fields){
         free(keyQuery_response_fields);

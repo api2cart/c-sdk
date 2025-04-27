@@ -17,7 +17,7 @@ Method | HTTP request | Description
 //
 // Retrieve basket information.
 //
-basket_info_200_response_t* BasketAPI_basketInfo(apiClient_t *apiClient, char *id, char *store_id, char *params, char *exclude, char *response_fields);
+basket_info_200_response_t* BasketAPI_basketInfo(apiClient_t *apiClient, char *id, char *store_id, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -26,9 +26,9 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **id** | **char \*** | Entity id | 
 **store_id** | **char \*** | Store Id | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;force_all&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -151,16 +151,16 @@ Name | Type | Description  | Notes
 //
 // Retrieve a list of live shipping rate services.
 //
-basket_live_shipping_service_list_200_response_t* BasketAPI_basketLiveShippingServiceList(apiClient_t *apiClient, char *store_id, int *start, int *count);
+basket_live_shipping_service_list_200_response_t* BasketAPI_basketLiveShippingServiceList(apiClient_t *apiClient, int *start, int *count, char *store_id);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**store_id** | **char \*** | Store Id | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**store_id** | **char \*** | Store Id | [optional] 
 
 ### Return type
 

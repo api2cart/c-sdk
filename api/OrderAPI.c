@@ -12,7 +12,7 @@
 // Get list of orders that were left by customers before completing the order.
 //
 model_response_order_abandoned_list_t*
-OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *customer_email, char *created_to, char *created_from, char *modified_to, char *modified_from, int *skip_empty_email, char *store_id, char *page_cursor, int *count, int *start, char *params, char *response_fields, char *exclude)
+OrderAPI_orderAbandonedList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *customer_id, char *customer_email, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to, int *skip_empty_email, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -31,6 +31,44 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
 
 
 
+
+    // query parameters
+    char *keyQuery_start = NULL;
+    char * valueQuery_start = NULL;
+    keyValuePair_t *keyPairQuery_start = 0;
+    if (start)
+    {
+        keyQuery_start = strdup("start");
+        valueQuery_start = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_start, MAX_NUMBER_LENGTH, "%d", *start);
+        keyPairQuery_start = keyValuePair_create(keyQuery_start, valueQuery_start);
+        list_addElement(localVarQueryParameters,keyPairQuery_start);
+    }
+
+    // query parameters
+    char *keyQuery_count = NULL;
+    char * valueQuery_count = NULL;
+    keyValuePair_t *keyPairQuery_count = 0;
+    if (count)
+    {
+        keyQuery_count = strdup("count");
+        valueQuery_count = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
+        keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
+        list_addElement(localVarQueryParameters,keyPairQuery_count);
+    }
+
+    // query parameters
+    char *keyQuery_page_cursor = NULL;
+    char * valueQuery_page_cursor = NULL;
+    keyValuePair_t *keyPairQuery_page_cursor = 0;
+    if (page_cursor)
+    {
+        keyQuery_page_cursor = strdup("page_cursor");
+        valueQuery_page_cursor = strdup((page_cursor));
+        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
+        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
+    }
 
     // query parameters
     char *keyQuery_customer_id = NULL;
@@ -57,15 +95,15 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
     }
 
     // query parameters
-    char *keyQuery_created_to = NULL;
-    char * valueQuery_created_to = NULL;
-    keyValuePair_t *keyPairQuery_created_to = 0;
-    if (created_to)
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
     {
-        keyQuery_created_to = strdup("created_to");
-        valueQuery_created_to = strdup((created_to));
-        keyPairQuery_created_to = keyValuePair_create(keyQuery_created_to, valueQuery_created_to);
-        list_addElement(localVarQueryParameters,keyPairQuery_created_to);
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
 
     // query parameters
@@ -81,15 +119,15 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
     }
 
     // query parameters
-    char *keyQuery_modified_to = NULL;
-    char * valueQuery_modified_to = NULL;
-    keyValuePair_t *keyPairQuery_modified_to = 0;
-    if (modified_to)
+    char *keyQuery_created_to = NULL;
+    char * valueQuery_created_to = NULL;
+    keyValuePair_t *keyPairQuery_created_to = 0;
+    if (created_to)
     {
-        keyQuery_modified_to = strdup("modified_to");
-        valueQuery_modified_to = strdup((modified_to));
-        keyPairQuery_modified_to = keyValuePair_create(keyQuery_modified_to, valueQuery_modified_to);
-        list_addElement(localVarQueryParameters,keyPairQuery_modified_to);
+        keyQuery_created_to = strdup("created_to");
+        valueQuery_created_to = strdup((created_to));
+        keyPairQuery_created_to = keyValuePair_create(keyQuery_created_to, valueQuery_created_to);
+        list_addElement(localVarQueryParameters,keyPairQuery_created_to);
     }
 
     // query parameters
@@ -102,6 +140,18 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
         valueQuery_modified_from = strdup((modified_from));
         keyPairQuery_modified_from = keyValuePair_create(keyQuery_modified_from, valueQuery_modified_from);
         list_addElement(localVarQueryParameters,keyPairQuery_modified_from);
+    }
+
+    // query parameters
+    char *keyQuery_modified_to = NULL;
+    char * valueQuery_modified_to = NULL;
+    keyValuePair_t *keyPairQuery_modified_to = 0;
+    if (modified_to)
+    {
+        keyQuery_modified_to = strdup("modified_to");
+        valueQuery_modified_to = strdup((modified_to));
+        keyPairQuery_modified_to = keyValuePair_create(keyQuery_modified_to, valueQuery_modified_to);
+        list_addElement(localVarQueryParameters,keyPairQuery_modified_to);
     }
 
     // query parameters
@@ -118,53 +168,15 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
     }
 
     // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
     {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
-
-    // query parameters
-    char *keyQuery_page_cursor = NULL;
-    char * valueQuery_page_cursor = NULL;
-    keyValuePair_t *keyPairQuery_page_cursor = 0;
-    if (page_cursor)
-    {
-        keyQuery_page_cursor = strdup("page_cursor");
-        valueQuery_page_cursor = strdup((page_cursor));
-        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
-        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
-    }
-
-    // query parameters
-    char *keyQuery_count = NULL;
-    char * valueQuery_count = NULL;
-    keyValuePair_t *keyPairQuery_count = 0;
-    if (count)
-    {
-        keyQuery_count = strdup("count");
-        valueQuery_count = calloc(1,MAX_NUMBER_LENGTH);
-        snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
-        keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
-        list_addElement(localVarQueryParameters,keyPairQuery_count);
-    }
-
-    // query parameters
-    char *keyQuery_start = NULL;
-    char * valueQuery_start = NULL;
-    keyValuePair_t *keyPairQuery_start = 0;
-    if (start)
-    {
-        keyQuery_start = strdup("start");
-        valueQuery_start = calloc(1,MAX_NUMBER_LENGTH);
-        snprintf(valueQuery_start, MAX_NUMBER_LENGTH, "%d", *start);
-        keyPairQuery_start = keyValuePair_create(keyQuery_start, valueQuery_start);
-        list_addElement(localVarQueryParameters,keyPairQuery_start);
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -177,18 +189,6 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
         valueQuery_params = strdup((params));
         keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
         list_addElement(localVarQueryParameters,keyPairQuery_params);
-    }
-
-    // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
-    {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -241,6 +241,42 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
+    if(keyQuery_start){
+        free(keyQuery_start);
+        keyQuery_start = NULL;
+    }
+    if(valueQuery_start){
+        free(valueQuery_start);
+        valueQuery_start = NULL;
+    }
+    if(keyPairQuery_start){
+        keyValuePair_free(keyPairQuery_start);
+        keyPairQuery_start = NULL;
+    }
+    if(keyQuery_count){
+        free(keyQuery_count);
+        keyQuery_count = NULL;
+    }
+    if(valueQuery_count){
+        free(valueQuery_count);
+        valueQuery_count = NULL;
+    }
+    if(keyPairQuery_count){
+        keyValuePair_free(keyPairQuery_count);
+        keyPairQuery_count = NULL;
+    }
+    if(keyQuery_page_cursor){
+        free(keyQuery_page_cursor);
+        keyQuery_page_cursor = NULL;
+    }
+    if(valueQuery_page_cursor){
+        free(valueQuery_page_cursor);
+        valueQuery_page_cursor = NULL;
+    }
+    if(keyPairQuery_page_cursor){
+        keyValuePair_free(keyPairQuery_page_cursor);
+        keyPairQuery_page_cursor = NULL;
+    }
     if(keyQuery_customer_id){
         free(keyQuery_customer_id);
         keyQuery_customer_id = NULL;
@@ -265,17 +301,17 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
         keyValuePair_free(keyPairQuery_customer_email);
         keyPairQuery_customer_email = NULL;
     }
-    if(keyQuery_created_to){
-        free(keyQuery_created_to);
-        keyQuery_created_to = NULL;
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
     }
-    if(valueQuery_created_to){
-        free(valueQuery_created_to);
-        valueQuery_created_to = NULL;
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
     }
-    if(keyPairQuery_created_to){
-        keyValuePair_free(keyPairQuery_created_to);
-        keyPairQuery_created_to = NULL;
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     if(keyQuery_created_from){
         free(keyQuery_created_from);
@@ -289,17 +325,17 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
         keyValuePair_free(keyPairQuery_created_from);
         keyPairQuery_created_from = NULL;
     }
-    if(keyQuery_modified_to){
-        free(keyQuery_modified_to);
-        keyQuery_modified_to = NULL;
+    if(keyQuery_created_to){
+        free(keyQuery_created_to);
+        keyQuery_created_to = NULL;
     }
-    if(valueQuery_modified_to){
-        free(valueQuery_modified_to);
-        valueQuery_modified_to = NULL;
+    if(valueQuery_created_to){
+        free(valueQuery_created_to);
+        valueQuery_created_to = NULL;
     }
-    if(keyPairQuery_modified_to){
-        keyValuePair_free(keyPairQuery_modified_to);
-        keyPairQuery_modified_to = NULL;
+    if(keyPairQuery_created_to){
+        keyValuePair_free(keyPairQuery_created_to);
+        keyPairQuery_created_to = NULL;
     }
     if(keyQuery_modified_from){
         free(keyQuery_modified_from);
@@ -313,6 +349,18 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
         keyValuePair_free(keyPairQuery_modified_from);
         keyPairQuery_modified_from = NULL;
     }
+    if(keyQuery_modified_to){
+        free(keyQuery_modified_to);
+        keyQuery_modified_to = NULL;
+    }
+    if(valueQuery_modified_to){
+        free(valueQuery_modified_to);
+        valueQuery_modified_to = NULL;
+    }
+    if(keyPairQuery_modified_to){
+        keyValuePair_free(keyPairQuery_modified_to);
+        keyPairQuery_modified_to = NULL;
+    }
     if(keyQuery_skip_empty_email){
         free(keyQuery_skip_empty_email);
         keyQuery_skip_empty_email = NULL;
@@ -325,53 +373,17 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
         keyValuePair_free(keyPairQuery_skip_empty_email);
         keyPairQuery_skip_empty_email = NULL;
     }
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
     }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
     }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
-    if(keyQuery_page_cursor){
-        free(keyQuery_page_cursor);
-        keyQuery_page_cursor = NULL;
-    }
-    if(valueQuery_page_cursor){
-        free(valueQuery_page_cursor);
-        valueQuery_page_cursor = NULL;
-    }
-    if(keyPairQuery_page_cursor){
-        keyValuePair_free(keyPairQuery_page_cursor);
-        keyPairQuery_page_cursor = NULL;
-    }
-    if(keyQuery_count){
-        free(keyQuery_count);
-        keyQuery_count = NULL;
-    }
-    if(valueQuery_count){
-        free(valueQuery_count);
-        valueQuery_count = NULL;
-    }
-    if(keyPairQuery_count){
-        keyValuePair_free(keyPairQuery_count);
-        keyPairQuery_count = NULL;
-    }
-    if(keyQuery_start){
-        free(keyQuery_start);
-        keyQuery_start = NULL;
-    }
-    if(valueQuery_start){
-        free(valueQuery_start);
-        valueQuery_start = NULL;
-    }
-    if(keyPairQuery_start){
-        keyValuePair_free(keyPairQuery_start);
-        keyPairQuery_start = NULL;
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_params){
         free(keyQuery_params);
@@ -384,18 +396,6 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *cus
     if(keyPairQuery_params){
         keyValuePair_free(keyPairQuery_params);
         keyPairQuery_params = NULL;
-    }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
-    }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
-    }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_exclude){
         free(keyQuery_exclude);
@@ -507,7 +507,7 @@ end:
 // Count orders in store
 //
 order_count_200_response_t*
-OrderAPI_orderCount(apiClient_t *apiClient, char *customer_id, char *customer_email, char *order_status, list_t *order_status_ids, char *created_to, char *created_from, char *modified_to, char *modified_from, char *store_id, char *ids, char *order_ids, char *ebay_order_status, char *financial_status, list_t *financial_status_ids, char *fulfillment_channel, char *fulfillment_status, char *shipping_method, char *delivery_method, char *tags, char *ship_node_type)
+OrderAPI_orderCount(apiClient_t *apiClient, char *order_ids, char *ids, char *customer_id, char *store_id, char *customer_email, char *order_status, list_t *order_status_ids, char *ebay_order_status, char *financial_status, list_t *financial_status_ids, char *fulfillment_channel, char *fulfillment_status, char *shipping_method, char *delivery_method, char *tags, char *ship_node_type, char *created_from, char *created_to, char *modified_from, char *modified_to)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -528,6 +528,30 @@ OrderAPI_orderCount(apiClient_t *apiClient, char *customer_id, char *customer_em
 
 
     // query parameters
+    char *keyQuery_order_ids = NULL;
+    char * valueQuery_order_ids = NULL;
+    keyValuePair_t *keyPairQuery_order_ids = 0;
+    if (order_ids)
+    {
+        keyQuery_order_ids = strdup("order_ids");
+        valueQuery_order_ids = strdup((order_ids));
+        keyPairQuery_order_ids = keyValuePair_create(keyQuery_order_ids, valueQuery_order_ids);
+        list_addElement(localVarQueryParameters,keyPairQuery_order_ids);
+    }
+
+    // query parameters
+    char *keyQuery_ids = NULL;
+    char * valueQuery_ids = NULL;
+    keyValuePair_t *keyPairQuery_ids = 0;
+    if (ids)
+    {
+        keyQuery_ids = strdup("ids");
+        valueQuery_ids = strdup((ids));
+        keyPairQuery_ids = keyValuePair_create(keyQuery_ids, valueQuery_ids);
+        list_addElement(localVarQueryParameters,keyPairQuery_ids);
+    }
+
+    // query parameters
     char *keyQuery_customer_id = NULL;
     char * valueQuery_customer_id = NULL;
     keyValuePair_t *keyPairQuery_customer_id = 0;
@@ -537,6 +561,18 @@ OrderAPI_orderCount(apiClient_t *apiClient, char *customer_id, char *customer_em
         valueQuery_customer_id = strdup((customer_id));
         keyPairQuery_customer_id = keyValuePair_create(keyQuery_customer_id, valueQuery_customer_id);
         list_addElement(localVarQueryParameters,keyPairQuery_customer_id);
+    }
+
+    // query parameters
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
+    {
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
 
     // query parameters
@@ -567,90 +603,6 @@ OrderAPI_orderCount(apiClient_t *apiClient, char *customer_id, char *customer_em
     if (order_status_ids)
     {
         list_addElement(localVarQueryParameters,order_status_ids);
-    }
-
-    // query parameters
-    char *keyQuery_created_to = NULL;
-    char * valueQuery_created_to = NULL;
-    keyValuePair_t *keyPairQuery_created_to = 0;
-    if (created_to)
-    {
-        keyQuery_created_to = strdup("created_to");
-        valueQuery_created_to = strdup((created_to));
-        keyPairQuery_created_to = keyValuePair_create(keyQuery_created_to, valueQuery_created_to);
-        list_addElement(localVarQueryParameters,keyPairQuery_created_to);
-    }
-
-    // query parameters
-    char *keyQuery_created_from = NULL;
-    char * valueQuery_created_from = NULL;
-    keyValuePair_t *keyPairQuery_created_from = 0;
-    if (created_from)
-    {
-        keyQuery_created_from = strdup("created_from");
-        valueQuery_created_from = strdup((created_from));
-        keyPairQuery_created_from = keyValuePair_create(keyQuery_created_from, valueQuery_created_from);
-        list_addElement(localVarQueryParameters,keyPairQuery_created_from);
-    }
-
-    // query parameters
-    char *keyQuery_modified_to = NULL;
-    char * valueQuery_modified_to = NULL;
-    keyValuePair_t *keyPairQuery_modified_to = 0;
-    if (modified_to)
-    {
-        keyQuery_modified_to = strdup("modified_to");
-        valueQuery_modified_to = strdup((modified_to));
-        keyPairQuery_modified_to = keyValuePair_create(keyQuery_modified_to, valueQuery_modified_to);
-        list_addElement(localVarQueryParameters,keyPairQuery_modified_to);
-    }
-
-    // query parameters
-    char *keyQuery_modified_from = NULL;
-    char * valueQuery_modified_from = NULL;
-    keyValuePair_t *keyPairQuery_modified_from = 0;
-    if (modified_from)
-    {
-        keyQuery_modified_from = strdup("modified_from");
-        valueQuery_modified_from = strdup((modified_from));
-        keyPairQuery_modified_from = keyValuePair_create(keyQuery_modified_from, valueQuery_modified_from);
-        list_addElement(localVarQueryParameters,keyPairQuery_modified_from);
-    }
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
-
-    // query parameters
-    char *keyQuery_ids = NULL;
-    char * valueQuery_ids = NULL;
-    keyValuePair_t *keyPairQuery_ids = 0;
-    if (ids)
-    {
-        keyQuery_ids = strdup("ids");
-        valueQuery_ids = strdup((ids));
-        keyPairQuery_ids = keyValuePair_create(keyQuery_ids, valueQuery_ids);
-        list_addElement(localVarQueryParameters,keyPairQuery_ids);
-    }
-
-    // query parameters
-    char *keyQuery_order_ids = NULL;
-    char * valueQuery_order_ids = NULL;
-    keyValuePair_t *keyPairQuery_order_ids = 0;
-    if (order_ids)
-    {
-        keyQuery_order_ids = strdup("order_ids");
-        valueQuery_order_ids = strdup((order_ids));
-        keyPairQuery_order_ids = keyValuePair_create(keyQuery_order_ids, valueQuery_order_ids);
-        list_addElement(localVarQueryParameters,keyPairQuery_order_ids);
     }
 
     // query parameters
@@ -754,6 +706,54 @@ OrderAPI_orderCount(apiClient_t *apiClient, char *customer_id, char *customer_em
         keyPairQuery_ship_node_type = keyValuePair_create(keyQuery_ship_node_type, valueQuery_ship_node_type);
         list_addElement(localVarQueryParameters,keyPairQuery_ship_node_type);
     }
+
+    // query parameters
+    char *keyQuery_created_from = NULL;
+    char * valueQuery_created_from = NULL;
+    keyValuePair_t *keyPairQuery_created_from = 0;
+    if (created_from)
+    {
+        keyQuery_created_from = strdup("created_from");
+        valueQuery_created_from = strdup((created_from));
+        keyPairQuery_created_from = keyValuePair_create(keyQuery_created_from, valueQuery_created_from);
+        list_addElement(localVarQueryParameters,keyPairQuery_created_from);
+    }
+
+    // query parameters
+    char *keyQuery_created_to = NULL;
+    char * valueQuery_created_to = NULL;
+    keyValuePair_t *keyPairQuery_created_to = 0;
+    if (created_to)
+    {
+        keyQuery_created_to = strdup("created_to");
+        valueQuery_created_to = strdup((created_to));
+        keyPairQuery_created_to = keyValuePair_create(keyQuery_created_to, valueQuery_created_to);
+        list_addElement(localVarQueryParameters,keyPairQuery_created_to);
+    }
+
+    // query parameters
+    char *keyQuery_modified_from = NULL;
+    char * valueQuery_modified_from = NULL;
+    keyValuePair_t *keyPairQuery_modified_from = 0;
+    if (modified_from)
+    {
+        keyQuery_modified_from = strdup("modified_from");
+        valueQuery_modified_from = strdup((modified_from));
+        keyPairQuery_modified_from = keyValuePair_create(keyQuery_modified_from, valueQuery_modified_from);
+        list_addElement(localVarQueryParameters,keyPairQuery_modified_from);
+    }
+
+    // query parameters
+    char *keyQuery_modified_to = NULL;
+    char * valueQuery_modified_to = NULL;
+    keyValuePair_t *keyPairQuery_modified_to = 0;
+    if (modified_to)
+    {
+        keyQuery_modified_to = strdup("modified_to");
+        valueQuery_modified_to = strdup((modified_to));
+        keyPairQuery_modified_to = keyValuePair_create(keyQuery_modified_to, valueQuery_modified_to);
+        list_addElement(localVarQueryParameters,keyPairQuery_modified_to);
+    }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
                     localVarPath,
@@ -793,6 +793,30 @@ OrderAPI_orderCount(apiClient_t *apiClient, char *customer_id, char *customer_em
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
+    if(keyQuery_order_ids){
+        free(keyQuery_order_ids);
+        keyQuery_order_ids = NULL;
+    }
+    if(valueQuery_order_ids){
+        free(valueQuery_order_ids);
+        valueQuery_order_ids = NULL;
+    }
+    if(keyPairQuery_order_ids){
+        keyValuePair_free(keyPairQuery_order_ids);
+        keyPairQuery_order_ids = NULL;
+    }
+    if(keyQuery_ids){
+        free(keyQuery_ids);
+        keyQuery_ids = NULL;
+    }
+    if(valueQuery_ids){
+        free(valueQuery_ids);
+        valueQuery_ids = NULL;
+    }
+    if(keyPairQuery_ids){
+        keyValuePair_free(keyPairQuery_ids);
+        keyPairQuery_ids = NULL;
+    }
     if(keyQuery_customer_id){
         free(keyQuery_customer_id);
         keyQuery_customer_id = NULL;
@@ -804,6 +828,18 @@ OrderAPI_orderCount(apiClient_t *apiClient, char *customer_id, char *customer_em
     if(keyPairQuery_customer_id){
         keyValuePair_free(keyPairQuery_customer_id);
         keyPairQuery_customer_id = NULL;
+    }
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
+    }
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
+    }
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     if(keyQuery_customer_email){
         free(keyQuery_customer_email);
@@ -828,90 +864,6 @@ OrderAPI_orderCount(apiClient_t *apiClient, char *customer_id, char *customer_em
     if(keyPairQuery_order_status){
         keyValuePair_free(keyPairQuery_order_status);
         keyPairQuery_order_status = NULL;
-    }
-    if(keyQuery_created_to){
-        free(keyQuery_created_to);
-        keyQuery_created_to = NULL;
-    }
-    if(valueQuery_created_to){
-        free(valueQuery_created_to);
-        valueQuery_created_to = NULL;
-    }
-    if(keyPairQuery_created_to){
-        keyValuePair_free(keyPairQuery_created_to);
-        keyPairQuery_created_to = NULL;
-    }
-    if(keyQuery_created_from){
-        free(keyQuery_created_from);
-        keyQuery_created_from = NULL;
-    }
-    if(valueQuery_created_from){
-        free(valueQuery_created_from);
-        valueQuery_created_from = NULL;
-    }
-    if(keyPairQuery_created_from){
-        keyValuePair_free(keyPairQuery_created_from);
-        keyPairQuery_created_from = NULL;
-    }
-    if(keyQuery_modified_to){
-        free(keyQuery_modified_to);
-        keyQuery_modified_to = NULL;
-    }
-    if(valueQuery_modified_to){
-        free(valueQuery_modified_to);
-        valueQuery_modified_to = NULL;
-    }
-    if(keyPairQuery_modified_to){
-        keyValuePair_free(keyPairQuery_modified_to);
-        keyPairQuery_modified_to = NULL;
-    }
-    if(keyQuery_modified_from){
-        free(keyQuery_modified_from);
-        keyQuery_modified_from = NULL;
-    }
-    if(valueQuery_modified_from){
-        free(valueQuery_modified_from);
-        valueQuery_modified_from = NULL;
-    }
-    if(keyPairQuery_modified_from){
-        keyValuePair_free(keyPairQuery_modified_from);
-        keyPairQuery_modified_from = NULL;
-    }
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
-    if(keyQuery_ids){
-        free(keyQuery_ids);
-        keyQuery_ids = NULL;
-    }
-    if(valueQuery_ids){
-        free(valueQuery_ids);
-        valueQuery_ids = NULL;
-    }
-    if(keyPairQuery_ids){
-        keyValuePair_free(keyPairQuery_ids);
-        keyPairQuery_ids = NULL;
-    }
-    if(keyQuery_order_ids){
-        free(keyQuery_order_ids);
-        keyQuery_order_ids = NULL;
-    }
-    if(valueQuery_order_ids){
-        free(valueQuery_order_ids);
-        valueQuery_order_ids = NULL;
-    }
-    if(keyPairQuery_order_ids){
-        keyValuePair_free(keyPairQuery_order_ids);
-        keyPairQuery_order_ids = NULL;
     }
     if(keyQuery_ebay_order_status){
         free(keyQuery_ebay_order_status);
@@ -1009,6 +961,54 @@ OrderAPI_orderCount(apiClient_t *apiClient, char *customer_id, char *customer_em
         keyValuePair_free(keyPairQuery_ship_node_type);
         keyPairQuery_ship_node_type = NULL;
     }
+    if(keyQuery_created_from){
+        free(keyQuery_created_from);
+        keyQuery_created_from = NULL;
+    }
+    if(valueQuery_created_from){
+        free(valueQuery_created_from);
+        valueQuery_created_from = NULL;
+    }
+    if(keyPairQuery_created_from){
+        keyValuePair_free(keyPairQuery_created_from);
+        keyPairQuery_created_from = NULL;
+    }
+    if(keyQuery_created_to){
+        free(keyQuery_created_to);
+        keyQuery_created_to = NULL;
+    }
+    if(valueQuery_created_to){
+        free(valueQuery_created_to);
+        valueQuery_created_to = NULL;
+    }
+    if(keyPairQuery_created_to){
+        keyValuePair_free(keyPairQuery_created_to);
+        keyPairQuery_created_to = NULL;
+    }
+    if(keyQuery_modified_from){
+        free(keyQuery_modified_from);
+        keyQuery_modified_from = NULL;
+    }
+    if(valueQuery_modified_from){
+        free(valueQuery_modified_from);
+        valueQuery_modified_from = NULL;
+    }
+    if(keyPairQuery_modified_from){
+        keyValuePair_free(keyPairQuery_modified_from);
+        keyPairQuery_modified_from = NULL;
+    }
+    if(keyQuery_modified_to){
+        free(keyQuery_modified_to);
+        keyQuery_modified_to = NULL;
+    }
+    if(valueQuery_modified_to){
+        free(valueQuery_modified_to);
+        valueQuery_modified_to = NULL;
+    }
+    if(keyPairQuery_modified_to){
+        keyValuePair_free(keyPairQuery_modified_to);
+        keyPairQuery_modified_to = NULL;
+    }
     return elementToReturn;
 end:
     free(localVarPath);
@@ -1091,7 +1091,7 @@ end:
 // This method is deprecated and won't be supported in the future. Please use \"order.list\" instead.
 //
 order_find_200_response_t*
-OrderAPI_orderFind(apiClient_t *apiClient, char *customer_id, char *customer_email, char *order_status, int *start, int *count, char *params, char *exclude, char *created_to, char *created_from, char *modified_to, char *modified_from, char *financial_status)
+OrderAPI_orderFind(apiClient_t *apiClient, int *start, int *count, char *customer_id, char *customer_email, char *order_status, char *financial_status, char *created_to, char *created_from, char *modified_to, char *modified_from, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1110,6 +1110,32 @@ OrderAPI_orderFind(apiClient_t *apiClient, char *customer_id, char *customer_ema
 
 
 
+
+    // query parameters
+    char *keyQuery_start = NULL;
+    char * valueQuery_start = NULL;
+    keyValuePair_t *keyPairQuery_start = 0;
+    if (start)
+    {
+        keyQuery_start = strdup("start");
+        valueQuery_start = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_start, MAX_NUMBER_LENGTH, "%d", *start);
+        keyPairQuery_start = keyValuePair_create(keyQuery_start, valueQuery_start);
+        list_addElement(localVarQueryParameters,keyPairQuery_start);
+    }
+
+    // query parameters
+    char *keyQuery_count = NULL;
+    char * valueQuery_count = NULL;
+    keyValuePair_t *keyPairQuery_count = 0;
+    if (count)
+    {
+        keyQuery_count = strdup("count");
+        valueQuery_count = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
+        keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
+        list_addElement(localVarQueryParameters,keyPairQuery_count);
+    }
 
     // query parameters
     char *keyQuery_customer_id = NULL;
@@ -1148,53 +1174,15 @@ OrderAPI_orderFind(apiClient_t *apiClient, char *customer_id, char *customer_ema
     }
 
     // query parameters
-    char *keyQuery_start = NULL;
-    char * valueQuery_start = NULL;
-    keyValuePair_t *keyPairQuery_start = 0;
-    if (start)
+    char *keyQuery_financial_status = NULL;
+    char * valueQuery_financial_status = NULL;
+    keyValuePair_t *keyPairQuery_financial_status = 0;
+    if (financial_status)
     {
-        keyQuery_start = strdup("start");
-        valueQuery_start = calloc(1,MAX_NUMBER_LENGTH);
-        snprintf(valueQuery_start, MAX_NUMBER_LENGTH, "%d", *start);
-        keyPairQuery_start = keyValuePair_create(keyQuery_start, valueQuery_start);
-        list_addElement(localVarQueryParameters,keyPairQuery_start);
-    }
-
-    // query parameters
-    char *keyQuery_count = NULL;
-    char * valueQuery_count = NULL;
-    keyValuePair_t *keyPairQuery_count = 0;
-    if (count)
-    {
-        keyQuery_count = strdup("count");
-        valueQuery_count = calloc(1,MAX_NUMBER_LENGTH);
-        snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
-        keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
-        list_addElement(localVarQueryParameters,keyPairQuery_count);
-    }
-
-    // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
-    {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
-    }
-
-    // query parameters
-    char *keyQuery_exclude = NULL;
-    char * valueQuery_exclude = NULL;
-    keyValuePair_t *keyPairQuery_exclude = 0;
-    if (exclude)
-    {
-        keyQuery_exclude = strdup("exclude");
-        valueQuery_exclude = strdup((exclude));
-        keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
-        list_addElement(localVarQueryParameters,keyPairQuery_exclude);
+        keyQuery_financial_status = strdup("financial_status");
+        valueQuery_financial_status = strdup((financial_status));
+        keyPairQuery_financial_status = keyValuePair_create(keyQuery_financial_status, valueQuery_financial_status);
+        list_addElement(localVarQueryParameters,keyPairQuery_financial_status);
     }
 
     // query parameters
@@ -1246,15 +1234,27 @@ OrderAPI_orderFind(apiClient_t *apiClient, char *customer_id, char *customer_ema
     }
 
     // query parameters
-    char *keyQuery_financial_status = NULL;
-    char * valueQuery_financial_status = NULL;
-    keyValuePair_t *keyPairQuery_financial_status = 0;
-    if (financial_status)
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
     {
-        keyQuery_financial_status = strdup("financial_status");
-        valueQuery_financial_status = strdup((financial_status));
-        keyPairQuery_financial_status = keyValuePair_create(keyQuery_financial_status, valueQuery_financial_status);
-        list_addElement(localVarQueryParameters,keyPairQuery_financial_status);
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
+    }
+
+    // query parameters
+    char *keyQuery_exclude = NULL;
+    char * valueQuery_exclude = NULL;
+    keyValuePair_t *keyPairQuery_exclude = 0;
+    if (exclude)
+    {
+        keyQuery_exclude = strdup("exclude");
+        valueQuery_exclude = strdup((exclude));
+        keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
+        list_addElement(localVarQueryParameters,keyPairQuery_exclude);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -1295,6 +1295,30 @@ OrderAPI_orderFind(apiClient_t *apiClient, char *customer_id, char *customer_ema
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
+    if(keyQuery_start){
+        free(keyQuery_start);
+        keyQuery_start = NULL;
+    }
+    if(valueQuery_start){
+        free(valueQuery_start);
+        valueQuery_start = NULL;
+    }
+    if(keyPairQuery_start){
+        keyValuePair_free(keyPairQuery_start);
+        keyPairQuery_start = NULL;
+    }
+    if(keyQuery_count){
+        free(keyQuery_count);
+        keyQuery_count = NULL;
+    }
+    if(valueQuery_count){
+        free(valueQuery_count);
+        valueQuery_count = NULL;
+    }
+    if(keyPairQuery_count){
+        keyValuePair_free(keyPairQuery_count);
+        keyPairQuery_count = NULL;
+    }
     if(keyQuery_customer_id){
         free(keyQuery_customer_id);
         keyQuery_customer_id = NULL;
@@ -1331,53 +1355,17 @@ OrderAPI_orderFind(apiClient_t *apiClient, char *customer_id, char *customer_ema
         keyValuePair_free(keyPairQuery_order_status);
         keyPairQuery_order_status = NULL;
     }
-    if(keyQuery_start){
-        free(keyQuery_start);
-        keyQuery_start = NULL;
+    if(keyQuery_financial_status){
+        free(keyQuery_financial_status);
+        keyQuery_financial_status = NULL;
     }
-    if(valueQuery_start){
-        free(valueQuery_start);
-        valueQuery_start = NULL;
+    if(valueQuery_financial_status){
+        free(valueQuery_financial_status);
+        valueQuery_financial_status = NULL;
     }
-    if(keyPairQuery_start){
-        keyValuePair_free(keyPairQuery_start);
-        keyPairQuery_start = NULL;
-    }
-    if(keyQuery_count){
-        free(keyQuery_count);
-        keyQuery_count = NULL;
-    }
-    if(valueQuery_count){
-        free(valueQuery_count);
-        valueQuery_count = NULL;
-    }
-    if(keyPairQuery_count){
-        keyValuePair_free(keyPairQuery_count);
-        keyPairQuery_count = NULL;
-    }
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
-    }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
-    }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
-    }
-    if(keyQuery_exclude){
-        free(keyQuery_exclude);
-        keyQuery_exclude = NULL;
-    }
-    if(valueQuery_exclude){
-        free(valueQuery_exclude);
-        valueQuery_exclude = NULL;
-    }
-    if(keyPairQuery_exclude){
-        keyValuePair_free(keyPairQuery_exclude);
-        keyPairQuery_exclude = NULL;
+    if(keyPairQuery_financial_status){
+        keyValuePair_free(keyPairQuery_financial_status);
+        keyPairQuery_financial_status = NULL;
     }
     if(keyQuery_created_to){
         free(keyQuery_created_to);
@@ -1427,17 +1415,29 @@ OrderAPI_orderFind(apiClient_t *apiClient, char *customer_id, char *customer_ema
         keyValuePair_free(keyPairQuery_modified_from);
         keyPairQuery_modified_from = NULL;
     }
-    if(keyQuery_financial_status){
-        free(keyQuery_financial_status);
-        keyQuery_financial_status = NULL;
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
     }
-    if(valueQuery_financial_status){
-        free(valueQuery_financial_status);
-        valueQuery_financial_status = NULL;
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
     }
-    if(keyPairQuery_financial_status){
-        keyValuePair_free(keyPairQuery_financial_status);
-        keyPairQuery_financial_status = NULL;
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
+    }
+    if(keyQuery_exclude){
+        free(keyQuery_exclude);
+        keyQuery_exclude = NULL;
+    }
+    if(valueQuery_exclude){
+        free(valueQuery_exclude);
+        valueQuery_exclude = NULL;
+    }
+    if(keyPairQuery_exclude){
+        keyValuePair_free(keyPairQuery_exclude);
+        keyPairQuery_exclude = NULL;
     }
     return elementToReturn;
 end:
@@ -1545,7 +1545,7 @@ end:
 // Info about a specific order by ID
 //
 order_info_200_response_t*
-OrderAPI_orderInfo(apiClient_t *apiClient, char *order_id, char *id, char *params, char *response_fields, char *exclude, char *store_id, int *enable_cache, int *use_latest_api_version)
+OrderAPI_orderInfo(apiClient_t *apiClient, char *id, char *order_id, char *store_id, char *params, char *response_fields, char *exclude, int *enable_cache, int *use_latest_api_version)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1566,6 +1566,18 @@ OrderAPI_orderInfo(apiClient_t *apiClient, char *order_id, char *id, char *param
 
 
     // query parameters
+    char *keyQuery_id = NULL;
+    char * valueQuery_id = NULL;
+    keyValuePair_t *keyPairQuery_id = 0;
+    if (id)
+    {
+        keyQuery_id = strdup("id");
+        valueQuery_id = strdup((id));
+        keyPairQuery_id = keyValuePair_create(keyQuery_id, valueQuery_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_id);
+    }
+
+    // query parameters
     char *keyQuery_order_id = NULL;
     char * valueQuery_order_id = NULL;
     keyValuePair_t *keyPairQuery_order_id = 0;
@@ -1578,15 +1590,15 @@ OrderAPI_orderInfo(apiClient_t *apiClient, char *order_id, char *id, char *param
     }
 
     // query parameters
-    char *keyQuery_id = NULL;
-    char * valueQuery_id = NULL;
-    keyValuePair_t *keyPairQuery_id = 0;
-    if (id)
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
     {
-        keyQuery_id = strdup("id");
-        valueQuery_id = strdup((id));
-        keyPairQuery_id = keyValuePair_create(keyQuery_id, valueQuery_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_id);
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
 
     // query parameters
@@ -1623,18 +1635,6 @@ OrderAPI_orderInfo(apiClient_t *apiClient, char *order_id, char *id, char *param
         valueQuery_exclude = strdup((exclude));
         keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
         list_addElement(localVarQueryParameters,keyPairQuery_exclude);
-    }
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
 
     // query parameters
@@ -1701,6 +1701,18 @@ OrderAPI_orderInfo(apiClient_t *apiClient, char *order_id, char *id, char *param
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
+    if(keyQuery_id){
+        free(keyQuery_id);
+        keyQuery_id = NULL;
+    }
+    if(valueQuery_id){
+        free(valueQuery_id);
+        valueQuery_id = NULL;
+    }
+    if(keyPairQuery_id){
+        keyValuePair_free(keyPairQuery_id);
+        keyPairQuery_id = NULL;
+    }
     if(keyQuery_order_id){
         free(keyQuery_order_id);
         keyQuery_order_id = NULL;
@@ -1713,17 +1725,17 @@ OrderAPI_orderInfo(apiClient_t *apiClient, char *order_id, char *id, char *param
         keyValuePair_free(keyPairQuery_order_id);
         keyPairQuery_order_id = NULL;
     }
-    if(keyQuery_id){
-        free(keyQuery_id);
-        keyQuery_id = NULL;
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
     }
-    if(valueQuery_id){
-        free(valueQuery_id);
-        valueQuery_id = NULL;
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
     }
-    if(keyPairQuery_id){
-        keyValuePair_free(keyPairQuery_id);
-        keyPairQuery_id = NULL;
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     if(keyQuery_params){
         free(keyQuery_params);
@@ -1761,18 +1773,6 @@ OrderAPI_orderInfo(apiClient_t *apiClient, char *order_id, char *id, char *param
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
     }
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
     if(keyQuery_enable_cache){
         free(keyQuery_enable_cache);
         keyQuery_enable_cache = NULL;
@@ -1809,7 +1809,7 @@ end:
 // Get list of orders from store.
 //
 model_response_order_list_t*
-OrderAPI_orderList(apiClient_t *apiClient, char *customer_id, char *customer_email, char *phone, char *order_status, list_t *order_status_ids, int *start, int *count, char *page_cursor, char *sort_by, char *sort_direction, char *params, char *response_fields, char *exclude, char *created_to, char *created_from, char *modified_to, char *modified_from, char *store_id, char *ids, char *order_ids, char *ebay_order_status, char *basket_id, char *financial_status, list_t *financial_status_ids, char *fulfillment_status, char *fulfillment_channel, char *shipping_method, char *skip_order_ids, char *since_id, int *is_deleted, char *shipping_country_iso3, int *enable_cache, char *delivery_method, char *tags, char *ship_node_type, char *currency_id, char *return_status, int *use_latest_api_version)
+OrderAPI_orderList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *order_ids, char *since_id, char *store_id, char *customer_id, char *customer_email, char *basket_id, char *currency_id, char *phone, char *order_status, list_t *order_status_ids, char *ebay_order_status, char *financial_status, list_t *financial_status_ids, char *fulfillment_status, char *return_status, char *fulfillment_channel, char *shipping_method, char *skip_order_ids, int *is_deleted, char *shipping_country_iso3, char *delivery_method, char *ship_node_type, char *created_to, char *created_from, char *modified_to, char *modified_from, char *tags, char *sort_by, char *sort_direction, char *params, char *response_fields, char *exclude, int *enable_cache, int *use_latest_api_version)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1828,60 +1828,6 @@ OrderAPI_orderList(apiClient_t *apiClient, char *customer_id, char *customer_ema
 
 
 
-
-    // query parameters
-    char *keyQuery_customer_id = NULL;
-    char * valueQuery_customer_id = NULL;
-    keyValuePair_t *keyPairQuery_customer_id = 0;
-    if (customer_id)
-    {
-        keyQuery_customer_id = strdup("customer_id");
-        valueQuery_customer_id = strdup((customer_id));
-        keyPairQuery_customer_id = keyValuePair_create(keyQuery_customer_id, valueQuery_customer_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_customer_id);
-    }
-
-    // query parameters
-    char *keyQuery_customer_email = NULL;
-    char * valueQuery_customer_email = NULL;
-    keyValuePair_t *keyPairQuery_customer_email = 0;
-    if (customer_email)
-    {
-        keyQuery_customer_email = strdup("customer_email");
-        valueQuery_customer_email = strdup((customer_email));
-        keyPairQuery_customer_email = keyValuePair_create(keyQuery_customer_email, valueQuery_customer_email);
-        list_addElement(localVarQueryParameters,keyPairQuery_customer_email);
-    }
-
-    // query parameters
-    char *keyQuery_phone = NULL;
-    char * valueQuery_phone = NULL;
-    keyValuePair_t *keyPairQuery_phone = 0;
-    if (phone)
-    {
-        keyQuery_phone = strdup("phone");
-        valueQuery_phone = strdup((phone));
-        keyPairQuery_phone = keyValuePair_create(keyQuery_phone, valueQuery_phone);
-        list_addElement(localVarQueryParameters,keyPairQuery_phone);
-    }
-
-    // query parameters
-    char *keyQuery_order_status = NULL;
-    char * valueQuery_order_status = NULL;
-    keyValuePair_t *keyPairQuery_order_status = 0;
-    if (order_status)
-    {
-        keyQuery_order_status = strdup("order_status");
-        valueQuery_order_status = strdup((order_status));
-        keyPairQuery_order_status = keyValuePair_create(keyQuery_order_status, valueQuery_order_status);
-        list_addElement(localVarQueryParameters,keyPairQuery_order_status);
-    }
-
-    // query parameters
-    if (order_status_ids)
-    {
-        list_addElement(localVarQueryParameters,order_status_ids);
-    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -1919,6 +1865,331 @@ OrderAPI_orderList(apiClient_t *apiClient, char *customer_id, char *customer_ema
         valueQuery_page_cursor = strdup((page_cursor));
         keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
         list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
+    }
+
+    // query parameters
+    char *keyQuery_ids = NULL;
+    char * valueQuery_ids = NULL;
+    keyValuePair_t *keyPairQuery_ids = 0;
+    if (ids)
+    {
+        keyQuery_ids = strdup("ids");
+        valueQuery_ids = strdup((ids));
+        keyPairQuery_ids = keyValuePair_create(keyQuery_ids, valueQuery_ids);
+        list_addElement(localVarQueryParameters,keyPairQuery_ids);
+    }
+
+    // query parameters
+    char *keyQuery_order_ids = NULL;
+    char * valueQuery_order_ids = NULL;
+    keyValuePair_t *keyPairQuery_order_ids = 0;
+    if (order_ids)
+    {
+        keyQuery_order_ids = strdup("order_ids");
+        valueQuery_order_ids = strdup((order_ids));
+        keyPairQuery_order_ids = keyValuePair_create(keyQuery_order_ids, valueQuery_order_ids);
+        list_addElement(localVarQueryParameters,keyPairQuery_order_ids);
+    }
+
+    // query parameters
+    char *keyQuery_since_id = NULL;
+    char * valueQuery_since_id = NULL;
+    keyValuePair_t *keyPairQuery_since_id = 0;
+    if (since_id)
+    {
+        keyQuery_since_id = strdup("since_id");
+        valueQuery_since_id = strdup((since_id));
+        keyPairQuery_since_id = keyValuePair_create(keyQuery_since_id, valueQuery_since_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_since_id);
+    }
+
+    // query parameters
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
+    {
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
+    }
+
+    // query parameters
+    char *keyQuery_customer_id = NULL;
+    char * valueQuery_customer_id = NULL;
+    keyValuePair_t *keyPairQuery_customer_id = 0;
+    if (customer_id)
+    {
+        keyQuery_customer_id = strdup("customer_id");
+        valueQuery_customer_id = strdup((customer_id));
+        keyPairQuery_customer_id = keyValuePair_create(keyQuery_customer_id, valueQuery_customer_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_customer_id);
+    }
+
+    // query parameters
+    char *keyQuery_customer_email = NULL;
+    char * valueQuery_customer_email = NULL;
+    keyValuePair_t *keyPairQuery_customer_email = 0;
+    if (customer_email)
+    {
+        keyQuery_customer_email = strdup("customer_email");
+        valueQuery_customer_email = strdup((customer_email));
+        keyPairQuery_customer_email = keyValuePair_create(keyQuery_customer_email, valueQuery_customer_email);
+        list_addElement(localVarQueryParameters,keyPairQuery_customer_email);
+    }
+
+    // query parameters
+    char *keyQuery_basket_id = NULL;
+    char * valueQuery_basket_id = NULL;
+    keyValuePair_t *keyPairQuery_basket_id = 0;
+    if (basket_id)
+    {
+        keyQuery_basket_id = strdup("basket_id");
+        valueQuery_basket_id = strdup((basket_id));
+        keyPairQuery_basket_id = keyValuePair_create(keyQuery_basket_id, valueQuery_basket_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_basket_id);
+    }
+
+    // query parameters
+    char *keyQuery_currency_id = NULL;
+    char * valueQuery_currency_id = NULL;
+    keyValuePair_t *keyPairQuery_currency_id = 0;
+    if (currency_id)
+    {
+        keyQuery_currency_id = strdup("currency_id");
+        valueQuery_currency_id = strdup((currency_id));
+        keyPairQuery_currency_id = keyValuePair_create(keyQuery_currency_id, valueQuery_currency_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_currency_id);
+    }
+
+    // query parameters
+    char *keyQuery_phone = NULL;
+    char * valueQuery_phone = NULL;
+    keyValuePair_t *keyPairQuery_phone = 0;
+    if (phone)
+    {
+        keyQuery_phone = strdup("phone");
+        valueQuery_phone = strdup((phone));
+        keyPairQuery_phone = keyValuePair_create(keyQuery_phone, valueQuery_phone);
+        list_addElement(localVarQueryParameters,keyPairQuery_phone);
+    }
+
+    // query parameters
+    char *keyQuery_order_status = NULL;
+    char * valueQuery_order_status = NULL;
+    keyValuePair_t *keyPairQuery_order_status = 0;
+    if (order_status)
+    {
+        keyQuery_order_status = strdup("order_status");
+        valueQuery_order_status = strdup((order_status));
+        keyPairQuery_order_status = keyValuePair_create(keyQuery_order_status, valueQuery_order_status);
+        list_addElement(localVarQueryParameters,keyPairQuery_order_status);
+    }
+
+    // query parameters
+    if (order_status_ids)
+    {
+        list_addElement(localVarQueryParameters,order_status_ids);
+    }
+
+    // query parameters
+    char *keyQuery_ebay_order_status = NULL;
+    char * valueQuery_ebay_order_status = NULL;
+    keyValuePair_t *keyPairQuery_ebay_order_status = 0;
+    if (ebay_order_status)
+    {
+        keyQuery_ebay_order_status = strdup("ebay_order_status");
+        valueQuery_ebay_order_status = strdup((ebay_order_status));
+        keyPairQuery_ebay_order_status = keyValuePair_create(keyQuery_ebay_order_status, valueQuery_ebay_order_status);
+        list_addElement(localVarQueryParameters,keyPairQuery_ebay_order_status);
+    }
+
+    // query parameters
+    char *keyQuery_financial_status = NULL;
+    char * valueQuery_financial_status = NULL;
+    keyValuePair_t *keyPairQuery_financial_status = 0;
+    if (financial_status)
+    {
+        keyQuery_financial_status = strdup("financial_status");
+        valueQuery_financial_status = strdup((financial_status));
+        keyPairQuery_financial_status = keyValuePair_create(keyQuery_financial_status, valueQuery_financial_status);
+        list_addElement(localVarQueryParameters,keyPairQuery_financial_status);
+    }
+
+    // query parameters
+    if (financial_status_ids)
+    {
+        list_addElement(localVarQueryParameters,financial_status_ids);
+    }
+
+    // query parameters
+    char *keyQuery_fulfillment_status = NULL;
+    char * valueQuery_fulfillment_status = NULL;
+    keyValuePair_t *keyPairQuery_fulfillment_status = 0;
+    if (fulfillment_status)
+    {
+        keyQuery_fulfillment_status = strdup("fulfillment_status");
+        valueQuery_fulfillment_status = strdup((fulfillment_status));
+        keyPairQuery_fulfillment_status = keyValuePair_create(keyQuery_fulfillment_status, valueQuery_fulfillment_status);
+        list_addElement(localVarQueryParameters,keyPairQuery_fulfillment_status);
+    }
+
+    // query parameters
+    char *keyQuery_return_status = NULL;
+    char * valueQuery_return_status = NULL;
+    keyValuePair_t *keyPairQuery_return_status = 0;
+    if (return_status)
+    {
+        keyQuery_return_status = strdup("return_status");
+        valueQuery_return_status = strdup((return_status));
+        keyPairQuery_return_status = keyValuePair_create(keyQuery_return_status, valueQuery_return_status);
+        list_addElement(localVarQueryParameters,keyPairQuery_return_status);
+    }
+
+    // query parameters
+    char *keyQuery_fulfillment_channel = NULL;
+    char * valueQuery_fulfillment_channel = NULL;
+    keyValuePair_t *keyPairQuery_fulfillment_channel = 0;
+    if (fulfillment_channel)
+    {
+        keyQuery_fulfillment_channel = strdup("fulfillment_channel");
+        valueQuery_fulfillment_channel = strdup((fulfillment_channel));
+        keyPairQuery_fulfillment_channel = keyValuePair_create(keyQuery_fulfillment_channel, valueQuery_fulfillment_channel);
+        list_addElement(localVarQueryParameters,keyPairQuery_fulfillment_channel);
+    }
+
+    // query parameters
+    char *keyQuery_shipping_method = NULL;
+    char * valueQuery_shipping_method = NULL;
+    keyValuePair_t *keyPairQuery_shipping_method = 0;
+    if (shipping_method)
+    {
+        keyQuery_shipping_method = strdup("shipping_method");
+        valueQuery_shipping_method = strdup((shipping_method));
+        keyPairQuery_shipping_method = keyValuePair_create(keyQuery_shipping_method, valueQuery_shipping_method);
+        list_addElement(localVarQueryParameters,keyPairQuery_shipping_method);
+    }
+
+    // query parameters
+    char *keyQuery_skip_order_ids = NULL;
+    char * valueQuery_skip_order_ids = NULL;
+    keyValuePair_t *keyPairQuery_skip_order_ids = 0;
+    if (skip_order_ids)
+    {
+        keyQuery_skip_order_ids = strdup("skip_order_ids");
+        valueQuery_skip_order_ids = strdup((skip_order_ids));
+        keyPairQuery_skip_order_ids = keyValuePair_create(keyQuery_skip_order_ids, valueQuery_skip_order_ids);
+        list_addElement(localVarQueryParameters,keyPairQuery_skip_order_ids);
+    }
+
+    // query parameters
+    char *keyQuery_is_deleted = NULL;
+    char * valueQuery_is_deleted = NULL;
+    keyValuePair_t *keyPairQuery_is_deleted = 0;
+    if (is_deleted)
+    {
+        keyQuery_is_deleted = strdup("is_deleted");
+        valueQuery_is_deleted = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_is_deleted, MAX_NUMBER_LENGTH, "%d", *is_deleted);
+        keyPairQuery_is_deleted = keyValuePair_create(keyQuery_is_deleted, valueQuery_is_deleted);
+        list_addElement(localVarQueryParameters,keyPairQuery_is_deleted);
+    }
+
+    // query parameters
+    char *keyQuery_shipping_country_iso3 = NULL;
+    char * valueQuery_shipping_country_iso3 = NULL;
+    keyValuePair_t *keyPairQuery_shipping_country_iso3 = 0;
+    if (shipping_country_iso3)
+    {
+        keyQuery_shipping_country_iso3 = strdup("shipping_country_iso3");
+        valueQuery_shipping_country_iso3 = strdup((shipping_country_iso3));
+        keyPairQuery_shipping_country_iso3 = keyValuePair_create(keyQuery_shipping_country_iso3, valueQuery_shipping_country_iso3);
+        list_addElement(localVarQueryParameters,keyPairQuery_shipping_country_iso3);
+    }
+
+    // query parameters
+    char *keyQuery_delivery_method = NULL;
+    char * valueQuery_delivery_method = NULL;
+    keyValuePair_t *keyPairQuery_delivery_method = 0;
+    if (delivery_method)
+    {
+        keyQuery_delivery_method = strdup("delivery_method");
+        valueQuery_delivery_method = strdup((delivery_method));
+        keyPairQuery_delivery_method = keyValuePair_create(keyQuery_delivery_method, valueQuery_delivery_method);
+        list_addElement(localVarQueryParameters,keyPairQuery_delivery_method);
+    }
+
+    // query parameters
+    char *keyQuery_ship_node_type = NULL;
+    char * valueQuery_ship_node_type = NULL;
+    keyValuePair_t *keyPairQuery_ship_node_type = 0;
+    if (ship_node_type)
+    {
+        keyQuery_ship_node_type = strdup("ship_node_type");
+        valueQuery_ship_node_type = strdup((ship_node_type));
+        keyPairQuery_ship_node_type = keyValuePair_create(keyQuery_ship_node_type, valueQuery_ship_node_type);
+        list_addElement(localVarQueryParameters,keyPairQuery_ship_node_type);
+    }
+
+    // query parameters
+    char *keyQuery_created_to = NULL;
+    char * valueQuery_created_to = NULL;
+    keyValuePair_t *keyPairQuery_created_to = 0;
+    if (created_to)
+    {
+        keyQuery_created_to = strdup("created_to");
+        valueQuery_created_to = strdup((created_to));
+        keyPairQuery_created_to = keyValuePair_create(keyQuery_created_to, valueQuery_created_to);
+        list_addElement(localVarQueryParameters,keyPairQuery_created_to);
+    }
+
+    // query parameters
+    char *keyQuery_created_from = NULL;
+    char * valueQuery_created_from = NULL;
+    keyValuePair_t *keyPairQuery_created_from = 0;
+    if (created_from)
+    {
+        keyQuery_created_from = strdup("created_from");
+        valueQuery_created_from = strdup((created_from));
+        keyPairQuery_created_from = keyValuePair_create(keyQuery_created_from, valueQuery_created_from);
+        list_addElement(localVarQueryParameters,keyPairQuery_created_from);
+    }
+
+    // query parameters
+    char *keyQuery_modified_to = NULL;
+    char * valueQuery_modified_to = NULL;
+    keyValuePair_t *keyPairQuery_modified_to = 0;
+    if (modified_to)
+    {
+        keyQuery_modified_to = strdup("modified_to");
+        valueQuery_modified_to = strdup((modified_to));
+        keyPairQuery_modified_to = keyValuePair_create(keyQuery_modified_to, valueQuery_modified_to);
+        list_addElement(localVarQueryParameters,keyPairQuery_modified_to);
+    }
+
+    // query parameters
+    char *keyQuery_modified_from = NULL;
+    char * valueQuery_modified_from = NULL;
+    keyValuePair_t *keyPairQuery_modified_from = 0;
+    if (modified_from)
+    {
+        keyQuery_modified_from = strdup("modified_from");
+        valueQuery_modified_from = strdup((modified_from));
+        keyPairQuery_modified_from = keyValuePair_create(keyQuery_modified_from, valueQuery_modified_from);
+        list_addElement(localVarQueryParameters,keyPairQuery_modified_from);
+    }
+
+    // query parameters
+    char *keyQuery_tags = NULL;
+    char * valueQuery_tags = NULL;
+    keyValuePair_t *keyPairQuery_tags = 0;
+    if (tags)
+    {
+        keyQuery_tags = strdup("tags");
+        valueQuery_tags = strdup((tags));
+        keyPairQuery_tags = keyValuePair_create(keyQuery_tags, valueQuery_tags);
+        list_addElement(localVarQueryParameters,keyPairQuery_tags);
     }
 
     // query parameters
@@ -1982,217 +2253,6 @@ OrderAPI_orderList(apiClient_t *apiClient, char *customer_id, char *customer_ema
     }
 
     // query parameters
-    char *keyQuery_created_to = NULL;
-    char * valueQuery_created_to = NULL;
-    keyValuePair_t *keyPairQuery_created_to = 0;
-    if (created_to)
-    {
-        keyQuery_created_to = strdup("created_to");
-        valueQuery_created_to = strdup((created_to));
-        keyPairQuery_created_to = keyValuePair_create(keyQuery_created_to, valueQuery_created_to);
-        list_addElement(localVarQueryParameters,keyPairQuery_created_to);
-    }
-
-    // query parameters
-    char *keyQuery_created_from = NULL;
-    char * valueQuery_created_from = NULL;
-    keyValuePair_t *keyPairQuery_created_from = 0;
-    if (created_from)
-    {
-        keyQuery_created_from = strdup("created_from");
-        valueQuery_created_from = strdup((created_from));
-        keyPairQuery_created_from = keyValuePair_create(keyQuery_created_from, valueQuery_created_from);
-        list_addElement(localVarQueryParameters,keyPairQuery_created_from);
-    }
-
-    // query parameters
-    char *keyQuery_modified_to = NULL;
-    char * valueQuery_modified_to = NULL;
-    keyValuePair_t *keyPairQuery_modified_to = 0;
-    if (modified_to)
-    {
-        keyQuery_modified_to = strdup("modified_to");
-        valueQuery_modified_to = strdup((modified_to));
-        keyPairQuery_modified_to = keyValuePair_create(keyQuery_modified_to, valueQuery_modified_to);
-        list_addElement(localVarQueryParameters,keyPairQuery_modified_to);
-    }
-
-    // query parameters
-    char *keyQuery_modified_from = NULL;
-    char * valueQuery_modified_from = NULL;
-    keyValuePair_t *keyPairQuery_modified_from = 0;
-    if (modified_from)
-    {
-        keyQuery_modified_from = strdup("modified_from");
-        valueQuery_modified_from = strdup((modified_from));
-        keyPairQuery_modified_from = keyValuePair_create(keyQuery_modified_from, valueQuery_modified_from);
-        list_addElement(localVarQueryParameters,keyPairQuery_modified_from);
-    }
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
-
-    // query parameters
-    char *keyQuery_ids = NULL;
-    char * valueQuery_ids = NULL;
-    keyValuePair_t *keyPairQuery_ids = 0;
-    if (ids)
-    {
-        keyQuery_ids = strdup("ids");
-        valueQuery_ids = strdup((ids));
-        keyPairQuery_ids = keyValuePair_create(keyQuery_ids, valueQuery_ids);
-        list_addElement(localVarQueryParameters,keyPairQuery_ids);
-    }
-
-    // query parameters
-    char *keyQuery_order_ids = NULL;
-    char * valueQuery_order_ids = NULL;
-    keyValuePair_t *keyPairQuery_order_ids = 0;
-    if (order_ids)
-    {
-        keyQuery_order_ids = strdup("order_ids");
-        valueQuery_order_ids = strdup((order_ids));
-        keyPairQuery_order_ids = keyValuePair_create(keyQuery_order_ids, valueQuery_order_ids);
-        list_addElement(localVarQueryParameters,keyPairQuery_order_ids);
-    }
-
-    // query parameters
-    char *keyQuery_ebay_order_status = NULL;
-    char * valueQuery_ebay_order_status = NULL;
-    keyValuePair_t *keyPairQuery_ebay_order_status = 0;
-    if (ebay_order_status)
-    {
-        keyQuery_ebay_order_status = strdup("ebay_order_status");
-        valueQuery_ebay_order_status = strdup((ebay_order_status));
-        keyPairQuery_ebay_order_status = keyValuePair_create(keyQuery_ebay_order_status, valueQuery_ebay_order_status);
-        list_addElement(localVarQueryParameters,keyPairQuery_ebay_order_status);
-    }
-
-    // query parameters
-    char *keyQuery_basket_id = NULL;
-    char * valueQuery_basket_id = NULL;
-    keyValuePair_t *keyPairQuery_basket_id = 0;
-    if (basket_id)
-    {
-        keyQuery_basket_id = strdup("basket_id");
-        valueQuery_basket_id = strdup((basket_id));
-        keyPairQuery_basket_id = keyValuePair_create(keyQuery_basket_id, valueQuery_basket_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_basket_id);
-    }
-
-    // query parameters
-    char *keyQuery_financial_status = NULL;
-    char * valueQuery_financial_status = NULL;
-    keyValuePair_t *keyPairQuery_financial_status = 0;
-    if (financial_status)
-    {
-        keyQuery_financial_status = strdup("financial_status");
-        valueQuery_financial_status = strdup((financial_status));
-        keyPairQuery_financial_status = keyValuePair_create(keyQuery_financial_status, valueQuery_financial_status);
-        list_addElement(localVarQueryParameters,keyPairQuery_financial_status);
-    }
-
-    // query parameters
-    if (financial_status_ids)
-    {
-        list_addElement(localVarQueryParameters,financial_status_ids);
-    }
-
-    // query parameters
-    char *keyQuery_fulfillment_status = NULL;
-    char * valueQuery_fulfillment_status = NULL;
-    keyValuePair_t *keyPairQuery_fulfillment_status = 0;
-    if (fulfillment_status)
-    {
-        keyQuery_fulfillment_status = strdup("fulfillment_status");
-        valueQuery_fulfillment_status = strdup((fulfillment_status));
-        keyPairQuery_fulfillment_status = keyValuePair_create(keyQuery_fulfillment_status, valueQuery_fulfillment_status);
-        list_addElement(localVarQueryParameters,keyPairQuery_fulfillment_status);
-    }
-
-    // query parameters
-    char *keyQuery_fulfillment_channel = NULL;
-    char * valueQuery_fulfillment_channel = NULL;
-    keyValuePair_t *keyPairQuery_fulfillment_channel = 0;
-    if (fulfillment_channel)
-    {
-        keyQuery_fulfillment_channel = strdup("fulfillment_channel");
-        valueQuery_fulfillment_channel = strdup((fulfillment_channel));
-        keyPairQuery_fulfillment_channel = keyValuePair_create(keyQuery_fulfillment_channel, valueQuery_fulfillment_channel);
-        list_addElement(localVarQueryParameters,keyPairQuery_fulfillment_channel);
-    }
-
-    // query parameters
-    char *keyQuery_shipping_method = NULL;
-    char * valueQuery_shipping_method = NULL;
-    keyValuePair_t *keyPairQuery_shipping_method = 0;
-    if (shipping_method)
-    {
-        keyQuery_shipping_method = strdup("shipping_method");
-        valueQuery_shipping_method = strdup((shipping_method));
-        keyPairQuery_shipping_method = keyValuePair_create(keyQuery_shipping_method, valueQuery_shipping_method);
-        list_addElement(localVarQueryParameters,keyPairQuery_shipping_method);
-    }
-
-    // query parameters
-    char *keyQuery_skip_order_ids = NULL;
-    char * valueQuery_skip_order_ids = NULL;
-    keyValuePair_t *keyPairQuery_skip_order_ids = 0;
-    if (skip_order_ids)
-    {
-        keyQuery_skip_order_ids = strdup("skip_order_ids");
-        valueQuery_skip_order_ids = strdup((skip_order_ids));
-        keyPairQuery_skip_order_ids = keyValuePair_create(keyQuery_skip_order_ids, valueQuery_skip_order_ids);
-        list_addElement(localVarQueryParameters,keyPairQuery_skip_order_ids);
-    }
-
-    // query parameters
-    char *keyQuery_since_id = NULL;
-    char * valueQuery_since_id = NULL;
-    keyValuePair_t *keyPairQuery_since_id = 0;
-    if (since_id)
-    {
-        keyQuery_since_id = strdup("since_id");
-        valueQuery_since_id = strdup((since_id));
-        keyPairQuery_since_id = keyValuePair_create(keyQuery_since_id, valueQuery_since_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_since_id);
-    }
-
-    // query parameters
-    char *keyQuery_is_deleted = NULL;
-    char * valueQuery_is_deleted = NULL;
-    keyValuePair_t *keyPairQuery_is_deleted = 0;
-    if (is_deleted)
-    {
-        keyQuery_is_deleted = strdup("is_deleted");
-        valueQuery_is_deleted = calloc(1,MAX_NUMBER_LENGTH);
-        snprintf(valueQuery_is_deleted, MAX_NUMBER_LENGTH, "%d", *is_deleted);
-        keyPairQuery_is_deleted = keyValuePair_create(keyQuery_is_deleted, valueQuery_is_deleted);
-        list_addElement(localVarQueryParameters,keyPairQuery_is_deleted);
-    }
-
-    // query parameters
-    char *keyQuery_shipping_country_iso3 = NULL;
-    char * valueQuery_shipping_country_iso3 = NULL;
-    keyValuePair_t *keyPairQuery_shipping_country_iso3 = 0;
-    if (shipping_country_iso3)
-    {
-        keyQuery_shipping_country_iso3 = strdup("shipping_country_iso3");
-        valueQuery_shipping_country_iso3 = strdup((shipping_country_iso3));
-        keyPairQuery_shipping_country_iso3 = keyValuePair_create(keyQuery_shipping_country_iso3, valueQuery_shipping_country_iso3);
-        list_addElement(localVarQueryParameters,keyPairQuery_shipping_country_iso3);
-    }
-
-    // query parameters
     char *keyQuery_enable_cache = NULL;
     char * valueQuery_enable_cache = NULL;
     keyValuePair_t *keyPairQuery_enable_cache = 0;
@@ -2203,66 +2263,6 @@ OrderAPI_orderList(apiClient_t *apiClient, char *customer_id, char *customer_ema
         snprintf(valueQuery_enable_cache, MAX_NUMBER_LENGTH, "%d", *enable_cache);
         keyPairQuery_enable_cache = keyValuePair_create(keyQuery_enable_cache, valueQuery_enable_cache);
         list_addElement(localVarQueryParameters,keyPairQuery_enable_cache);
-    }
-
-    // query parameters
-    char *keyQuery_delivery_method = NULL;
-    char * valueQuery_delivery_method = NULL;
-    keyValuePair_t *keyPairQuery_delivery_method = 0;
-    if (delivery_method)
-    {
-        keyQuery_delivery_method = strdup("delivery_method");
-        valueQuery_delivery_method = strdup((delivery_method));
-        keyPairQuery_delivery_method = keyValuePair_create(keyQuery_delivery_method, valueQuery_delivery_method);
-        list_addElement(localVarQueryParameters,keyPairQuery_delivery_method);
-    }
-
-    // query parameters
-    char *keyQuery_tags = NULL;
-    char * valueQuery_tags = NULL;
-    keyValuePair_t *keyPairQuery_tags = 0;
-    if (tags)
-    {
-        keyQuery_tags = strdup("tags");
-        valueQuery_tags = strdup((tags));
-        keyPairQuery_tags = keyValuePair_create(keyQuery_tags, valueQuery_tags);
-        list_addElement(localVarQueryParameters,keyPairQuery_tags);
-    }
-
-    // query parameters
-    char *keyQuery_ship_node_type = NULL;
-    char * valueQuery_ship_node_type = NULL;
-    keyValuePair_t *keyPairQuery_ship_node_type = 0;
-    if (ship_node_type)
-    {
-        keyQuery_ship_node_type = strdup("ship_node_type");
-        valueQuery_ship_node_type = strdup((ship_node_type));
-        keyPairQuery_ship_node_type = keyValuePair_create(keyQuery_ship_node_type, valueQuery_ship_node_type);
-        list_addElement(localVarQueryParameters,keyPairQuery_ship_node_type);
-    }
-
-    // query parameters
-    char *keyQuery_currency_id = NULL;
-    char * valueQuery_currency_id = NULL;
-    keyValuePair_t *keyPairQuery_currency_id = 0;
-    if (currency_id)
-    {
-        keyQuery_currency_id = strdup("currency_id");
-        valueQuery_currency_id = strdup((currency_id));
-        keyPairQuery_currency_id = keyValuePair_create(keyQuery_currency_id, valueQuery_currency_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_currency_id);
-    }
-
-    // query parameters
-    char *keyQuery_return_status = NULL;
-    char * valueQuery_return_status = NULL;
-    keyValuePair_t *keyPairQuery_return_status = 0;
-    if (return_status)
-    {
-        keyQuery_return_status = strdup("return_status");
-        valueQuery_return_status = strdup((return_status));
-        keyPairQuery_return_status = keyValuePair_create(keyQuery_return_status, valueQuery_return_status);
-        list_addElement(localVarQueryParameters,keyPairQuery_return_status);
     }
 
     // query parameters
@@ -2316,54 +2316,6 @@ OrderAPI_orderList(apiClient_t *apiClient, char *customer_id, char *customer_ema
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_customer_id){
-        free(keyQuery_customer_id);
-        keyQuery_customer_id = NULL;
-    }
-    if(valueQuery_customer_id){
-        free(valueQuery_customer_id);
-        valueQuery_customer_id = NULL;
-    }
-    if(keyPairQuery_customer_id){
-        keyValuePair_free(keyPairQuery_customer_id);
-        keyPairQuery_customer_id = NULL;
-    }
-    if(keyQuery_customer_email){
-        free(keyQuery_customer_email);
-        keyQuery_customer_email = NULL;
-    }
-    if(valueQuery_customer_email){
-        free(valueQuery_customer_email);
-        valueQuery_customer_email = NULL;
-    }
-    if(keyPairQuery_customer_email){
-        keyValuePair_free(keyPairQuery_customer_email);
-        keyPairQuery_customer_email = NULL;
-    }
-    if(keyQuery_phone){
-        free(keyQuery_phone);
-        keyQuery_phone = NULL;
-    }
-    if(valueQuery_phone){
-        free(valueQuery_phone);
-        valueQuery_phone = NULL;
-    }
-    if(keyPairQuery_phone){
-        keyValuePair_free(keyPairQuery_phone);
-        keyPairQuery_phone = NULL;
-    }
-    if(keyQuery_order_status){
-        free(keyQuery_order_status);
-        keyQuery_order_status = NULL;
-    }
-    if(valueQuery_order_status){
-        free(valueQuery_order_status);
-        valueQuery_order_status = NULL;
-    }
-    if(keyPairQuery_order_status){
-        keyValuePair_free(keyPairQuery_order_status);
-        keyPairQuery_order_status = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -2399,6 +2351,318 @@ OrderAPI_orderList(apiClient_t *apiClient, char *customer_id, char *customer_ema
     if(keyPairQuery_page_cursor){
         keyValuePair_free(keyPairQuery_page_cursor);
         keyPairQuery_page_cursor = NULL;
+    }
+    if(keyQuery_ids){
+        free(keyQuery_ids);
+        keyQuery_ids = NULL;
+    }
+    if(valueQuery_ids){
+        free(valueQuery_ids);
+        valueQuery_ids = NULL;
+    }
+    if(keyPairQuery_ids){
+        keyValuePair_free(keyPairQuery_ids);
+        keyPairQuery_ids = NULL;
+    }
+    if(keyQuery_order_ids){
+        free(keyQuery_order_ids);
+        keyQuery_order_ids = NULL;
+    }
+    if(valueQuery_order_ids){
+        free(valueQuery_order_ids);
+        valueQuery_order_ids = NULL;
+    }
+    if(keyPairQuery_order_ids){
+        keyValuePair_free(keyPairQuery_order_ids);
+        keyPairQuery_order_ids = NULL;
+    }
+    if(keyQuery_since_id){
+        free(keyQuery_since_id);
+        keyQuery_since_id = NULL;
+    }
+    if(valueQuery_since_id){
+        free(valueQuery_since_id);
+        valueQuery_since_id = NULL;
+    }
+    if(keyPairQuery_since_id){
+        keyValuePair_free(keyPairQuery_since_id);
+        keyPairQuery_since_id = NULL;
+    }
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
+    }
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
+    }
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
+    }
+    if(keyQuery_customer_id){
+        free(keyQuery_customer_id);
+        keyQuery_customer_id = NULL;
+    }
+    if(valueQuery_customer_id){
+        free(valueQuery_customer_id);
+        valueQuery_customer_id = NULL;
+    }
+    if(keyPairQuery_customer_id){
+        keyValuePair_free(keyPairQuery_customer_id);
+        keyPairQuery_customer_id = NULL;
+    }
+    if(keyQuery_customer_email){
+        free(keyQuery_customer_email);
+        keyQuery_customer_email = NULL;
+    }
+    if(valueQuery_customer_email){
+        free(valueQuery_customer_email);
+        valueQuery_customer_email = NULL;
+    }
+    if(keyPairQuery_customer_email){
+        keyValuePair_free(keyPairQuery_customer_email);
+        keyPairQuery_customer_email = NULL;
+    }
+    if(keyQuery_basket_id){
+        free(keyQuery_basket_id);
+        keyQuery_basket_id = NULL;
+    }
+    if(valueQuery_basket_id){
+        free(valueQuery_basket_id);
+        valueQuery_basket_id = NULL;
+    }
+    if(keyPairQuery_basket_id){
+        keyValuePair_free(keyPairQuery_basket_id);
+        keyPairQuery_basket_id = NULL;
+    }
+    if(keyQuery_currency_id){
+        free(keyQuery_currency_id);
+        keyQuery_currency_id = NULL;
+    }
+    if(valueQuery_currency_id){
+        free(valueQuery_currency_id);
+        valueQuery_currency_id = NULL;
+    }
+    if(keyPairQuery_currency_id){
+        keyValuePair_free(keyPairQuery_currency_id);
+        keyPairQuery_currency_id = NULL;
+    }
+    if(keyQuery_phone){
+        free(keyQuery_phone);
+        keyQuery_phone = NULL;
+    }
+    if(valueQuery_phone){
+        free(valueQuery_phone);
+        valueQuery_phone = NULL;
+    }
+    if(keyPairQuery_phone){
+        keyValuePair_free(keyPairQuery_phone);
+        keyPairQuery_phone = NULL;
+    }
+    if(keyQuery_order_status){
+        free(keyQuery_order_status);
+        keyQuery_order_status = NULL;
+    }
+    if(valueQuery_order_status){
+        free(valueQuery_order_status);
+        valueQuery_order_status = NULL;
+    }
+    if(keyPairQuery_order_status){
+        keyValuePair_free(keyPairQuery_order_status);
+        keyPairQuery_order_status = NULL;
+    }
+    if(keyQuery_ebay_order_status){
+        free(keyQuery_ebay_order_status);
+        keyQuery_ebay_order_status = NULL;
+    }
+    if(valueQuery_ebay_order_status){
+        free(valueQuery_ebay_order_status);
+        valueQuery_ebay_order_status = NULL;
+    }
+    if(keyPairQuery_ebay_order_status){
+        keyValuePair_free(keyPairQuery_ebay_order_status);
+        keyPairQuery_ebay_order_status = NULL;
+    }
+    if(keyQuery_financial_status){
+        free(keyQuery_financial_status);
+        keyQuery_financial_status = NULL;
+    }
+    if(valueQuery_financial_status){
+        free(valueQuery_financial_status);
+        valueQuery_financial_status = NULL;
+    }
+    if(keyPairQuery_financial_status){
+        keyValuePair_free(keyPairQuery_financial_status);
+        keyPairQuery_financial_status = NULL;
+    }
+    if(keyQuery_fulfillment_status){
+        free(keyQuery_fulfillment_status);
+        keyQuery_fulfillment_status = NULL;
+    }
+    if(valueQuery_fulfillment_status){
+        free(valueQuery_fulfillment_status);
+        valueQuery_fulfillment_status = NULL;
+    }
+    if(keyPairQuery_fulfillment_status){
+        keyValuePair_free(keyPairQuery_fulfillment_status);
+        keyPairQuery_fulfillment_status = NULL;
+    }
+    if(keyQuery_return_status){
+        free(keyQuery_return_status);
+        keyQuery_return_status = NULL;
+    }
+    if(valueQuery_return_status){
+        free(valueQuery_return_status);
+        valueQuery_return_status = NULL;
+    }
+    if(keyPairQuery_return_status){
+        keyValuePair_free(keyPairQuery_return_status);
+        keyPairQuery_return_status = NULL;
+    }
+    if(keyQuery_fulfillment_channel){
+        free(keyQuery_fulfillment_channel);
+        keyQuery_fulfillment_channel = NULL;
+    }
+    if(valueQuery_fulfillment_channel){
+        free(valueQuery_fulfillment_channel);
+        valueQuery_fulfillment_channel = NULL;
+    }
+    if(keyPairQuery_fulfillment_channel){
+        keyValuePair_free(keyPairQuery_fulfillment_channel);
+        keyPairQuery_fulfillment_channel = NULL;
+    }
+    if(keyQuery_shipping_method){
+        free(keyQuery_shipping_method);
+        keyQuery_shipping_method = NULL;
+    }
+    if(valueQuery_shipping_method){
+        free(valueQuery_shipping_method);
+        valueQuery_shipping_method = NULL;
+    }
+    if(keyPairQuery_shipping_method){
+        keyValuePair_free(keyPairQuery_shipping_method);
+        keyPairQuery_shipping_method = NULL;
+    }
+    if(keyQuery_skip_order_ids){
+        free(keyQuery_skip_order_ids);
+        keyQuery_skip_order_ids = NULL;
+    }
+    if(valueQuery_skip_order_ids){
+        free(valueQuery_skip_order_ids);
+        valueQuery_skip_order_ids = NULL;
+    }
+    if(keyPairQuery_skip_order_ids){
+        keyValuePair_free(keyPairQuery_skip_order_ids);
+        keyPairQuery_skip_order_ids = NULL;
+    }
+    if(keyQuery_is_deleted){
+        free(keyQuery_is_deleted);
+        keyQuery_is_deleted = NULL;
+    }
+    if(valueQuery_is_deleted){
+        free(valueQuery_is_deleted);
+        valueQuery_is_deleted = NULL;
+    }
+    if(keyPairQuery_is_deleted){
+        keyValuePair_free(keyPairQuery_is_deleted);
+        keyPairQuery_is_deleted = NULL;
+    }
+    if(keyQuery_shipping_country_iso3){
+        free(keyQuery_shipping_country_iso3);
+        keyQuery_shipping_country_iso3 = NULL;
+    }
+    if(valueQuery_shipping_country_iso3){
+        free(valueQuery_shipping_country_iso3);
+        valueQuery_shipping_country_iso3 = NULL;
+    }
+    if(keyPairQuery_shipping_country_iso3){
+        keyValuePair_free(keyPairQuery_shipping_country_iso3);
+        keyPairQuery_shipping_country_iso3 = NULL;
+    }
+    if(keyQuery_delivery_method){
+        free(keyQuery_delivery_method);
+        keyQuery_delivery_method = NULL;
+    }
+    if(valueQuery_delivery_method){
+        free(valueQuery_delivery_method);
+        valueQuery_delivery_method = NULL;
+    }
+    if(keyPairQuery_delivery_method){
+        keyValuePair_free(keyPairQuery_delivery_method);
+        keyPairQuery_delivery_method = NULL;
+    }
+    if(keyQuery_ship_node_type){
+        free(keyQuery_ship_node_type);
+        keyQuery_ship_node_type = NULL;
+    }
+    if(valueQuery_ship_node_type){
+        free(valueQuery_ship_node_type);
+        valueQuery_ship_node_type = NULL;
+    }
+    if(keyPairQuery_ship_node_type){
+        keyValuePair_free(keyPairQuery_ship_node_type);
+        keyPairQuery_ship_node_type = NULL;
+    }
+    if(keyQuery_created_to){
+        free(keyQuery_created_to);
+        keyQuery_created_to = NULL;
+    }
+    if(valueQuery_created_to){
+        free(valueQuery_created_to);
+        valueQuery_created_to = NULL;
+    }
+    if(keyPairQuery_created_to){
+        keyValuePair_free(keyPairQuery_created_to);
+        keyPairQuery_created_to = NULL;
+    }
+    if(keyQuery_created_from){
+        free(keyQuery_created_from);
+        keyQuery_created_from = NULL;
+    }
+    if(valueQuery_created_from){
+        free(valueQuery_created_from);
+        valueQuery_created_from = NULL;
+    }
+    if(keyPairQuery_created_from){
+        keyValuePair_free(keyPairQuery_created_from);
+        keyPairQuery_created_from = NULL;
+    }
+    if(keyQuery_modified_to){
+        free(keyQuery_modified_to);
+        keyQuery_modified_to = NULL;
+    }
+    if(valueQuery_modified_to){
+        free(valueQuery_modified_to);
+        valueQuery_modified_to = NULL;
+    }
+    if(keyPairQuery_modified_to){
+        keyValuePair_free(keyPairQuery_modified_to);
+        keyPairQuery_modified_to = NULL;
+    }
+    if(keyQuery_modified_from){
+        free(keyQuery_modified_from);
+        keyQuery_modified_from = NULL;
+    }
+    if(valueQuery_modified_from){
+        free(valueQuery_modified_from);
+        valueQuery_modified_from = NULL;
+    }
+    if(keyPairQuery_modified_from){
+        keyValuePair_free(keyPairQuery_modified_from);
+        keyPairQuery_modified_from = NULL;
+    }
+    if(keyQuery_tags){
+        free(keyQuery_tags);
+        keyQuery_tags = NULL;
+    }
+    if(valueQuery_tags){
+        free(valueQuery_tags);
+        valueQuery_tags = NULL;
+    }
+    if(keyPairQuery_tags){
+        keyValuePair_free(keyPairQuery_tags);
+        keyPairQuery_tags = NULL;
     }
     if(keyQuery_sort_by){
         free(keyQuery_sort_by);
@@ -2460,210 +2724,6 @@ OrderAPI_orderList(apiClient_t *apiClient, char *customer_id, char *customer_ema
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
     }
-    if(keyQuery_created_to){
-        free(keyQuery_created_to);
-        keyQuery_created_to = NULL;
-    }
-    if(valueQuery_created_to){
-        free(valueQuery_created_to);
-        valueQuery_created_to = NULL;
-    }
-    if(keyPairQuery_created_to){
-        keyValuePair_free(keyPairQuery_created_to);
-        keyPairQuery_created_to = NULL;
-    }
-    if(keyQuery_created_from){
-        free(keyQuery_created_from);
-        keyQuery_created_from = NULL;
-    }
-    if(valueQuery_created_from){
-        free(valueQuery_created_from);
-        valueQuery_created_from = NULL;
-    }
-    if(keyPairQuery_created_from){
-        keyValuePair_free(keyPairQuery_created_from);
-        keyPairQuery_created_from = NULL;
-    }
-    if(keyQuery_modified_to){
-        free(keyQuery_modified_to);
-        keyQuery_modified_to = NULL;
-    }
-    if(valueQuery_modified_to){
-        free(valueQuery_modified_to);
-        valueQuery_modified_to = NULL;
-    }
-    if(keyPairQuery_modified_to){
-        keyValuePair_free(keyPairQuery_modified_to);
-        keyPairQuery_modified_to = NULL;
-    }
-    if(keyQuery_modified_from){
-        free(keyQuery_modified_from);
-        keyQuery_modified_from = NULL;
-    }
-    if(valueQuery_modified_from){
-        free(valueQuery_modified_from);
-        valueQuery_modified_from = NULL;
-    }
-    if(keyPairQuery_modified_from){
-        keyValuePair_free(keyPairQuery_modified_from);
-        keyPairQuery_modified_from = NULL;
-    }
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
-    if(keyQuery_ids){
-        free(keyQuery_ids);
-        keyQuery_ids = NULL;
-    }
-    if(valueQuery_ids){
-        free(valueQuery_ids);
-        valueQuery_ids = NULL;
-    }
-    if(keyPairQuery_ids){
-        keyValuePair_free(keyPairQuery_ids);
-        keyPairQuery_ids = NULL;
-    }
-    if(keyQuery_order_ids){
-        free(keyQuery_order_ids);
-        keyQuery_order_ids = NULL;
-    }
-    if(valueQuery_order_ids){
-        free(valueQuery_order_ids);
-        valueQuery_order_ids = NULL;
-    }
-    if(keyPairQuery_order_ids){
-        keyValuePair_free(keyPairQuery_order_ids);
-        keyPairQuery_order_ids = NULL;
-    }
-    if(keyQuery_ebay_order_status){
-        free(keyQuery_ebay_order_status);
-        keyQuery_ebay_order_status = NULL;
-    }
-    if(valueQuery_ebay_order_status){
-        free(valueQuery_ebay_order_status);
-        valueQuery_ebay_order_status = NULL;
-    }
-    if(keyPairQuery_ebay_order_status){
-        keyValuePair_free(keyPairQuery_ebay_order_status);
-        keyPairQuery_ebay_order_status = NULL;
-    }
-    if(keyQuery_basket_id){
-        free(keyQuery_basket_id);
-        keyQuery_basket_id = NULL;
-    }
-    if(valueQuery_basket_id){
-        free(valueQuery_basket_id);
-        valueQuery_basket_id = NULL;
-    }
-    if(keyPairQuery_basket_id){
-        keyValuePair_free(keyPairQuery_basket_id);
-        keyPairQuery_basket_id = NULL;
-    }
-    if(keyQuery_financial_status){
-        free(keyQuery_financial_status);
-        keyQuery_financial_status = NULL;
-    }
-    if(valueQuery_financial_status){
-        free(valueQuery_financial_status);
-        valueQuery_financial_status = NULL;
-    }
-    if(keyPairQuery_financial_status){
-        keyValuePair_free(keyPairQuery_financial_status);
-        keyPairQuery_financial_status = NULL;
-    }
-    if(keyQuery_fulfillment_status){
-        free(keyQuery_fulfillment_status);
-        keyQuery_fulfillment_status = NULL;
-    }
-    if(valueQuery_fulfillment_status){
-        free(valueQuery_fulfillment_status);
-        valueQuery_fulfillment_status = NULL;
-    }
-    if(keyPairQuery_fulfillment_status){
-        keyValuePair_free(keyPairQuery_fulfillment_status);
-        keyPairQuery_fulfillment_status = NULL;
-    }
-    if(keyQuery_fulfillment_channel){
-        free(keyQuery_fulfillment_channel);
-        keyQuery_fulfillment_channel = NULL;
-    }
-    if(valueQuery_fulfillment_channel){
-        free(valueQuery_fulfillment_channel);
-        valueQuery_fulfillment_channel = NULL;
-    }
-    if(keyPairQuery_fulfillment_channel){
-        keyValuePair_free(keyPairQuery_fulfillment_channel);
-        keyPairQuery_fulfillment_channel = NULL;
-    }
-    if(keyQuery_shipping_method){
-        free(keyQuery_shipping_method);
-        keyQuery_shipping_method = NULL;
-    }
-    if(valueQuery_shipping_method){
-        free(valueQuery_shipping_method);
-        valueQuery_shipping_method = NULL;
-    }
-    if(keyPairQuery_shipping_method){
-        keyValuePair_free(keyPairQuery_shipping_method);
-        keyPairQuery_shipping_method = NULL;
-    }
-    if(keyQuery_skip_order_ids){
-        free(keyQuery_skip_order_ids);
-        keyQuery_skip_order_ids = NULL;
-    }
-    if(valueQuery_skip_order_ids){
-        free(valueQuery_skip_order_ids);
-        valueQuery_skip_order_ids = NULL;
-    }
-    if(keyPairQuery_skip_order_ids){
-        keyValuePair_free(keyPairQuery_skip_order_ids);
-        keyPairQuery_skip_order_ids = NULL;
-    }
-    if(keyQuery_since_id){
-        free(keyQuery_since_id);
-        keyQuery_since_id = NULL;
-    }
-    if(valueQuery_since_id){
-        free(valueQuery_since_id);
-        valueQuery_since_id = NULL;
-    }
-    if(keyPairQuery_since_id){
-        keyValuePair_free(keyPairQuery_since_id);
-        keyPairQuery_since_id = NULL;
-    }
-    if(keyQuery_is_deleted){
-        free(keyQuery_is_deleted);
-        keyQuery_is_deleted = NULL;
-    }
-    if(valueQuery_is_deleted){
-        free(valueQuery_is_deleted);
-        valueQuery_is_deleted = NULL;
-    }
-    if(keyPairQuery_is_deleted){
-        keyValuePair_free(keyPairQuery_is_deleted);
-        keyPairQuery_is_deleted = NULL;
-    }
-    if(keyQuery_shipping_country_iso3){
-        free(keyQuery_shipping_country_iso3);
-        keyQuery_shipping_country_iso3 = NULL;
-    }
-    if(valueQuery_shipping_country_iso3){
-        free(valueQuery_shipping_country_iso3);
-        valueQuery_shipping_country_iso3 = NULL;
-    }
-    if(keyPairQuery_shipping_country_iso3){
-        keyValuePair_free(keyPairQuery_shipping_country_iso3);
-        keyPairQuery_shipping_country_iso3 = NULL;
-    }
     if(keyQuery_enable_cache){
         free(keyQuery_enable_cache);
         keyQuery_enable_cache = NULL;
@@ -2675,66 +2735,6 @@ OrderAPI_orderList(apiClient_t *apiClient, char *customer_id, char *customer_ema
     if(keyPairQuery_enable_cache){
         keyValuePair_free(keyPairQuery_enable_cache);
         keyPairQuery_enable_cache = NULL;
-    }
-    if(keyQuery_delivery_method){
-        free(keyQuery_delivery_method);
-        keyQuery_delivery_method = NULL;
-    }
-    if(valueQuery_delivery_method){
-        free(valueQuery_delivery_method);
-        valueQuery_delivery_method = NULL;
-    }
-    if(keyPairQuery_delivery_method){
-        keyValuePair_free(keyPairQuery_delivery_method);
-        keyPairQuery_delivery_method = NULL;
-    }
-    if(keyQuery_tags){
-        free(keyQuery_tags);
-        keyQuery_tags = NULL;
-    }
-    if(valueQuery_tags){
-        free(valueQuery_tags);
-        valueQuery_tags = NULL;
-    }
-    if(keyPairQuery_tags){
-        keyValuePair_free(keyPairQuery_tags);
-        keyPairQuery_tags = NULL;
-    }
-    if(keyQuery_ship_node_type){
-        free(keyQuery_ship_node_type);
-        keyQuery_ship_node_type = NULL;
-    }
-    if(valueQuery_ship_node_type){
-        free(valueQuery_ship_node_type);
-        valueQuery_ship_node_type = NULL;
-    }
-    if(keyPairQuery_ship_node_type){
-        keyValuePair_free(keyPairQuery_ship_node_type);
-        keyPairQuery_ship_node_type = NULL;
-    }
-    if(keyQuery_currency_id){
-        free(keyQuery_currency_id);
-        keyQuery_currency_id = NULL;
-    }
-    if(valueQuery_currency_id){
-        free(valueQuery_currency_id);
-        valueQuery_currency_id = NULL;
-    }
-    if(keyPairQuery_currency_id){
-        keyValuePair_free(keyPairQuery_currency_id);
-        keyPairQuery_currency_id = NULL;
-    }
-    if(keyQuery_return_status){
-        free(keyQuery_return_status);
-        keyQuery_return_status = NULL;
-    }
-    if(valueQuery_return_status){
-        free(valueQuery_return_status);
-        valueQuery_return_status = NULL;
-    }
-    if(keyPairQuery_return_status){
-        keyValuePair_free(keyPairQuery_return_status);
-        keyPairQuery_return_status = NULL;
     }
     if(keyQuery_use_latest_api_version){
         free(keyQuery_use_latest_api_version);
@@ -3560,7 +3560,7 @@ end:
 // Get information of shipment.
 //
 order_shipment_info_200_response_t*
-OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int *start, char *params, char *response_fields, char *exclude, char *store_id)
+OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int *start, char *store_id, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -3579,6 +3579,19 @@ OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int
 
 
 
+
+    // query parameters
+    char *keyQuery_start = NULL;
+    char * valueQuery_start = NULL;
+    keyValuePair_t *keyPairQuery_start = 0;
+    if (start)
+    {
+        keyQuery_start = strdup("start");
+        valueQuery_start = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_start, MAX_NUMBER_LENGTH, "%d", *start);
+        keyPairQuery_start = keyValuePair_create(keyQuery_start, valueQuery_start);
+        list_addElement(localVarQueryParameters,keyPairQuery_start);
+    }
 
     // query parameters
     char *keyQuery_id = NULL;
@@ -3605,28 +3618,15 @@ OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int
     }
 
     // query parameters
-    char *keyQuery_start = NULL;
-    char * valueQuery_start = NULL;
-    keyValuePair_t *keyPairQuery_start = 0;
-    if (start)
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
     {
-        keyQuery_start = strdup("start");
-        valueQuery_start = calloc(1,MAX_NUMBER_LENGTH);
-        snprintf(valueQuery_start, MAX_NUMBER_LENGTH, "%d", *start);
-        keyPairQuery_start = keyValuePair_create(keyQuery_start, valueQuery_start);
-        list_addElement(localVarQueryParameters,keyPairQuery_start);
-    }
-
-    // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
-    {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
 
     // query parameters
@@ -3642,6 +3642,18 @@ OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int
     }
 
     // query parameters
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
+    {
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
+    }
+
+    // query parameters
     char *keyQuery_exclude = NULL;
     char * valueQuery_exclude = NULL;
     keyValuePair_t *keyPairQuery_exclude = 0;
@@ -3651,18 +3663,6 @@ OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int
         valueQuery_exclude = strdup((exclude));
         keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
         list_addElement(localVarQueryParameters,keyPairQuery_exclude);
-    }
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -3703,6 +3703,18 @@ OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
+    if(keyQuery_start){
+        free(keyQuery_start);
+        keyQuery_start = NULL;
+    }
+    if(valueQuery_start){
+        free(valueQuery_start);
+        valueQuery_start = NULL;
+    }
+    if(keyPairQuery_start){
+        keyValuePair_free(keyPairQuery_start);
+        keyPairQuery_start = NULL;
+    }
     if(keyQuery_id){
         free(keyQuery_id);
         keyQuery_id = NULL;
@@ -3727,29 +3739,17 @@ OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int
         keyValuePair_free(keyPairQuery_order_id);
         keyPairQuery_order_id = NULL;
     }
-    if(keyQuery_start){
-        free(keyQuery_start);
-        keyQuery_start = NULL;
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
     }
-    if(valueQuery_start){
-        free(valueQuery_start);
-        valueQuery_start = NULL;
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
     }
-    if(keyPairQuery_start){
-        keyValuePair_free(keyPairQuery_start);
-        keyPairQuery_start = NULL;
-    }
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
-    }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
-    }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     if(keyQuery_response_fields){
         free(keyQuery_response_fields);
@@ -3763,6 +3763,18 @@ OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int
         keyValuePair_free(keyPairQuery_response_fields);
         keyPairQuery_response_fields = NULL;
     }
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
+    }
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
+    }
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
+    }
     if(keyQuery_exclude){
         free(keyQuery_exclude);
         keyQuery_exclude = NULL;
@@ -3774,18 +3786,6 @@ OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int
     if(keyPairQuery_exclude){
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
-    }
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
     }
     return elementToReturn;
 end:
@@ -3799,7 +3799,7 @@ end:
 // Get list of shipments by orders.
 //
 model_response_order_shipment_list_t*
-OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, char *page_cursor, int *start, int *count, char *params, char *response_fields, char *exclude, char *created_from, char *created_to, char *modified_from, char *modified_to, char *store_id)
+OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, int *start, int *count, char *page_cursor, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -3818,30 +3818,6 @@ OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, char *page_cu
 
 
 
-
-    // query parameters
-    char *keyQuery_order_id = NULL;
-    char * valueQuery_order_id = NULL;
-    keyValuePair_t *keyPairQuery_order_id = 0;
-    if (order_id)
-    {
-        keyQuery_order_id = strdup("order_id");
-        valueQuery_order_id = strdup((order_id));
-        keyPairQuery_order_id = keyValuePair_create(keyQuery_order_id, valueQuery_order_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_order_id);
-    }
-
-    // query parameters
-    char *keyQuery_page_cursor = NULL;
-    char * valueQuery_page_cursor = NULL;
-    keyValuePair_t *keyPairQuery_page_cursor = 0;
-    if (page_cursor)
-    {
-        keyQuery_page_cursor = strdup("page_cursor");
-        valueQuery_page_cursor = strdup((page_cursor));
-        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
-        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
-    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -3870,39 +3846,39 @@ OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, char *page_cu
     }
 
     // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
+    char *keyQuery_page_cursor = NULL;
+    char * valueQuery_page_cursor = NULL;
+    keyValuePair_t *keyPairQuery_page_cursor = 0;
+    if (page_cursor)
     {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
+        keyQuery_page_cursor = strdup("page_cursor");
+        valueQuery_page_cursor = strdup((page_cursor));
+        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
+        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
     }
 
     // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
+    char *keyQuery_order_id = NULL;
+    char * valueQuery_order_id = NULL;
+    keyValuePair_t *keyPairQuery_order_id = 0;
+    if (order_id)
     {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+        keyQuery_order_id = strdup("order_id");
+        valueQuery_order_id = strdup((order_id));
+        keyPairQuery_order_id = keyValuePair_create(keyQuery_order_id, valueQuery_order_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_order_id);
     }
 
     // query parameters
-    char *keyQuery_exclude = NULL;
-    char * valueQuery_exclude = NULL;
-    keyValuePair_t *keyPairQuery_exclude = 0;
-    if (exclude)
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
     {
-        keyQuery_exclude = strdup("exclude");
-        valueQuery_exclude = strdup((exclude));
-        keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
-        list_addElement(localVarQueryParameters,keyPairQuery_exclude);
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
 
     // query parameters
@@ -3954,15 +3930,39 @@ OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, char *page_cu
     }
 
     // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
     {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+    }
+
+    // query parameters
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
+    {
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
+    }
+
+    // query parameters
+    char *keyQuery_exclude = NULL;
+    char * valueQuery_exclude = NULL;
+    keyValuePair_t *keyPairQuery_exclude = 0;
+    if (exclude)
+    {
+        keyQuery_exclude = strdup("exclude");
+        valueQuery_exclude = strdup((exclude));
+        keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
+        list_addElement(localVarQueryParameters,keyPairQuery_exclude);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -4003,30 +4003,6 @@ OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, char *page_cu
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_order_id){
-        free(keyQuery_order_id);
-        keyQuery_order_id = NULL;
-    }
-    if(valueQuery_order_id){
-        free(valueQuery_order_id);
-        valueQuery_order_id = NULL;
-    }
-    if(keyPairQuery_order_id){
-        keyValuePair_free(keyPairQuery_order_id);
-        keyPairQuery_order_id = NULL;
-    }
-    if(keyQuery_page_cursor){
-        free(keyQuery_page_cursor);
-        keyQuery_page_cursor = NULL;
-    }
-    if(valueQuery_page_cursor){
-        free(valueQuery_page_cursor);
-        valueQuery_page_cursor = NULL;
-    }
-    if(keyPairQuery_page_cursor){
-        keyValuePair_free(keyPairQuery_page_cursor);
-        keyPairQuery_page_cursor = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -4051,41 +4027,41 @@ OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, char *page_cu
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
     }
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
+    if(keyQuery_page_cursor){
+        free(keyQuery_page_cursor);
+        keyQuery_page_cursor = NULL;
     }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
+    if(valueQuery_page_cursor){
+        free(valueQuery_page_cursor);
+        valueQuery_page_cursor = NULL;
     }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
+    if(keyPairQuery_page_cursor){
+        keyValuePair_free(keyPairQuery_page_cursor);
+        keyPairQuery_page_cursor = NULL;
     }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
+    if(keyQuery_order_id){
+        free(keyQuery_order_id);
+        keyQuery_order_id = NULL;
     }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
+    if(valueQuery_order_id){
+        free(valueQuery_order_id);
+        valueQuery_order_id = NULL;
     }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
+    if(keyPairQuery_order_id){
+        keyValuePair_free(keyPairQuery_order_id);
+        keyPairQuery_order_id = NULL;
     }
-    if(keyQuery_exclude){
-        free(keyQuery_exclude);
-        keyQuery_exclude = NULL;
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
     }
-    if(valueQuery_exclude){
-        free(valueQuery_exclude);
-        valueQuery_exclude = NULL;
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
     }
-    if(keyPairQuery_exclude){
-        keyValuePair_free(keyPairQuery_exclude);
-        keyPairQuery_exclude = NULL;
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     if(keyQuery_created_from){
         free(keyQuery_created_from);
@@ -4135,17 +4111,41 @@ OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, char *page_cu
         keyValuePair_free(keyPairQuery_modified_to);
         keyPairQuery_modified_to = NULL;
     }
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
     }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
     }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
+    }
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
+    }
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
+    }
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
+    }
+    if(keyQuery_exclude){
+        free(keyQuery_exclude);
+        keyQuery_exclude = NULL;
+    }
+    if(valueQuery_exclude){
+        free(valueQuery_exclude);
+        valueQuery_exclude = NULL;
+    }
+    if(keyPairQuery_exclude){
+        keyValuePair_free(keyPairQuery_exclude);
+        keyPairQuery_exclude = NULL;
     }
     return elementToReturn;
 end:
@@ -4473,7 +4473,7 @@ end:
 // Retrieve list of order transaction
 //
 model_response_order_transaction_list_t*
-OrderAPI_orderTransactionList(apiClient_t *apiClient, char *order_ids, int *count, char *store_id, char *params, char *response_fields, char *exclude, char *page_cursor)
+OrderAPI_orderTransactionList(apiClient_t *apiClient, char *order_ids, int *count, char *page_cursor, char *store_id, char *params, char *response_fields, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -4504,6 +4504,18 @@ OrderAPI_orderTransactionList(apiClient_t *apiClient, char *order_ids, int *coun
         snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
         keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
         list_addElement(localVarQueryParameters,keyPairQuery_count);
+    }
+
+    // query parameters
+    char *keyQuery_page_cursor = NULL;
+    char * valueQuery_page_cursor = NULL;
+    keyValuePair_t *keyPairQuery_page_cursor = 0;
+    if (page_cursor)
+    {
+        keyQuery_page_cursor = strdup("page_cursor");
+        valueQuery_page_cursor = strdup((page_cursor));
+        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
+        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
     }
 
     // query parameters
@@ -4565,18 +4577,6 @@ OrderAPI_orderTransactionList(apiClient_t *apiClient, char *order_ids, int *coun
         keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
         list_addElement(localVarQueryParameters,keyPairQuery_exclude);
     }
-
-    // query parameters
-    char *keyQuery_page_cursor = NULL;
-    char * valueQuery_page_cursor = NULL;
-    keyValuePair_t *keyPairQuery_page_cursor = 0;
-    if (page_cursor)
-    {
-        keyQuery_page_cursor = strdup("page_cursor");
-        valueQuery_page_cursor = strdup((page_cursor));
-        keyPairQuery_page_cursor = keyValuePair_create(keyQuery_page_cursor, valueQuery_page_cursor);
-        list_addElement(localVarQueryParameters,keyPairQuery_page_cursor);
-    }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
                     localVarPath,
@@ -4627,6 +4627,18 @@ OrderAPI_orderTransactionList(apiClient_t *apiClient, char *order_ids, int *coun
     if(keyPairQuery_count){
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
+    }
+    if(keyQuery_page_cursor){
+        free(keyQuery_page_cursor);
+        keyQuery_page_cursor = NULL;
+    }
+    if(valueQuery_page_cursor){
+        free(valueQuery_page_cursor);
+        valueQuery_page_cursor = NULL;
+    }
+    if(keyPairQuery_page_cursor){
+        keyValuePair_free(keyPairQuery_page_cursor);
+        keyPairQuery_page_cursor = NULL;
     }
     if(keyQuery_order_ids){
         free(keyQuery_order_ids);
@@ -4688,18 +4700,6 @@ OrderAPI_orderTransactionList(apiClient_t *apiClient, char *order_ids, int *coun
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
     }
-    if(keyQuery_page_cursor){
-        free(keyQuery_page_cursor);
-        keyQuery_page_cursor = NULL;
-    }
-    if(valueQuery_page_cursor){
-        free(valueQuery_page_cursor);
-        valueQuery_page_cursor = NULL;
-    }
-    if(keyPairQuery_page_cursor){
-        keyValuePair_free(keyPairQuery_page_cursor);
-        keyPairQuery_page_cursor = NULL;
-    }
     return elementToReturn;
 end:
     free(localVarPath);
@@ -4712,7 +4712,7 @@ end:
 // Update existing order.
 //
 account_config_update_200_response_t*
-OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, char *order_status, char *cancellation_reason, char *comment, char *admin_comment, char *admin_private_comment, char *date_modified, char *date_finished, char *financial_status, char *fulfillment_status, char *order_payment_method, int *send_notifications, char *origin, int *create_invoice, char *invoice_admin_comment)
+OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, char *order_status, char *financial_status, char *fulfillment_status, char *cancellation_reason, char *order_payment_method, char *comment, char *admin_comment, char *admin_private_comment, char *invoice_admin_comment, char *date_modified, char *date_finished, int *send_notifications, int *create_invoice, char *origin)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -4769,6 +4769,30 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
     }
 
     // query parameters
+    char *keyQuery_financial_status = NULL;
+    char * valueQuery_financial_status = NULL;
+    keyValuePair_t *keyPairQuery_financial_status = 0;
+    if (financial_status)
+    {
+        keyQuery_financial_status = strdup("financial_status");
+        valueQuery_financial_status = strdup((financial_status));
+        keyPairQuery_financial_status = keyValuePair_create(keyQuery_financial_status, valueQuery_financial_status);
+        list_addElement(localVarQueryParameters,keyPairQuery_financial_status);
+    }
+
+    // query parameters
+    char *keyQuery_fulfillment_status = NULL;
+    char * valueQuery_fulfillment_status = NULL;
+    keyValuePair_t *keyPairQuery_fulfillment_status = 0;
+    if (fulfillment_status)
+    {
+        keyQuery_fulfillment_status = strdup("fulfillment_status");
+        valueQuery_fulfillment_status = strdup((fulfillment_status));
+        keyPairQuery_fulfillment_status = keyValuePair_create(keyQuery_fulfillment_status, valueQuery_fulfillment_status);
+        list_addElement(localVarQueryParameters,keyPairQuery_fulfillment_status);
+    }
+
+    // query parameters
     char *keyQuery_cancellation_reason = NULL;
     char * valueQuery_cancellation_reason = NULL;
     keyValuePair_t *keyPairQuery_cancellation_reason = 0;
@@ -4778,6 +4802,18 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
         valueQuery_cancellation_reason = strdup((cancellation_reason));
         keyPairQuery_cancellation_reason = keyValuePair_create(keyQuery_cancellation_reason, valueQuery_cancellation_reason);
         list_addElement(localVarQueryParameters,keyPairQuery_cancellation_reason);
+    }
+
+    // query parameters
+    char *keyQuery_order_payment_method = NULL;
+    char * valueQuery_order_payment_method = NULL;
+    keyValuePair_t *keyPairQuery_order_payment_method = 0;
+    if (order_payment_method)
+    {
+        keyQuery_order_payment_method = strdup("order_payment_method");
+        valueQuery_order_payment_method = strdup((order_payment_method));
+        keyPairQuery_order_payment_method = keyValuePair_create(keyQuery_order_payment_method, valueQuery_order_payment_method);
+        list_addElement(localVarQueryParameters,keyPairQuery_order_payment_method);
     }
 
     // query parameters
@@ -4817,6 +4853,18 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
     }
 
     // query parameters
+    char *keyQuery_invoice_admin_comment = NULL;
+    char * valueQuery_invoice_admin_comment = NULL;
+    keyValuePair_t *keyPairQuery_invoice_admin_comment = 0;
+    if (invoice_admin_comment)
+    {
+        keyQuery_invoice_admin_comment = strdup("invoice_admin_comment");
+        valueQuery_invoice_admin_comment = strdup((invoice_admin_comment));
+        keyPairQuery_invoice_admin_comment = keyValuePair_create(keyQuery_invoice_admin_comment, valueQuery_invoice_admin_comment);
+        list_addElement(localVarQueryParameters,keyPairQuery_invoice_admin_comment);
+    }
+
+    // query parameters
     char *keyQuery_date_modified = NULL;
     char * valueQuery_date_modified = NULL;
     keyValuePair_t *keyPairQuery_date_modified = 0;
@@ -4841,42 +4889,6 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
     }
 
     // query parameters
-    char *keyQuery_financial_status = NULL;
-    char * valueQuery_financial_status = NULL;
-    keyValuePair_t *keyPairQuery_financial_status = 0;
-    if (financial_status)
-    {
-        keyQuery_financial_status = strdup("financial_status");
-        valueQuery_financial_status = strdup((financial_status));
-        keyPairQuery_financial_status = keyValuePair_create(keyQuery_financial_status, valueQuery_financial_status);
-        list_addElement(localVarQueryParameters,keyPairQuery_financial_status);
-    }
-
-    // query parameters
-    char *keyQuery_fulfillment_status = NULL;
-    char * valueQuery_fulfillment_status = NULL;
-    keyValuePair_t *keyPairQuery_fulfillment_status = 0;
-    if (fulfillment_status)
-    {
-        keyQuery_fulfillment_status = strdup("fulfillment_status");
-        valueQuery_fulfillment_status = strdup((fulfillment_status));
-        keyPairQuery_fulfillment_status = keyValuePair_create(keyQuery_fulfillment_status, valueQuery_fulfillment_status);
-        list_addElement(localVarQueryParameters,keyPairQuery_fulfillment_status);
-    }
-
-    // query parameters
-    char *keyQuery_order_payment_method = NULL;
-    char * valueQuery_order_payment_method = NULL;
-    keyValuePair_t *keyPairQuery_order_payment_method = 0;
-    if (order_payment_method)
-    {
-        keyQuery_order_payment_method = strdup("order_payment_method");
-        valueQuery_order_payment_method = strdup((order_payment_method));
-        keyPairQuery_order_payment_method = keyValuePair_create(keyQuery_order_payment_method, valueQuery_order_payment_method);
-        list_addElement(localVarQueryParameters,keyPairQuery_order_payment_method);
-    }
-
-    // query parameters
     char *keyQuery_send_notifications = NULL;
     char * valueQuery_send_notifications = NULL;
     keyValuePair_t *keyPairQuery_send_notifications = 0;
@@ -4887,18 +4899,6 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
         snprintf(valueQuery_send_notifications, MAX_NUMBER_LENGTH, "%d", *send_notifications);
         keyPairQuery_send_notifications = keyValuePair_create(keyQuery_send_notifications, valueQuery_send_notifications);
         list_addElement(localVarQueryParameters,keyPairQuery_send_notifications);
-    }
-
-    // query parameters
-    char *keyQuery_origin = NULL;
-    char * valueQuery_origin = NULL;
-    keyValuePair_t *keyPairQuery_origin = 0;
-    if (origin)
-    {
-        keyQuery_origin = strdup("origin");
-        valueQuery_origin = strdup((origin));
-        keyPairQuery_origin = keyValuePair_create(keyQuery_origin, valueQuery_origin);
-        list_addElement(localVarQueryParameters,keyPairQuery_origin);
     }
 
     // query parameters
@@ -4915,15 +4915,15 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
     }
 
     // query parameters
-    char *keyQuery_invoice_admin_comment = NULL;
-    char * valueQuery_invoice_admin_comment = NULL;
-    keyValuePair_t *keyPairQuery_invoice_admin_comment = 0;
-    if (invoice_admin_comment)
+    char *keyQuery_origin = NULL;
+    char * valueQuery_origin = NULL;
+    keyValuePair_t *keyPairQuery_origin = 0;
+    if (origin)
     {
-        keyQuery_invoice_admin_comment = strdup("invoice_admin_comment");
-        valueQuery_invoice_admin_comment = strdup((invoice_admin_comment));
-        keyPairQuery_invoice_admin_comment = keyValuePair_create(keyQuery_invoice_admin_comment, valueQuery_invoice_admin_comment);
-        list_addElement(localVarQueryParameters,keyPairQuery_invoice_admin_comment);
+        keyQuery_origin = strdup("origin");
+        valueQuery_origin = strdup((origin));
+        keyPairQuery_origin = keyValuePair_create(keyQuery_origin, valueQuery_origin);
+        list_addElement(localVarQueryParameters,keyPairQuery_origin);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -5000,6 +5000,30 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
         keyValuePair_free(keyPairQuery_order_status);
         keyPairQuery_order_status = NULL;
     }
+    if(keyQuery_financial_status){
+        free(keyQuery_financial_status);
+        keyQuery_financial_status = NULL;
+    }
+    if(valueQuery_financial_status){
+        free(valueQuery_financial_status);
+        valueQuery_financial_status = NULL;
+    }
+    if(keyPairQuery_financial_status){
+        keyValuePair_free(keyPairQuery_financial_status);
+        keyPairQuery_financial_status = NULL;
+    }
+    if(keyQuery_fulfillment_status){
+        free(keyQuery_fulfillment_status);
+        keyQuery_fulfillment_status = NULL;
+    }
+    if(valueQuery_fulfillment_status){
+        free(valueQuery_fulfillment_status);
+        valueQuery_fulfillment_status = NULL;
+    }
+    if(keyPairQuery_fulfillment_status){
+        keyValuePair_free(keyPairQuery_fulfillment_status);
+        keyPairQuery_fulfillment_status = NULL;
+    }
     if(keyQuery_cancellation_reason){
         free(keyQuery_cancellation_reason);
         keyQuery_cancellation_reason = NULL;
@@ -5011,6 +5035,18 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
     if(keyPairQuery_cancellation_reason){
         keyValuePair_free(keyPairQuery_cancellation_reason);
         keyPairQuery_cancellation_reason = NULL;
+    }
+    if(keyQuery_order_payment_method){
+        free(keyQuery_order_payment_method);
+        keyQuery_order_payment_method = NULL;
+    }
+    if(valueQuery_order_payment_method){
+        free(valueQuery_order_payment_method);
+        valueQuery_order_payment_method = NULL;
+    }
+    if(keyPairQuery_order_payment_method){
+        keyValuePair_free(keyPairQuery_order_payment_method);
+        keyPairQuery_order_payment_method = NULL;
     }
     if(keyQuery_comment){
         free(keyQuery_comment);
@@ -5048,6 +5084,18 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
         keyValuePair_free(keyPairQuery_admin_private_comment);
         keyPairQuery_admin_private_comment = NULL;
     }
+    if(keyQuery_invoice_admin_comment){
+        free(keyQuery_invoice_admin_comment);
+        keyQuery_invoice_admin_comment = NULL;
+    }
+    if(valueQuery_invoice_admin_comment){
+        free(valueQuery_invoice_admin_comment);
+        valueQuery_invoice_admin_comment = NULL;
+    }
+    if(keyPairQuery_invoice_admin_comment){
+        keyValuePair_free(keyPairQuery_invoice_admin_comment);
+        keyPairQuery_invoice_admin_comment = NULL;
+    }
     if(keyQuery_date_modified){
         free(keyQuery_date_modified);
         keyQuery_date_modified = NULL;
@@ -5072,42 +5120,6 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
         keyValuePair_free(keyPairQuery_date_finished);
         keyPairQuery_date_finished = NULL;
     }
-    if(keyQuery_financial_status){
-        free(keyQuery_financial_status);
-        keyQuery_financial_status = NULL;
-    }
-    if(valueQuery_financial_status){
-        free(valueQuery_financial_status);
-        valueQuery_financial_status = NULL;
-    }
-    if(keyPairQuery_financial_status){
-        keyValuePair_free(keyPairQuery_financial_status);
-        keyPairQuery_financial_status = NULL;
-    }
-    if(keyQuery_fulfillment_status){
-        free(keyQuery_fulfillment_status);
-        keyQuery_fulfillment_status = NULL;
-    }
-    if(valueQuery_fulfillment_status){
-        free(valueQuery_fulfillment_status);
-        valueQuery_fulfillment_status = NULL;
-    }
-    if(keyPairQuery_fulfillment_status){
-        keyValuePair_free(keyPairQuery_fulfillment_status);
-        keyPairQuery_fulfillment_status = NULL;
-    }
-    if(keyQuery_order_payment_method){
-        free(keyQuery_order_payment_method);
-        keyQuery_order_payment_method = NULL;
-    }
-    if(valueQuery_order_payment_method){
-        free(valueQuery_order_payment_method);
-        valueQuery_order_payment_method = NULL;
-    }
-    if(keyPairQuery_order_payment_method){
-        keyValuePair_free(keyPairQuery_order_payment_method);
-        keyPairQuery_order_payment_method = NULL;
-    }
     if(keyQuery_send_notifications){
         free(keyQuery_send_notifications);
         keyQuery_send_notifications = NULL;
@@ -5119,18 +5131,6 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
     if(keyPairQuery_send_notifications){
         keyValuePair_free(keyPairQuery_send_notifications);
         keyPairQuery_send_notifications = NULL;
-    }
-    if(keyQuery_origin){
-        free(keyQuery_origin);
-        keyQuery_origin = NULL;
-    }
-    if(valueQuery_origin){
-        free(valueQuery_origin);
-        valueQuery_origin = NULL;
-    }
-    if(keyPairQuery_origin){
-        keyValuePair_free(keyPairQuery_origin);
-        keyPairQuery_origin = NULL;
     }
     if(keyQuery_create_invoice){
         free(keyQuery_create_invoice);
@@ -5144,17 +5144,17 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
         keyValuePair_free(keyPairQuery_create_invoice);
         keyPairQuery_create_invoice = NULL;
     }
-    if(keyQuery_invoice_admin_comment){
-        free(keyQuery_invoice_admin_comment);
-        keyQuery_invoice_admin_comment = NULL;
+    if(keyQuery_origin){
+        free(keyQuery_origin);
+        keyQuery_origin = NULL;
     }
-    if(valueQuery_invoice_admin_comment){
-        free(valueQuery_invoice_admin_comment);
-        valueQuery_invoice_admin_comment = NULL;
+    if(valueQuery_origin){
+        free(valueQuery_origin);
+        valueQuery_origin = NULL;
     }
-    if(keyPairQuery_invoice_admin_comment){
-        keyValuePair_free(keyPairQuery_invoice_admin_comment);
-        keyPairQuery_invoice_admin_comment = NULL;
+    if(keyPairQuery_origin){
+        keyValuePair_free(keyPairQuery_origin);
+        keyPairQuery_origin = NULL;
     }
     return elementToReturn;
 end:

@@ -27,7 +27,7 @@ typedef enum  { api2cart_openapi_categoryImageAdd_TYPE_NULL = 0, api2cart_openap
 // Add new category in store
 //
 category_add_200_response_t*
-CategoryAPI_categoryAdd(apiClient_t *apiClient, char *name, char *parent_id, char *stores_ids, char *store_id, char *lang_id, int *avail, int *sort_order, char *created_time, char *modified_time, char *description, char *short_description, char *meta_title, char *meta_description, char *meta_keywords, char *seo_url);
+CategoryAPI_categoryAdd(apiClient_t *apiClient, char *name, char *description, char *short_description, char *parent_id, int *avail, char *created_time, char *modified_time, int *sort_order, char *meta_title, char *meta_description, char *meta_keywords, char *seo_url, char *store_id, char *stores_ids, char *lang_id);
 
 
 // category.add.batch
@@ -43,7 +43,7 @@ CategoryAPI_categoryAddBatch(apiClient_t *apiClient, category_add_batch_t *categ
 // Assign category to product
 //
 cart_config_update_200_response_t*
-CategoryAPI_categoryAssign(apiClient_t *apiClient, char *product_id, char *category_id, char *store_id);
+CategoryAPI_categoryAssign(apiClient_t *apiClient, char *category_id, char *product_id, char *store_id);
 
 
 // category.count
@@ -51,7 +51,7 @@ CategoryAPI_categoryAssign(apiClient_t *apiClient, char *product_id, char *categ
 // Count categories in store.
 //
 category_count_200_response_t*
-CategoryAPI_categoryCount(apiClient_t *apiClient, char *parent_id, char *store_id, char *lang_id, char *created_from, char *created_to, char *modified_from, char *modified_to, int *avail, char *product_type, char *find_value, char *find_where, char *report_request_id, int *disable_report_cache);
+CategoryAPI_categoryCount(apiClient_t *apiClient, char *parent_id, char *store_id, char *lang_id, int *avail, char *created_from, char *created_to, char *modified_from, char *modified_to, char *product_type, char *find_value, char *find_where, char *report_request_id, int *disable_report_cache);
 
 
 // category.delete
@@ -75,7 +75,7 @@ CategoryAPI_categoryFind(apiClient_t *apiClient, char *find_value, char *find_wh
 // Add image to category
 //
 category_image_add_200_response_t*
-CategoryAPI_categoryImageAdd(apiClient_t *apiClient, char *category_id, char *image_name, char *url, api2cart_openapi_categoryImageAdd_type_e type, char *label, char *mime, int *position, char *store_id);
+CategoryAPI_categoryImageAdd(apiClient_t *apiClient, char *category_id, char *image_name, char *url, api2cart_openapi_categoryImageAdd_type_e type, char *store_id, char *label, char *mime, int *position);
 
 
 // category.image.delete
@@ -91,7 +91,7 @@ CategoryAPI_categoryImageDelete(apiClient_t *apiClient, char *category_id, char 
 // Get category info about category ID*** or specify other category ID.
 //
 category_info_200_response_t*
-CategoryAPI_categoryInfo(apiClient_t *apiClient, char *id, char *params, char *response_fields, char *exclude, char *store_id, char *lang_id, char *schema_type, char *report_request_id, int *disable_report_cache);
+CategoryAPI_categoryInfo(apiClient_t *apiClient, char *id, char *store_id, char *lang_id, char *schema_type, char *response_fields, char *params, char *exclude, char *report_request_id, int *disable_report_cache);
 
 
 // category.list
@@ -99,7 +99,7 @@ CategoryAPI_categoryInfo(apiClient_t *apiClient, char *id, char *params, char *r
 // Get list of categories from store.
 //
 model_response_category_list_t*
-CategoryAPI_categoryList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *parent_id, char *params, char *response_fields, char *exclude, char *store_id, char *lang_id, char *created_from, char *created_to, char *modified_from, char *modified_to, int *avail, char *product_type, char *find_value, char *find_where, char *report_request_id, int *disable_report_cache, int *disable_cache);
+CategoryAPI_categoryList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *store_id, char *lang_id, char *parent_id, int *avail, char *product_type, char *created_from, char *created_to, char *modified_from, char *modified_to, char *find_value, char *find_where, char *response_fields, char *params, char *exclude, char *report_request_id, int *disable_report_cache, int *disable_cache);
 
 
 // category.unassign
@@ -115,6 +115,6 @@ CategoryAPI_categoryUnassign(apiClient_t *apiClient, char *category_id, char *pr
 // Update category in store
 //
 account_config_update_200_response_t*
-CategoryAPI_categoryUpdate(apiClient_t *apiClient, char *id, char *name, char *parent_id, char *stores_ids, int *avail, int *sort_order, char *modified_time, char *description, char *short_description, char *meta_title, char *meta_description, char *meta_keywords, char *seo_url, char *lang_id, char *store_id);
+CategoryAPI_categoryUpdate(apiClient_t *apiClient, char *id, char *name, char *description, char *short_description, char *parent_id, int *avail, int *sort_order, char *modified_time, char *meta_title, char *meta_description, char *meta_keywords, char *seo_url, char *store_id, char *stores_ids, char *lang_id);
 
 

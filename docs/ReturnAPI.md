@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 //
 // Retrieve return information.
 //
-return_info_200_response_t* ReturnAPI_returnInfo(apiClient_t *apiClient, char *id, char *order_id, char *store_id, char *params, char *exclude, char *response_fields);
+return_info_200_response_t* ReturnAPI_returnInfo(apiClient_t *apiClient, char *id, char *order_id, char *store_id, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -99,9 +99,9 @@ Name | Type | Description  | Notes
 **id** | **char \*** | Entity id | 
 **order_id** | **char \*** | Defines the order id | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,order_products&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 //
 // Get list of return requests from store.
 //
-model_response_return_list_t* ReturnAPI_returnList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *params, char *exclude, char *response_fields, char *order_id, char *order_ids, char *customer_id, char *store_id, char *status, char *return_type, char *created_from, char *created_to, char *modified_from, char *modified_to, char *report_request_id, int *disable_report_cache);
+model_response_return_list_t* ReturnAPI_returnList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *order_id, char *order_ids, char *customer_id, char *store_id, char *status, char *return_type, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude, char *report_request_id, int *disable_report_cache);
 ```
 
 ### Parameters
@@ -135,9 +135,6 @@ Name | Type | Description  | Notes
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
 **page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,order_products&#39;]
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **order_id** | **char \*** | Defines the order id | [optional] 
 **order_ids** | **char \*** | Retrieves return requests specified by order ids | [optional] 
 **customer_id** | **char \*** | Retrieves return requests specified by customer id | [optional] 
@@ -148,6 +145,9 @@ Name | Type | Description  | Notes
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,order_products&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **report_request_id** | **char \*** | Report request id | [optional] 
 **disable_report_cache** | **int \*** | Disable report cache for current request | [optional] [default to false]
 

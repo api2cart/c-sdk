@@ -43,14 +43,13 @@ api2cart_openapi_cart_coupon_add_ACTIONSCOPE_e cart_coupon_add_action_scope_From
 
 
 typedef struct cart_coupon_add_t {
-    char *store_id; // string
     char *code; // string
-    char *name; // string
-    list_t *codes; //primitive container
     api2cart_openapi_cart_coupon_add_ACTIONTYPE_e action_type; //enum
     api2cart_openapi_cart_coupon_add_ACTIONAPPLYTO_e action_apply_to; //enum
     api2cart_openapi_cart_coupon_add_ACTIONSCOPE_e action_scope; //enum
     double action_amount; //numeric
+    list_t *codes; //primitive container
+    char *name; // string
     char *date_start; // string
     char *date_end; // string
     int usage_limit; //numeric
@@ -60,19 +59,19 @@ typedef struct cart_coupon_add_t {
     char *action_condition_operator; // string
     char *action_condition_value; // string
     int include_tax; //boolean
+    char *store_id; // string
 
     int _library_owned; // Is the library responsible for freeing this object?
 } cart_coupon_add_t;
 
 __attribute__((deprecated)) cart_coupon_add_t *cart_coupon_add_create(
-    char *store_id,
     char *code,
-    char *name,
-    list_t *codes,
     api2cart_openapi_cart_coupon_add_ACTIONTYPE_e action_type,
     api2cart_openapi_cart_coupon_add_ACTIONAPPLYTO_e action_apply_to,
     api2cart_openapi_cart_coupon_add_ACTIONSCOPE_e action_scope,
     double action_amount,
+    list_t *codes,
+    char *name,
     char *date_start,
     char *date_end,
     int usage_limit,
@@ -81,7 +80,8 @@ __attribute__((deprecated)) cart_coupon_add_t *cart_coupon_add_create(
     char *action_condition_key,
     char *action_condition_operator,
     char *action_condition_value,
-    int include_tax
+    int include_tax,
+    char *store_id
 );
 
 void cart_coupon_add_free(cart_coupon_add_t *cart_coupon_add);

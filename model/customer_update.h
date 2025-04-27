@@ -34,9 +34,9 @@ typedef struct customer_update_t {
     list_t *consents; //nonprimitive container
     char *tags; // string
     char *gender; // string
-    char *store_id; // string
     char *note; // string
     char *status; // string
+    char *store_id; // string
     list_t *address; //nonprimitive container
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -56,9 +56,9 @@ __attribute__((deprecated)) customer_update_t *customer_update_create(
     list_t *consents,
     char *tags,
     char *gender,
-    char *store_id,
     char *note,
     char *status,
+    char *store_id,
     list_t *address
 );
 

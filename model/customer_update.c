@@ -19,9 +19,9 @@ static customer_update_t *customer_update_create_internal(
     list_t *consents,
     char *tags,
     char *gender,
-    char *store_id,
     char *note,
     char *status,
+    char *store_id,
     list_t *address
     ) {
     customer_update_t *customer_update_local_var = malloc(sizeof(customer_update_t));
@@ -41,9 +41,9 @@ static customer_update_t *customer_update_create_internal(
     customer_update_local_var->consents = consents;
     customer_update_local_var->tags = tags;
     customer_update_local_var->gender = gender;
-    customer_update_local_var->store_id = store_id;
     customer_update_local_var->note = note;
     customer_update_local_var->status = status;
+    customer_update_local_var->store_id = store_id;
     customer_update_local_var->address = address;
 
     customer_update_local_var->_library_owned = 1;
@@ -64,9 +64,9 @@ __attribute__((deprecated)) customer_update_t *customer_update_create(
     list_t *consents,
     char *tags,
     char *gender,
-    char *store_id,
     char *note,
     char *status,
+    char *store_id,
     list_t *address
     ) {
     return customer_update_create_internal (
@@ -83,9 +83,9 @@ __attribute__((deprecated)) customer_update_t *customer_update_create(
         consents,
         tags,
         gender,
-        store_id,
         note,
         status,
+        store_id,
         address
         );
 }
@@ -150,10 +150,6 @@ void customer_update_free(customer_update_t *customer_update) {
         free(customer_update->gender);
         customer_update->gender = NULL;
     }
-    if (customer_update->store_id) {
-        free(customer_update->store_id);
-        customer_update->store_id = NULL;
-    }
     if (customer_update->note) {
         free(customer_update->note);
         customer_update->note = NULL;
@@ -161,6 +157,10 @@ void customer_update_free(customer_update_t *customer_update) {
     if (customer_update->status) {
         free(customer_update->status);
         customer_update->status = NULL;
+    }
+    if (customer_update->store_id) {
+        free(customer_update->store_id);
+        customer_update->store_id = NULL;
     }
     if (customer_update->address) {
         list_ForEach(listEntry, customer_update->address) {
@@ -291,14 +291,6 @@ cJSON *customer_update_convertToJSON(customer_update_t *customer_update) {
     }
 
 
-    // customer_update->store_id
-    if(customer_update->store_id) {
-    if(cJSON_AddStringToObject(item, "store_id", customer_update->store_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
     // customer_update->note
     if(customer_update->note) {
     if(cJSON_AddStringToObject(item, "note", customer_update->note) == NULL) {
@@ -310,6 +302,14 @@ cJSON *customer_update_convertToJSON(customer_update_t *customer_update) {
     // customer_update->status
     if(customer_update->status) {
     if(cJSON_AddStringToObject(item, "status", customer_update->status) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // customer_update->store_id
+    if(customer_update->store_id) {
+    if(cJSON_AddStringToObject(item, "store_id", customer_update->store_id) == NULL) {
     goto fail; //String
     }
     }
@@ -520,18 +520,6 @@ customer_update_t *customer_update_parseFromJSON(cJSON *customer_updateJSON){
     }
     }
 
-    // customer_update->store_id
-    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(customer_updateJSON, "store_id");
-    if (cJSON_IsNull(store_id)) {
-        store_id = NULL;
-    }
-    if (store_id) { 
-    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
-    {
-    goto end; //String
-    }
-    }
-
     // customer_update->note
     cJSON *note = cJSON_GetObjectItemCaseSensitive(customer_updateJSON, "note");
     if (cJSON_IsNull(note)) {
@@ -551,6 +539,18 @@ customer_update_t *customer_update_parseFromJSON(cJSON *customer_updateJSON){
     }
     if (status) { 
     if(!cJSON_IsString(status) && !cJSON_IsNull(status))
+    {
+    goto end; //String
+    }
+    }
+
+    // customer_update->store_id
+    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(customer_updateJSON, "store_id");
+    if (cJSON_IsNull(store_id)) {
+        store_id = NULL;
+    }
+    if (store_id) { 
+    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
     {
     goto end; //String
     }
@@ -595,9 +595,9 @@ customer_update_t *customer_update_parseFromJSON(cJSON *customer_updateJSON){
         consents ? consentsList : NULL,
         tags && !cJSON_IsNull(tags) ? strdup(tags->valuestring) : NULL,
         gender && !cJSON_IsNull(gender) ? strdup(gender->valuestring) : NULL,
-        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         note && !cJSON_IsNull(note) ? strdup(note->valuestring) : NULL,
         status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
+        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         address ? addressList : NULL
         );
 

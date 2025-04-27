@@ -81,7 +81,7 @@ ProductAPI_productAddBatch(apiClient_t *apiClient, product_add_batch_t *product_
 // Get list of attributes and values.
 //
 model_response_product_attribute_list_t*
-ProductAPI_productAttributeList(apiClient_t *apiClient, char *product_id, char *attribute_id, char *variant_id, char *page_cursor, int *start, int *count, char *attribute_group_id, char *set_name, char *lang_id, char *store_id, char *sort_by, char *sort_direction, char *params, char *response_fields, char *exclude);
+ProductAPI_productAttributeList(apiClient_t *apiClient, char *product_id, int *start, int *count, char *page_cursor, char *attribute_id, char *variant_id, char *attribute_group_id, char *lang_id, char *store_id, char *set_name, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude);
 
 
 // product.attribute.value.set
@@ -105,7 +105,7 @@ ProductAPI_productAttributeValueUnset(apiClient_t *apiClient, char *product_id, 
 // Get list of brands from your store.
 //
 model_response_product_brand_list_t*
-ProductAPI_productBrandList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *params, char *brand_ids, char *exclude, char *category_id, char *store_id, char *lang_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *parent_id, char *response_fields, char *find_where, char *find_value);
+ProductAPI_productBrandList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *brand_ids, char *category_id, char *parent_id, char *store_id, char *lang_id, char *find_where, char *find_value, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude);
 
 
 // product.child_item.find
@@ -121,7 +121,7 @@ ProductAPI_productChildItemFind(apiClient_t *apiClient, char *find_value, char *
 // Get child for specific product.
 //
 product_child_item_info_200_response_t*
-ProductAPI_productChildItemInfo(apiClient_t *apiClient, char *product_id, char *id, char *params, char *response_fields, char *exclude, char *store_id, char *lang_id, char *currency_id, int *use_latest_api_version);
+ProductAPI_productChildItemInfo(apiClient_t *apiClient, char *product_id, char *id, char *store_id, char *lang_id, char *currency_id, char *response_fields, char *params, char *exclude, int *use_latest_api_version);
 
 
 // product.child_item.list
@@ -129,7 +129,7 @@ ProductAPI_productChildItemInfo(apiClient_t *apiClient, char *product_id, char *
 // Get a list of a product's child items, such as variants or bundle components. The total_count field in the response indicates the total number of items in the context of the current filter.
 //
 model_response_product_child_item_list_t*
-ProductAPI_productChildItemList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *params, char *response_fields, char *exclude, char *created_from, char *created_to, char *modified_from, char *modified_to, char *product_id, char *product_ids, char *sku, char *store_id, char *lang_id, char *currency_id, int *avail_sale, char *find_value, char *find_where, char *report_request_id, int *disable_report_cache, int *use_latest_api_version, int *return_global);
+ProductAPI_productChildItemList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_id, char *product_ids, char *sku, char *store_id, char *lang_id, char *currency_id, int *avail_sale, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to, int *return_global, char *response_fields, char *params, char *exclude, char *report_request_id, int *disable_report_cache, int *use_latest_api_version);
 
 
 // product.count
@@ -137,7 +137,7 @@ ProductAPI_productChildItemList(apiClient_t *apiClient, char *page_cursor, int *
 // Count products in store.
 //
 product_count_200_response_t*
-ProductAPI_productCount(apiClient_t *apiClient, char *category_id, char *created_from, char *created_to, char *modified_from, char *modified_to, int *avail_view, int *avail_sale, char *store_id, char *lang_id, char *product_ids, char *since_id, char *report_request_id, int *disable_report_cache, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, int *use_latest_api_version, int *return_global, char *categories_ids);
+ProductAPI_productCount(apiClient_t *apiClient, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, char *report_request_id, int *return_global, int *disable_report_cache, int *use_latest_api_version);
 
 
 // product.currency.add
@@ -153,7 +153,7 @@ ProductAPI_productCurrencyAdd(apiClient_t *apiClient, char *iso3, double rate, c
 // Get list of currencies
 //
 model_response_product_currency_list_t*
-ProductAPI_productCurrencyList(apiClient_t *apiClient, int *start, int *count, char *params, char *page_cursor, char *exclude, char *response_fields, int *_default, int *avail);
+ProductAPI_productCurrencyList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, int *_default, int *avail, char *response_fields, char *params, char *exclude);
 
 
 // product.delete
@@ -209,7 +209,7 @@ ProductAPI_productImageDelete(apiClient_t *apiClient, char *product_id, char *id
 // Update details of image
 //
 product_image_update_200_response_t*
-ProductAPI_productImageUpdate(apiClient_t *apiClient, char *product_id, char *id, char *variant_ids, char *image_name, char *type, char *label, int *position, char *store_id, char *lang_id, int *hidden);
+ProductAPI_productImageUpdate(apiClient_t *apiClient, char *product_id, char *id, char *variant_ids, char *store_id, char *lang_id, char *image_name, char *type, char *label, int *position, int *hidden);
 
 
 // product.info
@@ -217,7 +217,7 @@ ProductAPI_productImageUpdate(apiClient_t *apiClient, char *product_id, char *id
 // Get information about a specific product by its ID. In the case of a multistore configuration, use the store_id filter to get a response in the context of a specific store.
 //
 product_info_200_response_t*
-ProductAPI_productInfo(apiClient_t *apiClient, char *id, char *params, char *response_fields, char *exclude, char *store_id, char *lang_id, char *currency_id, char *report_request_id, int *disable_report_cache, int *use_latest_api_version);
+ProductAPI_productInfo(apiClient_t *apiClient, char *id, char *store_id, char *lang_id, char *currency_id, char *response_fields, char *params, char *exclude, char *report_request_id, int *disable_report_cache, int *use_latest_api_version);
 
 
 // product.list
@@ -225,7 +225,7 @@ ProductAPI_productInfo(apiClient_t *apiClient, char *id, char *params, char *res
 // Get list of products from your store. Returns 10 products by default.
 //
 model_response_product_list_t*
-ProductAPI_productList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *params, char *response_fields, char *exclude, char *category_id, char *created_from, char *created_to, char *modified_from, char *modified_to, int *avail_view, int *avail_sale, char *store_id, char *lang_id, char *currency_id, char *product_ids, char *since_id, char *report_request_id, int *disable_report_cache, char *sort_by, char *sort_direction, char *sku, int *disable_cache, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, int *use_latest_api_version, int *return_global, char *categories_ids);
+ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, char *currency_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sku, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, int *return_global, char *params, char *response_fields, char *exclude, char *sort_by, char *sort_direction, char *report_request_id, int *disable_cache, int *disable_report_cache, int *use_latest_api_version);
 
 
 // product.manufacturer.add
@@ -265,7 +265,7 @@ ProductAPI_productOptionDelete(apiClient_t *apiClient, char *option_id, char *pr
 // Get list of options.
 //
 model_response_product_option_list_t*
-ProductAPI_productOptionList(apiClient_t *apiClient, int *start, int *count, char *params, char *exclude, char *response_fields, char *product_id, char *lang_id, char *store_id);
+ProductAPI_productOptionList(apiClient_t *apiClient, int *start, int *count, char *product_id, char *lang_id, char *store_id, char *response_fields, char *params, char *exclude);
 
 
 // product.option.value.add
@@ -329,7 +329,7 @@ ProductAPI_productPriceUpdate(apiClient_t *apiClient, product_price_update_t *pr
 // Get reviews of a specific product.
 //
 model_response_product_review_list_t*
-ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *start, char *page_cursor, int *count, char *ids, char *store_id, char *status, char *params, char *exclude, char *response_fields);
+ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *start, int *count, char *page_cursor, char *ids, char *store_id, char *status, char *response_fields, char *params, char *exclude);
 
 
 // product.store.assign
@@ -385,7 +385,7 @@ ProductAPI_productVariantAddBatch(apiClient_t *apiClient, product_variant_add_ba
 // Get count variants.
 //
 product_variant_count_200_response_t*
-ProductAPI_productVariantCount(apiClient_t *apiClient, char *product_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *category_id, char *store_id);
+ProductAPI_productVariantCount(apiClient_t *apiClient, char *product_id, char *category_id, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to);
 
 
 // product.variant.delete
@@ -425,7 +425,7 @@ ProductAPI_productVariantImageDelete(apiClient_t *apiClient, char *product_id, c
 // Get variant info. This method is deprecated, and its development is stopped. Please use \"product.child_item.info\" instead.
 //
 product_info_200_response_t*
-ProductAPI_productVariantInfo(apiClient_t *apiClient, char *id, char *params, char *exclude, char *store_id);
+ProductAPI_productVariantInfo(apiClient_t *apiClient, char *id, char *store_id, char *params, char *exclude);
 
 
 // product.variant.list
@@ -433,7 +433,7 @@ ProductAPI_productVariantInfo(apiClient_t *apiClient, char *id, char *params, ch
 // Get a list of variants. This method is deprecated, and its development is stopped. Please use \"product.child_item.list\" instead.
 //
 product_variant_list_200_response_t*
-ProductAPI_productVariantList(apiClient_t *apiClient, int *start, int *count, char *params, char *exclude, char *created_from, char *created_to, char *modified_from, char *modified_to, char *category_id, char *product_id, char *store_id);
+ProductAPI_productVariantList(apiClient_t *apiClient, int *start, int *count, char *product_id, char *category_id, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *params, char *exclude);
 
 
 // product.variant.price.add

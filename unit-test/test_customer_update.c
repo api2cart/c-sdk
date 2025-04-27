@@ -35,9 +35,9 @@ customer_update_t* instantiate_customer_update(int include_optional) {
       list_createList(),
       "tag1,tag2",
       "male",
-      "1",
       "Customer note",
       "disabled",
+      "1",
       list_createList()
     );
   } else {
@@ -55,9 +55,9 @@ customer_update_t* instantiate_customer_update(int include_optional) {
       list_createList(),
       "tag1,tag2",
       "male",
-      "1",
       "Customer note",
       "disabled",
+      "1",
       list_createList()
     );
   }

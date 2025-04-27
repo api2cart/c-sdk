@@ -14,11 +14,11 @@ static order_add_order_item_inner_t *order_add_order_item_inner_create_internal(
     double order_item_weight,
     char *order_item_variant_id,
     double order_item_tax,
+    int order_item_price_includes_tax,
     int order_item_parent,
     char *order_item_parent_option_name,
     int order_item_allow_refund_items_separately,
     int order_item_allow_ship_items_separately,
-    int order_item_price_includes_tax,
     list_t *order_item_option,
     list_t *order_item_property
     ) {
@@ -34,11 +34,11 @@ static order_add_order_item_inner_t *order_add_order_item_inner_create_internal(
     order_add_order_item_inner_local_var->order_item_weight = order_item_weight;
     order_add_order_item_inner_local_var->order_item_variant_id = order_item_variant_id;
     order_add_order_item_inner_local_var->order_item_tax = order_item_tax;
+    order_add_order_item_inner_local_var->order_item_price_includes_tax = order_item_price_includes_tax;
     order_add_order_item_inner_local_var->order_item_parent = order_item_parent;
     order_add_order_item_inner_local_var->order_item_parent_option_name = order_item_parent_option_name;
     order_add_order_item_inner_local_var->order_item_allow_refund_items_separately = order_item_allow_refund_items_separately;
     order_add_order_item_inner_local_var->order_item_allow_ship_items_separately = order_item_allow_ship_items_separately;
-    order_add_order_item_inner_local_var->order_item_price_includes_tax = order_item_price_includes_tax;
     order_add_order_item_inner_local_var->order_item_option = order_item_option;
     order_add_order_item_inner_local_var->order_item_property = order_item_property;
 
@@ -55,11 +55,11 @@ __attribute__((deprecated)) order_add_order_item_inner_t *order_add_order_item_i
     double order_item_weight,
     char *order_item_variant_id,
     double order_item_tax,
+    int order_item_price_includes_tax,
     int order_item_parent,
     char *order_item_parent_option_name,
     int order_item_allow_refund_items_separately,
     int order_item_allow_ship_items_separately,
-    int order_item_price_includes_tax,
     list_t *order_item_option,
     list_t *order_item_property
     ) {
@@ -72,11 +72,11 @@ __attribute__((deprecated)) order_add_order_item_inner_t *order_add_order_item_i
         order_item_weight,
         order_item_variant_id,
         order_item_tax,
+        order_item_price_includes_tax,
         order_item_parent,
         order_item_parent_option_name,
         order_item_allow_refund_items_separately,
         order_item_allow_ship_items_separately,
-        order_item_price_includes_tax,
         order_item_option,
         order_item_property
         );
@@ -199,6 +199,14 @@ cJSON *order_add_order_item_inner_convertToJSON(order_add_order_item_inner_t *or
     }
 
 
+    // order_add_order_item_inner->order_item_price_includes_tax
+    if(order_add_order_item_inner->order_item_price_includes_tax) {
+    if(cJSON_AddBoolToObject(item, "order_item_price_includes_tax", order_add_order_item_inner->order_item_price_includes_tax) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
     // order_add_order_item_inner->order_item_parent
     if(order_add_order_item_inner->order_item_parent) {
     if(cJSON_AddNumberToObject(item, "order_item_parent", order_add_order_item_inner->order_item_parent) == NULL) {
@@ -226,14 +234,6 @@ cJSON *order_add_order_item_inner_convertToJSON(order_add_order_item_inner_t *or
     // order_add_order_item_inner->order_item_allow_ship_items_separately
     if(order_add_order_item_inner->order_item_allow_ship_items_separately) {
     if(cJSON_AddBoolToObject(item, "order_item_allow_ship_items_separately", order_add_order_item_inner->order_item_allow_ship_items_separately) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // order_add_order_item_inner->order_item_price_includes_tax
-    if(order_add_order_item_inner->order_item_price_includes_tax) {
-    if(cJSON_AddBoolToObject(item, "order_item_price_includes_tax", order_add_order_item_inner->order_item_price_includes_tax) == NULL) {
     goto fail; //Bool
     }
     }
@@ -404,6 +404,18 @@ order_add_order_item_inner_t *order_add_order_item_inner_parseFromJSON(cJSON *or
     }
     }
 
+    // order_add_order_item_inner->order_item_price_includes_tax
+    cJSON *order_item_price_includes_tax = cJSON_GetObjectItemCaseSensitive(order_add_order_item_innerJSON, "order_item_price_includes_tax");
+    if (cJSON_IsNull(order_item_price_includes_tax)) {
+        order_item_price_includes_tax = NULL;
+    }
+    if (order_item_price_includes_tax) { 
+    if(!cJSON_IsBool(order_item_price_includes_tax))
+    {
+    goto end; //Bool
+    }
+    }
+
     // order_add_order_item_inner->order_item_parent
     cJSON *order_item_parent = cJSON_GetObjectItemCaseSensitive(order_add_order_item_innerJSON, "order_item_parent");
     if (cJSON_IsNull(order_item_parent)) {
@@ -447,18 +459,6 @@ order_add_order_item_inner_t *order_add_order_item_inner_parseFromJSON(cJSON *or
     }
     if (order_item_allow_ship_items_separately) { 
     if(!cJSON_IsBool(order_item_allow_ship_items_separately))
-    {
-    goto end; //Bool
-    }
-    }
-
-    // order_add_order_item_inner->order_item_price_includes_tax
-    cJSON *order_item_price_includes_tax = cJSON_GetObjectItemCaseSensitive(order_add_order_item_innerJSON, "order_item_price_includes_tax");
-    if (cJSON_IsNull(order_item_price_includes_tax)) {
-        order_item_price_includes_tax = NULL;
-    }
-    if (order_item_price_includes_tax) { 
-    if(!cJSON_IsBool(order_item_price_includes_tax))
     {
     goto end; //Bool
     }
@@ -522,11 +522,11 @@ order_add_order_item_inner_t *order_add_order_item_inner_parseFromJSON(cJSON *or
         order_item_weight ? order_item_weight->valuedouble : 0,
         order_item_variant_id && !cJSON_IsNull(order_item_variant_id) ? strdup(order_item_variant_id->valuestring) : NULL,
         order_item_tax ? order_item_tax->valuedouble : 0,
+        order_item_price_includes_tax ? order_item_price_includes_tax->valueint : 0,
         order_item_parent ? order_item_parent->valuedouble : 0,
         order_item_parent_option_name && !cJSON_IsNull(order_item_parent_option_name) ? strdup(order_item_parent_option_name->valuestring) : NULL,
         order_item_allow_refund_items_separately ? order_item_allow_refund_items_separately->valueint : 0,
         order_item_allow_ship_items_separately ? order_item_allow_ship_items_separately->valueint : 0,
-        order_item_price_includes_tax ? order_item_price_includes_tax->valueint : 0,
         order_item_option ? order_item_optionList : NULL,
         order_item_property ? order_item_propertyList : NULL
         );

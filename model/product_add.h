@@ -34,116 +34,116 @@ typedef struct product_add_t product_add_t;
 typedef struct product_add_t {
     char *name; // string
     char *model; // string
-    char *sku; // string
     char *description; // string
     double price; //numeric
-    double old_price; //numeric
-    double special_price; //numeric
-    double cost_price; //numeric
-    double fixed_cost_shipping_price; //numeric
-    char *sprice_create; // string
-    char *sprice_modified; // string
-    char *sprice_expire; // string
-    list_t *tier_prices; //nonprimitive container
-    list_t *group_prices; //nonprimitive container
+    char *sku; // string
+    char *short_description; // string
+    char *type; // string
+    char *status; // string
+    char *visible; // string
+    char *category_id; // string
+    char *categories_ids; // string
+    char *product_class; // string
+    char *product_type; // string
+    int is_virtual; //boolean
+    int downloadable; //boolean
+    int is_supply; //boolean
     int available_for_view; //boolean
     int available_for_sale; //boolean
+    char *store_id; // string
+    char *stores_ids; // string
+    char *lang_id; // string
+    double old_price; //numeric
+    double special_price; //numeric
+    double wholesale_price; //numeric
+    double cost_price; //numeric
+    double fixed_cost_shipping_price; //numeric
+    list_t *tier_prices; //nonprimitive container
+    list_t *group_prices; //nonprimitive container
+    double buyitnow_price; //numeric
+    double reserve_price; //numeric
+    double quantity; //numeric
+    int in_stock; //boolean
+    int manage_stock; //boolean
+    char *warehouse_id; // string
+    char *backorder_status; // string
+    double min_order_quantity; //numeric
+    double max_order_quantity; //numeric
     double weight; //numeric
+    char *weight_unit; // string
     double width; //numeric
     double height; //numeric
     double length; //numeric
-    char *weight_unit; // string
     char *dimensions_unit; // string
-    char *short_description; // string
-    char *warehouse_id; // string
-    char *backorder_status; // string
-    double quantity; //numeric
-    int downloadable; //boolean
-    double wholesale_price; //numeric
-    char *created_at; // string
-    char *manufacturer; // string
-    char *manufacturer_id; // string
-    char *categories_ids; // string
-    char *related_products_ids; // string
-    char *up_sell_products_ids; // string
-    char *cross_sell_products_ids; // string
-    char *tax_class_id; // string
-    char *type; // string
-    char *meta_title; // string
-    char *meta_keywords; // string
-    char *meta_description; // string
-    char *url; // string
-    char *lang_id; // string
-    char *stores_ids; // string
-    char *category_id; // string
-    int viewed_count; //numeric
-    int ordered_count; //numeric
-    char *attribute_set_name; // string
-    char *attribute_name; // string
-    int shipping_template_id; //numeric
-    char *production_partner_ids; // string
-    char *condition; // string
-    char *listing_duration; // string
-    char *listing_type; // string
-    list_t *payment_methods; //primitive container
-    int return_accepted; //boolean
-    list_t *shipping_details; //nonprimitive container
-    char *paypal_email; // string
-    struct product_add_seller_profiles_t *seller_profiles; //model
-    struct product_add_package_details_t *package_details; //model
-    struct product_add_best_offer_t *best_offer; //model
-    struct product_add_sales_tax_t *sales_tax; //model
     char *barcode; // string
     char *upc; // string
     char *ean; // string
     char *isbn; // string
-    list_t *specifics; //nonprimitive container
+    char *gtin; // string
+    char *mpn; // string
+    char *asin; // string
+    char *product_reference; // string
+    char *harmonized_system_code; // string
+    char *country_of_origin; // string
+    char *manufacturer; // string
+    char *manufacturer_id; // string
+    struct product_add_manufacturer_info_t *manufacturer_info; //model
+    char *brand_name; // string
     char *image_url; // string
     char *image_name; // string
     list_t *additional_image_urls; //primitive container
-    double reserve_price; //numeric
-    double buyitnow_price; //numeric
-    char *condition_description; // string
-    char *auction_confidentiality_level; // string
-    list_t *logistic_info; //nonprimitive container
-    char *avail_from; // string
-    char *tags; // string
-    int clear_cache; //boolean
-    char *asin; // string
-    char *gtin; // string
-    char *mpn; // string
-    int taxable; //boolean
-    char *visible; // string
-    char *status; // string
-    char *seo_url; // string
-    char *product_class; // string
-    char *product_type; // string
-    char *marketplace_item_properties; // string
-    int manage_stock; //boolean
-    char *harmonized_system_code; // string
-    char *country_of_origin; // string
     list_t *files; //nonprimitive container
+    struct product_add_size_chart_t *size_chart; //model
+    char *related_products_ids; // string
+    char *up_sell_products_ids; // string
+    char *cross_sell_products_ids; // string
+    char *attribute_set_name; // string
+    char *attribute_name; // string
     char *search_keywords; // string
-    char *store_id; // string
-    char *brand_name; // string
-    int is_virtual; //boolean
+    char *tags; // string
+    list_t *materials; //primitive container
+    list_t *certifications; //nonprimitive container
+    list_t *specifics; //nonprimitive container
+    char *avail_from; // string
+    char *sprice_create; // string
+    char *sprice_modified; // string
+    char *sprice_expire; // string
+    char *created_at; // string
+    int auto_renew; //boolean
+    char *when_made; // string
+    char *meta_title; // string
+    char *meta_keywords; // string
+    char *meta_description; // string
+    char *url; // string
+    char *seo_url; // string
+    char *tax_class_id; // string
+    int taxable; //boolean
+    struct product_add_sales_tax_t *sales_tax; //model
+    char *condition; // string
+    char *condition_description; // string
+    int allow_display_condition; //boolean
+    list_t *payment_methods; //primitive container
+    char *paypal_email; // string
+    int shipping_template_id; //numeric
+    list_t *shipping_details; //nonprimitive container
     int is_free_shipping; //boolean
-    int in_stock; //boolean
     char *delivery_code; // string
-    char *product_reference; // string
     char *delivery_type; // string
     int delivery_time; //numeric
-    struct product_add_size_chart_t *size_chart; //model
-    list_t *certifications; //nonprimitive container
     char *delivery_option_ids; // string
-    struct product_add_manufacturer_info_t *manufacturer_info; //model
-    char *when_made; // string
-    int is_supply; //boolean
-    list_t *materials; //primitive container
-    int auto_renew; //boolean
-    int allow_display_condition; //boolean
-    double min_order_quantity; //numeric
-    double max_order_quantity; //numeric
+    struct product_add_package_details_t *package_details; //model
+    list_t *logistic_info; //nonprimitive container
+    char *listing_duration; // string
+    char *listing_type; // string
+    int return_accepted; //boolean
+    struct product_add_seller_profiles_t *seller_profiles; //model
+    char *auction_confidentiality_level; // string
+    struct product_add_best_offer_t *best_offer; //model
+    char *production_partner_ids; // string
+    char *marketplace_item_properties; // string
+    int clear_cache; //boolean
+    int viewed_count; //numeric
+    int ordered_count; //numeric
 
     int _library_owned; // Is the library responsible for freeing this object?
 } product_add_t;
@@ -151,116 +151,116 @@ typedef struct product_add_t {
 __attribute__((deprecated)) product_add_t *product_add_create(
     char *name,
     char *model,
-    char *sku,
     char *description,
     double price,
-    double old_price,
-    double special_price,
-    double cost_price,
-    double fixed_cost_shipping_price,
-    char *sprice_create,
-    char *sprice_modified,
-    char *sprice_expire,
-    list_t *tier_prices,
-    list_t *group_prices,
+    char *sku,
+    char *short_description,
+    char *type,
+    char *status,
+    char *visible,
+    char *category_id,
+    char *categories_ids,
+    char *product_class,
+    char *product_type,
+    int is_virtual,
+    int downloadable,
+    int is_supply,
     int available_for_view,
     int available_for_sale,
+    char *store_id,
+    char *stores_ids,
+    char *lang_id,
+    double old_price,
+    double special_price,
+    double wholesale_price,
+    double cost_price,
+    double fixed_cost_shipping_price,
+    list_t *tier_prices,
+    list_t *group_prices,
+    double buyitnow_price,
+    double reserve_price,
+    double quantity,
+    int in_stock,
+    int manage_stock,
+    char *warehouse_id,
+    char *backorder_status,
+    double min_order_quantity,
+    double max_order_quantity,
     double weight,
+    char *weight_unit,
     double width,
     double height,
     double length,
-    char *weight_unit,
     char *dimensions_unit,
-    char *short_description,
-    char *warehouse_id,
-    char *backorder_status,
-    double quantity,
-    int downloadable,
-    double wholesale_price,
-    char *created_at,
-    char *manufacturer,
-    char *manufacturer_id,
-    char *categories_ids,
-    char *related_products_ids,
-    char *up_sell_products_ids,
-    char *cross_sell_products_ids,
-    char *tax_class_id,
-    char *type,
-    char *meta_title,
-    char *meta_keywords,
-    char *meta_description,
-    char *url,
-    char *lang_id,
-    char *stores_ids,
-    char *category_id,
-    int viewed_count,
-    int ordered_count,
-    char *attribute_set_name,
-    char *attribute_name,
-    int shipping_template_id,
-    char *production_partner_ids,
-    char *condition,
-    char *listing_duration,
-    char *listing_type,
-    list_t *payment_methods,
-    int return_accepted,
-    list_t *shipping_details,
-    char *paypal_email,
-    product_add_seller_profiles_t *seller_profiles,
-    product_add_package_details_t *package_details,
-    product_add_best_offer_t *best_offer,
-    product_add_sales_tax_t *sales_tax,
     char *barcode,
     char *upc,
     char *ean,
     char *isbn,
-    list_t *specifics,
+    char *gtin,
+    char *mpn,
+    char *asin,
+    char *product_reference,
+    char *harmonized_system_code,
+    char *country_of_origin,
+    char *manufacturer,
+    char *manufacturer_id,
+    product_add_manufacturer_info_t *manufacturer_info,
+    char *brand_name,
     char *image_url,
     char *image_name,
     list_t *additional_image_urls,
-    double reserve_price,
-    double buyitnow_price,
-    char *condition_description,
-    char *auction_confidentiality_level,
-    list_t *logistic_info,
-    char *avail_from,
-    char *tags,
-    int clear_cache,
-    char *asin,
-    char *gtin,
-    char *mpn,
-    int taxable,
-    char *visible,
-    char *status,
-    char *seo_url,
-    char *product_class,
-    char *product_type,
-    char *marketplace_item_properties,
-    int manage_stock,
-    char *harmonized_system_code,
-    char *country_of_origin,
     list_t *files,
+    product_add_size_chart_t *size_chart,
+    char *related_products_ids,
+    char *up_sell_products_ids,
+    char *cross_sell_products_ids,
+    char *attribute_set_name,
+    char *attribute_name,
     char *search_keywords,
-    char *store_id,
-    char *brand_name,
-    int is_virtual,
+    char *tags,
+    list_t *materials,
+    list_t *certifications,
+    list_t *specifics,
+    char *avail_from,
+    char *sprice_create,
+    char *sprice_modified,
+    char *sprice_expire,
+    char *created_at,
+    int auto_renew,
+    char *when_made,
+    char *meta_title,
+    char *meta_keywords,
+    char *meta_description,
+    char *url,
+    char *seo_url,
+    char *tax_class_id,
+    int taxable,
+    product_add_sales_tax_t *sales_tax,
+    char *condition,
+    char *condition_description,
+    int allow_display_condition,
+    list_t *payment_methods,
+    char *paypal_email,
+    int shipping_template_id,
+    list_t *shipping_details,
     int is_free_shipping,
-    int in_stock,
     char *delivery_code,
-    char *product_reference,
     char *delivery_type,
     int delivery_time,
-    product_add_size_chart_t *size_chart,
-    list_t *certifications,
     char *delivery_option_ids,
-    product_add_manufacturer_info_t *manufacturer_info,
-    char *when_made,
-    int is_supply,
-    list_t *materials,
-    int auto_renew,
-    int allow_display_condition,
-    double min_order_quantity,
-    double max_order_quantity
+    product_add_package_details_t *package_details,
+    list_t *logistic_info,
+    char *listing_duration,
+    char *listing_type,
+    int return_accepted,
+    product_add_seller_profiles_t *seller_profiles,
+    char *auction_confidentiality_level,
+    product_add_best_offer_t *best_offer,
+    char *production_partner_ids,
+    char *marketplace_item_properties,
+    int clear_cache,
+    int viewed_count,
+    int ordered_count
 );
 
 void product_add_free(product_add_t *product_add);

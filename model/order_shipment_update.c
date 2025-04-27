@@ -6,55 +6,55 @@
 
 
 static order_shipment_update_t *order_shipment_update_create_internal(
-    char *store_id,
     char *shipment_id,
     char *order_id,
+    char *store_id,
+    char *shipment_provider,
     list_t *tracking_numbers,
-    int replace,
-    int is_shipped,
     char *tracking_link,
+    int is_shipped,
     char *delivered_at,
-    char *shipment_provider
+    int replace
     ) {
     order_shipment_update_t *order_shipment_update_local_var = malloc(sizeof(order_shipment_update_t));
     if (!order_shipment_update_local_var) {
         return NULL;
     }
-    order_shipment_update_local_var->store_id = store_id;
     order_shipment_update_local_var->shipment_id = shipment_id;
     order_shipment_update_local_var->order_id = order_id;
-    order_shipment_update_local_var->tracking_numbers = tracking_numbers;
-    order_shipment_update_local_var->replace = replace;
-    order_shipment_update_local_var->is_shipped = is_shipped;
-    order_shipment_update_local_var->tracking_link = tracking_link;
-    order_shipment_update_local_var->delivered_at = delivered_at;
+    order_shipment_update_local_var->store_id = store_id;
     order_shipment_update_local_var->shipment_provider = shipment_provider;
+    order_shipment_update_local_var->tracking_numbers = tracking_numbers;
+    order_shipment_update_local_var->tracking_link = tracking_link;
+    order_shipment_update_local_var->is_shipped = is_shipped;
+    order_shipment_update_local_var->delivered_at = delivered_at;
+    order_shipment_update_local_var->replace = replace;
 
     order_shipment_update_local_var->_library_owned = 1;
     return order_shipment_update_local_var;
 }
 
 __attribute__((deprecated)) order_shipment_update_t *order_shipment_update_create(
-    char *store_id,
     char *shipment_id,
     char *order_id,
+    char *store_id,
+    char *shipment_provider,
     list_t *tracking_numbers,
-    int replace,
-    int is_shipped,
     char *tracking_link,
+    int is_shipped,
     char *delivered_at,
-    char *shipment_provider
+    int replace
     ) {
     return order_shipment_update_create_internal (
-        store_id,
         shipment_id,
         order_id,
+        store_id,
+        shipment_provider,
         tracking_numbers,
-        replace,
-        is_shipped,
         tracking_link,
+        is_shipped,
         delivered_at,
-        shipment_provider
+        replace
         );
 }
 
@@ -67,10 +67,6 @@ void order_shipment_update_free(order_shipment_update_t *order_shipment_update) 
         return ;
     }
     listEntry_t *listEntry;
-    if (order_shipment_update->store_id) {
-        free(order_shipment_update->store_id);
-        order_shipment_update->store_id = NULL;
-    }
     if (order_shipment_update->shipment_id) {
         free(order_shipment_update->shipment_id);
         order_shipment_update->shipment_id = NULL;
@@ -78,6 +74,14 @@ void order_shipment_update_free(order_shipment_update_t *order_shipment_update) 
     if (order_shipment_update->order_id) {
         free(order_shipment_update->order_id);
         order_shipment_update->order_id = NULL;
+    }
+    if (order_shipment_update->store_id) {
+        free(order_shipment_update->store_id);
+        order_shipment_update->store_id = NULL;
+    }
+    if (order_shipment_update->shipment_provider) {
+        free(order_shipment_update->shipment_provider);
+        order_shipment_update->shipment_provider = NULL;
     }
     if (order_shipment_update->tracking_numbers) {
         list_ForEach(listEntry, order_shipment_update->tracking_numbers) {
@@ -94,23 +98,11 @@ void order_shipment_update_free(order_shipment_update_t *order_shipment_update) 
         free(order_shipment_update->delivered_at);
         order_shipment_update->delivered_at = NULL;
     }
-    if (order_shipment_update->shipment_provider) {
-        free(order_shipment_update->shipment_provider);
-        order_shipment_update->shipment_provider = NULL;
-    }
     free(order_shipment_update);
 }
 
 cJSON *order_shipment_update_convertToJSON(order_shipment_update_t *order_shipment_update) {
     cJSON *item = cJSON_CreateObject();
-
-    // order_shipment_update->store_id
-    if(order_shipment_update->store_id) {
-    if(cJSON_AddStringToObject(item, "store_id", order_shipment_update->store_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
 
     // order_shipment_update->shipment_id
     if (!order_shipment_update->shipment_id) {
@@ -124,6 +116,22 @@ cJSON *order_shipment_update_convertToJSON(order_shipment_update_t *order_shipme
     // order_shipment_update->order_id
     if(order_shipment_update->order_id) {
     if(cJSON_AddStringToObject(item, "order_id", order_shipment_update->order_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // order_shipment_update->store_id
+    if(order_shipment_update->store_id) {
+    if(cJSON_AddStringToObject(item, "store_id", order_shipment_update->store_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // order_shipment_update->shipment_provider
+    if(order_shipment_update->shipment_provider) {
+    if(cJSON_AddStringToObject(item, "shipment_provider", order_shipment_update->shipment_provider) == NULL) {
     goto fail; //String
     }
     }
@@ -149,10 +157,10 @@ cJSON *order_shipment_update_convertToJSON(order_shipment_update_t *order_shipme
     }
 
 
-    // order_shipment_update->replace
-    if(order_shipment_update->replace) {
-    if(cJSON_AddBoolToObject(item, "replace", order_shipment_update->replace) == NULL) {
-    goto fail; //Bool
+    // order_shipment_update->tracking_link
+    if(order_shipment_update->tracking_link) {
+    if(cJSON_AddStringToObject(item, "tracking_link", order_shipment_update->tracking_link) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -165,14 +173,6 @@ cJSON *order_shipment_update_convertToJSON(order_shipment_update_t *order_shipme
     }
 
 
-    // order_shipment_update->tracking_link
-    if(order_shipment_update->tracking_link) {
-    if(cJSON_AddStringToObject(item, "tracking_link", order_shipment_update->tracking_link) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
     // order_shipment_update->delivered_at
     if(order_shipment_update->delivered_at) {
     if(cJSON_AddStringToObject(item, "delivered_at", order_shipment_update->delivered_at) == NULL) {
@@ -181,10 +181,10 @@ cJSON *order_shipment_update_convertToJSON(order_shipment_update_t *order_shipme
     }
 
 
-    // order_shipment_update->shipment_provider
-    if(order_shipment_update->shipment_provider) {
-    if(cJSON_AddStringToObject(item, "shipment_provider", order_shipment_update->shipment_provider) == NULL) {
-    goto fail; //String
+    // order_shipment_update->replace
+    if(order_shipment_update->replace) {
+    if(cJSON_AddBoolToObject(item, "replace", order_shipment_update->replace) == NULL) {
+    goto fail; //Bool
     }
     }
 
@@ -202,18 +202,6 @@ order_shipment_update_t *order_shipment_update_parseFromJSON(cJSON *order_shipme
 
     // define the local list for order_shipment_update->tracking_numbers
     list_t *tracking_numbersList = NULL;
-
-    // order_shipment_update->store_id
-    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(order_shipment_updateJSON, "store_id");
-    if (cJSON_IsNull(store_id)) {
-        store_id = NULL;
-    }
-    if (store_id) { 
-    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
-    {
-    goto end; //String
-    }
-    }
 
     // order_shipment_update->shipment_id
     cJSON *shipment_id = cJSON_GetObjectItemCaseSensitive(order_shipment_updateJSON, "shipment_id");
@@ -237,6 +225,30 @@ order_shipment_update_t *order_shipment_update_parseFromJSON(cJSON *order_shipme
     }
     if (order_id) { 
     if(!cJSON_IsString(order_id) && !cJSON_IsNull(order_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // order_shipment_update->store_id
+    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(order_shipment_updateJSON, "store_id");
+    if (cJSON_IsNull(store_id)) {
+        store_id = NULL;
+    }
+    if (store_id) { 
+    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // order_shipment_update->shipment_provider
+    cJSON *shipment_provider = cJSON_GetObjectItemCaseSensitive(order_shipment_updateJSON, "shipment_provider");
+    if (cJSON_IsNull(shipment_provider)) {
+        shipment_provider = NULL;
+    }
+    if (shipment_provider) { 
+    if(!cJSON_IsString(shipment_provider) && !cJSON_IsNull(shipment_provider))
     {
     goto end; //String
     }
@@ -266,15 +278,15 @@ order_shipment_update_t *order_shipment_update_parseFromJSON(cJSON *order_shipme
     }
     }
 
-    // order_shipment_update->replace
-    cJSON *replace = cJSON_GetObjectItemCaseSensitive(order_shipment_updateJSON, "replace");
-    if (cJSON_IsNull(replace)) {
-        replace = NULL;
+    // order_shipment_update->tracking_link
+    cJSON *tracking_link = cJSON_GetObjectItemCaseSensitive(order_shipment_updateJSON, "tracking_link");
+    if (cJSON_IsNull(tracking_link)) {
+        tracking_link = NULL;
     }
-    if (replace) { 
-    if(!cJSON_IsBool(replace))
+    if (tracking_link) { 
+    if(!cJSON_IsString(tracking_link) && !cJSON_IsNull(tracking_link))
     {
-    goto end; //Bool
+    goto end; //String
     }
     }
 
@@ -290,18 +302,6 @@ order_shipment_update_t *order_shipment_update_parseFromJSON(cJSON *order_shipme
     }
     }
 
-    // order_shipment_update->tracking_link
-    cJSON *tracking_link = cJSON_GetObjectItemCaseSensitive(order_shipment_updateJSON, "tracking_link");
-    if (cJSON_IsNull(tracking_link)) {
-        tracking_link = NULL;
-    }
-    if (tracking_link) { 
-    if(!cJSON_IsString(tracking_link) && !cJSON_IsNull(tracking_link))
-    {
-    goto end; //String
-    }
-    }
-
     // order_shipment_update->delivered_at
     cJSON *delivered_at = cJSON_GetObjectItemCaseSensitive(order_shipment_updateJSON, "delivered_at");
     if (cJSON_IsNull(delivered_at)) {
@@ -314,29 +314,29 @@ order_shipment_update_t *order_shipment_update_parseFromJSON(cJSON *order_shipme
     }
     }
 
-    // order_shipment_update->shipment_provider
-    cJSON *shipment_provider = cJSON_GetObjectItemCaseSensitive(order_shipment_updateJSON, "shipment_provider");
-    if (cJSON_IsNull(shipment_provider)) {
-        shipment_provider = NULL;
+    // order_shipment_update->replace
+    cJSON *replace = cJSON_GetObjectItemCaseSensitive(order_shipment_updateJSON, "replace");
+    if (cJSON_IsNull(replace)) {
+        replace = NULL;
     }
-    if (shipment_provider) { 
-    if(!cJSON_IsString(shipment_provider) && !cJSON_IsNull(shipment_provider))
+    if (replace) { 
+    if(!cJSON_IsBool(replace))
     {
-    goto end; //String
+    goto end; //Bool
     }
     }
 
 
     order_shipment_update_local_var = order_shipment_update_create_internal (
-        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         strdup(shipment_id->valuestring),
         order_id && !cJSON_IsNull(order_id) ? strdup(order_id->valuestring) : NULL,
+        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
+        shipment_provider && !cJSON_IsNull(shipment_provider) ? strdup(shipment_provider->valuestring) : NULL,
         tracking_numbers ? tracking_numbersList : NULL,
-        replace ? replace->valueint : 0,
-        is_shipped ? is_shipped->valueint : 0,
         tracking_link && !cJSON_IsNull(tracking_link) ? strdup(tracking_link->valuestring) : NULL,
+        is_shipped ? is_shipped->valueint : 0,
         delivered_at && !cJSON_IsNull(delivered_at) ? strdup(delivered_at->valuestring) : NULL,
-        shipment_provider && !cJSON_IsNull(shipment_provider) ? strdup(shipment_provider->valuestring) : NULL
+        replace ? replace->valueint : 0
         );
 
     return order_shipment_update_local_var;

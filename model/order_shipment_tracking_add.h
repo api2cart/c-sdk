@@ -19,10 +19,10 @@ typedef struct order_shipment_tracking_add_t order_shipment_tracking_add_t;
 
 
 typedef struct order_shipment_tracking_add_t {
-    char *store_id; // string
     char *order_id; // string
     char *shipment_id; // string
     char *carrier_id; // string
+    char *store_id; // string
     char *tracking_provider; // string
     char *tracking_number; // string
     char *tracking_link; // string
@@ -32,10 +32,10 @@ typedef struct order_shipment_tracking_add_t {
 } order_shipment_tracking_add_t;
 
 __attribute__((deprecated)) order_shipment_tracking_add_t *order_shipment_tracking_add_create(
-    char *store_id,
     char *order_id,
     char *shipment_id,
     char *carrier_id,
+    char *store_id,
     char *tracking_provider,
     char *tracking_number,
     char *tracking_link,

@@ -17,7 +17,7 @@
 // Retrieve basket information.
 //
 basket_info_200_response_t*
-BasketAPI_basketInfo(apiClient_t *apiClient, char *id, char *store_id, char *params, char *exclude, char *response_fields);
+BasketAPI_basketInfo(apiClient_t *apiClient, char *id, char *store_id, char *response_fields, char *params, char *exclude);
 
 
 // basket.item.add
@@ -49,6 +49,6 @@ BasketAPI_basketLiveShippingServiceDelete(apiClient_t *apiClient, int *id);
 // Retrieve a list of live shipping rate services.
 //
 basket_live_shipping_service_list_200_response_t*
-BasketAPI_basketLiveShippingServiceList(apiClient_t *apiClient, char *store_id, int *start, int *count);
+BasketAPI_basketLiveShippingServiceList(apiClient_t *apiClient, int *start, int *count, char *store_id);
 
 

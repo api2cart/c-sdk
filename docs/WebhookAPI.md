@@ -149,20 +149,20 @@ Name | Type | Description  | Notes
 //
 // List registered webhook on the store.
 //
-webhook_list_200_response_t* WebhookAPI_webhookList(apiClient_t *apiClient, char *params, int *start, int *count, char *entity, char *action, int *active, char *ids);
+webhook_list_200_response_t* WebhookAPI_webhookList(apiClient_t *apiClient, int *start, int *count, char *entity, char *action, int *active, char *ids, char *params);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,entity,action,callback&#39;]
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
 **entity** | **char \*** | The entity you want to filter webhooks by (e.g. order or product) | [optional] 
 **action** | **char \*** | The action you want to filter webhooks by (e.g. add, update, or delete) | [optional] 
 **active** | **int \*** | The webhook status you want to filter webhooks by | [optional] 
 **ids** | **char \*** | List of сomma-separated webhook ids | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,entity,action,callback&#39;]
 
 ### Return type
 

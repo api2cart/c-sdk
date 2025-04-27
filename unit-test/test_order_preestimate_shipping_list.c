@@ -23,9 +23,9 @@ order_preestimate_shipping_list_t* instantiate_order_preestimate_shipping_list(i
   if (include_optional) {
     order_preestimate_shipping_list = order_preestimate_shipping_list_create(
       "1",
-      "1",
-      "jubari@hannsgroup.com",
       "5",
+      "jubari@hannsgroup.com",
+      "1",
       "Green str. 35",
       "Chicago",
       "24545",
@@ -38,9 +38,9 @@ order_preestimate_shipping_list_t* instantiate_order_preestimate_shipping_list(i
   } else {
     order_preestimate_shipping_list = order_preestimate_shipping_list_create(
       "1",
-      "1",
-      "jubari@hannsgroup.com",
       "5",
+      "jubari@hannsgroup.com",
+      "1",
       "Green str. 35",
       "Chicago",
       "24545",

@@ -34,7 +34,7 @@ ReturnAPI_returnCount(apiClient_t *apiClient, char *order_ids, char *customer_id
 // Retrieve return information.
 //
 return_info_200_response_t*
-ReturnAPI_returnInfo(apiClient_t *apiClient, char *id, char *order_id, char *store_id, char *params, char *exclude, char *response_fields);
+ReturnAPI_returnInfo(apiClient_t *apiClient, char *id, char *order_id, char *store_id, char *response_fields, char *params, char *exclude);
 
 
 // return.list
@@ -42,7 +42,7 @@ ReturnAPI_returnInfo(apiClient_t *apiClient, char *id, char *order_id, char *sto
 // Get list of return requests from store.
 //
 model_response_return_list_t*
-ReturnAPI_returnList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *params, char *exclude, char *response_fields, char *order_id, char *order_ids, char *customer_id, char *store_id, char *status, char *return_type, char *created_from, char *created_to, char *modified_from, char *modified_to, char *report_request_id, int *disable_report_cache);
+ReturnAPI_returnList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *order_id, char *order_ids, char *customer_id, char *store_id, char *status, char *return_type, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude, char *report_request_id, int *disable_report_cache);
 
 
 // return.reason.list

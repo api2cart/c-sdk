@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 //
 // Get attributes for specific customer
 //
-model_response_customer_attribute_list_t* CustomerAPI_customerAttributeList(apiClient_t *apiClient, char *customer_id, int *count, char *page_cursor, char *store_id, char *lang_id, char *params, char *exclude, char *response_fields);
+model_response_customer_attribute_list_t* CustomerAPI_customerAttributeList(apiClient_t *apiClient, char *customer_id, int *count, char *page_cursor, char *store_id, char *lang_id, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -98,9 +98,9 @@ Name | Type | Description  | Notes
 **page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;force_all&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -124,25 +124,25 @@ Name | Type | Description  | Notes
 //
 // Get number of customers from store.
 //
-customer_count_200_response_t* CustomerAPI_customerCount(apiClient_t *apiClient, char *group_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *store_id, char *customer_list_id, int *avail, char *find_value, char *find_where, char *ids, char *since_id);
+customer_count_200_response_t* CustomerAPI_customerCount(apiClient_t *apiClient, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
+**ids** | **char \*** | Counts customers specified by ids | [optional] 
+**since_id** | **char \*** | Retrieve entities starting from the specified id. | [optional] 
+**customer_list_id** | **char \*** | The numeric ID of the customer list in Demandware. | [optional] 
 **group_id** | **char \*** | Customer group_id | [optional] 
+**store_id** | **char \*** | Counts customer specified by store id | [optional] 
+**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
+**find_value** | **char \*** | Entity search that is specified by some value | [optional] 
+**find_where** | **char \*** | Counts customers that are searched specified by field | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**store_id** | **char \*** | Counts customer specified by store id | [optional] 
-**customer_list_id** | **char \*** | The numeric ID of the customer list in Demandware. | [optional] 
-**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
-**find_value** | **char \*** | Entity search that is specified by some value | [optional] 
-**find_where** | **char \*** | Counts customers that are searched specified by field | [optional] 
-**ids** | **char \*** | Counts customers specified by ids | [optional] 
-**since_id** | **char \*** | Retrieve entities starting from the specified id. | [optional] 
 
 ### Return type
 
@@ -264,23 +264,23 @@ Name | Type | Description  | Notes
 //
 // Get list of customers groups.
 //
-model_response_customer_group_list_t* CustomerAPI_customerGroupList(apiClient_t *apiClient, int *disable_cache, char *page_cursor, int *start, int *count, char *store_id, char *lang_id, char *group_ids, char *params, char *exclude, char *response_fields);
+model_response_customer_group_list_t* CustomerAPI_customerGroupList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *group_ids, char *store_id, char *lang_id, char *response_fields, char *params, char *exclude, int *disable_cache);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**disable_cache** | **int \*** | Disable cache for current request | [optional] [default to false]
-**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+**group_ids** | **char \*** | Groups that will be assigned to a customer | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
-**group_ids** | **char \*** | Groups that will be assigned to a customer | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,additional_fields&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**disable_cache** | **int \*** | Disable cache for current request | [optional] [default to false]
 
 ### Return type
 
@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 //
 // Get customers' details from store.
 //
-customer_info_200_response_t* CustomerAPI_customerInfo(apiClient_t *apiClient, char *id, char *params, char *response_fields, char *exclude, char *store_id);
+customer_info_200_response_t* CustomerAPI_customerInfo(apiClient_t *apiClient, char *id, char *store_id, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -312,10 +312,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **id** | **char \*** | Retrieves customer&#39;s info specified by customer id | 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,email,first_name,last_name&#39;]
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **store_id** | **char \*** | Retrieves customer info specified by store id | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,email,first_name,last_name&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -339,33 +339,33 @@ Name | Type | Description  | Notes
 //
 // Get list of customers from store.
 //
-model_response_customer_list_t* CustomerAPI_customerList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *created_from, char *created_to, char *modified_from, char *modified_to, char *params, char *response_fields, char *exclude, char *group_id, char *store_id, char *customer_list_id, int *avail, char *find_value, char *find_where, char *sort_by, char *sort_direction, char *ids, char *since_id);
+model_response_customer_list_t* CustomerAPI_customerList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+**ids** | **char \*** | Retrieves customers specified by ids | [optional] 
+**since_id** | **char \*** | Retrieve entities starting from the specified id. | [optional] 
+**customer_list_id** | **char \*** | The numeric ID of the customer list in Demandware. | [optional] 
+**group_id** | **char \*** | Customer group_id | [optional] 
+**store_id** | **char \*** | Retrieves customers specified by store id | [optional] 
+**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
+**find_value** | **char \*** | Entity search that is specified by some value | [optional] 
+**find_where** | **char \*** | Customer search that is specified by field | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,email,first_name,last_name&#39;]
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-**group_id** | **char \*** | Customer group_id | [optional] 
-**store_id** | **char \*** | Retrieves customers specified by store id | [optional] 
-**customer_list_id** | **char \*** | The numeric ID of the customer list in Demandware. | [optional] 
-**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
-**find_value** | **char \*** | Entity search that is specified by some value | [optional] 
-**find_where** | **char \*** | Customer search that is specified by field | [optional] 
 **sort_by** | **char \*** | Set field to sort by | [optional] [default to &#39;created_time&#39;]
 **sort_direction** | **char \*** | Set sorting direction | [optional] [default to &#39;asc&#39;]
-**ids** | **char \*** | Retrieves customers specified by ids | [optional] 
-**since_id** | **char \*** | Retrieve entities starting from the specified id. | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,email,first_name,last_name&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -420,7 +420,7 @@ Name | Type | Description  | Notes
 //
 // Get a Wish List of customer from the store.
 //
-model_response_customer_wishlist_list_t* CustomerAPI_customerWishlistList(apiClient_t *apiClient, char *customer_id, char *id, char *store_id, int *start, int *count, char *page_cursor, char *response_fields);
+model_response_customer_wishlist_list_t* CustomerAPI_customerWishlistList(apiClient_t *apiClient, char *customer_id, int *start, int *count, char *page_cursor, char *id, char *store_id, char *response_fields);
 ```
 
 ### Parameters
@@ -428,11 +428,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **customer_id** | **char \*** | Retrieves orders specified by customer id | 
-**id** | **char \*** | Entity id | [optional] 
-**store_id** | **char \*** | Store Id | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
 **page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+**id** | **char \*** | Entity id | [optional] 
+**store_id** | **char \*** | Store Id | [optional] 
 **response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;{return_code,return_message,pagination,result}&#39;]
 
 ### Return type

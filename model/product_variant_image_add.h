@@ -29,6 +29,7 @@ api2cart_openapi_product_variant_image_add_TYPE_e product_variant_image_add_type
 typedef struct product_variant_image_add_t {
     char *product_id; // string
     char *product_variant_id; // string
+    char *store_id; // string
     char *image_name; // string
     api2cart_openapi_product_variant_image_add_TYPE_e type; //enum
     char *url; // string
@@ -36,7 +37,6 @@ typedef struct product_variant_image_add_t {
     char *label; // string
     char *mime; // string
     int position; //numeric
-    char *store_id; // string
     char *option_id; // string
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -45,6 +45,7 @@ typedef struct product_variant_image_add_t {
 __attribute__((deprecated)) product_variant_image_add_t *product_variant_image_add_create(
     char *product_id,
     char *product_variant_id,
+    char *store_id,
     char *image_name,
     api2cart_openapi_product_variant_image_add_TYPE_e type,
     char *url,
@@ -52,7 +53,6 @@ __attribute__((deprecated)) product_variant_image_add_t *product_variant_image_a
     char *label,
     char *mime,
     int position,
-    char *store_id,
     char *option_id
 );
 

@@ -27,22 +27,22 @@ typedef struct customer_add_t {
     char *password; // string
     char *group; // string
     char *group_ids; // string
+    char *status; // string
     char *created_time; // string
     char *modified_time; // string
     char *login; // string
     char *last_login; // string
     char *birth_day; // string
-    char *status; // string
     int news_letter_subscription; //boolean
     list_t *consents; //nonprimitive container
     char *gender; // string
     char *website; // string
-    char *store_id; // string
     char *fax; // string
     char *company; // string
     char *phone; // string
     char *note; // string
     char *country; // string
+    char *store_id; // string
     list_t *address; //nonprimitive container
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -55,22 +55,22 @@ __attribute__((deprecated)) customer_add_t *customer_add_create(
     char *password,
     char *group,
     char *group_ids,
+    char *status,
     char *created_time,
     char *modified_time,
     char *login,
     char *last_login,
     char *birth_day,
-    char *status,
     int news_letter_subscription,
     list_t *consents,
     char *gender,
     char *website,
-    char *store_id,
     char *fax,
     char *company,
     char *phone,
     char *note,
     char *country,
+    char *store_id,
     list_t *address
 );
 

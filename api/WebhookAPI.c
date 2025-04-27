@@ -558,7 +558,7 @@ end:
 // List registered webhook on the store.
 //
 webhook_list_200_response_t*
-WebhookAPI_webhookList(apiClient_t *apiClient, char *params, int *start, int *count, char *entity, char *action, int *active, char *ids)
+WebhookAPI_webhookList(apiClient_t *apiClient, int *start, int *count, char *entity, char *action, int *active, char *ids, char *params)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -577,18 +577,6 @@ WebhookAPI_webhookList(apiClient_t *apiClient, char *params, int *start, int *co
 
 
 
-
-    // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
-    {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
-    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -664,6 +652,18 @@ WebhookAPI_webhookList(apiClient_t *apiClient, char *params, int *start, int *co
         keyPairQuery_ids = keyValuePair_create(keyQuery_ids, valueQuery_ids);
         list_addElement(localVarQueryParameters,keyPairQuery_ids);
     }
+
+    // query parameters
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
+    {
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
+    }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
                     localVarPath,
@@ -703,18 +703,6 @@ WebhookAPI_webhookList(apiClient_t *apiClient, char *params, int *start, int *co
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
-    }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
-    }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -786,6 +774,18 @@ WebhookAPI_webhookList(apiClient_t *apiClient, char *params, int *start, int *co
     if(keyPairQuery_ids){
         keyValuePair_free(keyPairQuery_ids);
         keyPairQuery_ids = NULL;
+    }
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
+    }
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
+    }
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
     }
     return elementToReturn;
 end:

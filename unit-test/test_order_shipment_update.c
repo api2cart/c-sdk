@@ -22,27 +22,27 @@ order_shipment_update_t* instantiate_order_shipment_update(int include_optional)
   order_shipment_update_t* order_shipment_update = NULL;
   if (include_optional) {
     order_shipment_update = order_shipment_update_create(
-      "1",
       "200000002",
       "25",
+      "1",
+      "UPS",
       list_createList(),
-      false,
-      true,
       "http://example.com?someParam=value",
+      true,
       "2024-08-25T23:56:12+00:00",
-      "UPS"
+      false
     );
   } else {
     order_shipment_update = order_shipment_update_create(
-      "1",
       "200000002",
       "25",
+      "1",
+      "UPS",
       list_createList(),
-      false,
-      true,
       "http://example.com?someParam=value",
+      true,
       "2024-08-25T23:56:12+00:00",
-      "UPS"
+      false
     );
   }
 

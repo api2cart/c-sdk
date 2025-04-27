@@ -24,7 +24,7 @@ Method | HTTP request | Description
 //
 // Add new category in store
 //
-category_add_200_response_t* CategoryAPI_categoryAdd(apiClient_t *apiClient, char *name, char *parent_id, char *stores_ids, char *store_id, char *lang_id, int *avail, int *sort_order, char *created_time, char *modified_time, char *description, char *short_description, char *meta_title, char *meta_description, char *meta_keywords, char *seo_url);
+category_add_200_response_t* CategoryAPI_categoryAdd(apiClient_t *apiClient, char *name, char *description, char *short_description, char *parent_id, int *avail, char *created_time, char *modified_time, int *sort_order, char *meta_title, char *meta_description, char *meta_keywords, char *seo_url, char *store_id, char *stores_ids, char *lang_id);
 ```
 
 ### Parameters
@@ -32,20 +32,20 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **name** | **char \*** | Defines category&#39;s name that has to be added | 
-**parent_id** | **char \*** | Adds categories specified by parent id | [optional] 
-**stores_ids** | **char \*** | Create category in the stores that is specified by comma-separated stores&#39; id | [optional] 
-**store_id** | **char \*** | Store Id | [optional] 
-**lang_id** | **char \*** | Language id | [optional] 
-**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
-**sort_order** | **int \*** | Sort number in the list | [optional] [default to 0]
-**created_time** | **char \*** | Entity&#39;s date creation | [optional] 
-**modified_time** | **char \*** | Entity&#39;s date modification | [optional] 
 **description** | **char \*** | Defines category&#39;s description | [optional] 
 **short_description** | **char \*** | Defines short description | [optional] 
+**parent_id** | **char \*** | Adds categories specified by parent id | [optional] 
+**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
+**created_time** | **char \*** | Entity&#39;s date creation | [optional] 
+**modified_time** | **char \*** | Entity&#39;s date modification | [optional] 
+**sort_order** | **int \*** | Sort number in the list | [optional] [default to 0]
 **meta_title** | **char \*** | Defines unique meta title for each entity | [optional] 
 **meta_description** | **char \*** | Defines unique meta description of a entity | [optional] 
 **meta_keywords** | **char \*** | Defines unique meta keywords for each entity | [optional] 
 **seo_url** | **char \*** | Defines unique category&#39;s URL for SEO | [optional] 
+**store_id** | **char \*** | Store Id | [optional] 
+**stores_ids** | **char \*** | Create category in the stores that is specified by comma-separated stores&#39; id | [optional] 
+**lang_id** | **char \*** | Language id | [optional] 
 
 ### Return type
 
@@ -100,15 +100,15 @@ Name | Type | Description  | Notes
 //
 // Assign category to product
 //
-cart_config_update_200_response_t* CategoryAPI_categoryAssign(apiClient_t *apiClient, char *product_id, char *category_id, char *store_id);
+cart_config_update_200_response_t* CategoryAPI_categoryAssign(apiClient_t *apiClient, char *category_id, char *product_id, char *store_id);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**product_id** | **char \*** | Defines category assign to the product, specified by product id | 
 **category_id** | **char \*** | Defines category assign, specified by category id | 
+**product_id** | **char \*** | Defines category assign to the product, specified by product id | 
 **store_id** | **char \*** | Store Id | [optional] 
 
 ### Return type
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 //
 // Count categories in store.
 //
-category_count_200_response_t* CategoryAPI_categoryCount(apiClient_t *apiClient, char *parent_id, char *store_id, char *lang_id, char *created_from, char *created_to, char *modified_from, char *modified_to, int *avail, char *product_type, char *find_value, char *find_where, char *report_request_id, int *disable_report_cache);
+category_count_200_response_t* CategoryAPI_categoryCount(apiClient_t *apiClient, char *parent_id, char *store_id, char *lang_id, int *avail, char *created_from, char *created_to, char *modified_from, char *modified_to, char *product_type, char *find_value, char *find_where, char *report_request_id, int *disable_report_cache);
 ```
 
 ### Parameters
@@ -143,11 +143,11 @@ Name | Type | Description  | Notes
 **parent_id** | **char \*** | Counts categories specified by parent id | [optional] 
 **store_id** | **char \*** | Counts category specified by store id | [optional] 
 **lang_id** | **char \*** | Counts category specified by language id | [optional] 
+**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
 **product_type** | **char \*** | A categorization for the product | [optional] 
 **find_value** | **char \*** | Entity search that is specified by some value | [optional] 
 **find_where** | **char \*** | Counts categories that are searched specified by field | [optional] 
@@ -243,7 +243,7 @@ Name | Type | Description  | Notes
 //
 // Add image to category
 //
-category_image_add_200_response_t* CategoryAPI_categoryImageAdd(apiClient_t *apiClient, char *category_id, char *image_name, char *url, api2cart_openapi_categoryImageAdd_type_e type, char *label, char *mime, int *position, char *store_id);
+category_image_add_200_response_t* CategoryAPI_categoryImageAdd(apiClient_t *apiClient, char *category_id, char *image_name, char *url, api2cart_openapi_categoryImageAdd_type_e type, char *store_id, char *label, char *mime, int *position);
 ```
 
 ### Parameters
@@ -254,10 +254,10 @@ Name | Type | Description  | Notes
 **image_name** | **char \*** | Defines image&#39;s name | 
 **url** | **char \*** | Defines URL of the image that has to be added | 
 **type** | **api2cart_openapi_categoryImageAdd_type_e** | Defines image&#39;s types that are specified by comma-separated list | 
+**store_id** | **char \*** | Store Id | [optional] 
 **label** | **char \*** | Defines alternative text that has to be attached to the picture | [optional] 
 **mime** | **char \*** | Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. | [optional] 
 **position** | **int \*** | Defines image’s position in the list | [optional] [default to 0]
-**store_id** | **char \*** | Store Id | [optional] 
 
 ### Return type
 
@@ -314,7 +314,7 @@ Name | Type | Description  | Notes
 //
 // Get category info about category ID*** or specify other category ID.
 //
-category_info_200_response_t* CategoryAPI_categoryInfo(apiClient_t *apiClient, char *id, char *params, char *response_fields, char *exclude, char *store_id, char *lang_id, char *schema_type, char *report_request_id, int *disable_report_cache);
+category_info_200_response_t* CategoryAPI_categoryInfo(apiClient_t *apiClient, char *id, char *store_id, char *lang_id, char *schema_type, char *response_fields, char *params, char *exclude, char *report_request_id, int *disable_report_cache);
 ```
 
 ### Parameters
@@ -322,12 +322,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **id** | **char \*** | Retrieves category&#39;s info specified by category id | 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,parent_id,name,description&#39;]
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **store_id** | **char \*** | Retrieves category info  specified by store id | [optional] 
 **lang_id** | **char \*** | Retrieves category info  specified by language id | [optional] 
 **schema_type** | **char \*** | The name of the requirements set for the provided schema. | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,parent_id,name,description&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **report_request_id** | **char \*** | Report request id | [optional] 
 **disable_report_cache** | **int \*** | Disable report cache for current request | [optional] [default to false]
 
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 //
 // Get list of categories from store.
 //
-model_response_category_list_t* CategoryAPI_categoryList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *parent_id, char *params, char *response_fields, char *exclude, char *store_id, char *lang_id, char *created_from, char *created_to, char *modified_from, char *modified_to, int *avail, char *product_type, char *find_value, char *find_where, char *report_request_id, int *disable_report_cache, int *disable_cache);
+model_response_category_list_t* CategoryAPI_categoryList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *store_id, char *lang_id, char *parent_id, int *avail, char *product_type, char *created_from, char *created_to, char *modified_from, char *modified_to, char *find_value, char *find_where, char *response_fields, char *params, char *exclude, char *report_request_id, int *disable_report_cache, int *disable_cache);
 ```
 
 ### Parameters
@@ -363,20 +363,20 @@ Name | Type | Description  | Notes
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
 **page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
-**parent_id** | **char \*** | Retrieves categories specified by parent id | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,parent_id,name,description&#39;]
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **store_id** | **char \*** | Retrieves categories specified by store id | [optional] 
 **lang_id** | **char \*** | Retrieves categorys specified by language id | [optional] 
+**parent_id** | **char \*** | Retrieves categories specified by parent id | [optional] 
+**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
+**product_type** | **char \*** | A categorization for the product | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
-**product_type** | **char \*** | A categorization for the product | [optional] 
 **find_value** | **char \*** | Entity search that is specified by some value | [optional] 
 **find_where** | **char \*** | Category search that is specified by field | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,parent_id,name,description&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **report_request_id** | **char \*** | Report request id | [optional] 
 **disable_report_cache** | **int \*** | Disable report cache for current request | [optional] [default to false]
 **disable_cache** | **int \*** | Disable cache for current request | [optional] [default to false]
@@ -436,7 +436,7 @@ Name | Type | Description  | Notes
 //
 // Update category in store
 //
-account_config_update_200_response_t* CategoryAPI_categoryUpdate(apiClient_t *apiClient, char *id, char *name, char *parent_id, char *stores_ids, int *avail, int *sort_order, char *modified_time, char *description, char *short_description, char *meta_title, char *meta_description, char *meta_keywords, char *seo_url, char *lang_id, char *store_id);
+account_config_update_200_response_t* CategoryAPI_categoryUpdate(apiClient_t *apiClient, char *id, char *name, char *description, char *short_description, char *parent_id, int *avail, int *sort_order, char *modified_time, char *meta_title, char *meta_description, char *meta_keywords, char *seo_url, char *store_id, char *stores_ids, char *lang_id);
 ```
 
 ### Parameters
@@ -445,19 +445,19 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **id** | **char \*** | Defines category update specified by category id | 
 **name** | **char \*** | Defines new category’s name | [optional] 
+**description** | **char \*** | Defines new category&#39;s description | [optional] 
+**short_description** | **char \*** | Defines short description | [optional] 
 **parent_id** | **char \*** | Defines new parent category id | [optional] 
-**stores_ids** | **char \*** | Update category in the stores that is specified by comma-separated stores&#39; id | [optional] 
 **avail** | **int \*** | Defines category&#39;s visibility status | [optional] 
 **sort_order** | **int \*** | Sort number in the list | [optional] 
 **modified_time** | **char \*** | Entity&#39;s date modification | [optional] 
-**description** | **char \*** | Defines new category&#39;s description | [optional] 
-**short_description** | **char \*** | Defines short description | [optional] 
 **meta_title** | **char \*** | Defines unique meta title for each entity | [optional] 
 **meta_description** | **char \*** | Defines unique meta description of a entity | [optional] 
 **meta_keywords** | **char \*** | Defines unique meta keywords for each entity | [optional] 
 **seo_url** | **char \*** | Defines unique category&#39;s URL for SEO | [optional] 
-**lang_id** | **char \*** | Language id | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
+**stores_ids** | **char \*** | Update category in the stores that is specified by comma-separated stores&#39; id | [optional] 
+**lang_id** | **char \*** | Language id | [optional] 
 
 ### Return type
 

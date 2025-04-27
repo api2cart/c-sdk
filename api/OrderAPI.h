@@ -42,7 +42,7 @@
 // Get list of orders that were left by customers before completing the order.
 //
 model_response_order_abandoned_list_t*
-OrderAPI_orderAbandonedList(apiClient_t *apiClient, char *customer_id, char *customer_email, char *created_to, char *created_from, char *modified_to, char *modified_from, int *skip_empty_email, char *store_id, char *page_cursor, int *count, int *start, char *params, char *response_fields, char *exclude);
+OrderAPI_orderAbandonedList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *customer_id, char *customer_email, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to, int *skip_empty_email, char *response_fields, char *params, char *exclude);
 
 
 // order.add
@@ -58,7 +58,7 @@ OrderAPI_orderAdd(apiClient_t *apiClient, order_add_t *order_add);
 // Count orders in store
 //
 order_count_200_response_t*
-OrderAPI_orderCount(apiClient_t *apiClient, char *customer_id, char *customer_email, char *order_status, list_t *order_status_ids, char *created_to, char *created_from, char *modified_to, char *modified_from, char *store_id, char *ids, char *order_ids, char *ebay_order_status, char *financial_status, list_t *financial_status_ids, char *fulfillment_channel, char *fulfillment_status, char *shipping_method, char *delivery_method, char *tags, char *ship_node_type);
+OrderAPI_orderCount(apiClient_t *apiClient, char *order_ids, char *ids, char *customer_id, char *store_id, char *customer_email, char *order_status, list_t *order_status_ids, char *ebay_order_status, char *financial_status, list_t *financial_status_ids, char *fulfillment_channel, char *fulfillment_status, char *shipping_method, char *delivery_method, char *tags, char *ship_node_type, char *created_from, char *created_to, char *modified_from, char *modified_to);
 
 
 // order.financial_status.list
@@ -74,7 +74,7 @@ OrderAPI_orderFinancialStatusList(apiClient_t *apiClient);
 // This method is deprecated and won't be supported in the future. Please use \"order.list\" instead.
 //
 order_find_200_response_t*
-OrderAPI_orderFind(apiClient_t *apiClient, char *customer_id, char *customer_email, char *order_status, int *start, int *count, char *params, char *exclude, char *created_to, char *created_from, char *modified_to, char *modified_from, char *financial_status);
+OrderAPI_orderFind(apiClient_t *apiClient, int *start, int *count, char *customer_id, char *customer_email, char *order_status, char *financial_status, char *created_to, char *created_from, char *modified_to, char *modified_from, char *params, char *exclude);
 
 
 // order.fulfillment_status.list
@@ -90,7 +90,7 @@ OrderAPI_orderFulfillmentStatusList(apiClient_t *apiClient, char *action);
 // Info about a specific order by ID
 //
 order_info_200_response_t*
-OrderAPI_orderInfo(apiClient_t *apiClient, char *order_id, char *id, char *params, char *response_fields, char *exclude, char *store_id, int *enable_cache, int *use_latest_api_version);
+OrderAPI_orderInfo(apiClient_t *apiClient, char *id, char *order_id, char *store_id, char *params, char *response_fields, char *exclude, int *enable_cache, int *use_latest_api_version);
 
 
 // order.list
@@ -98,7 +98,7 @@ OrderAPI_orderInfo(apiClient_t *apiClient, char *order_id, char *id, char *param
 // Get list of orders from store.
 //
 model_response_order_list_t*
-OrderAPI_orderList(apiClient_t *apiClient, char *customer_id, char *customer_email, char *phone, char *order_status, list_t *order_status_ids, int *start, int *count, char *page_cursor, char *sort_by, char *sort_direction, char *params, char *response_fields, char *exclude, char *created_to, char *created_from, char *modified_to, char *modified_from, char *store_id, char *ids, char *order_ids, char *ebay_order_status, char *basket_id, char *financial_status, list_t *financial_status_ids, char *fulfillment_status, char *fulfillment_channel, char *shipping_method, char *skip_order_ids, char *since_id, int *is_deleted, char *shipping_country_iso3, int *enable_cache, char *delivery_method, char *tags, char *ship_node_type, char *currency_id, char *return_status, int *use_latest_api_version);
+OrderAPI_orderList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *order_ids, char *since_id, char *store_id, char *customer_id, char *customer_email, char *basket_id, char *currency_id, char *phone, char *order_status, list_t *order_status_ids, char *ebay_order_status, char *financial_status, list_t *financial_status_ids, char *fulfillment_status, char *return_status, char *fulfillment_channel, char *shipping_method, char *skip_order_ids, int *is_deleted, char *shipping_country_iso3, char *delivery_method, char *ship_node_type, char *created_to, char *created_from, char *modified_to, char *modified_from, char *tags, char *sort_by, char *sort_direction, char *params, char *response_fields, char *exclude, int *enable_cache, int *use_latest_api_version);
 
 
 // order.preestimate_shipping.list
@@ -170,7 +170,7 @@ OrderAPI_orderShipmentDelete(apiClient_t *apiClient, char *shipment_id, char *or
 // Get information of shipment.
 //
 order_shipment_info_200_response_t*
-OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int *start, char *params, char *response_fields, char *exclude, char *store_id);
+OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int *start, char *store_id, char *response_fields, char *params, char *exclude);
 
 
 // order.shipment.list
@@ -178,7 +178,7 @@ OrderAPI_orderShipmentInfo(apiClient_t *apiClient, char *id, char *order_id, int
 // Get list of shipments by orders.
 //
 model_response_order_shipment_list_t*
-OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, char *page_cursor, int *start, int *count, char *params, char *response_fields, char *exclude, char *created_from, char *created_to, char *modified_from, char *modified_to, char *store_id);
+OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, int *start, int *count, char *page_cursor, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude);
 
 
 // order.shipment.tracking.add
@@ -210,7 +210,7 @@ OrderAPI_orderStatusList(apiClient_t *apiClient, char *store_id, char *action, c
 // Retrieve list of order transaction
 //
 model_response_order_transaction_list_t*
-OrderAPI_orderTransactionList(apiClient_t *apiClient, char *order_ids, int *count, char *store_id, char *params, char *response_fields, char *exclude, char *page_cursor);
+OrderAPI_orderTransactionList(apiClient_t *apiClient, char *order_ids, int *count, char *page_cursor, char *store_id, char *params, char *response_fields, char *exclude);
 
 
 // order.update
@@ -218,6 +218,6 @@ OrderAPI_orderTransactionList(apiClient_t *apiClient, char *order_ids, int *coun
 // Update existing order.
 //
 account_config_update_200_response_t*
-OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, char *order_status, char *cancellation_reason, char *comment, char *admin_comment, char *admin_private_comment, char *date_modified, char *date_finished, char *financial_status, char *fulfillment_status, char *order_payment_method, int *send_notifications, char *origin, int *create_invoice, char *invoice_admin_comment);
+OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, char *order_status, char *financial_status, char *fulfillment_status, char *cancellation_reason, char *order_payment_method, char *comment, char *admin_comment, char *admin_private_comment, char *invoice_admin_comment, char *date_modified, char *date_finished, int *send_notifications, int *create_invoice, char *origin);
 
 

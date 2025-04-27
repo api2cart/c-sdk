@@ -7,17 +7,17 @@
 
 static order_shipment_add_t *order_shipment_add_create_internal(
     char *order_id,
-    char *store_id,
     char *warehouse_id,
+    char *store_id,
     char *shipment_provider,
     char *shipping_method,
     list_t *items,
-    int send_notifications,
     list_t *tracking_numbers,
-    int adjust_stock,
-    int enable_cache,
     char *tracking_link,
     int is_shipped,
+    int send_notifications,
+    int adjust_stock,
+    int enable_cache,
     int check_process_status,
     int use_latest_api_version
     ) {
@@ -26,17 +26,17 @@ static order_shipment_add_t *order_shipment_add_create_internal(
         return NULL;
     }
     order_shipment_add_local_var->order_id = order_id;
-    order_shipment_add_local_var->store_id = store_id;
     order_shipment_add_local_var->warehouse_id = warehouse_id;
+    order_shipment_add_local_var->store_id = store_id;
     order_shipment_add_local_var->shipment_provider = shipment_provider;
     order_shipment_add_local_var->shipping_method = shipping_method;
     order_shipment_add_local_var->items = items;
-    order_shipment_add_local_var->send_notifications = send_notifications;
     order_shipment_add_local_var->tracking_numbers = tracking_numbers;
-    order_shipment_add_local_var->adjust_stock = adjust_stock;
-    order_shipment_add_local_var->enable_cache = enable_cache;
     order_shipment_add_local_var->tracking_link = tracking_link;
     order_shipment_add_local_var->is_shipped = is_shipped;
+    order_shipment_add_local_var->send_notifications = send_notifications;
+    order_shipment_add_local_var->adjust_stock = adjust_stock;
+    order_shipment_add_local_var->enable_cache = enable_cache;
     order_shipment_add_local_var->check_process_status = check_process_status;
     order_shipment_add_local_var->use_latest_api_version = use_latest_api_version;
 
@@ -46,33 +46,33 @@ static order_shipment_add_t *order_shipment_add_create_internal(
 
 __attribute__((deprecated)) order_shipment_add_t *order_shipment_add_create(
     char *order_id,
-    char *store_id,
     char *warehouse_id,
+    char *store_id,
     char *shipment_provider,
     char *shipping_method,
     list_t *items,
-    int send_notifications,
     list_t *tracking_numbers,
-    int adjust_stock,
-    int enable_cache,
     char *tracking_link,
     int is_shipped,
+    int send_notifications,
+    int adjust_stock,
+    int enable_cache,
     int check_process_status,
     int use_latest_api_version
     ) {
     return order_shipment_add_create_internal (
         order_id,
-        store_id,
         warehouse_id,
+        store_id,
         shipment_provider,
         shipping_method,
         items,
-        send_notifications,
         tracking_numbers,
-        adjust_stock,
-        enable_cache,
         tracking_link,
         is_shipped,
+        send_notifications,
+        adjust_stock,
+        enable_cache,
         check_process_status,
         use_latest_api_version
         );
@@ -91,13 +91,13 @@ void order_shipment_add_free(order_shipment_add_t *order_shipment_add) {
         free(order_shipment_add->order_id);
         order_shipment_add->order_id = NULL;
     }
-    if (order_shipment_add->store_id) {
-        free(order_shipment_add->store_id);
-        order_shipment_add->store_id = NULL;
-    }
     if (order_shipment_add->warehouse_id) {
         free(order_shipment_add->warehouse_id);
         order_shipment_add->warehouse_id = NULL;
+    }
+    if (order_shipment_add->store_id) {
+        free(order_shipment_add->store_id);
+        order_shipment_add->store_id = NULL;
     }
     if (order_shipment_add->shipment_provider) {
         free(order_shipment_add->shipment_provider);
@@ -139,17 +139,17 @@ cJSON *order_shipment_add_convertToJSON(order_shipment_add_t *order_shipment_add
     }
 
 
-    // order_shipment_add->store_id
-    if(order_shipment_add->store_id) {
-    if(cJSON_AddStringToObject(item, "store_id", order_shipment_add->store_id) == NULL) {
+    // order_shipment_add->warehouse_id
+    if(order_shipment_add->warehouse_id) {
+    if(cJSON_AddStringToObject(item, "warehouse_id", order_shipment_add->warehouse_id) == NULL) {
     goto fail; //String
     }
     }
 
 
-    // order_shipment_add->warehouse_id
-    if(order_shipment_add->warehouse_id) {
-    if(cJSON_AddStringToObject(item, "warehouse_id", order_shipment_add->warehouse_id) == NULL) {
+    // order_shipment_add->store_id
+    if(order_shipment_add->store_id) {
+    if(cJSON_AddStringToObject(item, "store_id", order_shipment_add->store_id) == NULL) {
     goto fail; //String
     }
     }
@@ -191,14 +191,6 @@ cJSON *order_shipment_add_convertToJSON(order_shipment_add_t *order_shipment_add
     }
 
 
-    // order_shipment_add->send_notifications
-    if(order_shipment_add->send_notifications) {
-    if(cJSON_AddBoolToObject(item, "send_notifications", order_shipment_add->send_notifications) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
     // order_shipment_add->tracking_numbers
     if(order_shipment_add->tracking_numbers) {
     cJSON *tracking_numbers = cJSON_AddArrayToObject(item, "tracking_numbers");
@@ -219,22 +211,6 @@ cJSON *order_shipment_add_convertToJSON(order_shipment_add_t *order_shipment_add
     }
 
 
-    // order_shipment_add->adjust_stock
-    if(order_shipment_add->adjust_stock) {
-    if(cJSON_AddBoolToObject(item, "adjust_stock", order_shipment_add->adjust_stock) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // order_shipment_add->enable_cache
-    if(order_shipment_add->enable_cache) {
-    if(cJSON_AddBoolToObject(item, "enable_cache", order_shipment_add->enable_cache) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
     // order_shipment_add->tracking_link
     if(order_shipment_add->tracking_link) {
     if(cJSON_AddStringToObject(item, "tracking_link", order_shipment_add->tracking_link) == NULL) {
@@ -246,6 +222,30 @@ cJSON *order_shipment_add_convertToJSON(order_shipment_add_t *order_shipment_add
     // order_shipment_add->is_shipped
     if(order_shipment_add->is_shipped) {
     if(cJSON_AddBoolToObject(item, "is_shipped", order_shipment_add->is_shipped) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // order_shipment_add->send_notifications
+    if(order_shipment_add->send_notifications) {
+    if(cJSON_AddBoolToObject(item, "send_notifications", order_shipment_add->send_notifications) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // order_shipment_add->adjust_stock
+    if(order_shipment_add->adjust_stock) {
+    if(cJSON_AddBoolToObject(item, "adjust_stock", order_shipment_add->adjust_stock) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // order_shipment_add->enable_cache
+    if(order_shipment_add->enable_cache) {
+    if(cJSON_AddBoolToObject(item, "enable_cache", order_shipment_add->enable_cache) == NULL) {
     goto fail; //Bool
     }
     }
@@ -296,18 +296,6 @@ order_shipment_add_t *order_shipment_add_parseFromJSON(cJSON *order_shipment_add
     }
     }
 
-    // order_shipment_add->store_id
-    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "store_id");
-    if (cJSON_IsNull(store_id)) {
-        store_id = NULL;
-    }
-    if (store_id) { 
-    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
-    {
-    goto end; //String
-    }
-    }
-
     // order_shipment_add->warehouse_id
     cJSON *warehouse_id = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "warehouse_id");
     if (cJSON_IsNull(warehouse_id)) {
@@ -315,6 +303,18 @@ order_shipment_add_t *order_shipment_add_parseFromJSON(cJSON *order_shipment_add
     }
     if (warehouse_id) { 
     if(!cJSON_IsString(warehouse_id) && !cJSON_IsNull(warehouse_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // order_shipment_add->store_id
+    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "store_id");
+    if (cJSON_IsNull(store_id)) {
+        store_id = NULL;
+    }
+    if (store_id) { 
+    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
     {
     goto end; //String
     }
@@ -368,18 +368,6 @@ order_shipment_add_t *order_shipment_add_parseFromJSON(cJSON *order_shipment_add
     }
     }
 
-    // order_shipment_add->send_notifications
-    cJSON *send_notifications = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "send_notifications");
-    if (cJSON_IsNull(send_notifications)) {
-        send_notifications = NULL;
-    }
-    if (send_notifications) { 
-    if(!cJSON_IsBool(send_notifications))
-    {
-    goto end; //Bool
-    }
-    }
-
     // order_shipment_add->tracking_numbers
     cJSON *tracking_numbers = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "tracking_numbers");
     if (cJSON_IsNull(tracking_numbers)) {
@@ -404,30 +392,6 @@ order_shipment_add_t *order_shipment_add_parseFromJSON(cJSON *order_shipment_add
     }
     }
 
-    // order_shipment_add->adjust_stock
-    cJSON *adjust_stock = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "adjust_stock");
-    if (cJSON_IsNull(adjust_stock)) {
-        adjust_stock = NULL;
-    }
-    if (adjust_stock) { 
-    if(!cJSON_IsBool(adjust_stock))
-    {
-    goto end; //Bool
-    }
-    }
-
-    // order_shipment_add->enable_cache
-    cJSON *enable_cache = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "enable_cache");
-    if (cJSON_IsNull(enable_cache)) {
-        enable_cache = NULL;
-    }
-    if (enable_cache) { 
-    if(!cJSON_IsBool(enable_cache))
-    {
-    goto end; //Bool
-    }
-    }
-
     // order_shipment_add->tracking_link
     cJSON *tracking_link = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "tracking_link");
     if (cJSON_IsNull(tracking_link)) {
@@ -447,6 +411,42 @@ order_shipment_add_t *order_shipment_add_parseFromJSON(cJSON *order_shipment_add
     }
     if (is_shipped) { 
     if(!cJSON_IsBool(is_shipped))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // order_shipment_add->send_notifications
+    cJSON *send_notifications = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "send_notifications");
+    if (cJSON_IsNull(send_notifications)) {
+        send_notifications = NULL;
+    }
+    if (send_notifications) { 
+    if(!cJSON_IsBool(send_notifications))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // order_shipment_add->adjust_stock
+    cJSON *adjust_stock = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "adjust_stock");
+    if (cJSON_IsNull(adjust_stock)) {
+        adjust_stock = NULL;
+    }
+    if (adjust_stock) { 
+    if(!cJSON_IsBool(adjust_stock))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // order_shipment_add->enable_cache
+    cJSON *enable_cache = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "enable_cache");
+    if (cJSON_IsNull(enable_cache)) {
+        enable_cache = NULL;
+    }
+    if (enable_cache) { 
+    if(!cJSON_IsBool(enable_cache))
     {
     goto end; //Bool
     }
@@ -479,17 +479,17 @@ order_shipment_add_t *order_shipment_add_parseFromJSON(cJSON *order_shipment_add
 
     order_shipment_add_local_var = order_shipment_add_create_internal (
         order_id && !cJSON_IsNull(order_id) ? strdup(order_id->valuestring) : NULL,
-        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         warehouse_id && !cJSON_IsNull(warehouse_id) ? strdup(warehouse_id->valuestring) : NULL,
+        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         shipment_provider && !cJSON_IsNull(shipment_provider) ? strdup(shipment_provider->valuestring) : NULL,
         shipping_method && !cJSON_IsNull(shipping_method) ? strdup(shipping_method->valuestring) : NULL,
         items ? itemsList : NULL,
-        send_notifications ? send_notifications->valueint : 0,
         tracking_numbers ? tracking_numbersList : NULL,
-        adjust_stock ? adjust_stock->valueint : 0,
-        enable_cache ? enable_cache->valueint : 0,
         tracking_link && !cJSON_IsNull(tracking_link) ? strdup(tracking_link->valuestring) : NULL,
         is_shipped ? is_shipped->valueint : 0,
+        send_notifications ? send_notifications->valueint : 0,
+        adjust_stock ? adjust_stock->valueint : 0,
+        enable_cache ? enable_cache->valueint : 0,
         check_process_status ? check_process_status->valueint : 0,
         use_latest_api_version ? use_latest_api_version->valueint : 0
         );

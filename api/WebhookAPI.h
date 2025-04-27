@@ -50,7 +50,7 @@ WebhookAPI_webhookEvents(apiClient_t *apiClient);
 // List registered webhook on the store.
 //
 webhook_list_200_response_t*
-WebhookAPI_webhookList(apiClient_t *apiClient, char *params, int *start, int *count, char *entity, char *action, int *active, char *ids);
+WebhookAPI_webhookList(apiClient_t *apiClient, int *start, int *count, char *entity, char *action, int *active, char *ids, char *params);
 
 
 // webhook.update

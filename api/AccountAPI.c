@@ -98,7 +98,7 @@ end:
 // This method lets you get a list of online stores connected to your API2Cart account. You can get the number of API requests to each store if you specify a period using parameters (request_from_date, request_to_date). The total_calls field is displayed only if there are parameters (request_from_date, request_to_date).
 //
 account_cart_list_200_response_t*
-AccountAPI_accountCartList(apiClient_t *apiClient, char *params, char *exclude, char *request_from_date, char *request_to_date, char *store_url, char *store_key)
+AccountAPI_accountCartList(apiClient_t *apiClient, char *store_url, char *store_key, char *request_from_date, char *request_to_date, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -119,27 +119,27 @@ AccountAPI_accountCartList(apiClient_t *apiClient, char *params, char *exclude, 
 
 
     // query parameters
-    char *keyQuery_params = NULL;
-    char * valueQuery_params = NULL;
-    keyValuePair_t *keyPairQuery_params = 0;
-    if (params)
+    char *keyQuery_store_url = NULL;
+    char * valueQuery_store_url = NULL;
+    keyValuePair_t *keyPairQuery_store_url = 0;
+    if (store_url)
     {
-        keyQuery_params = strdup("params");
-        valueQuery_params = strdup((params));
-        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
-        list_addElement(localVarQueryParameters,keyPairQuery_params);
+        keyQuery_store_url = strdup("store_url");
+        valueQuery_store_url = strdup((store_url));
+        keyPairQuery_store_url = keyValuePair_create(keyQuery_store_url, valueQuery_store_url);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_url);
     }
 
     // query parameters
-    char *keyQuery_exclude = NULL;
-    char * valueQuery_exclude = NULL;
-    keyValuePair_t *keyPairQuery_exclude = 0;
-    if (exclude)
+    char *keyQuery_store_key = NULL;
+    char * valueQuery_store_key = NULL;
+    keyValuePair_t *keyPairQuery_store_key = 0;
+    if (store_key)
     {
-        keyQuery_exclude = strdup("exclude");
-        valueQuery_exclude = strdup((exclude));
-        keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
-        list_addElement(localVarQueryParameters,keyPairQuery_exclude);
+        keyQuery_store_key = strdup("store_key");
+        valueQuery_store_key = strdup((store_key));
+        keyPairQuery_store_key = keyValuePair_create(keyQuery_store_key, valueQuery_store_key);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_key);
     }
 
     // query parameters
@@ -167,27 +167,27 @@ AccountAPI_accountCartList(apiClient_t *apiClient, char *params, char *exclude, 
     }
 
     // query parameters
-    char *keyQuery_store_url = NULL;
-    char * valueQuery_store_url = NULL;
-    keyValuePair_t *keyPairQuery_store_url = 0;
-    if (store_url)
+    char *keyQuery_params = NULL;
+    char * valueQuery_params = NULL;
+    keyValuePair_t *keyPairQuery_params = 0;
+    if (params)
     {
-        keyQuery_store_url = strdup("store_url");
-        valueQuery_store_url = strdup((store_url));
-        keyPairQuery_store_url = keyValuePair_create(keyQuery_store_url, valueQuery_store_url);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_url);
+        keyQuery_params = strdup("params");
+        valueQuery_params = strdup((params));
+        keyPairQuery_params = keyValuePair_create(keyQuery_params, valueQuery_params);
+        list_addElement(localVarQueryParameters,keyPairQuery_params);
     }
 
     // query parameters
-    char *keyQuery_store_key = NULL;
-    char * valueQuery_store_key = NULL;
-    keyValuePair_t *keyPairQuery_store_key = 0;
-    if (store_key)
+    char *keyQuery_exclude = NULL;
+    char * valueQuery_exclude = NULL;
+    keyValuePair_t *keyPairQuery_exclude = 0;
+    if (exclude)
     {
-        keyQuery_store_key = strdup("store_key");
-        valueQuery_store_key = strdup((store_key));
-        keyPairQuery_store_key = keyValuePair_create(keyQuery_store_key, valueQuery_store_key);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_key);
+        keyQuery_exclude = strdup("exclude");
+        valueQuery_exclude = strdup((exclude));
+        keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
+        list_addElement(localVarQueryParameters,keyPairQuery_exclude);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -228,29 +228,29 @@ AccountAPI_accountCartList(apiClient_t *apiClient, char *params, char *exclude, 
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_params){
-        free(keyQuery_params);
-        keyQuery_params = NULL;
+    if(keyQuery_store_url){
+        free(keyQuery_store_url);
+        keyQuery_store_url = NULL;
     }
-    if(valueQuery_params){
-        free(valueQuery_params);
-        valueQuery_params = NULL;
+    if(valueQuery_store_url){
+        free(valueQuery_store_url);
+        valueQuery_store_url = NULL;
     }
-    if(keyPairQuery_params){
-        keyValuePair_free(keyPairQuery_params);
-        keyPairQuery_params = NULL;
+    if(keyPairQuery_store_url){
+        keyValuePair_free(keyPairQuery_store_url);
+        keyPairQuery_store_url = NULL;
     }
-    if(keyQuery_exclude){
-        free(keyQuery_exclude);
-        keyQuery_exclude = NULL;
+    if(keyQuery_store_key){
+        free(keyQuery_store_key);
+        keyQuery_store_key = NULL;
     }
-    if(valueQuery_exclude){
-        free(valueQuery_exclude);
-        valueQuery_exclude = NULL;
+    if(valueQuery_store_key){
+        free(valueQuery_store_key);
+        valueQuery_store_key = NULL;
     }
-    if(keyPairQuery_exclude){
-        keyValuePair_free(keyPairQuery_exclude);
-        keyPairQuery_exclude = NULL;
+    if(keyPairQuery_store_key){
+        keyValuePair_free(keyPairQuery_store_key);
+        keyPairQuery_store_key = NULL;
     }
     if(keyQuery_request_from_date){
         free(keyQuery_request_from_date);
@@ -276,29 +276,29 @@ AccountAPI_accountCartList(apiClient_t *apiClient, char *params, char *exclude, 
         keyValuePair_free(keyPairQuery_request_to_date);
         keyPairQuery_request_to_date = NULL;
     }
-    if(keyQuery_store_url){
-        free(keyQuery_store_url);
-        keyQuery_store_url = NULL;
+    if(keyQuery_params){
+        free(keyQuery_params);
+        keyQuery_params = NULL;
     }
-    if(valueQuery_store_url){
-        free(valueQuery_store_url);
-        valueQuery_store_url = NULL;
+    if(valueQuery_params){
+        free(valueQuery_params);
+        valueQuery_params = NULL;
     }
-    if(keyPairQuery_store_url){
-        keyValuePair_free(keyPairQuery_store_url);
-        keyPairQuery_store_url = NULL;
+    if(keyPairQuery_params){
+        keyValuePair_free(keyPairQuery_params);
+        keyPairQuery_params = NULL;
     }
-    if(keyQuery_store_key){
-        free(keyQuery_store_key);
-        keyQuery_store_key = NULL;
+    if(keyQuery_exclude){
+        free(keyQuery_exclude);
+        keyQuery_exclude = NULL;
     }
-    if(valueQuery_store_key){
-        free(valueQuery_store_key);
-        valueQuery_store_key = NULL;
+    if(valueQuery_exclude){
+        free(valueQuery_exclude);
+        valueQuery_exclude = NULL;
     }
-    if(keyPairQuery_store_key){
-        keyValuePair_free(keyPairQuery_store_key);
-        keyPairQuery_store_key = NULL;
+    if(keyPairQuery_exclude){
+        keyValuePair_free(keyPairQuery_exclude);
+        keyPairQuery_exclude = NULL;
     }
     return elementToReturn;
 end:
@@ -312,7 +312,7 @@ end:
 // Use this method to automate the change of credentials used to connect online stores. The list of supported parameters differs depending on the platform.
 //
 account_config_update_200_response_t*
-AccountAPI_accountConfigUpdate(apiClient_t *apiClient, int *replace_parameters, char *new_store_url, char *new_store_key, char *bridge_url, char *store_root, char *db_tables_prefix, char *user_agent, char *_3dcart_private_key, char *_3dcart_access_token, char *_3dcartapi_api_key, char *amazon_sp_client_id, char *amazon_sp_client_secret, char *amazon_sp_refresh_token, char *amazon_sp_aws_region, char *amazon_sp_api_environment, char *amazon_seller_id, char *aspdotnetstorefront_api_user, char *aspdotnetstorefront_api_pass, char *bigcommerceapi_admin_account, char *bigcommerceapi_api_path, char *bigcommerceapi_api_key, char *bigcommerceapi_client_id, char *bigcommerceapi_access_token, char *bigcommerceapi_context, char *bol_api_key, char *bol_api_secret, int *bol_retailer_id, char *demandware_client_id, char *demandware_api_password, char *demandware_user_name, char *demandware_user_password, char *ebay_client_id, char *ebay_client_secret, char *ebay_runame, char *ebay_access_token, char *ebay_refresh_token, char *ebay_environment, int *ebay_site_id, char *ecwid_acess_token, char *ecwid_store_id, char *lazada_app_id, char *lazada_app_secret, char *lazada_refresh_token, char *lazada_region, char *etsy_keystring, char *etsy_shared_secret, char *etsy_access_token, char *etsy_token_secret, char *etsy_client_id, char *etsy_refresh_token, char *facebook_app_id, char *facebook_app_secret, char *facebook_access_token, char *facebook_business_id, char *neto_api_key, char *neto_api_username, char *shopline_access_token, char *shopline_app_key, char *shopline_app_secret, char *shopify_access_token, char *shopify_api_key, char *shopify_api_password, char *shopify_shared_secret, char *shoplazza_access_token, char *shoplazza_shared_secret, char *miva_access_token, char *miva_signature, char *shopware_access_key, char *shopware_api_key, char *shopware_api_secret, char *volusion_login, char *volusion_password, char *walmart_client_id, char *walmart_client_secret, char *walmart_environment, char *walmart_channel_type, char *walmart_region, char *square_client_id, char *square_client_secret, char *square_refresh_token, char *squarespace_api_key, char *squarespace_client_id, char *squarespace_client_secret, char *squarespace_access_token, char *squarespace_refresh_token, char *hybris_client_id, char *hybris_client_secret, char *hybris_username, char *hybris_password, list_t *hybris_websites, char *lightspeed_api_key, char *lightspeed_api_secret, char *commercehq_api_key, char *commercehq_api_password, char *wc_consumer_key, char *wc_consumer_secret, char *magento_consumer_key, char *magento_consumer_secret, char *magento_access_token, char *magento_token_secret, char *prestashop_webservice_key, char *wix_app_id, char *wix_app_secret_key, char *wix_instance_id, char *wix_refresh_token, char *mercado_libre_app_id, char *mercado_libre_app_secret_key, char *mercado_libre_refresh_token, int *zid_client_id, char *zid_client_secret, char *zid_access_token, char *zid_authorization, char *zid_refresh_token, char *flipkart_client_id, char *flipkart_client_secret, char *allegro_client_id, char *allegro_client_secret, char *allegro_access_token, char *allegro_refresh_token, char *allegro_environment, char *zoho_client_id, char *zoho_client_secret, char *zoho_refresh_token, char *zoho_region, int *tiendanube_user_id, char *tiendanube_access_token, char *tiendanube_client_secret, char *otto_client_id, char *otto_client_secret, char *otto_app_id, char *otto_refresh_token, char *otto_environment, char *otto_access_token, char *tiktokshop_app_key, char *tiktokshop_app_secret, char *tiktokshop_refresh_token, char *tiktokshop_access_token, char *salla_client_id, char *salla_client_secret, char *salla_refresh_token, char *salla_access_token)
+AccountAPI_accountConfigUpdate(apiClient_t *apiClient, int *replace_parameters, char *new_store_url, char *new_store_key, char *bridge_url, char *store_root, char *db_tables_prefix, char *user_agent, char *_3dcart_private_key, char *_3dcart_access_token, char *_3dcartapi_api_key, char *amazon_sp_client_id, char *amazon_sp_client_secret, char *amazon_sp_refresh_token, char *amazon_sp_aws_region, char *amazon_sp_api_environment, char *amazon_seller_id, char *aspdotnetstorefront_api_user, char *aspdotnetstorefront_api_pass, char *bigcommerceapi_admin_account, char *bigcommerceapi_api_path, char *bigcommerceapi_api_key, char *bigcommerceapi_client_id, char *bigcommerceapi_access_token, char *bigcommerceapi_context, char *bol_api_key, char *bol_api_secret, int *bol_retailer_id, char *demandware_client_id, char *demandware_api_password, char *demandware_user_name, char *demandware_user_password, char *ebay_client_id, char *ebay_client_secret, char *ebay_runame, char *ebay_access_token, char *ebay_refresh_token, char *ebay_environment, int *ebay_site_id, char *ecwid_acess_token, char *ecwid_store_id, char *lazada_app_id, char *lazada_app_secret, char *lazada_refresh_token, char *lazada_region, char *etsy_keystring, char *etsy_shared_secret, char *etsy_access_token, char *etsy_token_secret, char *etsy_client_id, char *etsy_refresh_token, char *facebook_app_id, char *facebook_app_secret, char *facebook_access_token, char *facebook_business_id, char *neto_api_key, char *neto_api_username, char *shopline_access_token, char *shopline_app_key, char *shopline_app_secret, char *shopline_shared_secret, char *shopify_access_token, char *shopify_api_key, char *shopify_api_password, char *shopify_shared_secret, char *shoplazza_access_token, char *shoplazza_shared_secret, char *miva_access_token, char *miva_signature, char *shopware_access_key, char *shopware_api_key, char *shopware_api_secret, char *volusion_login, char *volusion_password, char *walmart_client_id, char *walmart_client_secret, char *walmart_environment, char *walmart_channel_type, char *walmart_region, char *square_client_id, char *square_client_secret, char *square_refresh_token, char *squarespace_api_key, char *squarespace_client_id, char *squarespace_client_secret, char *squarespace_access_token, char *squarespace_refresh_token, char *hybris_client_id, char *hybris_client_secret, char *hybris_username, char *hybris_password, list_t *hybris_websites, char *lightspeed_api_key, char *lightspeed_api_secret, char *commercehq_api_key, char *commercehq_api_password, char *wc_consumer_key, char *wc_consumer_secret, char *magento_consumer_key, char *magento_consumer_secret, char *magento_access_token, char *magento_token_secret, char *prestashop_webservice_key, char *wix_app_id, char *wix_app_secret_key, char *wix_instance_id, char *wix_refresh_token, char *mercado_libre_app_id, char *mercado_libre_app_secret_key, char *mercado_libre_refresh_token, int *zid_client_id, char *zid_client_secret, char *zid_access_token, char *zid_authorization, char *zid_refresh_token, char *flipkart_client_id, char *flipkart_client_secret, char *allegro_client_id, char *allegro_client_secret, char *allegro_access_token, char *allegro_refresh_token, char *allegro_environment, char *zoho_client_id, char *zoho_client_secret, char *zoho_refresh_token, char *zoho_region, int *tiendanube_user_id, char *tiendanube_access_token, char *tiendanube_client_secret, char *otto_client_id, char *otto_client_secret, char *otto_app_id, char *otto_refresh_token, char *otto_environment, char *otto_access_token, char *tiktokshop_app_key, char *tiktokshop_app_secret, char *tiktokshop_refresh_token, char *tiktokshop_access_token, char *salla_client_id, char *salla_client_secret, char *salla_refresh_token, char *salla_access_token)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1041,6 +1041,18 @@ AccountAPI_accountConfigUpdate(apiClient_t *apiClient, int *replace_parameters, 
         valueQuery_shopline_app_secret = strdup((shopline_app_secret));
         keyPairQuery_shopline_app_secret = keyValuePair_create(keyQuery_shopline_app_secret, valueQuery_shopline_app_secret);
         list_addElement(localVarQueryParameters,keyPairQuery_shopline_app_secret);
+    }
+
+    // query parameters
+    char *keyQuery_shopline_shared_secret = NULL;
+    char * valueQuery_shopline_shared_secret = NULL;
+    keyValuePair_t *keyPairQuery_shopline_shared_secret = 0;
+    if (shopline_shared_secret)
+    {
+        keyQuery_shopline_shared_secret = strdup("shopline_shared_secret");
+        valueQuery_shopline_shared_secret = strdup((shopline_shared_secret));
+        keyPairQuery_shopline_shared_secret = keyValuePair_create(keyQuery_shopline_shared_secret, valueQuery_shopline_shared_secret);
+        list_addElement(localVarQueryParameters,keyPairQuery_shopline_shared_secret);
     }
 
     // query parameters
@@ -2769,6 +2781,18 @@ AccountAPI_accountConfigUpdate(apiClient_t *apiClient, int *replace_parameters, 
         keyValuePair_free(keyPairQuery_shopline_app_secret);
         keyPairQuery_shopline_app_secret = NULL;
     }
+    if(keyQuery_shopline_shared_secret){
+        free(keyQuery_shopline_shared_secret);
+        keyQuery_shopline_shared_secret = NULL;
+    }
+    if(valueQuery_shopline_shared_secret){
+        free(valueQuery_shopline_shared_secret);
+        valueQuery_shopline_shared_secret = NULL;
+    }
+    if(keyPairQuery_shopline_shared_secret){
+        keyValuePair_free(keyPairQuery_shopline_shared_secret);
+        keyPairQuery_shopline_shared_secret = NULL;
+    }
     if(keyQuery_shopify_access_token){
         free(keyQuery_shopify_access_token);
         keyQuery_shopify_access_token = NULL;
@@ -3753,7 +3777,7 @@ end:
 // If the callback of your service for some reason could not accept webhooks from API2Cart, then with the help of this method you can get a list of missed webhooks to perform synchronization again using entity_id. Please note that we keep such records for 24 hours.
 //
 account_failed_webhooks_200_response_t*
-AccountAPI_accountFailedWebhooks(apiClient_t *apiClient, int *count, int *start, char *ids)
+AccountAPI_accountFailedWebhooks(apiClient_t *apiClient, int *start, int *count, char *ids)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -3774,19 +3798,6 @@ AccountAPI_accountFailedWebhooks(apiClient_t *apiClient, int *count, int *start,
 
 
     // query parameters
-    char *keyQuery_count = NULL;
-    char * valueQuery_count = NULL;
-    keyValuePair_t *keyPairQuery_count = 0;
-    if (count)
-    {
-        keyQuery_count = strdup("count");
-        valueQuery_count = calloc(1,MAX_NUMBER_LENGTH);
-        snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
-        keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
-        list_addElement(localVarQueryParameters,keyPairQuery_count);
-    }
-
-    // query parameters
     char *keyQuery_start = NULL;
     char * valueQuery_start = NULL;
     keyValuePair_t *keyPairQuery_start = 0;
@@ -3797,6 +3808,19 @@ AccountAPI_accountFailedWebhooks(apiClient_t *apiClient, int *count, int *start,
         snprintf(valueQuery_start, MAX_NUMBER_LENGTH, "%d", *start);
         keyPairQuery_start = keyValuePair_create(keyQuery_start, valueQuery_start);
         list_addElement(localVarQueryParameters,keyPairQuery_start);
+    }
+
+    // query parameters
+    char *keyQuery_count = NULL;
+    char * valueQuery_count = NULL;
+    keyValuePair_t *keyPairQuery_count = 0;
+    if (count)
+    {
+        keyQuery_count = strdup("count");
+        valueQuery_count = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
+        keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
+        list_addElement(localVarQueryParameters,keyPairQuery_count);
     }
 
     // query parameters
@@ -3849,18 +3873,6 @@ AccountAPI_accountFailedWebhooks(apiClient_t *apiClient, int *count, int *start,
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_count){
-        free(keyQuery_count);
-        keyQuery_count = NULL;
-    }
-    if(valueQuery_count){
-        free(valueQuery_count);
-        valueQuery_count = NULL;
-    }
-    if(keyPairQuery_count){
-        keyValuePair_free(keyPairQuery_count);
-        keyPairQuery_count = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -3872,6 +3884,18 @@ AccountAPI_accountFailedWebhooks(apiClient_t *apiClient, int *count, int *start,
     if(keyPairQuery_start){
         keyValuePair_free(keyPairQuery_start);
         keyPairQuery_start = NULL;
+    }
+    if(keyQuery_count){
+        free(keyQuery_count);
+        keyQuery_count = NULL;
+    }
+    if(valueQuery_count){
+        free(valueQuery_count);
+        valueQuery_count = NULL;
+    }
+    if(keyPairQuery_count){
+        keyValuePair_free(keyPairQuery_count);
+        keyPairQuery_count = NULL;
     }
     if(keyQuery_ids){
         free(keyQuery_ids);

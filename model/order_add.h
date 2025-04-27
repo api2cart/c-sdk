@@ -26,68 +26,68 @@ typedef struct order_add_t {
     char *store_id; // string
     char *channel_id; // string
     char *order_status; // string
-    int send_notifications; //boolean
-    int send_admin_notifications; //boolean
+    char *fulfillment_status; // string
+    char *financial_status; // string
     char *customer_email; // string
-    char *bill_first_name; // string
-    char *bill_last_name; // string
-    char *bill_address_1; // string
-    char *bill_city; // string
-    char *bill_postcode; // string
-    char *bill_state; // string
-    char *bill_country; // string
-    char *shipp_first_name; // string
-    char *shipp_last_name; // string
-    char *shipp_address_1; // string
-    char *shipp_city; // string
-    char *shipp_postcode; // string
-    char *shipp_state; // string
-    char *shipp_country; // string
-    double total_price; //numeric
-    char *date; // string
-    char *order_payment_method; // string
-    char *transaction_id; // string
-    char *order_shipping_method; // string
-    char *currency; // string
-    char *bill_address_2; // string
-    char *bill_company; // string
-    char *bill_phone; // string
-    char *bill_fax; // string
-    char *comment; // string
-    char *admin_comment; // string
-    char *admin_private_comment; // string
     char *customer_first_name; // string
     char *customer_last_name; // string
     char *customer_phone; // string
     char *customer_country; // string
     char *customer_birthday; // string
     char *customer_fax; // string
+    char *order_payment_method; // string
+    char *transaction_id; // string
+    char *currency; // string
+    char *date; // string
+    char *date_modified; // string
+    char *date_finished; // string
+    char *bill_first_name; // string
+    char *bill_last_name; // string
+    char *bill_address_1; // string
+    char *bill_address_2; // string
+    char *bill_city; // string
+    char *bill_postcode; // string
+    char *bill_state; // string
+    char *bill_country; // string
+    char *bill_company; // string
+    char *bill_phone; // string
+    char *bill_fax; // string
+    char *shipp_first_name; // string
+    char *shipp_last_name; // string
+    char *shipp_address_1; // string
     char *shipp_address_2; // string
+    char *shipp_city; // string
+    char *shipp_postcode; // string
+    char *shipp_state; // string
+    char *shipp_country; // string
     char *shipp_company; // string
     char *shipp_phone; // string
     char *shipp_fax; // string
-    char *date_modified; // string
-    char *date_finished; // string
     double subtotal_price; //numeric
     double tax_price; //numeric
+    double total_price; //numeric
+    double total_paid; //numeric
+    int total_weight; //numeric
     int prices_inc_tax; //boolean
     double shipping_price; //numeric
     double shipping_tax; //numeric
-    char *carrier_id; // string
-    char *warehouse_id; // string
     double discount; //numeric
     double coupon_discount; //numeric
-    list_t *coupons; //primitive container
     double gift_certificate_discount; //numeric
-    char *fulfillment_status; // string
-    char *financial_status; // string
-    double total_paid; //numeric
-    char *external_source; // string
+    char *order_shipping_method; // string
+    char *carrier_id; // string
+    char *warehouse_id; // string
+    list_t *coupons; //primitive container
     char *tags; // string
+    char *comment; // string
+    char *admin_comment; // string
+    char *admin_private_comment; // string
+    int send_notifications; //boolean
+    int send_admin_notifications; //boolean
+    char *external_source; // string
     char *inventory_behaviour; // string
     int create_invoice; //boolean
     list_t *note_attributes; //nonprimitive container
-    int total_weight; //numeric
     int clear_cache; //boolean
     char *origin; // string
     list_t *order_item; //nonprimitive container
@@ -101,68 +101,68 @@ __attribute__((deprecated)) order_add_t *order_add_create(
     char *store_id,
     char *channel_id,
     char *order_status,
-    int send_notifications,
-    int send_admin_notifications,
+    char *fulfillment_status,
+    char *financial_status,
     char *customer_email,
-    char *bill_first_name,
-    char *bill_last_name,
-    char *bill_address_1,
-    char *bill_city,
-    char *bill_postcode,
-    char *bill_state,
-    char *bill_country,
-    char *shipp_first_name,
-    char *shipp_last_name,
-    char *shipp_address_1,
-    char *shipp_city,
-    char *shipp_postcode,
-    char *shipp_state,
-    char *shipp_country,
-    double total_price,
-    char *date,
-    char *order_payment_method,
-    char *transaction_id,
-    char *order_shipping_method,
-    char *currency,
-    char *bill_address_2,
-    char *bill_company,
-    char *bill_phone,
-    char *bill_fax,
-    char *comment,
-    char *admin_comment,
-    char *admin_private_comment,
     char *customer_first_name,
     char *customer_last_name,
     char *customer_phone,
     char *customer_country,
     char *customer_birthday,
     char *customer_fax,
+    char *order_payment_method,
+    char *transaction_id,
+    char *currency,
+    char *date,
+    char *date_modified,
+    char *date_finished,
+    char *bill_first_name,
+    char *bill_last_name,
+    char *bill_address_1,
+    char *bill_address_2,
+    char *bill_city,
+    char *bill_postcode,
+    char *bill_state,
+    char *bill_country,
+    char *bill_company,
+    char *bill_phone,
+    char *bill_fax,
+    char *shipp_first_name,
+    char *shipp_last_name,
+    char *shipp_address_1,
     char *shipp_address_2,
+    char *shipp_city,
+    char *shipp_postcode,
+    char *shipp_state,
+    char *shipp_country,
     char *shipp_company,
     char *shipp_phone,
     char *shipp_fax,
-    char *date_modified,
-    char *date_finished,
     double subtotal_price,
     double tax_price,
+    double total_price,
+    double total_paid,
+    int total_weight,
     int prices_inc_tax,
     double shipping_price,
     double shipping_tax,
-    char *carrier_id,
-    char *warehouse_id,
     double discount,
     double coupon_discount,
-    list_t *coupons,
     double gift_certificate_discount,
-    char *fulfillment_status,
-    char *financial_status,
-    double total_paid,
-    char *external_source,
+    char *order_shipping_method,
+    char *carrier_id,
+    char *warehouse_id,
+    list_t *coupons,
     char *tags,
+    char *comment,
+    char *admin_comment,
+    char *admin_private_comment,
+    int send_notifications,
+    int send_admin_notifications,
+    char *external_source,
     char *inventory_behaviour,
     int create_invoice,
     list_t *note_attributes,
-    int total_weight,
     int clear_cache,
     char *origin,
     list_t *order_item

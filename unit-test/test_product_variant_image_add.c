@@ -24,6 +24,7 @@ product_variant_image_add_t* instantiate_product_variant_image_add(int include_o
     product_variant_image_add = product_variant_image_add_create(
       "10",
       "45",
+      "1",
       "abibas.png",
       api2cart_openapi_product_variant_image_add_TYPE_"base",
       "http://docs.api2cart.com/img/logo.png",
@@ -31,13 +32,13 @@ product_variant_image_add_t* instantiate_product_variant_image_add(int include_o
       "This cool image",
       "image/jpeg",
       5,
-      "1",
       "5"
     );
   } else {
     product_variant_image_add = product_variant_image_add_create(
       "10",
       "45",
+      "1",
       "abibas.png",
       api2cart_openapi_product_variant_image_add_TYPE_"base",
       "http://docs.api2cart.com/img/logo.png",
@@ -45,7 +46,6 @@ product_variant_image_add_t* instantiate_product_variant_image_add(int include_o
       "This cool image",
       "image/jpeg",
       5,
-      "1",
       "5"
     );
   }

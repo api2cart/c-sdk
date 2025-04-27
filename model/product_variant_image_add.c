@@ -25,6 +25,7 @@ api2cart_openapi_product_variant_image_add_TYPE_e product_variant_image_add_type
 static product_variant_image_add_t *product_variant_image_add_create_internal(
     char *product_id,
     char *product_variant_id,
+    char *store_id,
     char *image_name,
     api2cart_openapi_product_variant_image_add_TYPE_e type,
     char *url,
@@ -32,7 +33,6 @@ static product_variant_image_add_t *product_variant_image_add_create_internal(
     char *label,
     char *mime,
     int position,
-    char *store_id,
     char *option_id
     ) {
     product_variant_image_add_t *product_variant_image_add_local_var = malloc(sizeof(product_variant_image_add_t));
@@ -41,6 +41,7 @@ static product_variant_image_add_t *product_variant_image_add_create_internal(
     }
     product_variant_image_add_local_var->product_id = product_id;
     product_variant_image_add_local_var->product_variant_id = product_variant_id;
+    product_variant_image_add_local_var->store_id = store_id;
     product_variant_image_add_local_var->image_name = image_name;
     product_variant_image_add_local_var->type = type;
     product_variant_image_add_local_var->url = url;
@@ -48,7 +49,6 @@ static product_variant_image_add_t *product_variant_image_add_create_internal(
     product_variant_image_add_local_var->label = label;
     product_variant_image_add_local_var->mime = mime;
     product_variant_image_add_local_var->position = position;
-    product_variant_image_add_local_var->store_id = store_id;
     product_variant_image_add_local_var->option_id = option_id;
 
     product_variant_image_add_local_var->_library_owned = 1;
@@ -58,6 +58,7 @@ static product_variant_image_add_t *product_variant_image_add_create_internal(
 __attribute__((deprecated)) product_variant_image_add_t *product_variant_image_add_create(
     char *product_id,
     char *product_variant_id,
+    char *store_id,
     char *image_name,
     api2cart_openapi_product_variant_image_add_TYPE_e type,
     char *url,
@@ -65,12 +66,12 @@ __attribute__((deprecated)) product_variant_image_add_t *product_variant_image_a
     char *label,
     char *mime,
     int position,
-    char *store_id,
     char *option_id
     ) {
     return product_variant_image_add_create_internal (
         product_id,
         product_variant_id,
+        store_id,
         image_name,
         type,
         url,
@@ -78,7 +79,6 @@ __attribute__((deprecated)) product_variant_image_add_t *product_variant_image_a
         label,
         mime,
         position,
-        store_id,
         option_id
         );
 }
@@ -100,6 +100,10 @@ void product_variant_image_add_free(product_variant_image_add_t *product_variant
         free(product_variant_image_add->product_variant_id);
         product_variant_image_add->product_variant_id = NULL;
     }
+    if (product_variant_image_add->store_id) {
+        free(product_variant_image_add->store_id);
+        product_variant_image_add->store_id = NULL;
+    }
     if (product_variant_image_add->image_name) {
         free(product_variant_image_add->image_name);
         product_variant_image_add->image_name = NULL;
@@ -119,10 +123,6 @@ void product_variant_image_add_free(product_variant_image_add_t *product_variant
     if (product_variant_image_add->mime) {
         free(product_variant_image_add->mime);
         product_variant_image_add->mime = NULL;
-    }
-    if (product_variant_image_add->store_id) {
-        free(product_variant_image_add->store_id);
-        product_variant_image_add->store_id = NULL;
     }
     if (product_variant_image_add->option_id) {
         free(product_variant_image_add->option_id);
@@ -148,6 +148,14 @@ cJSON *product_variant_image_add_convertToJSON(product_variant_image_add_t *prod
     }
     if(cJSON_AddStringToObject(item, "product_variant_id", product_variant_image_add->product_variant_id) == NULL) {
     goto fail; //String
+    }
+
+
+    // product_variant_image_add->store_id
+    if(product_variant_image_add->store_id) {
+    if(cJSON_AddStringToObject(item, "store_id", product_variant_image_add->store_id) == NULL) {
+    goto fail; //String
+    }
     }
 
 
@@ -210,14 +218,6 @@ cJSON *product_variant_image_add_convertToJSON(product_variant_image_add_t *prod
     }
 
 
-    // product_variant_image_add->store_id
-    if(product_variant_image_add->store_id) {
-    if(cJSON_AddStringToObject(item, "store_id", product_variant_image_add->store_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
     // product_variant_image_add->option_id
     if(product_variant_image_add->option_id) {
     if(cJSON_AddStringToObject(item, "option_id", product_variant_image_add->option_id) == NULL) {
@@ -262,6 +262,18 @@ product_variant_image_add_t *product_variant_image_add_parseFromJSON(cJSON *prod
     if(!cJSON_IsString(product_variant_id))
     {
     goto end; //String
+    }
+
+    // product_variant_image_add->store_id
+    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(product_variant_image_addJSON, "store_id");
+    if (cJSON_IsNull(store_id)) {
+        store_id = NULL;
+    }
+    if (store_id) { 
+    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
+    {
+    goto end; //String
+    }
     }
 
     // product_variant_image_add->image_name
@@ -356,18 +368,6 @@ product_variant_image_add_t *product_variant_image_add_parseFromJSON(cJSON *prod
     }
     }
 
-    // product_variant_image_add->store_id
-    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(product_variant_image_addJSON, "store_id");
-    if (cJSON_IsNull(store_id)) {
-        store_id = NULL;
-    }
-    if (store_id) { 
-    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
-    {
-    goto end; //String
-    }
-    }
-
     // product_variant_image_add->option_id
     cJSON *option_id = cJSON_GetObjectItemCaseSensitive(product_variant_image_addJSON, "option_id");
     if (cJSON_IsNull(option_id)) {
@@ -384,6 +384,7 @@ product_variant_image_add_t *product_variant_image_add_parseFromJSON(cJSON *prod
     product_variant_image_add_local_var = product_variant_image_add_create_internal (
         product_id && !cJSON_IsNull(product_id) ? strdup(product_id->valuestring) : NULL,
         strdup(product_variant_id->valuestring),
+        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         strdup(image_name->valuestring),
         typeVariable,
         url && !cJSON_IsNull(url) ? strdup(url->valuestring) : NULL,
@@ -391,7 +392,6 @@ product_variant_image_add_t *product_variant_image_add_parseFromJSON(cJSON *prod
         label && !cJSON_IsNull(label) ? strdup(label->valuestring) : NULL,
         mime && !cJSON_IsNull(mime) ? strdup(mime->valuestring) : NULL,
         position ? position->valuedouble : 0,
-        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         option_id && !cJSON_IsNull(option_id) ? strdup(option_id->valuestring) : NULL
         );
 

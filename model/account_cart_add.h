@@ -101,6 +101,7 @@ typedef struct account_cart_add_t {
     char *shopline_access_token; // string
     char *shopline_app_key; // string
     char *shopline_app_secret; // string
+    char *shopline_shared_secret; // string
     char *shopify_access_token; // string
     char *shopify_api_key; // string
     char *shopify_api_password; // string
@@ -254,6 +255,7 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     char *shopline_access_token,
     char *shopline_app_key,
     char *shopline_app_secret,
+    char *shopline_shared_secret,
     char *shopify_access_token,
     char *shopify_api_key,
     char *shopify_api_password,

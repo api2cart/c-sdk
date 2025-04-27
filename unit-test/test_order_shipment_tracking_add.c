@@ -22,10 +22,10 @@ order_shipment_tracking_add_t* instantiate_order_shipment_tracking_add(int inclu
   order_shipment_tracking_add_t* order_shipment_tracking_add = NULL;
   if (include_optional) {
     order_shipment_tracking_add = order_shipment_tracking_add_create(
-      "1",
       "25",
       "200000002",
       "USPS",
+      "1",
       "Custom tracker",
       "1А6745",
       "http://example.com?someParam=value",
@@ -33,10 +33,10 @@ order_shipment_tracking_add_t* instantiate_order_shipment_tracking_add(int inclu
     );
   } else {
     order_shipment_tracking_add = order_shipment_tracking_add_create(
-      "1",
       "25",
       "200000002",
       "USPS",
+      "1",
       "Custom tracker",
       "1А6745",
       "http://example.com?someParam=value",

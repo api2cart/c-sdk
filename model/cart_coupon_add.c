@@ -57,14 +57,13 @@ api2cart_openapi_cart_coupon_add_ACTIONSCOPE_e cart_coupon_add_action_scope_From
 }
 
 static cart_coupon_add_t *cart_coupon_add_create_internal(
-    char *store_id,
     char *code,
-    char *name,
-    list_t *codes,
     api2cart_openapi_cart_coupon_add_ACTIONTYPE_e action_type,
     api2cart_openapi_cart_coupon_add_ACTIONAPPLYTO_e action_apply_to,
     api2cart_openapi_cart_coupon_add_ACTIONSCOPE_e action_scope,
     double action_amount,
+    list_t *codes,
+    char *name,
     char *date_start,
     char *date_end,
     int usage_limit,
@@ -73,20 +72,20 @@ static cart_coupon_add_t *cart_coupon_add_create_internal(
     char *action_condition_key,
     char *action_condition_operator,
     char *action_condition_value,
-    int include_tax
+    int include_tax,
+    char *store_id
     ) {
     cart_coupon_add_t *cart_coupon_add_local_var = malloc(sizeof(cart_coupon_add_t));
     if (!cart_coupon_add_local_var) {
         return NULL;
     }
-    cart_coupon_add_local_var->store_id = store_id;
     cart_coupon_add_local_var->code = code;
-    cart_coupon_add_local_var->name = name;
-    cart_coupon_add_local_var->codes = codes;
     cart_coupon_add_local_var->action_type = action_type;
     cart_coupon_add_local_var->action_apply_to = action_apply_to;
     cart_coupon_add_local_var->action_scope = action_scope;
     cart_coupon_add_local_var->action_amount = action_amount;
+    cart_coupon_add_local_var->codes = codes;
+    cart_coupon_add_local_var->name = name;
     cart_coupon_add_local_var->date_start = date_start;
     cart_coupon_add_local_var->date_end = date_end;
     cart_coupon_add_local_var->usage_limit = usage_limit;
@@ -96,20 +95,20 @@ static cart_coupon_add_t *cart_coupon_add_create_internal(
     cart_coupon_add_local_var->action_condition_operator = action_condition_operator;
     cart_coupon_add_local_var->action_condition_value = action_condition_value;
     cart_coupon_add_local_var->include_tax = include_tax;
+    cart_coupon_add_local_var->store_id = store_id;
 
     cart_coupon_add_local_var->_library_owned = 1;
     return cart_coupon_add_local_var;
 }
 
 __attribute__((deprecated)) cart_coupon_add_t *cart_coupon_add_create(
-    char *store_id,
     char *code,
-    char *name,
-    list_t *codes,
     api2cart_openapi_cart_coupon_add_ACTIONTYPE_e action_type,
     api2cart_openapi_cart_coupon_add_ACTIONAPPLYTO_e action_apply_to,
     api2cart_openapi_cart_coupon_add_ACTIONSCOPE_e action_scope,
     double action_amount,
+    list_t *codes,
+    char *name,
     char *date_start,
     char *date_end,
     int usage_limit,
@@ -118,17 +117,17 @@ __attribute__((deprecated)) cart_coupon_add_t *cart_coupon_add_create(
     char *action_condition_key,
     char *action_condition_operator,
     char *action_condition_value,
-    int include_tax
+    int include_tax,
+    char *store_id
     ) {
     return cart_coupon_add_create_internal (
-        store_id,
         code,
-        name,
-        codes,
         action_type,
         action_apply_to,
         action_scope,
         action_amount,
+        codes,
+        name,
         date_start,
         date_end,
         usage_limit,
@@ -137,7 +136,8 @@ __attribute__((deprecated)) cart_coupon_add_t *cart_coupon_add_create(
         action_condition_key,
         action_condition_operator,
         action_condition_value,
-        include_tax
+        include_tax,
+        store_id
         );
 }
 
@@ -150,17 +150,9 @@ void cart_coupon_add_free(cart_coupon_add_t *cart_coupon_add) {
         return ;
     }
     listEntry_t *listEntry;
-    if (cart_coupon_add->store_id) {
-        free(cart_coupon_add->store_id);
-        cart_coupon_add->store_id = NULL;
-    }
     if (cart_coupon_add->code) {
         free(cart_coupon_add->code);
         cart_coupon_add->code = NULL;
-    }
-    if (cart_coupon_add->name) {
-        free(cart_coupon_add->name);
-        cart_coupon_add->name = NULL;
     }
     if (cart_coupon_add->codes) {
         list_ForEach(listEntry, cart_coupon_add->codes) {
@@ -168,6 +160,10 @@ void cart_coupon_add_free(cart_coupon_add_t *cart_coupon_add) {
         }
         list_freeList(cart_coupon_add->codes);
         cart_coupon_add->codes = NULL;
+    }
+    if (cart_coupon_add->name) {
+        free(cart_coupon_add->name);
+        cart_coupon_add->name = NULL;
     }
     if (cart_coupon_add->date_start) {
         free(cart_coupon_add->date_start);
@@ -193,19 +189,15 @@ void cart_coupon_add_free(cart_coupon_add_t *cart_coupon_add) {
         free(cart_coupon_add->action_condition_value);
         cart_coupon_add->action_condition_value = NULL;
     }
+    if (cart_coupon_add->store_id) {
+        free(cart_coupon_add->store_id);
+        cart_coupon_add->store_id = NULL;
+    }
     free(cart_coupon_add);
 }
 
 cJSON *cart_coupon_add_convertToJSON(cart_coupon_add_t *cart_coupon_add) {
     cJSON *item = cJSON_CreateObject();
-
-    // cart_coupon_add->store_id
-    if(cart_coupon_add->store_id) {
-    if(cJSON_AddStringToObject(item, "store_id", cart_coupon_add->store_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
 
     // cart_coupon_add->code
     if (!cart_coupon_add->code) {
@@ -213,31 +205,6 @@ cJSON *cart_coupon_add_convertToJSON(cart_coupon_add_t *cart_coupon_add) {
     }
     if(cJSON_AddStringToObject(item, "code", cart_coupon_add->code) == NULL) {
     goto fail; //String
-    }
-
-
-    // cart_coupon_add->name
-    if(cart_coupon_add->name) {
-    if(cJSON_AddStringToObject(item, "name", cart_coupon_add->name) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // cart_coupon_add->codes
-    if(cart_coupon_add->codes) {
-    cJSON *codes = cJSON_AddArrayToObject(item, "codes");
-    if(codes == NULL) {
-        goto fail; //primitive container
-    }
-
-    listEntry_t *codesListEntry;
-    list_ForEach(codesListEntry, cart_coupon_add->codes) {
-    if(cJSON_AddStringToObject(codes, "", codesListEntry->data) == NULL)
-    {
-        goto fail;
-    }
-    }
     }
 
 
@@ -277,6 +244,31 @@ cJSON *cart_coupon_add_convertToJSON(cart_coupon_add_t *cart_coupon_add) {
     }
     if(cJSON_AddNumberToObject(item, "action_amount", cart_coupon_add->action_amount) == NULL) {
     goto fail; //Numeric
+    }
+
+
+    // cart_coupon_add->codes
+    if(cart_coupon_add->codes) {
+    cJSON *codes = cJSON_AddArrayToObject(item, "codes");
+    if(codes == NULL) {
+        goto fail; //primitive container
+    }
+
+    listEntry_t *codesListEntry;
+    list_ForEach(codesListEntry, cart_coupon_add->codes) {
+    if(cJSON_AddStringToObject(codes, "", codesListEntry->data) == NULL)
+    {
+        goto fail;
+    }
+    }
+    }
+
+
+    // cart_coupon_add->name
+    if(cart_coupon_add->name) {
+    if(cJSON_AddStringToObject(item, "name", cart_coupon_add->name) == NULL) {
+    goto fail; //String
+    }
     }
 
 
@@ -351,6 +343,14 @@ cJSON *cart_coupon_add_convertToJSON(cart_coupon_add_t *cart_coupon_add) {
     }
     }
 
+
+    // cart_coupon_add->store_id
+    if(cart_coupon_add->store_id) {
+    if(cJSON_AddStringToObject(item, "store_id", cart_coupon_add->store_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -366,18 +366,6 @@ cart_coupon_add_t *cart_coupon_add_parseFromJSON(cJSON *cart_coupon_addJSON){
     // define the local list for cart_coupon_add->codes
     list_t *codesList = NULL;
 
-    // cart_coupon_add->store_id
-    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(cart_coupon_addJSON, "store_id");
-    if (cJSON_IsNull(store_id)) {
-        store_id = NULL;
-    }
-    if (store_id) { 
-    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
-    {
-    goto end; //String
-    }
-    }
-
     // cart_coupon_add->code
     cJSON *code = cJSON_GetObjectItemCaseSensitive(cart_coupon_addJSON, "code");
     if (cJSON_IsNull(code)) {
@@ -391,40 +379,6 @@ cart_coupon_add_t *cart_coupon_add_parseFromJSON(cJSON *cart_coupon_addJSON){
     if(!cJSON_IsString(code))
     {
     goto end; //String
-    }
-
-    // cart_coupon_add->name
-    cJSON *name = cJSON_GetObjectItemCaseSensitive(cart_coupon_addJSON, "name");
-    if (cJSON_IsNull(name)) {
-        name = NULL;
-    }
-    if (name) { 
-    if(!cJSON_IsString(name) && !cJSON_IsNull(name))
-    {
-    goto end; //String
-    }
-    }
-
-    // cart_coupon_add->codes
-    cJSON *codes = cJSON_GetObjectItemCaseSensitive(cart_coupon_addJSON, "codes");
-    if (cJSON_IsNull(codes)) {
-        codes = NULL;
-    }
-    if (codes) { 
-    cJSON *codes_local = NULL;
-    if(!cJSON_IsArray(codes)) {
-        goto end;//primitive container
-    }
-    codesList = list_createList();
-
-    cJSON_ArrayForEach(codes_local, codes)
-    {
-        if(!cJSON_IsString(codes_local))
-        {
-            goto end;
-        }
-        list_addElement(codesList , strdup(codes_local->valuestring));
-    }
     }
 
     // cart_coupon_add->action_type
@@ -491,6 +445,40 @@ cart_coupon_add_t *cart_coupon_add_parseFromJSON(cJSON *cart_coupon_addJSON){
     if(!cJSON_IsNumber(action_amount))
     {
     goto end; //Numeric
+    }
+
+    // cart_coupon_add->codes
+    cJSON *codes = cJSON_GetObjectItemCaseSensitive(cart_coupon_addJSON, "codes");
+    if (cJSON_IsNull(codes)) {
+        codes = NULL;
+    }
+    if (codes) { 
+    cJSON *codes_local = NULL;
+    if(!cJSON_IsArray(codes)) {
+        goto end;//primitive container
+    }
+    codesList = list_createList();
+
+    cJSON_ArrayForEach(codes_local, codes)
+    {
+        if(!cJSON_IsString(codes_local))
+        {
+            goto end;
+        }
+        list_addElement(codesList , strdup(codes_local->valuestring));
+    }
+    }
+
+    // cart_coupon_add->name
+    cJSON *name = cJSON_GetObjectItemCaseSensitive(cart_coupon_addJSON, "name");
+    if (cJSON_IsNull(name)) {
+        name = NULL;
+    }
+    if (name) { 
+    if(!cJSON_IsString(name) && !cJSON_IsNull(name))
+    {
+    goto end; //String
+    }
     }
 
     // cart_coupon_add->date_start
@@ -601,16 +589,27 @@ cart_coupon_add_t *cart_coupon_add_parseFromJSON(cJSON *cart_coupon_addJSON){
     }
     }
 
+    // cart_coupon_add->store_id
+    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(cart_coupon_addJSON, "store_id");
+    if (cJSON_IsNull(store_id)) {
+        store_id = NULL;
+    }
+    if (store_id) { 
+    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
+    {
+    goto end; //String
+    }
+    }
+
 
     cart_coupon_add_local_var = cart_coupon_add_create_internal (
-        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
         strdup(code->valuestring),
-        name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
-        codes ? codesList : NULL,
         action_typeVariable,
         action_apply_toVariable,
         action_scopeVariable,
         action_amount->valuedouble,
+        codes ? codesList : NULL,
+        name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
         date_start && !cJSON_IsNull(date_start) ? strdup(date_start->valuestring) : NULL,
         date_end && !cJSON_IsNull(date_end) ? strdup(date_end->valuestring) : NULL,
         usage_limit ? usage_limit->valuedouble : 0,
@@ -619,7 +618,8 @@ cart_coupon_add_t *cart_coupon_add_parseFromJSON(cJSON *cart_coupon_addJSON){
         action_condition_key && !cJSON_IsNull(action_condition_key) ? strdup(action_condition_key->valuestring) : NULL,
         action_condition_operator && !cJSON_IsNull(action_condition_operator) ? strdup(action_condition_operator->valuestring) : NULL,
         action_condition_value && !cJSON_IsNull(action_condition_value) ? strdup(action_condition_value->valuestring) : NULL,
-        include_tax ? include_tax->valueint : 0
+        include_tax ? include_tax->valueint : 0,
+        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL
         );
 
     return cart_coupon_add_local_var;

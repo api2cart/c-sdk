@@ -8,84 +8,86 @@
 static product_update_t *product_update_create_internal(
     char *id,
     char *model,
-    double old_price,
+    char *sku,
+    char *name,
+    char *description,
+    char *short_description,
     double price,
+    double old_price,
     double special_price,
     char *sprice_create,
     char *sprice_expire,
     double cost_price,
     double fixed_cost_shipping_price,
     double retail_price,
-    double quantity,
+    list_t *tier_prices,
+    double reserve_price,
+    double buyitnow_price,
+    int taxable,
+    char *tax_class_id,
+    char *type,
+    char *status,
+    char *condition,
+    char *visible,
+    int in_stock,
+    int avail,
+    char *avail_from,
+    char *product_class,
     int available_for_view,
-    double weight,
-    char *weight_unit,
-    char *dimensions_unit,
-    double increase_quantity,
-    double reduce_quantity,
-    char *warehouse_id,
+    char *stores_ids,
+    char *store_id,
+    char *lang_id,
+    double quantity,
     double reserve_quantity,
     int manage_stock,
     char *backorder_status,
-    char *name,
-    char *sku,
-    char *visible,
+    double increase_quantity,
+    double reduce_quantity,
+    char *warehouse_id,
+    double weight,
+    char *weight_unit,
+    double height,
+    double length,
+    double width,
+    char *dimensions_unit,
+    int is_virtual,
+    int is_free_shipping,
+    char *gtin,
+    char *upc,
+    char *mpn,
+    char *ean,
+    char *isbn,
+    char *barcode,
     char *manufacturer,
     char *manufacturer_id,
     char *categories_ids,
     char *related_products_ids,
     char *up_sell_products_ids,
     char *cross_sell_products_ids,
-    char *description,
-    char *short_description,
     char *meta_title,
     char *meta_keywords,
     char *meta_description,
-    char *store_id,
-    char *lang_id,
-    int in_stock,
-    char *status,
     char *seo_url,
-    char *report_request_id,
-    int disable_report_cache,
-    int reindex,
-    char *tags,
-    int clear_cache,
-    char *gtin,
-    char *upc,
-    char *mpn,
-    char *ean,
-    char *isbn,
-    int taxable,
-    char *product_class,
-    double height,
-    double length,
-    double width,
-    char *harmonized_system_code,
-    char *country_of_origin,
     char *search_keywords,
-    char *barcode,
-    int is_virtual,
-    int is_free_shipping,
-    double reserve_price,
-    double buyitnow_price,
-    char *avail_from,
-    char *tax_class_id,
-    char *type,
-    int avail,
+    char *tags,
     char *delivery_code,
-    int check_process_status,
     product_add_package_details_t *package_details,
-    char *stores_ids,
-    product_add_manufacturer_info_t *manufacturer_info,
-    char *production_partner_ids,
+    char *country_of_origin,
+    char *harmonized_system_code,
     int shipping_template_id,
     char *when_made,
     int is_supply,
     int downloadable,
     list_t *materials,
     int auto_renew,
-    int on_sale
+    int on_sale,
+    char *production_partner_ids,
+    product_add_manufacturer_info_t *manufacturer_info,
+    char *report_request_id,
+    int disable_report_cache,
+    int reindex,
+    int clear_cache,
+    int check_process_status
     ) {
     product_update_t *product_update_local_var = malloc(sizeof(product_update_t));
     if (!product_update_local_var) {
@@ -93,77 +95,72 @@ static product_update_t *product_update_create_internal(
     }
     product_update_local_var->id = id;
     product_update_local_var->model = model;
-    product_update_local_var->old_price = old_price;
+    product_update_local_var->sku = sku;
+    product_update_local_var->name = name;
+    product_update_local_var->description = description;
+    product_update_local_var->short_description = short_description;
     product_update_local_var->price = price;
+    product_update_local_var->old_price = old_price;
     product_update_local_var->special_price = special_price;
     product_update_local_var->sprice_create = sprice_create;
     product_update_local_var->sprice_expire = sprice_expire;
     product_update_local_var->cost_price = cost_price;
     product_update_local_var->fixed_cost_shipping_price = fixed_cost_shipping_price;
     product_update_local_var->retail_price = retail_price;
-    product_update_local_var->quantity = quantity;
+    product_update_local_var->tier_prices = tier_prices;
+    product_update_local_var->reserve_price = reserve_price;
+    product_update_local_var->buyitnow_price = buyitnow_price;
+    product_update_local_var->taxable = taxable;
+    product_update_local_var->tax_class_id = tax_class_id;
+    product_update_local_var->type = type;
+    product_update_local_var->status = status;
+    product_update_local_var->condition = condition;
+    product_update_local_var->visible = visible;
+    product_update_local_var->in_stock = in_stock;
+    product_update_local_var->avail = avail;
+    product_update_local_var->avail_from = avail_from;
+    product_update_local_var->product_class = product_class;
     product_update_local_var->available_for_view = available_for_view;
-    product_update_local_var->weight = weight;
-    product_update_local_var->weight_unit = weight_unit;
-    product_update_local_var->dimensions_unit = dimensions_unit;
-    product_update_local_var->increase_quantity = increase_quantity;
-    product_update_local_var->reduce_quantity = reduce_quantity;
-    product_update_local_var->warehouse_id = warehouse_id;
+    product_update_local_var->stores_ids = stores_ids;
+    product_update_local_var->store_id = store_id;
+    product_update_local_var->lang_id = lang_id;
+    product_update_local_var->quantity = quantity;
     product_update_local_var->reserve_quantity = reserve_quantity;
     product_update_local_var->manage_stock = manage_stock;
     product_update_local_var->backorder_status = backorder_status;
-    product_update_local_var->name = name;
-    product_update_local_var->sku = sku;
-    product_update_local_var->visible = visible;
+    product_update_local_var->increase_quantity = increase_quantity;
+    product_update_local_var->reduce_quantity = reduce_quantity;
+    product_update_local_var->warehouse_id = warehouse_id;
+    product_update_local_var->weight = weight;
+    product_update_local_var->weight_unit = weight_unit;
+    product_update_local_var->height = height;
+    product_update_local_var->length = length;
+    product_update_local_var->width = width;
+    product_update_local_var->dimensions_unit = dimensions_unit;
+    product_update_local_var->is_virtual = is_virtual;
+    product_update_local_var->is_free_shipping = is_free_shipping;
+    product_update_local_var->gtin = gtin;
+    product_update_local_var->upc = upc;
+    product_update_local_var->mpn = mpn;
+    product_update_local_var->ean = ean;
+    product_update_local_var->isbn = isbn;
+    product_update_local_var->barcode = barcode;
     product_update_local_var->manufacturer = manufacturer;
     product_update_local_var->manufacturer_id = manufacturer_id;
     product_update_local_var->categories_ids = categories_ids;
     product_update_local_var->related_products_ids = related_products_ids;
     product_update_local_var->up_sell_products_ids = up_sell_products_ids;
     product_update_local_var->cross_sell_products_ids = cross_sell_products_ids;
-    product_update_local_var->description = description;
-    product_update_local_var->short_description = short_description;
     product_update_local_var->meta_title = meta_title;
     product_update_local_var->meta_keywords = meta_keywords;
     product_update_local_var->meta_description = meta_description;
-    product_update_local_var->store_id = store_id;
-    product_update_local_var->lang_id = lang_id;
-    product_update_local_var->in_stock = in_stock;
-    product_update_local_var->status = status;
     product_update_local_var->seo_url = seo_url;
-    product_update_local_var->report_request_id = report_request_id;
-    product_update_local_var->disable_report_cache = disable_report_cache;
-    product_update_local_var->reindex = reindex;
-    product_update_local_var->tags = tags;
-    product_update_local_var->clear_cache = clear_cache;
-    product_update_local_var->gtin = gtin;
-    product_update_local_var->upc = upc;
-    product_update_local_var->mpn = mpn;
-    product_update_local_var->ean = ean;
-    product_update_local_var->isbn = isbn;
-    product_update_local_var->taxable = taxable;
-    product_update_local_var->product_class = product_class;
-    product_update_local_var->height = height;
-    product_update_local_var->length = length;
-    product_update_local_var->width = width;
-    product_update_local_var->harmonized_system_code = harmonized_system_code;
-    product_update_local_var->country_of_origin = country_of_origin;
     product_update_local_var->search_keywords = search_keywords;
-    product_update_local_var->barcode = barcode;
-    product_update_local_var->is_virtual = is_virtual;
-    product_update_local_var->is_free_shipping = is_free_shipping;
-    product_update_local_var->reserve_price = reserve_price;
-    product_update_local_var->buyitnow_price = buyitnow_price;
-    product_update_local_var->avail_from = avail_from;
-    product_update_local_var->tax_class_id = tax_class_id;
-    product_update_local_var->type = type;
-    product_update_local_var->avail = avail;
+    product_update_local_var->tags = tags;
     product_update_local_var->delivery_code = delivery_code;
-    product_update_local_var->check_process_status = check_process_status;
     product_update_local_var->package_details = package_details;
-    product_update_local_var->stores_ids = stores_ids;
-    product_update_local_var->manufacturer_info = manufacturer_info;
-    product_update_local_var->production_partner_ids = production_partner_ids;
+    product_update_local_var->country_of_origin = country_of_origin;
+    product_update_local_var->harmonized_system_code = harmonized_system_code;
     product_update_local_var->shipping_template_id = shipping_template_id;
     product_update_local_var->when_made = when_made;
     product_update_local_var->is_supply = is_supply;
@@ -171,6 +168,13 @@ static product_update_t *product_update_create_internal(
     product_update_local_var->materials = materials;
     product_update_local_var->auto_renew = auto_renew;
     product_update_local_var->on_sale = on_sale;
+    product_update_local_var->production_partner_ids = production_partner_ids;
+    product_update_local_var->manufacturer_info = manufacturer_info;
+    product_update_local_var->report_request_id = report_request_id;
+    product_update_local_var->disable_report_cache = disable_report_cache;
+    product_update_local_var->reindex = reindex;
+    product_update_local_var->clear_cache = clear_cache;
+    product_update_local_var->check_process_status = check_process_status;
 
     product_update_local_var->_library_owned = 1;
     return product_update_local_var;
@@ -179,166 +183,170 @@ static product_update_t *product_update_create_internal(
 __attribute__((deprecated)) product_update_t *product_update_create(
     char *id,
     char *model,
-    double old_price,
+    char *sku,
+    char *name,
+    char *description,
+    char *short_description,
     double price,
+    double old_price,
     double special_price,
     char *sprice_create,
     char *sprice_expire,
     double cost_price,
     double fixed_cost_shipping_price,
     double retail_price,
-    double quantity,
+    list_t *tier_prices,
+    double reserve_price,
+    double buyitnow_price,
+    int taxable,
+    char *tax_class_id,
+    char *type,
+    char *status,
+    char *condition,
+    char *visible,
+    int in_stock,
+    int avail,
+    char *avail_from,
+    char *product_class,
     int available_for_view,
-    double weight,
-    char *weight_unit,
-    char *dimensions_unit,
-    double increase_quantity,
-    double reduce_quantity,
-    char *warehouse_id,
+    char *stores_ids,
+    char *store_id,
+    char *lang_id,
+    double quantity,
     double reserve_quantity,
     int manage_stock,
     char *backorder_status,
-    char *name,
-    char *sku,
-    char *visible,
+    double increase_quantity,
+    double reduce_quantity,
+    char *warehouse_id,
+    double weight,
+    char *weight_unit,
+    double height,
+    double length,
+    double width,
+    char *dimensions_unit,
+    int is_virtual,
+    int is_free_shipping,
+    char *gtin,
+    char *upc,
+    char *mpn,
+    char *ean,
+    char *isbn,
+    char *barcode,
     char *manufacturer,
     char *manufacturer_id,
     char *categories_ids,
     char *related_products_ids,
     char *up_sell_products_ids,
     char *cross_sell_products_ids,
-    char *description,
-    char *short_description,
     char *meta_title,
     char *meta_keywords,
     char *meta_description,
-    char *store_id,
-    char *lang_id,
-    int in_stock,
-    char *status,
     char *seo_url,
-    char *report_request_id,
-    int disable_report_cache,
-    int reindex,
-    char *tags,
-    int clear_cache,
-    char *gtin,
-    char *upc,
-    char *mpn,
-    char *ean,
-    char *isbn,
-    int taxable,
-    char *product_class,
-    double height,
-    double length,
-    double width,
-    char *harmonized_system_code,
-    char *country_of_origin,
     char *search_keywords,
-    char *barcode,
-    int is_virtual,
-    int is_free_shipping,
-    double reserve_price,
-    double buyitnow_price,
-    char *avail_from,
-    char *tax_class_id,
-    char *type,
-    int avail,
+    char *tags,
     char *delivery_code,
-    int check_process_status,
     product_add_package_details_t *package_details,
-    char *stores_ids,
-    product_add_manufacturer_info_t *manufacturer_info,
-    char *production_partner_ids,
+    char *country_of_origin,
+    char *harmonized_system_code,
     int shipping_template_id,
     char *when_made,
     int is_supply,
     int downloadable,
     list_t *materials,
     int auto_renew,
-    int on_sale
+    int on_sale,
+    char *production_partner_ids,
+    product_add_manufacturer_info_t *manufacturer_info,
+    char *report_request_id,
+    int disable_report_cache,
+    int reindex,
+    int clear_cache,
+    int check_process_status
     ) {
     return product_update_create_internal (
         id,
         model,
-        old_price,
+        sku,
+        name,
+        description,
+        short_description,
         price,
+        old_price,
         special_price,
         sprice_create,
         sprice_expire,
         cost_price,
         fixed_cost_shipping_price,
         retail_price,
-        quantity,
+        tier_prices,
+        reserve_price,
+        buyitnow_price,
+        taxable,
+        tax_class_id,
+        type,
+        status,
+        condition,
+        visible,
+        in_stock,
+        avail,
+        avail_from,
+        product_class,
         available_for_view,
-        weight,
-        weight_unit,
-        dimensions_unit,
-        increase_quantity,
-        reduce_quantity,
-        warehouse_id,
+        stores_ids,
+        store_id,
+        lang_id,
+        quantity,
         reserve_quantity,
         manage_stock,
         backorder_status,
-        name,
-        sku,
-        visible,
+        increase_quantity,
+        reduce_quantity,
+        warehouse_id,
+        weight,
+        weight_unit,
+        height,
+        length,
+        width,
+        dimensions_unit,
+        is_virtual,
+        is_free_shipping,
+        gtin,
+        upc,
+        mpn,
+        ean,
+        isbn,
+        barcode,
         manufacturer,
         manufacturer_id,
         categories_ids,
         related_products_ids,
         up_sell_products_ids,
         cross_sell_products_ids,
-        description,
-        short_description,
         meta_title,
         meta_keywords,
         meta_description,
-        store_id,
-        lang_id,
-        in_stock,
-        status,
         seo_url,
-        report_request_id,
-        disable_report_cache,
-        reindex,
-        tags,
-        clear_cache,
-        gtin,
-        upc,
-        mpn,
-        ean,
-        isbn,
-        taxable,
-        product_class,
-        height,
-        length,
-        width,
-        harmonized_system_code,
-        country_of_origin,
         search_keywords,
-        barcode,
-        is_virtual,
-        is_free_shipping,
-        reserve_price,
-        buyitnow_price,
-        avail_from,
-        tax_class_id,
-        type,
-        avail,
+        tags,
         delivery_code,
-        check_process_status,
         package_details,
-        stores_ids,
-        manufacturer_info,
-        production_partner_ids,
+        country_of_origin,
+        harmonized_system_code,
         shipping_template_id,
         when_made,
         is_supply,
         downloadable,
         materials,
         auto_renew,
-        on_sale
+        on_sale,
+        production_partner_ids,
+        manufacturer_info,
+        report_request_id,
+        disable_report_cache,
+        reindex,
+        clear_cache,
+        check_process_status
         );
 }
 
@@ -359,6 +367,22 @@ void product_update_free(product_update_t *product_update) {
         free(product_update->model);
         product_update->model = NULL;
     }
+    if (product_update->sku) {
+        free(product_update->sku);
+        product_update->sku = NULL;
+    }
+    if (product_update->name) {
+        free(product_update->name);
+        product_update->name = NULL;
+    }
+    if (product_update->description) {
+        free(product_update->description);
+        product_update->description = NULL;
+    }
+    if (product_update->short_description) {
+        free(product_update->short_description);
+        product_update->short_description = NULL;
+    }
     if (product_update->sprice_create) {
         free(product_update->sprice_create);
         product_update->sprice_create = NULL;
@@ -366,6 +390,61 @@ void product_update_free(product_update_t *product_update) {
     if (product_update->sprice_expire) {
         free(product_update->sprice_expire);
         product_update->sprice_expire = NULL;
+    }
+    if (product_update->tier_prices) {
+        list_ForEach(listEntry, product_update->tier_prices) {
+            product_add_tier_prices_inner_free(listEntry->data);
+        }
+        list_freeList(product_update->tier_prices);
+        product_update->tier_prices = NULL;
+    }
+    if (product_update->tax_class_id) {
+        free(product_update->tax_class_id);
+        product_update->tax_class_id = NULL;
+    }
+    if (product_update->type) {
+        free(product_update->type);
+        product_update->type = NULL;
+    }
+    if (product_update->status) {
+        free(product_update->status);
+        product_update->status = NULL;
+    }
+    if (product_update->condition) {
+        free(product_update->condition);
+        product_update->condition = NULL;
+    }
+    if (product_update->visible) {
+        free(product_update->visible);
+        product_update->visible = NULL;
+    }
+    if (product_update->avail_from) {
+        free(product_update->avail_from);
+        product_update->avail_from = NULL;
+    }
+    if (product_update->product_class) {
+        free(product_update->product_class);
+        product_update->product_class = NULL;
+    }
+    if (product_update->stores_ids) {
+        free(product_update->stores_ids);
+        product_update->stores_ids = NULL;
+    }
+    if (product_update->store_id) {
+        free(product_update->store_id);
+        product_update->store_id = NULL;
+    }
+    if (product_update->lang_id) {
+        free(product_update->lang_id);
+        product_update->lang_id = NULL;
+    }
+    if (product_update->backorder_status) {
+        free(product_update->backorder_status);
+        product_update->backorder_status = NULL;
+    }
+    if (product_update->warehouse_id) {
+        free(product_update->warehouse_id);
+        product_update->warehouse_id = NULL;
     }
     if (product_update->weight_unit) {
         free(product_update->weight_unit);
@@ -375,25 +454,29 @@ void product_update_free(product_update_t *product_update) {
         free(product_update->dimensions_unit);
         product_update->dimensions_unit = NULL;
     }
-    if (product_update->warehouse_id) {
-        free(product_update->warehouse_id);
-        product_update->warehouse_id = NULL;
+    if (product_update->gtin) {
+        free(product_update->gtin);
+        product_update->gtin = NULL;
     }
-    if (product_update->backorder_status) {
-        free(product_update->backorder_status);
-        product_update->backorder_status = NULL;
+    if (product_update->upc) {
+        free(product_update->upc);
+        product_update->upc = NULL;
     }
-    if (product_update->name) {
-        free(product_update->name);
-        product_update->name = NULL;
+    if (product_update->mpn) {
+        free(product_update->mpn);
+        product_update->mpn = NULL;
     }
-    if (product_update->sku) {
-        free(product_update->sku);
-        product_update->sku = NULL;
+    if (product_update->ean) {
+        free(product_update->ean);
+        product_update->ean = NULL;
     }
-    if (product_update->visible) {
-        free(product_update->visible);
-        product_update->visible = NULL;
+    if (product_update->isbn) {
+        free(product_update->isbn);
+        product_update->isbn = NULL;
+    }
+    if (product_update->barcode) {
+        free(product_update->barcode);
+        product_update->barcode = NULL;
     }
     if (product_update->manufacturer) {
         free(product_update->manufacturer);
@@ -419,14 +502,6 @@ void product_update_free(product_update_t *product_update) {
         free(product_update->cross_sell_products_ids);
         product_update->cross_sell_products_ids = NULL;
     }
-    if (product_update->description) {
-        free(product_update->description);
-        product_update->description = NULL;
-    }
-    if (product_update->short_description) {
-        free(product_update->short_description);
-        product_update->short_description = NULL;
-    }
     if (product_update->meta_title) {
         free(product_update->meta_title);
         product_update->meta_title = NULL;
@@ -439,81 +514,17 @@ void product_update_free(product_update_t *product_update) {
         free(product_update->meta_description);
         product_update->meta_description = NULL;
     }
-    if (product_update->store_id) {
-        free(product_update->store_id);
-        product_update->store_id = NULL;
-    }
-    if (product_update->lang_id) {
-        free(product_update->lang_id);
-        product_update->lang_id = NULL;
-    }
-    if (product_update->status) {
-        free(product_update->status);
-        product_update->status = NULL;
-    }
     if (product_update->seo_url) {
         free(product_update->seo_url);
         product_update->seo_url = NULL;
-    }
-    if (product_update->report_request_id) {
-        free(product_update->report_request_id);
-        product_update->report_request_id = NULL;
-    }
-    if (product_update->tags) {
-        free(product_update->tags);
-        product_update->tags = NULL;
-    }
-    if (product_update->gtin) {
-        free(product_update->gtin);
-        product_update->gtin = NULL;
-    }
-    if (product_update->upc) {
-        free(product_update->upc);
-        product_update->upc = NULL;
-    }
-    if (product_update->mpn) {
-        free(product_update->mpn);
-        product_update->mpn = NULL;
-    }
-    if (product_update->ean) {
-        free(product_update->ean);
-        product_update->ean = NULL;
-    }
-    if (product_update->isbn) {
-        free(product_update->isbn);
-        product_update->isbn = NULL;
-    }
-    if (product_update->product_class) {
-        free(product_update->product_class);
-        product_update->product_class = NULL;
-    }
-    if (product_update->harmonized_system_code) {
-        free(product_update->harmonized_system_code);
-        product_update->harmonized_system_code = NULL;
-    }
-    if (product_update->country_of_origin) {
-        free(product_update->country_of_origin);
-        product_update->country_of_origin = NULL;
     }
     if (product_update->search_keywords) {
         free(product_update->search_keywords);
         product_update->search_keywords = NULL;
     }
-    if (product_update->barcode) {
-        free(product_update->barcode);
-        product_update->barcode = NULL;
-    }
-    if (product_update->avail_from) {
-        free(product_update->avail_from);
-        product_update->avail_from = NULL;
-    }
-    if (product_update->tax_class_id) {
-        free(product_update->tax_class_id);
-        product_update->tax_class_id = NULL;
-    }
-    if (product_update->type) {
-        free(product_update->type);
-        product_update->type = NULL;
+    if (product_update->tags) {
+        free(product_update->tags);
+        product_update->tags = NULL;
     }
     if (product_update->delivery_code) {
         free(product_update->delivery_code);
@@ -523,17 +534,13 @@ void product_update_free(product_update_t *product_update) {
         product_add_package_details_free(product_update->package_details);
         product_update->package_details = NULL;
     }
-    if (product_update->stores_ids) {
-        free(product_update->stores_ids);
-        product_update->stores_ids = NULL;
+    if (product_update->country_of_origin) {
+        free(product_update->country_of_origin);
+        product_update->country_of_origin = NULL;
     }
-    if (product_update->manufacturer_info) {
-        product_add_manufacturer_info_free(product_update->manufacturer_info);
-        product_update->manufacturer_info = NULL;
-    }
-    if (product_update->production_partner_ids) {
-        free(product_update->production_partner_ids);
-        product_update->production_partner_ids = NULL;
+    if (product_update->harmonized_system_code) {
+        free(product_update->harmonized_system_code);
+        product_update->harmonized_system_code = NULL;
     }
     if (product_update->when_made) {
         free(product_update->when_made);
@@ -545,6 +552,18 @@ void product_update_free(product_update_t *product_update) {
         }
         list_freeList(product_update->materials);
         product_update->materials = NULL;
+    }
+    if (product_update->production_partner_ids) {
+        free(product_update->production_partner_ids);
+        product_update->production_partner_ids = NULL;
+    }
+    if (product_update->manufacturer_info) {
+        product_add_manufacturer_info_free(product_update->manufacturer_info);
+        product_update->manufacturer_info = NULL;
+    }
+    if (product_update->report_request_id) {
+        free(product_update->report_request_id);
+        product_update->report_request_id = NULL;
     }
     free(product_update);
 }
@@ -568,10 +587,34 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     }
 
 
-    // product_update->old_price
-    if(product_update->old_price) {
-    if(cJSON_AddNumberToObject(item, "old_price", product_update->old_price) == NULL) {
-    goto fail; //Numeric
+    // product_update->sku
+    if(product_update->sku) {
+    if(cJSON_AddStringToObject(item, "sku", product_update->sku) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->name
+    if(product_update->name) {
+    if(cJSON_AddStringToObject(item, "name", product_update->name) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->description
+    if(product_update->description) {
+    if(cJSON_AddStringToObject(item, "description", product_update->description) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->short_description
+    if(product_update->short_description) {
+    if(cJSON_AddStringToObject(item, "short_description", product_update->short_description) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -579,6 +622,14 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     // product_update->price
     if(product_update->price) {
     if(cJSON_AddNumberToObject(item, "price", product_update->price) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_update->old_price
+    if(product_update->old_price) {
+    if(cJSON_AddNumberToObject(item, "old_price", product_update->old_price) == NULL) {
     goto fail; //Numeric
     }
     }
@@ -632,10 +683,118 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     }
 
 
-    // product_update->quantity
-    if(product_update->quantity) {
-    if(cJSON_AddNumberToObject(item, "quantity", product_update->quantity) == NULL) {
+    // product_update->tier_prices
+    if(product_update->tier_prices) {
+    cJSON *tier_prices = cJSON_AddArrayToObject(item, "tier_prices");
+    if(tier_prices == NULL) {
+    goto fail; //nonprimitive container
+    }
+
+    listEntry_t *tier_pricesListEntry;
+    if (product_update->tier_prices) {
+    list_ForEach(tier_pricesListEntry, product_update->tier_prices) {
+    cJSON *itemLocal = product_add_tier_prices_inner_convertToJSON(tier_pricesListEntry->data);
+    if(itemLocal == NULL) {
+    goto fail;
+    }
+    cJSON_AddItemToArray(tier_prices, itemLocal);
+    }
+    }
+    }
+
+
+    // product_update->reserve_price
+    if(product_update->reserve_price) {
+    if(cJSON_AddNumberToObject(item, "reserve_price", product_update->reserve_price) == NULL) {
     goto fail; //Numeric
+    }
+    }
+
+
+    // product_update->buyitnow_price
+    if(product_update->buyitnow_price) {
+    if(cJSON_AddNumberToObject(item, "buyitnow_price", product_update->buyitnow_price) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_update->taxable
+    if(product_update->taxable) {
+    if(cJSON_AddBoolToObject(item, "taxable", product_update->taxable) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // product_update->tax_class_id
+    if(product_update->tax_class_id) {
+    if(cJSON_AddStringToObject(item, "tax_class_id", product_update->tax_class_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->type
+    if(product_update->type) {
+    if(cJSON_AddStringToObject(item, "type", product_update->type) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->status
+    if(product_update->status) {
+    if(cJSON_AddStringToObject(item, "status", product_update->status) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->condition
+    if(product_update->condition) {
+    if(cJSON_AddStringToObject(item, "condition", product_update->condition) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->visible
+    if(product_update->visible) {
+    if(cJSON_AddStringToObject(item, "visible", product_update->visible) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->in_stock
+    if(product_update->in_stock) {
+    if(cJSON_AddBoolToObject(item, "in_stock", product_update->in_stock) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // product_update->avail
+    if(product_update->avail) {
+    if(cJSON_AddBoolToObject(item, "avail", product_update->avail) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // product_update->avail_from
+    if(product_update->avail_from) {
+    if(cJSON_AddStringToObject(item, "avail_from", product_update->avail_from) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->product_class
+    if(product_update->product_class) {
+    if(cJSON_AddStringToObject(item, "product_class", product_update->product_class) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -648,25 +807,57 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     }
 
 
-    // product_update->weight
-    if(product_update->weight) {
-    if(cJSON_AddNumberToObject(item, "weight", product_update->weight) == NULL) {
-    goto fail; //Numeric
-    }
-    }
-
-
-    // product_update->weight_unit
-    if(product_update->weight_unit) {
-    if(cJSON_AddStringToObject(item, "weight_unit", product_update->weight_unit) == NULL) {
+    // product_update->stores_ids
+    if(product_update->stores_ids) {
+    if(cJSON_AddStringToObject(item, "stores_ids", product_update->stores_ids) == NULL) {
     goto fail; //String
     }
     }
 
 
-    // product_update->dimensions_unit
-    if(product_update->dimensions_unit) {
-    if(cJSON_AddStringToObject(item, "dimensions_unit", product_update->dimensions_unit) == NULL) {
+    // product_update->store_id
+    if(product_update->store_id) {
+    if(cJSON_AddStringToObject(item, "store_id", product_update->store_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->lang_id
+    if(product_update->lang_id) {
+    if(cJSON_AddStringToObject(item, "lang_id", product_update->lang_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->quantity
+    if(product_update->quantity) {
+    if(cJSON_AddNumberToObject(item, "quantity", product_update->quantity) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_update->reserve_quantity
+    if(product_update->reserve_quantity) {
+    if(cJSON_AddNumberToObject(item, "reserve_quantity", product_update->reserve_quantity) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_update->manage_stock
+    if(product_update->manage_stock) {
+    if(cJSON_AddBoolToObject(item, "manage_stock", product_update->manage_stock) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // product_update->backorder_status
+    if(product_update->backorder_status) {
+    if(cJSON_AddStringToObject(item, "backorder_status", product_update->backorder_status) == NULL) {
     goto fail; //String
     }
     }
@@ -696,49 +887,113 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     }
 
 
-    // product_update->reserve_quantity
-    if(product_update->reserve_quantity) {
-    if(cJSON_AddNumberToObject(item, "reserve_quantity", product_update->reserve_quantity) == NULL) {
+    // product_update->weight
+    if(product_update->weight) {
+    if(cJSON_AddNumberToObject(item, "weight", product_update->weight) == NULL) {
     goto fail; //Numeric
     }
     }
 
 
-    // product_update->manage_stock
-    if(product_update->manage_stock) {
-    if(cJSON_AddBoolToObject(item, "manage_stock", product_update->manage_stock) == NULL) {
+    // product_update->weight_unit
+    if(product_update->weight_unit) {
+    if(cJSON_AddStringToObject(item, "weight_unit", product_update->weight_unit) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->height
+    if(product_update->height) {
+    if(cJSON_AddNumberToObject(item, "height", product_update->height) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_update->length
+    if(product_update->length) {
+    if(cJSON_AddNumberToObject(item, "length", product_update->length) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_update->width
+    if(product_update->width) {
+    if(cJSON_AddNumberToObject(item, "width", product_update->width) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_update->dimensions_unit
+    if(product_update->dimensions_unit) {
+    if(cJSON_AddStringToObject(item, "dimensions_unit", product_update->dimensions_unit) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->is_virtual
+    if(product_update->is_virtual) {
+    if(cJSON_AddBoolToObject(item, "is_virtual", product_update->is_virtual) == NULL) {
     goto fail; //Bool
     }
     }
 
 
-    // product_update->backorder_status
-    if(product_update->backorder_status) {
-    if(cJSON_AddStringToObject(item, "backorder_status", product_update->backorder_status) == NULL) {
+    // product_update->is_free_shipping
+    if(product_update->is_free_shipping) {
+    if(cJSON_AddBoolToObject(item, "is_free_shipping", product_update->is_free_shipping) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // product_update->gtin
+    if(product_update->gtin) {
+    if(cJSON_AddStringToObject(item, "gtin", product_update->gtin) == NULL) {
     goto fail; //String
     }
     }
 
 
-    // product_update->name
-    if(product_update->name) {
-    if(cJSON_AddStringToObject(item, "name", product_update->name) == NULL) {
+    // product_update->upc
+    if(product_update->upc) {
+    if(cJSON_AddStringToObject(item, "upc", product_update->upc) == NULL) {
     goto fail; //String
     }
     }
 
 
-    // product_update->sku
-    if(product_update->sku) {
-    if(cJSON_AddStringToObject(item, "sku", product_update->sku) == NULL) {
+    // product_update->mpn
+    if(product_update->mpn) {
+    if(cJSON_AddStringToObject(item, "mpn", product_update->mpn) == NULL) {
     goto fail; //String
     }
     }
 
 
-    // product_update->visible
-    if(product_update->visible) {
-    if(cJSON_AddStringToObject(item, "visible", product_update->visible) == NULL) {
+    // product_update->ean
+    if(product_update->ean) {
+    if(cJSON_AddStringToObject(item, "ean", product_update->ean) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->isbn
+    if(product_update->isbn) {
+    if(cJSON_AddStringToObject(item, "isbn", product_update->isbn) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->barcode
+    if(product_update->barcode) {
+    if(cJSON_AddStringToObject(item, "barcode", product_update->barcode) == NULL) {
     goto fail; //String
     }
     }
@@ -792,22 +1047,6 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     }
 
 
-    // product_update->description
-    if(product_update->description) {
-    if(cJSON_AddStringToObject(item, "description", product_update->description) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->short_description
-    if(product_update->short_description) {
-    if(cJSON_AddStringToObject(item, "short_description", product_update->short_description) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
     // product_update->meta_title
     if(product_update->meta_title) {
     if(cJSON_AddStringToObject(item, "meta_title", product_update->meta_title) == NULL) {
@@ -832,177 +1071,9 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     }
 
 
-    // product_update->store_id
-    if(product_update->store_id) {
-    if(cJSON_AddStringToObject(item, "store_id", product_update->store_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->lang_id
-    if(product_update->lang_id) {
-    if(cJSON_AddStringToObject(item, "lang_id", product_update->lang_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->in_stock
-    if(product_update->in_stock) {
-    if(cJSON_AddBoolToObject(item, "in_stock", product_update->in_stock) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // product_update->status
-    if(product_update->status) {
-    if(cJSON_AddStringToObject(item, "status", product_update->status) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
     // product_update->seo_url
     if(product_update->seo_url) {
     if(cJSON_AddStringToObject(item, "seo_url", product_update->seo_url) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->report_request_id
-    if(product_update->report_request_id) {
-    if(cJSON_AddStringToObject(item, "report_request_id", product_update->report_request_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->disable_report_cache
-    if(product_update->disable_report_cache) {
-    if(cJSON_AddBoolToObject(item, "disable_report_cache", product_update->disable_report_cache) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // product_update->reindex
-    if(product_update->reindex) {
-    if(cJSON_AddBoolToObject(item, "reindex", product_update->reindex) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // product_update->tags
-    if(product_update->tags) {
-    if(cJSON_AddStringToObject(item, "tags", product_update->tags) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->clear_cache
-    if(product_update->clear_cache) {
-    if(cJSON_AddBoolToObject(item, "clear_cache", product_update->clear_cache) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // product_update->gtin
-    if(product_update->gtin) {
-    if(cJSON_AddStringToObject(item, "gtin", product_update->gtin) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->upc
-    if(product_update->upc) {
-    if(cJSON_AddStringToObject(item, "upc", product_update->upc) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->mpn
-    if(product_update->mpn) {
-    if(cJSON_AddStringToObject(item, "mpn", product_update->mpn) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->ean
-    if(product_update->ean) {
-    if(cJSON_AddStringToObject(item, "ean", product_update->ean) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->isbn
-    if(product_update->isbn) {
-    if(cJSON_AddStringToObject(item, "isbn", product_update->isbn) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->taxable
-    if(product_update->taxable) {
-    if(cJSON_AddBoolToObject(item, "taxable", product_update->taxable) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // product_update->product_class
-    if(product_update->product_class) {
-    if(cJSON_AddStringToObject(item, "product_class", product_update->product_class) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->height
-    if(product_update->height) {
-    if(cJSON_AddNumberToObject(item, "height", product_update->height) == NULL) {
-    goto fail; //Numeric
-    }
-    }
-
-
-    // product_update->length
-    if(product_update->length) {
-    if(cJSON_AddNumberToObject(item, "length", product_update->length) == NULL) {
-    goto fail; //Numeric
-    }
-    }
-
-
-    // product_update->width
-    if(product_update->width) {
-    if(cJSON_AddNumberToObject(item, "width", product_update->width) == NULL) {
-    goto fail; //Numeric
-    }
-    }
-
-
-    // product_update->harmonized_system_code
-    if(product_update->harmonized_system_code) {
-    if(cJSON_AddStringToObject(item, "harmonized_system_code", product_update->harmonized_system_code) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->country_of_origin
-    if(product_update->country_of_origin) {
-    if(cJSON_AddStringToObject(item, "country_of_origin", product_update->country_of_origin) == NULL) {
     goto fail; //String
     }
     }
@@ -1016,74 +1087,10 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     }
 
 
-    // product_update->barcode
-    if(product_update->barcode) {
-    if(cJSON_AddStringToObject(item, "barcode", product_update->barcode) == NULL) {
+    // product_update->tags
+    if(product_update->tags) {
+    if(cJSON_AddStringToObject(item, "tags", product_update->tags) == NULL) {
     goto fail; //String
-    }
-    }
-
-
-    // product_update->is_virtual
-    if(product_update->is_virtual) {
-    if(cJSON_AddBoolToObject(item, "is_virtual", product_update->is_virtual) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // product_update->is_free_shipping
-    if(product_update->is_free_shipping) {
-    if(cJSON_AddBoolToObject(item, "is_free_shipping", product_update->is_free_shipping) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // product_update->reserve_price
-    if(product_update->reserve_price) {
-    if(cJSON_AddNumberToObject(item, "reserve_price", product_update->reserve_price) == NULL) {
-    goto fail; //Numeric
-    }
-    }
-
-
-    // product_update->buyitnow_price
-    if(product_update->buyitnow_price) {
-    if(cJSON_AddNumberToObject(item, "buyitnow_price", product_update->buyitnow_price) == NULL) {
-    goto fail; //Numeric
-    }
-    }
-
-
-    // product_update->avail_from
-    if(product_update->avail_from) {
-    if(cJSON_AddStringToObject(item, "avail_from", product_update->avail_from) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->tax_class_id
-    if(product_update->tax_class_id) {
-    if(cJSON_AddStringToObject(item, "tax_class_id", product_update->tax_class_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->type
-    if(product_update->type) {
-    if(cJSON_AddStringToObject(item, "type", product_update->type) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // product_update->avail
-    if(product_update->avail) {
-    if(cJSON_AddBoolToObject(item, "avail", product_update->avail) == NULL) {
-    goto fail; //Bool
     }
     }
 
@@ -1092,14 +1099,6 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     if(product_update->delivery_code) {
     if(cJSON_AddStringToObject(item, "delivery_code", product_update->delivery_code) == NULL) {
     goto fail; //String
-    }
-    }
-
-
-    // product_update->check_process_status
-    if(product_update->check_process_status) {
-    if(cJSON_AddBoolToObject(item, "check_process_status", product_update->check_process_status) == NULL) {
-    goto fail; //Bool
     }
     }
 
@@ -1117,30 +1116,17 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     }
 
 
-    // product_update->stores_ids
-    if(product_update->stores_ids) {
-    if(cJSON_AddStringToObject(item, "stores_ids", product_update->stores_ids) == NULL) {
+    // product_update->country_of_origin
+    if(product_update->country_of_origin) {
+    if(cJSON_AddStringToObject(item, "country_of_origin", product_update->country_of_origin) == NULL) {
     goto fail; //String
     }
     }
 
 
-    // product_update->manufacturer_info
-    if(product_update->manufacturer_info) {
-    cJSON *manufacturer_info_local_JSON = product_add_manufacturer_info_convertToJSON(product_update->manufacturer_info);
-    if(manufacturer_info_local_JSON == NULL) {
-    goto fail; //model
-    }
-    cJSON_AddItemToObject(item, "manufacturer_info", manufacturer_info_local_JSON);
-    if(item->child == NULL) {
-    goto fail;
-    }
-    }
-
-
-    // product_update->production_partner_ids
-    if(product_update->production_partner_ids) {
-    if(cJSON_AddStringToObject(item, "production_partner_ids", product_update->production_partner_ids) == NULL) {
+    // product_update->harmonized_system_code
+    if(product_update->harmonized_system_code) {
+    if(cJSON_AddStringToObject(item, "harmonized_system_code", product_update->harmonized_system_code) == NULL) {
     goto fail; //String
     }
     }
@@ -1210,6 +1196,67 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     }
     }
 
+
+    // product_update->production_partner_ids
+    if(product_update->production_partner_ids) {
+    if(cJSON_AddStringToObject(item, "production_partner_ids", product_update->production_partner_ids) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->manufacturer_info
+    if(product_update->manufacturer_info) {
+    cJSON *manufacturer_info_local_JSON = product_add_manufacturer_info_convertToJSON(product_update->manufacturer_info);
+    if(manufacturer_info_local_JSON == NULL) {
+    goto fail; //model
+    }
+    cJSON_AddItemToObject(item, "manufacturer_info", manufacturer_info_local_JSON);
+    if(item->child == NULL) {
+    goto fail;
+    }
+    }
+
+
+    // product_update->report_request_id
+    if(product_update->report_request_id) {
+    if(cJSON_AddStringToObject(item, "report_request_id", product_update->report_request_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->disable_report_cache
+    if(product_update->disable_report_cache) {
+    if(cJSON_AddBoolToObject(item, "disable_report_cache", product_update->disable_report_cache) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // product_update->reindex
+    if(product_update->reindex) {
+    if(cJSON_AddBoolToObject(item, "reindex", product_update->reindex) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // product_update->clear_cache
+    if(product_update->clear_cache) {
+    if(cJSON_AddBoolToObject(item, "clear_cache", product_update->clear_cache) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // product_update->check_process_status
+    if(product_update->check_process_status) {
+    if(cJSON_AddBoolToObject(item, "check_process_status", product_update->check_process_status) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -1222,14 +1269,17 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
 
     product_update_t *product_update_local_var = NULL;
 
+    // define the local list for product_update->tier_prices
+    list_t *tier_pricesList = NULL;
+
     // define the local variable for product_update->package_details
     product_add_package_details_t *package_details_local_nonprim = NULL;
 
-    // define the local variable for product_update->manufacturer_info
-    product_add_manufacturer_info_t *manufacturer_info_local_nonprim = NULL;
-
     // define the local list for product_update->materials
     list_t *materialsList = NULL;
+
+    // define the local variable for product_update->manufacturer_info
+    product_add_manufacturer_info_t *manufacturer_info_local_nonprim = NULL;
 
     // product_update->id
     cJSON *id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "id");
@@ -1255,15 +1305,51 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
-    // product_update->old_price
-    cJSON *old_price = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "old_price");
-    if (cJSON_IsNull(old_price)) {
-        old_price = NULL;
+    // product_update->sku
+    cJSON *sku = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "sku");
+    if (cJSON_IsNull(sku)) {
+        sku = NULL;
     }
-    if (old_price) { 
-    if(!cJSON_IsNumber(old_price))
+    if (sku) { 
+    if(!cJSON_IsString(sku) && !cJSON_IsNull(sku))
     {
-    goto end; //Numeric
+    goto end; //String
+    }
+    }
+
+    // product_update->name
+    cJSON *name = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "name");
+    if (cJSON_IsNull(name)) {
+        name = NULL;
+    }
+    if (name) { 
+    if(!cJSON_IsString(name) && !cJSON_IsNull(name))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->description
+    cJSON *description = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "description");
+    if (cJSON_IsNull(description)) {
+        description = NULL;
+    }
+    if (description) { 
+    if(!cJSON_IsString(description) && !cJSON_IsNull(description))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->short_description
+    cJSON *short_description = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "short_description");
+    if (cJSON_IsNull(short_description)) {
+        short_description = NULL;
+    }
+    if (short_description) { 
+    if(!cJSON_IsString(short_description) && !cJSON_IsNull(short_description))
+    {
+    goto end; //String
     }
     }
 
@@ -1274,6 +1360,18 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     if (price) { 
     if(!cJSON_IsNumber(price))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // product_update->old_price
+    cJSON *old_price = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "old_price");
+    if (cJSON_IsNull(old_price)) {
+        old_price = NULL;
+    }
+    if (old_price) { 
+    if(!cJSON_IsNumber(old_price))
     {
     goto end; //Numeric
     }
@@ -1351,15 +1449,171 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
-    // product_update->quantity
-    cJSON *quantity = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "quantity");
-    if (cJSON_IsNull(quantity)) {
-        quantity = NULL;
+    // product_update->tier_prices
+    cJSON *tier_prices = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "tier_prices");
+    if (cJSON_IsNull(tier_prices)) {
+        tier_prices = NULL;
     }
-    if (quantity) { 
-    if(!cJSON_IsNumber(quantity))
+    if (tier_prices) { 
+    cJSON *tier_prices_local_nonprimitive = NULL;
+    if(!cJSON_IsArray(tier_prices)){
+        goto end; //nonprimitive container
+    }
+
+    tier_pricesList = list_createList();
+
+    cJSON_ArrayForEach(tier_prices_local_nonprimitive,tier_prices )
+    {
+        if(!cJSON_IsObject(tier_prices_local_nonprimitive)){
+            goto end;
+        }
+        product_add_tier_prices_inner_t *tier_pricesItem = product_add_tier_prices_inner_parseFromJSON(tier_prices_local_nonprimitive);
+
+        list_addElement(tier_pricesList, tier_pricesItem);
+    }
+    }
+
+    // product_update->reserve_price
+    cJSON *reserve_price = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "reserve_price");
+    if (cJSON_IsNull(reserve_price)) {
+        reserve_price = NULL;
+    }
+    if (reserve_price) { 
+    if(!cJSON_IsNumber(reserve_price))
     {
     goto end; //Numeric
+    }
+    }
+
+    // product_update->buyitnow_price
+    cJSON *buyitnow_price = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "buyitnow_price");
+    if (cJSON_IsNull(buyitnow_price)) {
+        buyitnow_price = NULL;
+    }
+    if (buyitnow_price) { 
+    if(!cJSON_IsNumber(buyitnow_price))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // product_update->taxable
+    cJSON *taxable = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "taxable");
+    if (cJSON_IsNull(taxable)) {
+        taxable = NULL;
+    }
+    if (taxable) { 
+    if(!cJSON_IsBool(taxable))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // product_update->tax_class_id
+    cJSON *tax_class_id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "tax_class_id");
+    if (cJSON_IsNull(tax_class_id)) {
+        tax_class_id = NULL;
+    }
+    if (tax_class_id) { 
+    if(!cJSON_IsString(tax_class_id) && !cJSON_IsNull(tax_class_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->type
+    cJSON *type = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "type");
+    if (cJSON_IsNull(type)) {
+        type = NULL;
+    }
+    if (type) { 
+    if(!cJSON_IsString(type) && !cJSON_IsNull(type))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->status
+    cJSON *status = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "status");
+    if (cJSON_IsNull(status)) {
+        status = NULL;
+    }
+    if (status) { 
+    if(!cJSON_IsString(status) && !cJSON_IsNull(status))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->condition
+    cJSON *condition = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "condition");
+    if (cJSON_IsNull(condition)) {
+        condition = NULL;
+    }
+    if (condition) { 
+    if(!cJSON_IsString(condition) && !cJSON_IsNull(condition))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->visible
+    cJSON *visible = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "visible");
+    if (cJSON_IsNull(visible)) {
+        visible = NULL;
+    }
+    if (visible) { 
+    if(!cJSON_IsString(visible) && !cJSON_IsNull(visible))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->in_stock
+    cJSON *in_stock = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "in_stock");
+    if (cJSON_IsNull(in_stock)) {
+        in_stock = NULL;
+    }
+    if (in_stock) { 
+    if(!cJSON_IsBool(in_stock))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // product_update->avail
+    cJSON *avail = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "avail");
+    if (cJSON_IsNull(avail)) {
+        avail = NULL;
+    }
+    if (avail) { 
+    if(!cJSON_IsBool(avail))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // product_update->avail_from
+    cJSON *avail_from = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "avail_from");
+    if (cJSON_IsNull(avail_from)) {
+        avail_from = NULL;
+    }
+    if (avail_from) { 
+    if(!cJSON_IsString(avail_from) && !cJSON_IsNull(avail_from))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->product_class
+    cJSON *product_class = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "product_class");
+    if (cJSON_IsNull(product_class)) {
+        product_class = NULL;
+    }
+    if (product_class) { 
+    if(!cJSON_IsString(product_class) && !cJSON_IsNull(product_class))
+    {
+    goto end; //String
     }
     }
 
@@ -1375,37 +1629,85 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
-    // product_update->weight
-    cJSON *weight = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "weight");
-    if (cJSON_IsNull(weight)) {
-        weight = NULL;
+    // product_update->stores_ids
+    cJSON *stores_ids = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "stores_ids");
+    if (cJSON_IsNull(stores_ids)) {
+        stores_ids = NULL;
     }
-    if (weight) { 
-    if(!cJSON_IsNumber(weight))
-    {
-    goto end; //Numeric
-    }
-    }
-
-    // product_update->weight_unit
-    cJSON *weight_unit = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "weight_unit");
-    if (cJSON_IsNull(weight_unit)) {
-        weight_unit = NULL;
-    }
-    if (weight_unit) { 
-    if(!cJSON_IsString(weight_unit) && !cJSON_IsNull(weight_unit))
+    if (stores_ids) { 
+    if(!cJSON_IsString(stores_ids) && !cJSON_IsNull(stores_ids))
     {
     goto end; //String
     }
     }
 
-    // product_update->dimensions_unit
-    cJSON *dimensions_unit = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "dimensions_unit");
-    if (cJSON_IsNull(dimensions_unit)) {
-        dimensions_unit = NULL;
+    // product_update->store_id
+    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "store_id");
+    if (cJSON_IsNull(store_id)) {
+        store_id = NULL;
     }
-    if (dimensions_unit) { 
-    if(!cJSON_IsString(dimensions_unit) && !cJSON_IsNull(dimensions_unit))
+    if (store_id) { 
+    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->lang_id
+    cJSON *lang_id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "lang_id");
+    if (cJSON_IsNull(lang_id)) {
+        lang_id = NULL;
+    }
+    if (lang_id) { 
+    if(!cJSON_IsString(lang_id) && !cJSON_IsNull(lang_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->quantity
+    cJSON *quantity = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "quantity");
+    if (cJSON_IsNull(quantity)) {
+        quantity = NULL;
+    }
+    if (quantity) { 
+    if(!cJSON_IsNumber(quantity))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // product_update->reserve_quantity
+    cJSON *reserve_quantity = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "reserve_quantity");
+    if (cJSON_IsNull(reserve_quantity)) {
+        reserve_quantity = NULL;
+    }
+    if (reserve_quantity) { 
+    if(!cJSON_IsNumber(reserve_quantity))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // product_update->manage_stock
+    cJSON *manage_stock = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "manage_stock");
+    if (cJSON_IsNull(manage_stock)) {
+        manage_stock = NULL;
+    }
+    if (manage_stock) { 
+    if(!cJSON_IsBool(manage_stock))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // product_update->backorder_status
+    cJSON *backorder_status = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "backorder_status");
+    if (cJSON_IsNull(backorder_status)) {
+        backorder_status = NULL;
+    }
+    if (backorder_status) { 
+    if(!cJSON_IsString(backorder_status) && !cJSON_IsNull(backorder_status))
     {
     goto end; //String
     }
@@ -1447,73 +1749,169 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
-    // product_update->reserve_quantity
-    cJSON *reserve_quantity = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "reserve_quantity");
-    if (cJSON_IsNull(reserve_quantity)) {
-        reserve_quantity = NULL;
+    // product_update->weight
+    cJSON *weight = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "weight");
+    if (cJSON_IsNull(weight)) {
+        weight = NULL;
     }
-    if (reserve_quantity) { 
-    if(!cJSON_IsNumber(reserve_quantity))
+    if (weight) { 
+    if(!cJSON_IsNumber(weight))
     {
     goto end; //Numeric
     }
     }
 
-    // product_update->manage_stock
-    cJSON *manage_stock = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "manage_stock");
-    if (cJSON_IsNull(manage_stock)) {
-        manage_stock = NULL;
+    // product_update->weight_unit
+    cJSON *weight_unit = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "weight_unit");
+    if (cJSON_IsNull(weight_unit)) {
+        weight_unit = NULL;
     }
-    if (manage_stock) { 
-    if(!cJSON_IsBool(manage_stock))
+    if (weight_unit) { 
+    if(!cJSON_IsString(weight_unit) && !cJSON_IsNull(weight_unit))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->height
+    cJSON *height = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "height");
+    if (cJSON_IsNull(height)) {
+        height = NULL;
+    }
+    if (height) { 
+    if(!cJSON_IsNumber(height))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // product_update->length
+    cJSON *length = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "length");
+    if (cJSON_IsNull(length)) {
+        length = NULL;
+    }
+    if (length) { 
+    if(!cJSON_IsNumber(length))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // product_update->width
+    cJSON *width = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "width");
+    if (cJSON_IsNull(width)) {
+        width = NULL;
+    }
+    if (width) { 
+    if(!cJSON_IsNumber(width))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // product_update->dimensions_unit
+    cJSON *dimensions_unit = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "dimensions_unit");
+    if (cJSON_IsNull(dimensions_unit)) {
+        dimensions_unit = NULL;
+    }
+    if (dimensions_unit) { 
+    if(!cJSON_IsString(dimensions_unit) && !cJSON_IsNull(dimensions_unit))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->is_virtual
+    cJSON *is_virtual = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "is_virtual");
+    if (cJSON_IsNull(is_virtual)) {
+        is_virtual = NULL;
+    }
+    if (is_virtual) { 
+    if(!cJSON_IsBool(is_virtual))
     {
     goto end; //Bool
     }
     }
 
-    // product_update->backorder_status
-    cJSON *backorder_status = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "backorder_status");
-    if (cJSON_IsNull(backorder_status)) {
-        backorder_status = NULL;
+    // product_update->is_free_shipping
+    cJSON *is_free_shipping = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "is_free_shipping");
+    if (cJSON_IsNull(is_free_shipping)) {
+        is_free_shipping = NULL;
     }
-    if (backorder_status) { 
-    if(!cJSON_IsString(backorder_status) && !cJSON_IsNull(backorder_status))
+    if (is_free_shipping) { 
+    if(!cJSON_IsBool(is_free_shipping))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // product_update->gtin
+    cJSON *gtin = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "gtin");
+    if (cJSON_IsNull(gtin)) {
+        gtin = NULL;
+    }
+    if (gtin) { 
+    if(!cJSON_IsString(gtin) && !cJSON_IsNull(gtin))
     {
     goto end; //String
     }
     }
 
-    // product_update->name
-    cJSON *name = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "name");
-    if (cJSON_IsNull(name)) {
-        name = NULL;
+    // product_update->upc
+    cJSON *upc = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "upc");
+    if (cJSON_IsNull(upc)) {
+        upc = NULL;
     }
-    if (name) { 
-    if(!cJSON_IsString(name) && !cJSON_IsNull(name))
+    if (upc) { 
+    if(!cJSON_IsString(upc) && !cJSON_IsNull(upc))
     {
     goto end; //String
     }
     }
 
-    // product_update->sku
-    cJSON *sku = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "sku");
-    if (cJSON_IsNull(sku)) {
-        sku = NULL;
+    // product_update->mpn
+    cJSON *mpn = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "mpn");
+    if (cJSON_IsNull(mpn)) {
+        mpn = NULL;
     }
-    if (sku) { 
-    if(!cJSON_IsString(sku) && !cJSON_IsNull(sku))
+    if (mpn) { 
+    if(!cJSON_IsString(mpn) && !cJSON_IsNull(mpn))
     {
     goto end; //String
     }
     }
 
-    // product_update->visible
-    cJSON *visible = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "visible");
-    if (cJSON_IsNull(visible)) {
-        visible = NULL;
+    // product_update->ean
+    cJSON *ean = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "ean");
+    if (cJSON_IsNull(ean)) {
+        ean = NULL;
     }
-    if (visible) { 
-    if(!cJSON_IsString(visible) && !cJSON_IsNull(visible))
+    if (ean) { 
+    if(!cJSON_IsString(ean) && !cJSON_IsNull(ean))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->isbn
+    cJSON *isbn = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "isbn");
+    if (cJSON_IsNull(isbn)) {
+        isbn = NULL;
+    }
+    if (isbn) { 
+    if(!cJSON_IsString(isbn) && !cJSON_IsNull(isbn))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->barcode
+    cJSON *barcode = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "barcode");
+    if (cJSON_IsNull(barcode)) {
+        barcode = NULL;
+    }
+    if (barcode) { 
+    if(!cJSON_IsString(barcode) && !cJSON_IsNull(barcode))
     {
     goto end; //String
     }
@@ -1591,30 +1989,6 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
-    // product_update->description
-    cJSON *description = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "description");
-    if (cJSON_IsNull(description)) {
-        description = NULL;
-    }
-    if (description) { 
-    if(!cJSON_IsString(description) && !cJSON_IsNull(description))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->short_description
-    cJSON *short_description = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "short_description");
-    if (cJSON_IsNull(short_description)) {
-        short_description = NULL;
-    }
-    if (short_description) { 
-    if(!cJSON_IsString(short_description) && !cJSON_IsNull(short_description))
-    {
-    goto end; //String
-    }
-    }
-
     // product_update->meta_title
     cJSON *meta_title = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "meta_title");
     if (cJSON_IsNull(meta_title)) {
@@ -1651,54 +2025,6 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
-    // product_update->store_id
-    cJSON *store_id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "store_id");
-    if (cJSON_IsNull(store_id)) {
-        store_id = NULL;
-    }
-    if (store_id) { 
-    if(!cJSON_IsString(store_id) && !cJSON_IsNull(store_id))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->lang_id
-    cJSON *lang_id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "lang_id");
-    if (cJSON_IsNull(lang_id)) {
-        lang_id = NULL;
-    }
-    if (lang_id) { 
-    if(!cJSON_IsString(lang_id) && !cJSON_IsNull(lang_id))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->in_stock
-    cJSON *in_stock = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "in_stock");
-    if (cJSON_IsNull(in_stock)) {
-        in_stock = NULL;
-    }
-    if (in_stock) { 
-    if(!cJSON_IsBool(in_stock))
-    {
-    goto end; //Bool
-    }
-    }
-
-    // product_update->status
-    cJSON *status = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "status");
-    if (cJSON_IsNull(status)) {
-        status = NULL;
-    }
-    if (status) { 
-    if(!cJSON_IsString(status) && !cJSON_IsNull(status))
-    {
-    goto end; //String
-    }
-    }
-
     // product_update->seo_url
     cJSON *seo_url = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "seo_url");
     if (cJSON_IsNull(seo_url)) {
@@ -1706,210 +2032,6 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     if (seo_url) { 
     if(!cJSON_IsString(seo_url) && !cJSON_IsNull(seo_url))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->report_request_id
-    cJSON *report_request_id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "report_request_id");
-    if (cJSON_IsNull(report_request_id)) {
-        report_request_id = NULL;
-    }
-    if (report_request_id) { 
-    if(!cJSON_IsString(report_request_id) && !cJSON_IsNull(report_request_id))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->disable_report_cache
-    cJSON *disable_report_cache = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "disable_report_cache");
-    if (cJSON_IsNull(disable_report_cache)) {
-        disable_report_cache = NULL;
-    }
-    if (disable_report_cache) { 
-    if(!cJSON_IsBool(disable_report_cache))
-    {
-    goto end; //Bool
-    }
-    }
-
-    // product_update->reindex
-    cJSON *reindex = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "reindex");
-    if (cJSON_IsNull(reindex)) {
-        reindex = NULL;
-    }
-    if (reindex) { 
-    if(!cJSON_IsBool(reindex))
-    {
-    goto end; //Bool
-    }
-    }
-
-    // product_update->tags
-    cJSON *tags = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "tags");
-    if (cJSON_IsNull(tags)) {
-        tags = NULL;
-    }
-    if (tags) { 
-    if(!cJSON_IsString(tags) && !cJSON_IsNull(tags))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->clear_cache
-    cJSON *clear_cache = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "clear_cache");
-    if (cJSON_IsNull(clear_cache)) {
-        clear_cache = NULL;
-    }
-    if (clear_cache) { 
-    if(!cJSON_IsBool(clear_cache))
-    {
-    goto end; //Bool
-    }
-    }
-
-    // product_update->gtin
-    cJSON *gtin = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "gtin");
-    if (cJSON_IsNull(gtin)) {
-        gtin = NULL;
-    }
-    if (gtin) { 
-    if(!cJSON_IsString(gtin) && !cJSON_IsNull(gtin))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->upc
-    cJSON *upc = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "upc");
-    if (cJSON_IsNull(upc)) {
-        upc = NULL;
-    }
-    if (upc) { 
-    if(!cJSON_IsString(upc) && !cJSON_IsNull(upc))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->mpn
-    cJSON *mpn = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "mpn");
-    if (cJSON_IsNull(mpn)) {
-        mpn = NULL;
-    }
-    if (mpn) { 
-    if(!cJSON_IsString(mpn) && !cJSON_IsNull(mpn))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->ean
-    cJSON *ean = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "ean");
-    if (cJSON_IsNull(ean)) {
-        ean = NULL;
-    }
-    if (ean) { 
-    if(!cJSON_IsString(ean) && !cJSON_IsNull(ean))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->isbn
-    cJSON *isbn = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "isbn");
-    if (cJSON_IsNull(isbn)) {
-        isbn = NULL;
-    }
-    if (isbn) { 
-    if(!cJSON_IsString(isbn) && !cJSON_IsNull(isbn))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->taxable
-    cJSON *taxable = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "taxable");
-    if (cJSON_IsNull(taxable)) {
-        taxable = NULL;
-    }
-    if (taxable) { 
-    if(!cJSON_IsBool(taxable))
-    {
-    goto end; //Bool
-    }
-    }
-
-    // product_update->product_class
-    cJSON *product_class = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "product_class");
-    if (cJSON_IsNull(product_class)) {
-        product_class = NULL;
-    }
-    if (product_class) { 
-    if(!cJSON_IsString(product_class) && !cJSON_IsNull(product_class))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->height
-    cJSON *height = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "height");
-    if (cJSON_IsNull(height)) {
-        height = NULL;
-    }
-    if (height) { 
-    if(!cJSON_IsNumber(height))
-    {
-    goto end; //Numeric
-    }
-    }
-
-    // product_update->length
-    cJSON *length = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "length");
-    if (cJSON_IsNull(length)) {
-        length = NULL;
-    }
-    if (length) { 
-    if(!cJSON_IsNumber(length))
-    {
-    goto end; //Numeric
-    }
-    }
-
-    // product_update->width
-    cJSON *width = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "width");
-    if (cJSON_IsNull(width)) {
-        width = NULL;
-    }
-    if (width) { 
-    if(!cJSON_IsNumber(width))
-    {
-    goto end; //Numeric
-    }
-    }
-
-    // product_update->harmonized_system_code
-    cJSON *harmonized_system_code = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "harmonized_system_code");
-    if (cJSON_IsNull(harmonized_system_code)) {
-        harmonized_system_code = NULL;
-    }
-    if (harmonized_system_code) { 
-    if(!cJSON_IsString(harmonized_system_code) && !cJSON_IsNull(harmonized_system_code))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->country_of_origin
-    cJSON *country_of_origin = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "country_of_origin");
-    if (cJSON_IsNull(country_of_origin)) {
-        country_of_origin = NULL;
-    }
-    if (country_of_origin) { 
-    if(!cJSON_IsString(country_of_origin) && !cJSON_IsNull(country_of_origin))
     {
     goto end; //String
     }
@@ -1927,111 +2049,15 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
-    // product_update->barcode
-    cJSON *barcode = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "barcode");
-    if (cJSON_IsNull(barcode)) {
-        barcode = NULL;
+    // product_update->tags
+    cJSON *tags = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "tags");
+    if (cJSON_IsNull(tags)) {
+        tags = NULL;
     }
-    if (barcode) { 
-    if(!cJSON_IsString(barcode) && !cJSON_IsNull(barcode))
+    if (tags) { 
+    if(!cJSON_IsString(tags) && !cJSON_IsNull(tags))
     {
     goto end; //String
-    }
-    }
-
-    // product_update->is_virtual
-    cJSON *is_virtual = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "is_virtual");
-    if (cJSON_IsNull(is_virtual)) {
-        is_virtual = NULL;
-    }
-    if (is_virtual) { 
-    if(!cJSON_IsBool(is_virtual))
-    {
-    goto end; //Bool
-    }
-    }
-
-    // product_update->is_free_shipping
-    cJSON *is_free_shipping = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "is_free_shipping");
-    if (cJSON_IsNull(is_free_shipping)) {
-        is_free_shipping = NULL;
-    }
-    if (is_free_shipping) { 
-    if(!cJSON_IsBool(is_free_shipping))
-    {
-    goto end; //Bool
-    }
-    }
-
-    // product_update->reserve_price
-    cJSON *reserve_price = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "reserve_price");
-    if (cJSON_IsNull(reserve_price)) {
-        reserve_price = NULL;
-    }
-    if (reserve_price) { 
-    if(!cJSON_IsNumber(reserve_price))
-    {
-    goto end; //Numeric
-    }
-    }
-
-    // product_update->buyitnow_price
-    cJSON *buyitnow_price = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "buyitnow_price");
-    if (cJSON_IsNull(buyitnow_price)) {
-        buyitnow_price = NULL;
-    }
-    if (buyitnow_price) { 
-    if(!cJSON_IsNumber(buyitnow_price))
-    {
-    goto end; //Numeric
-    }
-    }
-
-    // product_update->avail_from
-    cJSON *avail_from = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "avail_from");
-    if (cJSON_IsNull(avail_from)) {
-        avail_from = NULL;
-    }
-    if (avail_from) { 
-    if(!cJSON_IsString(avail_from) && !cJSON_IsNull(avail_from))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->tax_class_id
-    cJSON *tax_class_id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "tax_class_id");
-    if (cJSON_IsNull(tax_class_id)) {
-        tax_class_id = NULL;
-    }
-    if (tax_class_id) { 
-    if(!cJSON_IsString(tax_class_id) && !cJSON_IsNull(tax_class_id))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->type
-    cJSON *type = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "type");
-    if (cJSON_IsNull(type)) {
-        type = NULL;
-    }
-    if (type) { 
-    if(!cJSON_IsString(type) && !cJSON_IsNull(type))
-    {
-    goto end; //String
-    }
-    }
-
-    // product_update->avail
-    cJSON *avail = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "avail");
-    if (cJSON_IsNull(avail)) {
-        avail = NULL;
-    }
-    if (avail) { 
-    if(!cJSON_IsBool(avail))
-    {
-    goto end; //Bool
     }
     }
 
@@ -2047,18 +2073,6 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
-    // product_update->check_process_status
-    cJSON *check_process_status = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "check_process_status");
-    if (cJSON_IsNull(check_process_status)) {
-        check_process_status = NULL;
-    }
-    if (check_process_status) { 
-    if(!cJSON_IsBool(check_process_status))
-    {
-    goto end; //Bool
-    }
-    }
-
     // product_update->package_details
     cJSON *package_details = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "package_details");
     if (cJSON_IsNull(package_details)) {
@@ -2068,34 +2082,25 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     package_details_local_nonprim = product_add_package_details_parseFromJSON(package_details); //nonprimitive
     }
 
-    // product_update->stores_ids
-    cJSON *stores_ids = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "stores_ids");
-    if (cJSON_IsNull(stores_ids)) {
-        stores_ids = NULL;
+    // product_update->country_of_origin
+    cJSON *country_of_origin = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "country_of_origin");
+    if (cJSON_IsNull(country_of_origin)) {
+        country_of_origin = NULL;
     }
-    if (stores_ids) { 
-    if(!cJSON_IsString(stores_ids) && !cJSON_IsNull(stores_ids))
+    if (country_of_origin) { 
+    if(!cJSON_IsString(country_of_origin) && !cJSON_IsNull(country_of_origin))
     {
     goto end; //String
     }
     }
 
-    // product_update->manufacturer_info
-    cJSON *manufacturer_info = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "manufacturer_info");
-    if (cJSON_IsNull(manufacturer_info)) {
-        manufacturer_info = NULL;
+    // product_update->harmonized_system_code
+    cJSON *harmonized_system_code = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "harmonized_system_code");
+    if (cJSON_IsNull(harmonized_system_code)) {
+        harmonized_system_code = NULL;
     }
-    if (manufacturer_info) { 
-    manufacturer_info_local_nonprim = product_add_manufacturer_info_parseFromJSON(manufacturer_info); //nonprimitive
-    }
-
-    // product_update->production_partner_ids
-    cJSON *production_partner_ids = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "production_partner_ids");
-    if (cJSON_IsNull(production_partner_ids)) {
-        production_partner_ids = NULL;
-    }
-    if (production_partner_ids) { 
-    if(!cJSON_IsString(production_partner_ids) && !cJSON_IsNull(production_partner_ids))
+    if (harmonized_system_code) { 
+    if(!cJSON_IsString(harmonized_system_code) && !cJSON_IsNull(harmonized_system_code))
     {
     goto end; //String
     }
@@ -2195,99 +2200,187 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
+    // product_update->production_partner_ids
+    cJSON *production_partner_ids = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "production_partner_ids");
+    if (cJSON_IsNull(production_partner_ids)) {
+        production_partner_ids = NULL;
+    }
+    if (production_partner_ids) { 
+    if(!cJSON_IsString(production_partner_ids) && !cJSON_IsNull(production_partner_ids))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->manufacturer_info
+    cJSON *manufacturer_info = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "manufacturer_info");
+    if (cJSON_IsNull(manufacturer_info)) {
+        manufacturer_info = NULL;
+    }
+    if (manufacturer_info) { 
+    manufacturer_info_local_nonprim = product_add_manufacturer_info_parseFromJSON(manufacturer_info); //nonprimitive
+    }
+
+    // product_update->report_request_id
+    cJSON *report_request_id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "report_request_id");
+    if (cJSON_IsNull(report_request_id)) {
+        report_request_id = NULL;
+    }
+    if (report_request_id) { 
+    if(!cJSON_IsString(report_request_id) && !cJSON_IsNull(report_request_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->disable_report_cache
+    cJSON *disable_report_cache = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "disable_report_cache");
+    if (cJSON_IsNull(disable_report_cache)) {
+        disable_report_cache = NULL;
+    }
+    if (disable_report_cache) { 
+    if(!cJSON_IsBool(disable_report_cache))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // product_update->reindex
+    cJSON *reindex = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "reindex");
+    if (cJSON_IsNull(reindex)) {
+        reindex = NULL;
+    }
+    if (reindex) { 
+    if(!cJSON_IsBool(reindex))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // product_update->clear_cache
+    cJSON *clear_cache = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "clear_cache");
+    if (cJSON_IsNull(clear_cache)) {
+        clear_cache = NULL;
+    }
+    if (clear_cache) { 
+    if(!cJSON_IsBool(clear_cache))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // product_update->check_process_status
+    cJSON *check_process_status = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "check_process_status");
+    if (cJSON_IsNull(check_process_status)) {
+        check_process_status = NULL;
+    }
+    if (check_process_status) { 
+    if(!cJSON_IsBool(check_process_status))
+    {
+    goto end; //Bool
+    }
+    }
+
 
     product_update_local_var = product_update_create_internal (
         id && !cJSON_IsNull(id) ? strdup(id->valuestring) : NULL,
         model && !cJSON_IsNull(model) ? strdup(model->valuestring) : NULL,
-        old_price ? old_price->valuedouble : 0,
+        sku && !cJSON_IsNull(sku) ? strdup(sku->valuestring) : NULL,
+        name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
+        description && !cJSON_IsNull(description) ? strdup(description->valuestring) : NULL,
+        short_description && !cJSON_IsNull(short_description) ? strdup(short_description->valuestring) : NULL,
         price ? price->valuedouble : 0,
+        old_price ? old_price->valuedouble : 0,
         special_price ? special_price->valuedouble : 0,
         sprice_create && !cJSON_IsNull(sprice_create) ? strdup(sprice_create->valuestring) : NULL,
         sprice_expire && !cJSON_IsNull(sprice_expire) ? strdup(sprice_expire->valuestring) : NULL,
         cost_price ? cost_price->valuedouble : 0,
         fixed_cost_shipping_price ? fixed_cost_shipping_price->valuedouble : 0,
         retail_price ? retail_price->valuedouble : 0,
-        quantity ? quantity->valuedouble : 0,
+        tier_prices ? tier_pricesList : NULL,
+        reserve_price ? reserve_price->valuedouble : 0,
+        buyitnow_price ? buyitnow_price->valuedouble : 0,
+        taxable ? taxable->valueint : 0,
+        tax_class_id && !cJSON_IsNull(tax_class_id) ? strdup(tax_class_id->valuestring) : NULL,
+        type && !cJSON_IsNull(type) ? strdup(type->valuestring) : NULL,
+        status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
+        condition && !cJSON_IsNull(condition) ? strdup(condition->valuestring) : NULL,
+        visible && !cJSON_IsNull(visible) ? strdup(visible->valuestring) : NULL,
+        in_stock ? in_stock->valueint : 0,
+        avail ? avail->valueint : 0,
+        avail_from && !cJSON_IsNull(avail_from) ? strdup(avail_from->valuestring) : NULL,
+        product_class && !cJSON_IsNull(product_class) ? strdup(product_class->valuestring) : NULL,
         available_for_view ? available_for_view->valueint : 0,
-        weight ? weight->valuedouble : 0,
-        weight_unit && !cJSON_IsNull(weight_unit) ? strdup(weight_unit->valuestring) : NULL,
-        dimensions_unit && !cJSON_IsNull(dimensions_unit) ? strdup(dimensions_unit->valuestring) : NULL,
-        increase_quantity ? increase_quantity->valuedouble : 0,
-        reduce_quantity ? reduce_quantity->valuedouble : 0,
-        warehouse_id && !cJSON_IsNull(warehouse_id) ? strdup(warehouse_id->valuestring) : NULL,
+        stores_ids && !cJSON_IsNull(stores_ids) ? strdup(stores_ids->valuestring) : NULL,
+        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
+        lang_id && !cJSON_IsNull(lang_id) ? strdup(lang_id->valuestring) : NULL,
+        quantity ? quantity->valuedouble : 0,
         reserve_quantity ? reserve_quantity->valuedouble : 0,
         manage_stock ? manage_stock->valueint : 0,
         backorder_status && !cJSON_IsNull(backorder_status) ? strdup(backorder_status->valuestring) : NULL,
-        name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
-        sku && !cJSON_IsNull(sku) ? strdup(sku->valuestring) : NULL,
-        visible && !cJSON_IsNull(visible) ? strdup(visible->valuestring) : NULL,
+        increase_quantity ? increase_quantity->valuedouble : 0,
+        reduce_quantity ? reduce_quantity->valuedouble : 0,
+        warehouse_id && !cJSON_IsNull(warehouse_id) ? strdup(warehouse_id->valuestring) : NULL,
+        weight ? weight->valuedouble : 0,
+        weight_unit && !cJSON_IsNull(weight_unit) ? strdup(weight_unit->valuestring) : NULL,
+        height ? height->valuedouble : 0,
+        length ? length->valuedouble : 0,
+        width ? width->valuedouble : 0,
+        dimensions_unit && !cJSON_IsNull(dimensions_unit) ? strdup(dimensions_unit->valuestring) : NULL,
+        is_virtual ? is_virtual->valueint : 0,
+        is_free_shipping ? is_free_shipping->valueint : 0,
+        gtin && !cJSON_IsNull(gtin) ? strdup(gtin->valuestring) : NULL,
+        upc && !cJSON_IsNull(upc) ? strdup(upc->valuestring) : NULL,
+        mpn && !cJSON_IsNull(mpn) ? strdup(mpn->valuestring) : NULL,
+        ean && !cJSON_IsNull(ean) ? strdup(ean->valuestring) : NULL,
+        isbn && !cJSON_IsNull(isbn) ? strdup(isbn->valuestring) : NULL,
+        barcode && !cJSON_IsNull(barcode) ? strdup(barcode->valuestring) : NULL,
         manufacturer && !cJSON_IsNull(manufacturer) ? strdup(manufacturer->valuestring) : NULL,
         manufacturer_id && !cJSON_IsNull(manufacturer_id) ? strdup(manufacturer_id->valuestring) : NULL,
         categories_ids && !cJSON_IsNull(categories_ids) ? strdup(categories_ids->valuestring) : NULL,
         related_products_ids && !cJSON_IsNull(related_products_ids) ? strdup(related_products_ids->valuestring) : NULL,
         up_sell_products_ids && !cJSON_IsNull(up_sell_products_ids) ? strdup(up_sell_products_ids->valuestring) : NULL,
         cross_sell_products_ids && !cJSON_IsNull(cross_sell_products_ids) ? strdup(cross_sell_products_ids->valuestring) : NULL,
-        description && !cJSON_IsNull(description) ? strdup(description->valuestring) : NULL,
-        short_description && !cJSON_IsNull(short_description) ? strdup(short_description->valuestring) : NULL,
         meta_title && !cJSON_IsNull(meta_title) ? strdup(meta_title->valuestring) : NULL,
         meta_keywords && !cJSON_IsNull(meta_keywords) ? strdup(meta_keywords->valuestring) : NULL,
         meta_description && !cJSON_IsNull(meta_description) ? strdup(meta_description->valuestring) : NULL,
-        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
-        lang_id && !cJSON_IsNull(lang_id) ? strdup(lang_id->valuestring) : NULL,
-        in_stock ? in_stock->valueint : 0,
-        status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
         seo_url && !cJSON_IsNull(seo_url) ? strdup(seo_url->valuestring) : NULL,
-        report_request_id && !cJSON_IsNull(report_request_id) ? strdup(report_request_id->valuestring) : NULL,
-        disable_report_cache ? disable_report_cache->valueint : 0,
-        reindex ? reindex->valueint : 0,
-        tags && !cJSON_IsNull(tags) ? strdup(tags->valuestring) : NULL,
-        clear_cache ? clear_cache->valueint : 0,
-        gtin && !cJSON_IsNull(gtin) ? strdup(gtin->valuestring) : NULL,
-        upc && !cJSON_IsNull(upc) ? strdup(upc->valuestring) : NULL,
-        mpn && !cJSON_IsNull(mpn) ? strdup(mpn->valuestring) : NULL,
-        ean && !cJSON_IsNull(ean) ? strdup(ean->valuestring) : NULL,
-        isbn && !cJSON_IsNull(isbn) ? strdup(isbn->valuestring) : NULL,
-        taxable ? taxable->valueint : 0,
-        product_class && !cJSON_IsNull(product_class) ? strdup(product_class->valuestring) : NULL,
-        height ? height->valuedouble : 0,
-        length ? length->valuedouble : 0,
-        width ? width->valuedouble : 0,
-        harmonized_system_code && !cJSON_IsNull(harmonized_system_code) ? strdup(harmonized_system_code->valuestring) : NULL,
-        country_of_origin && !cJSON_IsNull(country_of_origin) ? strdup(country_of_origin->valuestring) : NULL,
         search_keywords && !cJSON_IsNull(search_keywords) ? strdup(search_keywords->valuestring) : NULL,
-        barcode && !cJSON_IsNull(barcode) ? strdup(barcode->valuestring) : NULL,
-        is_virtual ? is_virtual->valueint : 0,
-        is_free_shipping ? is_free_shipping->valueint : 0,
-        reserve_price ? reserve_price->valuedouble : 0,
-        buyitnow_price ? buyitnow_price->valuedouble : 0,
-        avail_from && !cJSON_IsNull(avail_from) ? strdup(avail_from->valuestring) : NULL,
-        tax_class_id && !cJSON_IsNull(tax_class_id) ? strdup(tax_class_id->valuestring) : NULL,
-        type && !cJSON_IsNull(type) ? strdup(type->valuestring) : NULL,
-        avail ? avail->valueint : 0,
+        tags && !cJSON_IsNull(tags) ? strdup(tags->valuestring) : NULL,
         delivery_code && !cJSON_IsNull(delivery_code) ? strdup(delivery_code->valuestring) : NULL,
-        check_process_status ? check_process_status->valueint : 0,
         package_details ? package_details_local_nonprim : NULL,
-        stores_ids && !cJSON_IsNull(stores_ids) ? strdup(stores_ids->valuestring) : NULL,
-        manufacturer_info ? manufacturer_info_local_nonprim : NULL,
-        production_partner_ids && !cJSON_IsNull(production_partner_ids) ? strdup(production_partner_ids->valuestring) : NULL,
+        country_of_origin && !cJSON_IsNull(country_of_origin) ? strdup(country_of_origin->valuestring) : NULL,
+        harmonized_system_code && !cJSON_IsNull(harmonized_system_code) ? strdup(harmonized_system_code->valuestring) : NULL,
         shipping_template_id ? shipping_template_id->valuedouble : 0,
         when_made && !cJSON_IsNull(when_made) ? strdup(when_made->valuestring) : NULL,
         is_supply ? is_supply->valueint : 0,
         downloadable ? downloadable->valueint : 0,
         materials ? materialsList : NULL,
         auto_renew ? auto_renew->valueint : 0,
-        on_sale ? on_sale->valueint : 0
+        on_sale ? on_sale->valueint : 0,
+        production_partner_ids && !cJSON_IsNull(production_partner_ids) ? strdup(production_partner_ids->valuestring) : NULL,
+        manufacturer_info ? manufacturer_info_local_nonprim : NULL,
+        report_request_id && !cJSON_IsNull(report_request_id) ? strdup(report_request_id->valuestring) : NULL,
+        disable_report_cache ? disable_report_cache->valueint : 0,
+        reindex ? reindex->valueint : 0,
+        clear_cache ? clear_cache->valueint : 0,
+        check_process_status ? check_process_status->valueint : 0
         );
 
     return product_update_local_var;
 end:
+    if (tier_pricesList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, tier_pricesList) {
+            product_add_tier_prices_inner_free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(tier_pricesList);
+        tier_pricesList = NULL;
+    }
     if (package_details_local_nonprim) {
         product_add_package_details_free(package_details_local_nonprim);
         package_details_local_nonprim = NULL;
-    }
-    if (manufacturer_info_local_nonprim) {
-        product_add_manufacturer_info_free(manufacturer_info_local_nonprim);
-        manufacturer_info_local_nonprim = NULL;
     }
     if (materialsList) {
         listEntry_t *listEntry = NULL;
@@ -2297,6 +2390,10 @@ end:
         }
         list_freeList(materialsList);
         materialsList = NULL;
+    }
+    if (manufacturer_info_local_nonprim) {
+        product_add_manufacturer_info_free(manufacturer_info_local_nonprim);
+        manufacturer_info_local_nonprim = NULL;
     }
     return NULL;
 

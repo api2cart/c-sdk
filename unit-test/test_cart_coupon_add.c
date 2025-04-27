@@ -22,14 +22,13 @@ cart_coupon_add_t* instantiate_cart_coupon_add(int include_optional) {
   cart_coupon_add_t* cart_coupon_add = NULL;
   if (include_optional) {
     cart_coupon_add = cart_coupon_add_create(
-      "1",
       "000_BIG_SALE_000",
-      "Sale! -30%",
-      codes[0]=000_BIG_SALE_000&codes[1]=000_BIG_SALE_001&codes[2]=000_BIG_SALE_002,
       api2cart_openapi_cart_coupon_add_ACTIONTYPE_"percent",
       api2cart_openapi_cart_coupon_add_ACTIONAPPLYTO_"order_total",
       api2cart_openapi_cart_coupon_add_ACTIONSCOPE_"matching_items",
       15.5,
+      codes[0]=000_BIG_SALE_000&codes[1]=000_BIG_SALE_001&codes[2]=000_BIG_SALE_002,
+      "Sale! -30%",
       "now",
       "2020-01-05 01:00:00",
       99,
@@ -38,18 +37,18 @@ cart_coupon_add_t* instantiate_cart_coupon_add(int include_optional) {
       "product_id",
       "ONE_OF",
       "17834222,45466663",
-      true
+      true,
+      "1"
     );
   } else {
     cart_coupon_add = cart_coupon_add_create(
-      "1",
       "000_BIG_SALE_000",
-      "Sale! -30%",
-      codes[0]=000_BIG_SALE_000&codes[1]=000_BIG_SALE_001&codes[2]=000_BIG_SALE_002,
       api2cart_openapi_cart_coupon_add_ACTIONTYPE_"percent",
       api2cart_openapi_cart_coupon_add_ACTIONAPPLYTO_"order_total",
       api2cart_openapi_cart_coupon_add_ACTIONSCOPE_"matching_items",
       15.5,
+      codes[0]=000_BIG_SALE_000&codes[1]=000_BIG_SALE_001&codes[2]=000_BIG_SALE_002,
+      "Sale! -30%",
       "now",
       "2020-01-05 01:00:00",
       99,
@@ -58,7 +57,8 @@ cart_coupon_add_t* instantiate_cart_coupon_add(int include_optional) {
       "product_id",
       "ONE_OF",
       "17834222,45466663",
-      true
+      true,
+      "1"
     );
   }
 

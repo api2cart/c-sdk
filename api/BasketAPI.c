@@ -12,7 +12,7 @@
 // Retrieve basket information.
 //
 basket_info_200_response_t*
-BasketAPI_basketInfo(apiClient_t *apiClient, char *id, char *store_id, char *params, char *exclude, char *response_fields)
+BasketAPI_basketInfo(apiClient_t *apiClient, char *id, char *store_id, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -57,6 +57,18 @@ BasketAPI_basketInfo(apiClient_t *apiClient, char *id, char *store_id, char *par
     }
 
     // query parameters
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
+    {
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
+    }
+
+    // query parameters
     char *keyQuery_params = NULL;
     char * valueQuery_params = NULL;
     keyValuePair_t *keyPairQuery_params = 0;
@@ -78,18 +90,6 @@ BasketAPI_basketInfo(apiClient_t *apiClient, char *id, char *store_id, char *par
         valueQuery_exclude = strdup((exclude));
         keyPairQuery_exclude = keyValuePair_create(keyQuery_exclude, valueQuery_exclude);
         list_addElement(localVarQueryParameters,keyPairQuery_exclude);
-    }
-
-    // query parameters
-    char *keyQuery_response_fields = NULL;
-    char * valueQuery_response_fields = NULL;
-    keyValuePair_t *keyPairQuery_response_fields = 0;
-    if (response_fields)
-    {
-        keyQuery_response_fields = strdup("response_fields");
-        valueQuery_response_fields = strdup((response_fields));
-        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
-        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -154,6 +154,18 @@ BasketAPI_basketInfo(apiClient_t *apiClient, char *id, char *store_id, char *par
         keyValuePair_free(keyPairQuery_store_id);
         keyPairQuery_store_id = NULL;
     }
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
+    }
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
+    }
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
+    }
     if(keyQuery_params){
         free(keyQuery_params);
         keyQuery_params = NULL;
@@ -177,18 +189,6 @@ BasketAPI_basketInfo(apiClient_t *apiClient, char *id, char *store_id, char *par
     if(keyPairQuery_exclude){
         keyValuePair_free(keyPairQuery_exclude);
         keyPairQuery_exclude = NULL;
-    }
-    if(keyQuery_response_fields){
-        free(keyQuery_response_fields);
-        keyQuery_response_fields = NULL;
-    }
-    if(valueQuery_response_fields){
-        free(valueQuery_response_fields);
-        valueQuery_response_fields = NULL;
-    }
-    if(keyPairQuery_response_fields){
-        keyValuePair_free(keyPairQuery_response_fields);
-        keyPairQuery_response_fields = NULL;
     }
     return elementToReturn;
 end:
@@ -409,18 +409,6 @@ BasketAPI_basketLiveShippingServiceCreate(apiClient_t *apiClient, char *name, ch
 
 
     // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
-
-    // query parameters
     char *keyQuery_name = NULL;
     char * valueQuery_name = NULL;
     keyValuePair_t *keyPairQuery_name = 0;
@@ -442,6 +430,18 @@ BasketAPI_basketLiveShippingServiceCreate(apiClient_t *apiClient, char *name, ch
         valueQuery_callback = strdup((callback));
         keyPairQuery_callback = keyValuePair_create(keyQuery_callback, valueQuery_callback);
         list_addElement(localVarQueryParameters,keyPairQuery_callback);
+    }
+
+    // query parameters
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
+    {
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -482,18 +482,6 @@ BasketAPI_basketLiveShippingServiceCreate(apiClient_t *apiClient, char *name, ch
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
     if(keyQuery_name){
         free(keyQuery_name);
         keyQuery_name = NULL;
@@ -517,6 +505,18 @@ BasketAPI_basketLiveShippingServiceCreate(apiClient_t *apiClient, char *name, ch
     if(keyPairQuery_callback){
         keyValuePair_free(keyPairQuery_callback);
         keyPairQuery_callback = NULL;
+    }
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
+    }
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
+    }
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     return elementToReturn;
 end:
@@ -625,7 +625,7 @@ end:
 // Retrieve a list of live shipping rate services.
 //
 basket_live_shipping_service_list_200_response_t*
-BasketAPI_basketLiveShippingServiceList(apiClient_t *apiClient, char *store_id, int *start, int *count)
+BasketAPI_basketLiveShippingServiceList(apiClient_t *apiClient, int *start, int *count, char *store_id)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -644,18 +644,6 @@ BasketAPI_basketLiveShippingServiceList(apiClient_t *apiClient, char *store_id, 
 
 
 
-
-    // query parameters
-    char *keyQuery_store_id = NULL;
-    char * valueQuery_store_id = NULL;
-    keyValuePair_t *keyPairQuery_store_id = 0;
-    if (store_id)
-    {
-        keyQuery_store_id = strdup("store_id");
-        valueQuery_store_id = strdup((store_id));
-        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
-        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
-    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -681,6 +669,18 @@ BasketAPI_basketLiveShippingServiceList(apiClient_t *apiClient, char *store_id, 
         snprintf(valueQuery_count, MAX_NUMBER_LENGTH, "%d", *count);
         keyPairQuery_count = keyValuePair_create(keyQuery_count, valueQuery_count);
         list_addElement(localVarQueryParameters,keyPairQuery_count);
+    }
+
+    // query parameters
+    char *keyQuery_store_id = NULL;
+    char * valueQuery_store_id = NULL;
+    keyValuePair_t *keyPairQuery_store_id = 0;
+    if (store_id)
+    {
+        keyQuery_store_id = strdup("store_id");
+        valueQuery_store_id = strdup((store_id));
+        keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_store_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -721,18 +721,6 @@ BasketAPI_basketLiveShippingServiceList(apiClient_t *apiClient, char *store_id, 
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
-    if(keyQuery_store_id){
-        free(keyQuery_store_id);
-        keyQuery_store_id = NULL;
-    }
-    if(valueQuery_store_id){
-        free(valueQuery_store_id);
-        valueQuery_store_id = NULL;
-    }
-    if(keyPairQuery_store_id){
-        keyValuePair_free(keyPairQuery_store_id);
-        keyPairQuery_store_id = NULL;
-    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;
@@ -756,6 +744,18 @@ BasketAPI_basketLiveShippingServiceList(apiClient_t *apiClient, char *store_id, 
     if(keyPairQuery_count){
         keyValuePair_free(keyPairQuery_count);
         keyPairQuery_count = NULL;
+    }
+    if(keyQuery_store_id){
+        free(keyQuery_store_id);
+        keyQuery_store_id = NULL;
+    }
+    if(valueQuery_store_id){
+        free(valueQuery_store_id);
+        valueQuery_store_id = NULL;
+    }
+    if(keyPairQuery_store_id){
+        keyValuePair_free(keyPairQuery_store_id);
+        keyPairQuery_store_id = NULL;
     }
     return elementToReturn;
 end:

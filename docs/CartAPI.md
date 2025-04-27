@@ -102,19 +102,19 @@ Name | Type | Description  | Notes
 //
 // Get cart catalog price rules discounts.
 //
-model_response_cart_catalog_price_rules_list_t* CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *ids, char *params, char *response_fields, char *exclude);
+model_response_cart_catalog_price_rules_list_t* CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **ids** | **char \*** | Retrieves  catalog_price_rules by ids | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description&#39;]
 **response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -264,7 +264,7 @@ Name | Type | Description  | Notes
 //
 // Use this method to add additional conditions for coupon application.
 //
-basket_live_shipping_service_delete_200_response_t* CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart_openapi_cartCouponConditionAdd_entity_e entity, api2cart_openapi_cartCouponConditionAdd_key_e key, char *_operator, char *value, char *store_id, char *target, int *include_tax, int *include_shipping);
+basket_live_shipping_service_delete_200_response_t* CartAPI_cartCouponConditionAdd(apiClient_t *apiClient, char *coupon_id, api2cart_openapi_cartCouponConditionAdd_entity_e entity, api2cart_openapi_cartCouponConditionAdd_key_e key, char *_operator, char *value, char *target, int *include_tax, int *include_shipping, char *store_id);
 ```
 
 ### Parameters
@@ -276,10 +276,10 @@ Name | Type | Description  | Notes
 **key** | **api2cart_openapi_cartCouponConditionAdd_key_e** | Defines condition entity attribute key | 
 **_operator** | **char \*** | Defines condition operator | 
 **value** | **char \*** | Defines condition value, can be comma separated according to the operator. | 
-**store_id** | **char \*** | Store Id | [optional] 
 **target** | **char \*** | Defines condition operator | [optional] [default to &#39;coupon_prerequisite&#39;]
 **include_tax** | **int \*** | Indicates whether to apply a discount for taxes. | [optional] [default to false]
 **include_shipping** | **int \*** | Indicates whether to apply a discount for shipping. | [optional] [default to false]
+**store_id** | **char \*** | Store Id | [optional] 
 
 ### Return type
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 //
 // This method allows you to get the number of coupons. On some platforms, you can filter the coupons by the date they were active.
 //
-cart_coupon_count_200_response_t* CartAPI_cartCouponCount(apiClient_t *apiClient, char *store_id, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, int *avail);
+cart_coupon_count_200_response_t* CartAPI_cartCouponCount(apiClient_t *apiClient, char *store_id, int *avail, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to);
 ```
 
 ### Parameters
@@ -311,11 +311,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **store_id** | **char \*** | Store Id | [optional] 
+**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
 **date_start_from** | **char \*** | Filter entity by date_start (greater or equal) | [optional] 
 **date_start_to** | **char \*** | Filter entity by date_start (less or equal) | [optional] 
 **date_end_from** | **char \*** | Filter entity by date_end (greater or equal) | [optional] 
 **date_end_to** | **char \*** | Filter entity by date_end (less or equal) | [optional] 
-**avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
 
 ### Return type
 
@@ -371,26 +371,26 @@ Name | Type | Description  | Notes
 //
 // Get cart coupon discounts.
 //
-model_response_cart_coupon_list_t* CartAPI_cartCouponList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *coupons_ids, char *store_id, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, int *avail, char *lang_id, char *params, char *response_fields, char *exclude);
+model_response_cart_coupon_list_t* CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *coupons_ids, char *store_id, char *lang_id, int *avail, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **coupons_ids** | **char \*** | Filter coupons by ids | [optional] 
 **store_id** | **char \*** | Filter coupons by store id | [optional] 
+**lang_id** | **char \*** | Language id | [optional] 
+**avail** | **int \*** | Filter coupons by avail status | [optional] 
 **date_start_from** | **char \*** | Filter entity by date_start (greater or equal) | [optional] 
 **date_start_to** | **char \*** | Filter entity by date_start (less or equal) | [optional] 
 **date_end_from** | **char \*** | Filter entity by date_end (greater or equal) | [optional] 
 **date_end_to** | **char \*** | Filter entity by date_end (less or equal) | [optional] 
-**avail** | **int \*** | Filter coupons by avail status | [optional] 
-**lang_id** | **char \*** | Language id | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,code,name,description&#39;]
 **response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,code,name,description&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -606,19 +606,19 @@ Name | Type | Description  | Notes
 //
 // Get gift cards list.
 //
-model_response_cart_gift_card_list_t* CartAPI_cartGiftcardList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *store_id, char *params, char *response_fields, char *exclude);
+model_response_cart_gift_card_list_t* CartAPI_cartGiftcardList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *store_id, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,code,name&#39;]
 **response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,code,name&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -643,17 +643,17 @@ Name | Type | Description  | Notes
 //
 // This method allows you to get various information about the store, including a list of stores (in the case of a multistore configuration), a list of supported languages, currencies, carriers, warehouses, and many other information. This information contains data that is relatively stable and rarely changes, so API2Cart can cache certain data to reduce the load on the store and speed up the execution of the request. We also recommend that you cache the response of this method on your side to save requests. If you need to clear the cache for a specific store, then use the cart.validate method.
 //
-cart_info_200_response_t* CartAPI_cartInfo(apiClient_t *apiClient, char *params, char *response_fields, char *exclude, char *store_id);
+cart_info_200_response_t* CartAPI_cartInfo(apiClient_t *apiClient, char *store_id, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;store_name,store_url,db_prefix&#39;]
-**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;store_name,store_url,db_prefix&#39;]
+**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -707,7 +707,7 @@ Name | Type | Description  | Notes
 //
 // Using this method, you can get a list of metadata for various entities (products, options, customers, orders). Usually this is data created by third-party plugins.
 //
-model_response_cart_meta_data_list_t* CartAPI_cartMetaDataList(apiClient_t *apiClient, char *entity_id, char *entity, char *store_id, char *lang_id, char *key, int *count, char *page_cursor, char *params, char *response_fields, char *exclude);
+model_response_cart_meta_data_list_t* CartAPI_cartMetaDataList(apiClient_t *apiClient, char *entity_id, int *count, char *page_cursor, char *entity, char *store_id, char *lang_id, char *key, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -715,14 +715,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **entity_id** | **char \*** | Entity Id | 
+**count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **entity** | **char \*** | Entity | [optional] [default to &#39;product&#39;]
 **store_id** | **char \*** | Store Id | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
 **key** | **char \*** | Key | [optional] 
-**count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
-**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;key,value&#39;]
 **response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;key,value&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -849,16 +849,16 @@ Name | Type | Description  | Notes
 //
 // Get a list of third-party plugins installed on the store.
 //
-cart_plugin_list_200_response_t* CartAPI_cartPluginList(apiClient_t *apiClient, char *store_id, int *start, int *count);
+cart_plugin_list_200_response_t* CartAPI_cartPluginList(apiClient_t *apiClient, int *start, int *count, char *store_id);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**store_id** | **char \*** | Store Id | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**store_id** | **char \*** | Store Id | [optional] 
 
 ### Return type
 
@@ -952,24 +952,24 @@ Name | Type | Description  | Notes
 //
 // Get scripts installed to the storefront
 //
-model_response_cart_script_list_t* CartAPI_cartScriptList(apiClient_t *apiClient, char *page_cursor, int *start, int *count, char *created_from, char *created_to, char *modified_from, char *modified_to, char *script_ids, char *store_id, char *params, char *response_fields, char *exclude);
+model_response_cart_script_list_t* CartAPI_cartScriptList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *script_ids, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+**page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+**script_ids** | **char \*** | Retrieves only scripts with specific ids | [optional] 
+**store_id** | **char \*** | Store Id | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
 **created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
 **modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
 **modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**script_ids** | **char \*** | Retrieves only scripts with specific ids | [optional] 
-**store_id** | **char \*** | Store Id | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description&#39;]
 **response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,description&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -994,18 +994,18 @@ Name | Type | Description  | Notes
 //
 // Get list of shipping zones
 //
-model_response_cart_shipping_zones_list_t* CartAPI_cartShippingZonesList(apiClient_t *apiClient, char *store_id, int *start, int *count, char *params, char *response_fields, char *exclude);
+model_response_cart_shipping_zones_list_t* CartAPI_cartShippingZonesList(apiClient_t *apiClient, int *start, int *count, char *store_id, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**store_id** | **char \*** | Store Id | [optional] 
 **start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
 **count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,enabled&#39;]
+**store_id** | **char \*** | Store Id | [optional] 
 **response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,name,enabled&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
