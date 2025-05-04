@@ -35,6 +35,7 @@ order_shipment_add_t* instantiate_order_shipment_add(int include_optional) {
       true,
       true,
       false,
+      "Custom tracker",
       true
     );
   } else {
@@ -52,6 +53,7 @@ order_shipment_add_t* instantiate_order_shipment_add(int include_optional) {
       true,
       true,
       false,
+      "Custom tracker",
       true
     );
   }

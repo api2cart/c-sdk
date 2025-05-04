@@ -15,6 +15,7 @@
 
 typedef struct order_shipment_update_t order_shipment_update_t;
 
+#include "order_shipment_add_items_inner.h"
 #include "order_shipment_add_tracking_numbers_inner.h"
 
 
@@ -29,6 +30,9 @@ typedef struct order_shipment_update_t {
     int is_shipped; //boolean
     char *delivered_at; // string
     int replace; //boolean
+    int send_notifications; //boolean
+    char *tracking_provider; // string
+    list_t *items; //nonprimitive container
 
     int _library_owned; // Is the library responsible for freeing this object?
 } order_shipment_update_t;
@@ -42,7 +46,10 @@ __attribute__((deprecated)) order_shipment_update_t *order_shipment_update_creat
     char *tracking_link,
     int is_shipped,
     char *delivered_at,
-    int replace
+    int replace,
+    int send_notifications,
+    char *tracking_provider,
+    list_t *items
 );
 
 void order_shipment_update_free(order_shipment_update_t *order_shipment_update);

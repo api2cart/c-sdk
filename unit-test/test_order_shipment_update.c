@@ -30,7 +30,10 @@ order_shipment_update_t* instantiate_order_shipment_update(int include_optional)
       "http://example.com?someParam=value",
       true,
       "2024-08-25T23:56:12+00:00",
-      false
+      false,
+      true,
+      "Custom tracker",
+      list_createList()
     );
   } else {
     order_shipment_update = order_shipment_update_create(
@@ -42,7 +45,10 @@ order_shipment_update_t* instantiate_order_shipment_update(int include_optional)
       "http://example.com?someParam=value",
       true,
       "2024-08-25T23:56:12+00:00",
-      false
+      false,
+      true,
+      "Custom tracker",
+      list_createList()
     );
   }
 

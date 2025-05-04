@@ -5,13 +5,13 @@
 
 
 char* account_cart_add_cart_id_ToString(api2cart_openapi_account_cart_add_CARTID_e cart_id) {
-    char* cart_idArray[] =  { "NULL", "3DCart", "3DCartApi", "AceShop", "AmazonSP", "AspDotNetStorefront", "BigcommerceApi", "Bol", "CommerceHQ", "Creloaded", "Cscart", "Cubecart", "Demandware", "EBay", "Ecwid", "EtsyAPIv3", "Flipkart", "Gambio", "Hybris", "JooCart", "Lazada", "LightSpeed", "Magento1212", "Magento2Api", "MercadoLibre", "MijoShop", "Miva", "Neto", "Opencart14", "Oscmax2", "Oscommerce22ms2", "Otto", "Oxid", "Pinnacle", "Prestashop", "PrestashopApi", "SSPremium", "Salla", "Shopify", "Shoplazza", "Shopline", "Shopware", "ShopwareApi", "Square", "Squarespace", "Tiendanube", "TikTokShop", "Tomatocart", "Ubercart", "Virtuemart", "Volusion", "WPecommerce", "Walmart", "WebAsyst", "Wix", "Woocommerce", "WoocommerceApi", "Xcart", "Xtcommerce", "XtcommerceVeyton", "Zencart137", "Zid", "Zoey", "Zoho" };
+    char* cart_idArray[] =  { "NULL", "3DCart", "3DCartApi", "AceShop", "AmazonSP", "AspDotNetStorefront", "BigCartel", "BigcommerceApi", "Bol", "CommerceHQ", "Creloaded", "Cscart", "Cubecart", "Demandware", "EBay", "Ecwid", "EtsyAPIv3", "Flipkart", "Gambio", "Hybris", "JooCart", "Lazada", "LightSpeed", "Magento1212", "Magento2Api", "MercadoLibre", "MijoShop", "Miva", "Neto", "Opencart14", "Oscmax2", "Oscommerce22ms2", "Otto", "Oxid", "Pinnacle", "Prestashop", "PrestashopApi", "SSPremium", "Salla", "Shopify", "Shoplazza", "Shopline", "Shopware", "ShopwareApi", "Square", "Squarespace", "Tiendanube", "TikTokShop", "Tomatocart", "Ubercart", "Virtuemart", "Volusion", "WPecommerce", "Walmart", "WebAsyst", "Wix", "Woocommerce", "WoocommerceApi", "Xcart", "Xtcommerce", "XtcommerceVeyton", "Zencart137", "Zid", "Zoey", "Zoho" };
     return cart_idArray[cart_id];
 }
 
 api2cart_openapi_account_cart_add_CARTID_e account_cart_add_cart_id_FromString(char* cart_id){
     int stringToReturn = 0;
-    char *cart_idArray[] =  { "NULL", "3DCart", "3DCartApi", "AceShop", "AmazonSP", "AspDotNetStorefront", "BigcommerceApi", "Bol", "CommerceHQ", "Creloaded", "Cscart", "Cubecart", "Demandware", "EBay", "Ecwid", "EtsyAPIv3", "Flipkart", "Gambio", "Hybris", "JooCart", "Lazada", "LightSpeed", "Magento1212", "Magento2Api", "MercadoLibre", "MijoShop", "Miva", "Neto", "Opencart14", "Oscmax2", "Oscommerce22ms2", "Otto", "Oxid", "Pinnacle", "Prestashop", "PrestashopApi", "SSPremium", "Salla", "Shopify", "Shoplazza", "Shopline", "Shopware", "ShopwareApi", "Square", "Squarespace", "Tiendanube", "TikTokShop", "Tomatocart", "Ubercart", "Virtuemart", "Volusion", "WPecommerce", "Walmart", "WebAsyst", "Wix", "Woocommerce", "WoocommerceApi", "Xcart", "Xtcommerce", "XtcommerceVeyton", "Zencart137", "Zid", "Zoey", "Zoho" };
+    char *cart_idArray[] =  { "NULL", "3DCart", "3DCartApi", "AceShop", "AmazonSP", "AspDotNetStorefront", "BigCartel", "BigcommerceApi", "Bol", "CommerceHQ", "Creloaded", "Cscart", "Cubecart", "Demandware", "EBay", "Ecwid", "EtsyAPIv3", "Flipkart", "Gambio", "Hybris", "JooCart", "Lazada", "LightSpeed", "Magento1212", "Magento2Api", "MercadoLibre", "MijoShop", "Miva", "Neto", "Opencart14", "Oscmax2", "Oscommerce22ms2", "Otto", "Oxid", "Pinnacle", "Prestashop", "PrestashopApi", "SSPremium", "Salla", "Shopify", "Shoplazza", "Shopline", "Shopware", "ShopwareApi", "Square", "Squarespace", "Tiendanube", "TikTokShop", "Tomatocart", "Ubercart", "Virtuemart", "Volusion", "WPecommerce", "Walmart", "WebAsyst", "Wix", "Woocommerce", "WoocommerceApi", "Xcart", "Xtcommerce", "XtcommerceVeyton", "Zencart137", "Zid", "Zoey", "Zoho" };
     size_t sizeofArray = sizeof(cart_idArray) / sizeof(cart_idArray[0]);
     while(stringToReturn < sizeofArray) {
         if(strcmp(cart_id, cart_idArray[stringToReturn]) == 0) {
@@ -57,6 +57,8 @@ static account_cart_add_t *account_cart_add_create_internal(
     char *bol_api_key,
     char *bol_api_secret,
     int bol_retailer_id,
+    char *bigcartel_user_name,
+    char *bigcartel_password,
     char *demandware_client_id,
     char *demandware_api_password,
     char *demandware_user_name,
@@ -211,6 +213,8 @@ static account_cart_add_t *account_cart_add_create_internal(
     account_cart_add_local_var->bol_api_key = bol_api_key;
     account_cart_add_local_var->bol_api_secret = bol_api_secret;
     account_cart_add_local_var->bol_retailer_id = bol_retailer_id;
+    account_cart_add_local_var->bigcartel_user_name = bigcartel_user_name;
+    account_cart_add_local_var->bigcartel_password = bigcartel_password;
     account_cart_add_local_var->demandware_client_id = demandware_client_id;
     account_cart_add_local_var->demandware_api_password = demandware_api_password;
     account_cart_add_local_var->demandware_user_name = demandware_user_name;
@@ -366,6 +370,8 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     char *bol_api_key,
     char *bol_api_secret,
     int bol_retailer_id,
+    char *bigcartel_user_name,
+    char *bigcartel_password,
     char *demandware_client_id,
     char *demandware_api_password,
     char *demandware_user_name,
@@ -517,6 +523,8 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
         bol_api_key,
         bol_api_secret,
         bol_retailer_id,
+        bigcartel_user_name,
+        bigcartel_password,
         demandware_client_id,
         demandware_api_password,
         demandware_user_name,
@@ -759,6 +767,14 @@ void account_cart_add_free(account_cart_add_t *account_cart_add) {
     if (account_cart_add->bol_api_secret) {
         free(account_cart_add->bol_api_secret);
         account_cart_add->bol_api_secret = NULL;
+    }
+    if (account_cart_add->bigcartel_user_name) {
+        free(account_cart_add->bigcartel_user_name);
+        account_cart_add->bigcartel_user_name = NULL;
+    }
+    if (account_cart_add->bigcartel_password) {
+        free(account_cart_add->bigcartel_password);
+        account_cart_add->bigcartel_password = NULL;
     }
     if (account_cart_add->demandware_client_id) {
         free(account_cart_add->demandware_client_id);
@@ -1488,6 +1504,24 @@ cJSON *account_cart_add_convertToJSON(account_cart_add_t *account_cart_add) {
     if(cJSON_AddNumberToObject(item, "bol_retailer_id", account_cart_add->bol_retailer_id) == NULL) {
     goto fail; //Numeric
     }
+    }
+
+
+    // account_cart_add->bigcartel_user_name
+    if (!account_cart_add->bigcartel_user_name) {
+        goto fail;
+    }
+    if(cJSON_AddStringToObject(item, "bigcartel_user_name", account_cart_add->bigcartel_user_name) == NULL) {
+    goto fail; //String
+    }
+
+
+    // account_cart_add->bigcartel_password
+    if (!account_cart_add->bigcartel_password) {
+        goto fail;
+    }
+    if(cJSON_AddStringToObject(item, "bigcartel_password", account_cart_add->bigcartel_password) == NULL) {
+    goto fail; //String
     }
 
 
@@ -2850,6 +2884,36 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     {
     goto end; //Numeric
     }
+    }
+
+    // account_cart_add->bigcartel_user_name
+    cJSON *bigcartel_user_name = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "bigcartel_user_name");
+    if (cJSON_IsNull(bigcartel_user_name)) {
+        bigcartel_user_name = NULL;
+    }
+    if (!bigcartel_user_name) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(bigcartel_user_name))
+    {
+    goto end; //String
+    }
+
+    // account_cart_add->bigcartel_password
+    cJSON *bigcartel_password = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "bigcartel_password");
+    if (cJSON_IsNull(bigcartel_password)) {
+        bigcartel_password = NULL;
+    }
+    if (!bigcartel_password) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(bigcartel_password))
+    {
+    goto end; //String
     }
 
     // account_cart_add->demandware_client_id
@@ -4286,6 +4350,8 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
         bol_api_key && !cJSON_IsNull(bol_api_key) ? strdup(bol_api_key->valuestring) : NULL,
         bol_api_secret && !cJSON_IsNull(bol_api_secret) ? strdup(bol_api_secret->valuestring) : NULL,
         bol_retailer_id ? bol_retailer_id->valuedouble : 0,
+        strdup(bigcartel_user_name->valuestring),
+        strdup(bigcartel_password->valuestring),
         demandware_client_id && !cJSON_IsNull(demandware_client_id) ? strdup(demandware_client_id->valuestring) : NULL,
         demandware_api_password && !cJSON_IsNull(demandware_api_password) ? strdup(demandware_api_password->valuestring) : NULL,
         demandware_user_name && !cJSON_IsNull(demandware_user_name) ? strdup(demandware_user_name->valuestring) : NULL,

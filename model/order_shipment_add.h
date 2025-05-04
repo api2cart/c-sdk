@@ -34,6 +34,7 @@ typedef struct order_shipment_add_t {
     int adjust_stock; //boolean
     int enable_cache; //boolean
     int check_process_status; //boolean
+    char *tracking_provider; // string
     int use_latest_api_version; //boolean
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -53,6 +54,7 @@ __attribute__((deprecated)) order_shipment_add_t *order_shipment_add_create(
     int adjust_stock,
     int enable_cache,
     int check_process_status,
+    char *tracking_provider,
     int use_latest_api_version
 );
 

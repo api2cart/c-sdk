@@ -19,6 +19,7 @@ static order_shipment_add_t *order_shipment_add_create_internal(
     int adjust_stock,
     int enable_cache,
     int check_process_status,
+    char *tracking_provider,
     int use_latest_api_version
     ) {
     order_shipment_add_t *order_shipment_add_local_var = malloc(sizeof(order_shipment_add_t));
@@ -38,6 +39,7 @@ static order_shipment_add_t *order_shipment_add_create_internal(
     order_shipment_add_local_var->adjust_stock = adjust_stock;
     order_shipment_add_local_var->enable_cache = enable_cache;
     order_shipment_add_local_var->check_process_status = check_process_status;
+    order_shipment_add_local_var->tracking_provider = tracking_provider;
     order_shipment_add_local_var->use_latest_api_version = use_latest_api_version;
 
     order_shipment_add_local_var->_library_owned = 1;
@@ -58,6 +60,7 @@ __attribute__((deprecated)) order_shipment_add_t *order_shipment_add_create(
     int adjust_stock,
     int enable_cache,
     int check_process_status,
+    char *tracking_provider,
     int use_latest_api_version
     ) {
     return order_shipment_add_create_internal (
@@ -74,6 +77,7 @@ __attribute__((deprecated)) order_shipment_add_t *order_shipment_add_create(
         adjust_stock,
         enable_cache,
         check_process_status,
+        tracking_provider,
         use_latest_api_version
         );
 }
@@ -124,6 +128,10 @@ void order_shipment_add_free(order_shipment_add_t *order_shipment_add) {
     if (order_shipment_add->tracking_link) {
         free(order_shipment_add->tracking_link);
         order_shipment_add->tracking_link = NULL;
+    }
+    if (order_shipment_add->tracking_provider) {
+        free(order_shipment_add->tracking_provider);
+        order_shipment_add->tracking_provider = NULL;
     }
     free(order_shipment_add);
 }
@@ -255,6 +263,14 @@ cJSON *order_shipment_add_convertToJSON(order_shipment_add_t *order_shipment_add
     if(order_shipment_add->check_process_status) {
     if(cJSON_AddBoolToObject(item, "check_process_status", order_shipment_add->check_process_status) == NULL) {
     goto fail; //Bool
+    }
+    }
+
+
+    // order_shipment_add->tracking_provider
+    if(order_shipment_add->tracking_provider) {
+    if(cJSON_AddStringToObject(item, "tracking_provider", order_shipment_add->tracking_provider) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -464,6 +480,18 @@ order_shipment_add_t *order_shipment_add_parseFromJSON(cJSON *order_shipment_add
     }
     }
 
+    // order_shipment_add->tracking_provider
+    cJSON *tracking_provider = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "tracking_provider");
+    if (cJSON_IsNull(tracking_provider)) {
+        tracking_provider = NULL;
+    }
+    if (tracking_provider) { 
+    if(!cJSON_IsString(tracking_provider) && !cJSON_IsNull(tracking_provider))
+    {
+    goto end; //String
+    }
+    }
+
     // order_shipment_add->use_latest_api_version
     cJSON *use_latest_api_version = cJSON_GetObjectItemCaseSensitive(order_shipment_addJSON, "use_latest_api_version");
     if (cJSON_IsNull(use_latest_api_version)) {
@@ -491,6 +519,7 @@ order_shipment_add_t *order_shipment_add_parseFromJSON(cJSON *order_shipment_add
         adjust_stock ? adjust_stock->valueint : 0,
         enable_cache ? enable_cache->valueint : 0,
         check_process_status ? check_process_status->valueint : 0,
+        tracking_provider && !cJSON_IsNull(tracking_provider) ? strdup(tracking_provider->valuestring) : NULL,
         use_latest_api_version ? use_latest_api_version->valueint : 0
         );
 

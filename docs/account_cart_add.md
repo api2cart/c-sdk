@@ -37,6 +37,8 @@ Name | Type | Description | Notes
 **bol_api_key** | **char \*** | Bol API Key | [optional] 
 **bol_api_secret** | **char \*** | Bol API Secret | [optional] 
 **bol_retailer_id** | **int** | Bol Retailer ID | [optional] 
+**bigcartel_user_name** | **char \*** | Subdomain of store | 
+**bigcartel_password** | **char \*** | BigCartel account password | 
 **demandware_client_id** | **char \*** | Demandware client id | [optional] 
 **demandware_api_password** | **char \*** | Demandware api password | [optional] 
 **demandware_user_name** | **char \*** | Demandware user name | [optional] 
