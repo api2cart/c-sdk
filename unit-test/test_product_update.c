@@ -18,6 +18,7 @@ product_update_t* instantiate_product_update(int include_optional);
 
 #include "test_product_add_package_details.c"
 #include "test_product_add_manufacturer_info.c"
+#include "test_product_add_personalization_details.c"
 
 
 product_update_t* instantiate_product_update(int include_optional) {
@@ -107,7 +108,11 @@ product_update_t* instantiate_product_update(int include_optional) {
       false,
       false,
       false,
-      false
+      false,
+      list_createList(),
+      `12345678`,
+       // false, not to have infinite recursion
+      instantiate_product_add_personalization_details(0)
     );
   } else {
     product_update = product_update_create(
@@ -192,7 +197,10 @@ product_update_t* instantiate_product_update(int include_optional) {
       false,
       false,
       false,
-      false
+      false,
+      list_createList(),
+      `12345678`,
+      NULL
     );
   }
 

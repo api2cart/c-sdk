@@ -519,6 +519,7 @@ Category | Method | HTTP request | Description
  - [product_add_logistic_info_inner_t](docs/product_add_logistic_info_inner.md)
  - [product_add_manufacturer_info_t](docs/product_add_manufacturer_info.md)
  - [product_add_package_details_t](docs/product_add_package_details.md)
+ - [product_add_personalization_details_t](docs/product_add_personalization_details.md)
  - [product_add_sales_tax_t](docs/product_add_sales_tax.md)
  - [product_add_seller_profiles_t](docs/product_add_seller_profiles.md)
  - [product_add_shipping_details_inner_t](docs/product_add_shipping_details_inner.md)

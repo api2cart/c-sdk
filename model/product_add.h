@@ -22,6 +22,7 @@ typedef struct product_add_t product_add_t;
 #include "product_add_logistic_info_inner.h"
 #include "product_add_manufacturer_info.h"
 #include "product_add_package_details.h"
+#include "product_add_personalization_details.h"
 #include "product_add_sales_tax.h"
 #include "product_add_seller_profiles.h"
 #include "product_add_shipping_details_inner.h"
@@ -144,6 +145,9 @@ typedef struct product_add_t {
     int clear_cache; //boolean
     int viewed_count; //numeric
     int ordered_count; //numeric
+    int shop_section_id; //numeric
+    int return_policy_id; //numeric
+    struct product_add_personalization_details_t *personalization_details; //model
 
     int _library_owned; // Is the library responsible for freeing this object?
 } product_add_t;
@@ -260,7 +264,10 @@ __attribute__((deprecated)) product_add_t *product_add_create(
     char *marketplace_item_properties,
     int clear_cache,
     int viewed_count,
-    int ordered_count
+    int ordered_count,
+    int shop_section_id,
+    int return_policy_id,
+    product_add_personalization_details_t *personalization_details
 );
 
 void product_add_free(product_add_t *product_add);

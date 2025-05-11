@@ -87,7 +87,10 @@ static product_update_t *product_update_create_internal(
     int disable_report_cache,
     int reindex,
     int clear_cache,
-    int check_process_status
+    int check_process_status,
+    list_t *specifics,
+    int shop_section_id,
+    product_add_personalization_details_t *personalization_details
     ) {
     product_update_t *product_update_local_var = malloc(sizeof(product_update_t));
     if (!product_update_local_var) {
@@ -175,6 +178,9 @@ static product_update_t *product_update_create_internal(
     product_update_local_var->reindex = reindex;
     product_update_local_var->clear_cache = clear_cache;
     product_update_local_var->check_process_status = check_process_status;
+    product_update_local_var->specifics = specifics;
+    product_update_local_var->shop_section_id = shop_section_id;
+    product_update_local_var->personalization_details = personalization_details;
 
     product_update_local_var->_library_owned = 1;
     return product_update_local_var;
@@ -262,7 +268,10 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     int disable_report_cache,
     int reindex,
     int clear_cache,
-    int check_process_status
+    int check_process_status,
+    list_t *specifics,
+    int shop_section_id,
+    product_add_personalization_details_t *personalization_details
     ) {
     return product_update_create_internal (
         id,
@@ -346,7 +355,10 @@ __attribute__((deprecated)) product_update_t *product_update_create(
         disable_report_cache,
         reindex,
         clear_cache,
-        check_process_status
+        check_process_status,
+        specifics,
+        shop_section_id,
+        personalization_details
         );
 }
 
@@ -564,6 +576,17 @@ void product_update_free(product_update_t *product_update) {
     if (product_update->report_request_id) {
         free(product_update->report_request_id);
         product_update->report_request_id = NULL;
+    }
+    if (product_update->specifics) {
+        list_ForEach(listEntry, product_update->specifics) {
+            product_add_specifics_inner_free(listEntry->data);
+        }
+        list_freeList(product_update->specifics);
+        product_update->specifics = NULL;
+    }
+    if (product_update->personalization_details) {
+        product_add_personalization_details_free(product_update->personalization_details);
+        product_update->personalization_details = NULL;
     }
     free(product_update);
 }
@@ -1257,6 +1280,47 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     }
     }
 
+
+    // product_update->specifics
+    if(product_update->specifics) {
+    cJSON *specifics = cJSON_AddArrayToObject(item, "specifics");
+    if(specifics == NULL) {
+    goto fail; //nonprimitive container
+    }
+
+    listEntry_t *specificsListEntry;
+    if (product_update->specifics) {
+    list_ForEach(specificsListEntry, product_update->specifics) {
+    cJSON *itemLocal = product_add_specifics_inner_convertToJSON(specificsListEntry->data);
+    if(itemLocal == NULL) {
+    goto fail;
+    }
+    cJSON_AddItemToArray(specifics, itemLocal);
+    }
+    }
+    }
+
+
+    // product_update->shop_section_id
+    if(product_update->shop_section_id) {
+    if(cJSON_AddNumberToObject(item, "shop_section_id", product_update->shop_section_id) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_update->personalization_details
+    if(product_update->personalization_details) {
+    cJSON *personalization_details_local_JSON = product_add_personalization_details_convertToJSON(product_update->personalization_details);
+    if(personalization_details_local_JSON == NULL) {
+    goto fail; //model
+    }
+    cJSON_AddItemToObject(item, "personalization_details", personalization_details_local_JSON);
+    if(item->child == NULL) {
+    goto fail;
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -1280,6 +1344,12 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
 
     // define the local variable for product_update->manufacturer_info
     product_add_manufacturer_info_t *manufacturer_info_local_nonprim = NULL;
+
+    // define the local list for product_update->specifics
+    list_t *specificsList = NULL;
+
+    // define the local variable for product_update->personalization_details
+    product_add_personalization_details_t *personalization_details_local_nonprim = NULL;
 
     // product_update->id
     cJSON *id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "id");
@@ -2281,6 +2351,51 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
+    // product_update->specifics
+    cJSON *specifics = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "specifics");
+    if (cJSON_IsNull(specifics)) {
+        specifics = NULL;
+    }
+    if (specifics) { 
+    cJSON *specifics_local_nonprimitive = NULL;
+    if(!cJSON_IsArray(specifics)){
+        goto end; //nonprimitive container
+    }
+
+    specificsList = list_createList();
+
+    cJSON_ArrayForEach(specifics_local_nonprimitive,specifics )
+    {
+        if(!cJSON_IsObject(specifics_local_nonprimitive)){
+            goto end;
+        }
+        product_add_specifics_inner_t *specificsItem = product_add_specifics_inner_parseFromJSON(specifics_local_nonprimitive);
+
+        list_addElement(specificsList, specificsItem);
+    }
+    }
+
+    // product_update->shop_section_id
+    cJSON *shop_section_id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "shop_section_id");
+    if (cJSON_IsNull(shop_section_id)) {
+        shop_section_id = NULL;
+    }
+    if (shop_section_id) { 
+    if(!cJSON_IsNumber(shop_section_id))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // product_update->personalization_details
+    cJSON *personalization_details = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "personalization_details");
+    if (cJSON_IsNull(personalization_details)) {
+        personalization_details = NULL;
+    }
+    if (personalization_details) { 
+    personalization_details_local_nonprim = product_add_personalization_details_parseFromJSON(personalization_details); //nonprimitive
+    }
+
 
     product_update_local_var = product_update_create_internal (
         id && !cJSON_IsNull(id) ? strdup(id->valuestring) : NULL,
@@ -2364,7 +2479,10 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
         disable_report_cache ? disable_report_cache->valueint : 0,
         reindex ? reindex->valueint : 0,
         clear_cache ? clear_cache->valueint : 0,
-        check_process_status ? check_process_status->valueint : 0
+        check_process_status ? check_process_status->valueint : 0,
+        specifics ? specificsList : NULL,
+        shop_section_id ? shop_section_id->valuedouble : 0,
+        personalization_details ? personalization_details_local_nonprim : NULL
         );
 
     return product_update_local_var;
@@ -2394,6 +2512,19 @@ end:
     if (manufacturer_info_local_nonprim) {
         product_add_manufacturer_info_free(manufacturer_info_local_nonprim);
         manufacturer_info_local_nonprim = NULL;
+    }
+    if (specificsList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, specificsList) {
+            product_add_specifics_inner_free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(specificsList);
+        specificsList = NULL;
+    }
+    if (personalization_details_local_nonprim) {
+        product_add_personalization_details_free(personalization_details_local_nonprim);
+        personalization_details_local_nonprim = NULL;
     }
     return NULL;
 

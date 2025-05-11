@@ -322,6 +322,7 @@ set(SRCS
     model/product_add_logistic_info_inner.c
     model/product_add_manufacturer_info.c
     model/product_add_package_details.c
+    model/product_add_personalization_details.c
     model/product_add_sales_tax.c
     model/product_add_seller_profiles.c
     model/product_add_shipping_details_inner.c
@@ -785,6 +786,7 @@ set(HDRS
     model/product_add_logistic_info_inner.h
     model/product_add_manufacturer_info.h
     model/product_add_package_details.h
+    model/product_add_personalization_details.h
     model/product_add_sales_tax.h
     model/product_add_seller_profiles.h
     model/product_add_shipping_details_inner.h

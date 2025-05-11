@@ -13,6 +13,6 @@
 // Get subscribers list
 //
 model_response_subscriber_list_t*
-SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, int *subscribed, char *store_id, char *email, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude);
+SubscriberAPI_subscriberList(apiClient_t *apiClient, char *ids, int *start, int *count, char *page_cursor, int *subscribed, char *store_id, char *email, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude);
 
 

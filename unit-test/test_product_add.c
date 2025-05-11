@@ -22,6 +22,7 @@ product_add_t* instantiate_product_add(int include_optional);
 #include "test_product_add_package_details.c"
 #include "test_product_add_seller_profiles.c"
 #include "test_product_add_best_offer.c"
+#include "test_product_add_personalization_details.c"
 
 
 product_add_t* instantiate_product_add(int include_optional) {
@@ -145,7 +146,11 @@ product_add_t* instantiate_product_add(int include_optional) {
       "{"color":["Silver"],"manufacturer":"Philips","features":["3 way"],"countPerPack":1,"watts":{"unit":"W","measure":40}}",
       false,
       9,
-      15
+      15,
+      `12345678`,
+      `12345678`,
+       // false, not to have infinite recursion
+      instantiate_product_add_personalization_details(0)
     );
   } else {
     product_add = product_add_create(
@@ -260,7 +265,10 @@ product_add_t* instantiate_product_add(int include_optional) {
       "{"color":["Silver"],"manufacturer":"Philips","features":["3 way"],"countPerPack":1,"watts":{"unit":"W","measure":40}}",
       false,
       9,
-      15
+      15,
+      `12345678`,
+      `12345678`,
+      NULL
     );
   }
 

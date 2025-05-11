@@ -322,6 +322,7 @@ docs/product_add_group_prices_inner.md
 docs/product_add_logistic_info_inner.md
 docs/product_add_manufacturer_info.md
 docs/product_add_package_details.md
+docs/product_add_personalization_details.md
 docs/product_add_sales_tax.md
 docs/product_add_seller_profiles.md
 docs/product_add_shipping_details_inner.md
@@ -1044,6 +1045,8 @@ model/product_add_manufacturer_info.c
 model/product_add_manufacturer_info.h
 model/product_add_package_details.c
 model/product_add_package_details.h
+model/product_add_personalization_details.c
+model/product_add_personalization_details.h
 model/product_add_sales_tax.c
 model/product_add_sales_tax.h
 model/product_add_seller_profiles.c
@@ -1649,6 +1652,7 @@ unit-test/test_product_add_group_prices_inner.c
 unit-test/test_product_add_logistic_info_inner.c
 unit-test/test_product_add_manufacturer_info.c
 unit-test/test_product_add_package_details.c
+unit-test/test_product_add_personalization_details.c
 unit-test/test_product_add_sales_tax.c
 unit-test/test_product_add_seller_profiles.c
 unit-test/test_product_add_shipping_details_inner.c

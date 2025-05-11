@@ -12,7 +12,7 @@
 // Get subscribers list
 //
 model_response_subscriber_list_t*
-SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, int *subscribed, char *store_id, char *email, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude)
+SubscriberAPI_subscriberList(apiClient_t *apiClient, char *ids, int *start, int *count, char *page_cursor, int *subscribed, char *store_id, char *email, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -31,6 +31,18 @@ SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, cha
 
 
 
+
+    // query parameters
+    char *keyQuery_ids = NULL;
+    char * valueQuery_ids = NULL;
+    keyValuePair_t *keyPairQuery_ids = 0;
+    if (ids)
+    {
+        keyQuery_ids = strdup("ids");
+        valueQuery_ids = strdup((ids));
+        keyPairQuery_ids = keyValuePair_create(keyQuery_ids, valueQuery_ids);
+        list_addElement(localVarQueryParameters,keyPairQuery_ids);
+    }
 
     // query parameters
     char *keyQuery_start = NULL;
@@ -229,6 +241,18 @@ SubscriberAPI_subscriberList(apiClient_t *apiClient, int *start, int *count, cha
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
+    if(keyQuery_ids){
+        free(keyQuery_ids);
+        keyQuery_ids = NULL;
+    }
+    if(valueQuery_ids){
+        free(valueQuery_ids);
+        valueQuery_ids = NULL;
+    }
+    if(keyPairQuery_ids){
+        keyValuePair_free(keyPairQuery_ids);
+        keyPairQuery_ids = NULL;
+    }
     if(keyQuery_start){
         free(keyQuery_start);
         keyQuery_start = NULL;

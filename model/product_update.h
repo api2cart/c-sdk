@@ -17,6 +17,8 @@ typedef struct product_update_t product_update_t;
 
 #include "product_add_manufacturer_info.h"
 #include "product_add_package_details.h"
+#include "product_add_personalization_details.h"
+#include "product_add_specifics_inner.h"
 #include "product_add_tier_prices_inner.h"
 
 
@@ -104,6 +106,9 @@ typedef struct product_update_t {
     int reindex; //boolean
     int clear_cache; //boolean
     int check_process_status; //boolean
+    list_t *specifics; //nonprimitive container
+    int shop_section_id; //numeric
+    struct product_add_personalization_details_t *personalization_details; //model
 
     int _library_owned; // Is the library responsible for freeing this object?
 } product_update_t;
@@ -190,7 +195,10 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     int disable_report_cache,
     int reindex,
     int clear_cache,
-    int check_process_status
+    int check_process_status,
+    list_t *specifics,
+    int shop_section_id,
+    product_add_personalization_details_t *personalization_details
 );
 
 void product_update_free(product_update_t *product_update);

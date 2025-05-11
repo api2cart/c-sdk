@@ -117,7 +117,10 @@ static product_add_t *product_add_create_internal(
     char *marketplace_item_properties,
     int clear_cache,
     int viewed_count,
-    int ordered_count
+    int ordered_count,
+    int shop_section_id,
+    int return_policy_id,
+    product_add_personalization_details_t *personalization_details
     ) {
     product_add_t *product_add_local_var = malloc(sizeof(product_add_t));
     if (!product_add_local_var) {
@@ -235,6 +238,9 @@ static product_add_t *product_add_create_internal(
     product_add_local_var->clear_cache = clear_cache;
     product_add_local_var->viewed_count = viewed_count;
     product_add_local_var->ordered_count = ordered_count;
+    product_add_local_var->shop_section_id = shop_section_id;
+    product_add_local_var->return_policy_id = return_policy_id;
+    product_add_local_var->personalization_details = personalization_details;
 
     product_add_local_var->_library_owned = 1;
     return product_add_local_var;
@@ -352,7 +358,10 @@ __attribute__((deprecated)) product_add_t *product_add_create(
     char *marketplace_item_properties,
     int clear_cache,
     int viewed_count,
-    int ordered_count
+    int ordered_count,
+    int shop_section_id,
+    int return_policy_id,
+    product_add_personalization_details_t *personalization_details
     ) {
     return product_add_create_internal (
         name,
@@ -466,7 +475,10 @@ __attribute__((deprecated)) product_add_t *product_add_create(
         marketplace_item_properties,
         clear_cache,
         viewed_count,
-        ordered_count
+        ordered_count,
+        shop_section_id,
+        return_policy_id,
+        personalization_details
         );
 }
 
@@ -828,6 +840,10 @@ void product_add_free(product_add_t *product_add) {
     if (product_add->marketplace_item_properties) {
         free(product_add->marketplace_item_properties);
         product_add->marketplace_item_properties = NULL;
+    }
+    if (product_add->personalization_details) {
+        product_add_personalization_details_free(product_add->personalization_details);
+        product_add->personalization_details = NULL;
     }
     free(product_add);
 }
@@ -1875,6 +1891,35 @@ cJSON *product_add_convertToJSON(product_add_t *product_add) {
     }
     }
 
+
+    // product_add->shop_section_id
+    if(product_add->shop_section_id) {
+    if(cJSON_AddNumberToObject(item, "shop_section_id", product_add->shop_section_id) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_add->return_policy_id
+    if(product_add->return_policy_id) {
+    if(cJSON_AddNumberToObject(item, "return_policy_id", product_add->return_policy_id) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_add->personalization_details
+    if(product_add->personalization_details) {
+    cJSON *personalization_details_local_JSON = product_add_personalization_details_convertToJSON(product_add->personalization_details);
+    if(personalization_details_local_JSON == NULL) {
+    goto fail; //model
+    }
+    cJSON_AddItemToObject(item, "personalization_details", personalization_details_local_JSON);
+    if(item->child == NULL) {
+    goto fail;
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -1934,6 +1979,9 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
 
     // define the local variable for product_add->best_offer
     product_add_best_offer_t *best_offer_local_nonprim = NULL;
+
+    // define the local variable for product_add->personalization_details
+    product_add_personalization_details_t *personalization_details_local_nonprim = NULL;
 
     // product_add->name
     cJSON *name = cJSON_GetObjectItemCaseSensitive(product_addJSON, "name");
@@ -3387,6 +3435,39 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
     }
     }
 
+    // product_add->shop_section_id
+    cJSON *shop_section_id = cJSON_GetObjectItemCaseSensitive(product_addJSON, "shop_section_id");
+    if (cJSON_IsNull(shop_section_id)) {
+        shop_section_id = NULL;
+    }
+    if (shop_section_id) { 
+    if(!cJSON_IsNumber(shop_section_id))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // product_add->return_policy_id
+    cJSON *return_policy_id = cJSON_GetObjectItemCaseSensitive(product_addJSON, "return_policy_id");
+    if (cJSON_IsNull(return_policy_id)) {
+        return_policy_id = NULL;
+    }
+    if (return_policy_id) { 
+    if(!cJSON_IsNumber(return_policy_id))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // product_add->personalization_details
+    cJSON *personalization_details = cJSON_GetObjectItemCaseSensitive(product_addJSON, "personalization_details");
+    if (cJSON_IsNull(personalization_details)) {
+        personalization_details = NULL;
+    }
+    if (personalization_details) { 
+    personalization_details_local_nonprim = product_add_personalization_details_parseFromJSON(personalization_details); //nonprimitive
+    }
+
 
     product_add_local_var = product_add_create_internal (
         strdup(name->valuestring),
@@ -3500,7 +3581,10 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
         marketplace_item_properties && !cJSON_IsNull(marketplace_item_properties) ? strdup(marketplace_item_properties->valuestring) : NULL,
         clear_cache ? clear_cache->valueint : 0,
         viewed_count ? viewed_count->valuedouble : 0,
-        ordered_count ? ordered_count->valuedouble : 0
+        ordered_count ? ordered_count->valuedouble : 0,
+        shop_section_id ? shop_section_id->valuedouble : 0,
+        return_policy_id ? return_policy_id->valuedouble : 0,
+        personalization_details ? personalization_details_local_nonprim : NULL
         );
 
     return product_add_local_var;
@@ -3618,6 +3702,10 @@ end:
     if (best_offer_local_nonprim) {
         product_add_best_offer_free(best_offer_local_nonprim);
         best_offer_local_nonprim = NULL;
+    }
+    if (personalization_details_local_nonprim) {
+        product_add_personalization_details_free(personalization_details_local_nonprim);
+        personalization_details_local_nonprim = NULL;
     }
     return NULL;
 
