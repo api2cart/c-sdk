@@ -832,7 +832,7 @@ Name | Type | Description  | Notes
 //
 // Update existing order.
 //
-account_config_update_200_response_t* OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, char *order_status, char *financial_status, char *fulfillment_status, char *cancellation_reason, char *order_payment_method, char *comment, char *admin_comment, char *admin_private_comment, char *invoice_admin_comment, char *date_modified, char *date_finished, int *send_notifications, int *create_invoice, char *origin);
+account_config_update_200_response_t* OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, char *order_status, char *financial_status, char *fulfillment_status, char *cancellation_reason, char *order_payment_method, char *comment, char *admin_comment, char *admin_private_comment, char *invoice_admin_comment, char *date_modified, char *date_finished, int *send_notifications, int *create_invoice, char *origin, char *tags);
 ```
 
 ### Parameters
@@ -855,6 +855,7 @@ Name | Type | Description  | Notes
 **send_notifications** | **int \*** | Send notifications to customer after order was created | [optional] [default to false]
 **create_invoice** | **int \*** | Determines whether an invoice should be created if it has not already been created | [optional] 
 **origin** | **char \*** | The source of the order | [optional] 
+**tags** | **char \*** | Order tags | [optional] 
 
 ### Return type
 

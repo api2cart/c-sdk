@@ -218,6 +218,6 @@ OrderAPI_orderTransactionList(apiClient_t *apiClient, char *order_ids, int *coun
 // Update existing order.
 //
 account_config_update_200_response_t*
-OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, char *order_status, char *financial_status, char *fulfillment_status, char *cancellation_reason, char *order_payment_method, char *comment, char *admin_comment, char *admin_private_comment, char *invoice_admin_comment, char *date_modified, char *date_finished, int *send_notifications, int *create_invoice, char *origin);
+OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, char *order_status, char *financial_status, char *fulfillment_status, char *cancellation_reason, char *order_payment_method, char *comment, char *admin_comment, char *admin_private_comment, char *invoice_admin_comment, char *date_modified, char *date_finished, int *send_notifications, int *create_invoice, char *origin, char *tags);
 
 

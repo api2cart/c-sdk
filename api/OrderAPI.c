@@ -4712,7 +4712,7 @@ end:
 // Update existing order.
 //
 account_config_update_200_response_t*
-OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, char *order_status, char *financial_status, char *fulfillment_status, char *cancellation_reason, char *order_payment_method, char *comment, char *admin_comment, char *admin_private_comment, char *invoice_admin_comment, char *date_modified, char *date_finished, int *send_notifications, int *create_invoice, char *origin)
+OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, char *order_status, char *financial_status, char *fulfillment_status, char *cancellation_reason, char *order_payment_method, char *comment, char *admin_comment, char *admin_private_comment, char *invoice_admin_comment, char *date_modified, char *date_finished, int *send_notifications, int *create_invoice, char *origin, char *tags)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -4924,6 +4924,18 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
         valueQuery_origin = strdup((origin));
         keyPairQuery_origin = keyValuePair_create(keyQuery_origin, valueQuery_origin);
         list_addElement(localVarQueryParameters,keyPairQuery_origin);
+    }
+
+    // query parameters
+    char *keyQuery_tags = NULL;
+    char * valueQuery_tags = NULL;
+    keyValuePair_t *keyPairQuery_tags = 0;
+    if (tags)
+    {
+        keyQuery_tags = strdup("tags");
+        valueQuery_tags = strdup((tags));
+        keyPairQuery_tags = keyValuePair_create(keyQuery_tags, valueQuery_tags);
+        list_addElement(localVarQueryParameters,keyPairQuery_tags);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -5155,6 +5167,18 @@ OrderAPI_orderUpdate(apiClient_t *apiClient, char *order_id, char *store_id, cha
     if(keyPairQuery_origin){
         keyValuePair_free(keyPairQuery_origin);
         keyPairQuery_origin = NULL;
+    }
+    if(keyQuery_tags){
+        free(keyQuery_tags);
+        keyQuery_tags = NULL;
+    }
+    if(valueQuery_tags){
+        free(valueQuery_tags);
+        valueQuery_tags = NULL;
+    }
+    if(keyPairQuery_tags){
+        keyValuePair_free(keyPairQuery_tags);
+        keyPairQuery_tags = NULL;
     }
     return elementToReturn;
 end:
