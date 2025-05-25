@@ -102,6 +102,12 @@ account_cart_add_t* instantiate_account_cart_add(int include_optional) {
       "bbca57d8ff3c3677128112c15556d9e3",
       "860f3a6fc87632301a42cd88e4b5ab3d",
       "gmz3iz45x2",
+      "1276777",
+      "6a46494b4d746576554646626775617a577542774850636375464d6a736d5598",
+      "137968",
+      "EAAPP06rM2n8BO4mZBuMPnu9zS0MaMbN7ue8aUkcxw4zewU987mVVb5br",
+      "CN",
+      "production",
       "igse8e4rdmzkxdi937qe69d59en1imw",
       "gmz3iz45x2",
       "SWSCS3O1RJBSRNBYQLFIYJN2ZQ",
@@ -177,7 +183,11 @@ account_cart_add_t* instantiate_account_cart_add(int include_optional) {
       "1bxxxcf9-5xx4-xxx-bxxf-929b8xxxxe11",
       "8x88axxxc25e1fxxxa1c06fxxx150xx5",
       "oxy_rt_zxxxxiY2xxZWWxxxxlU-tROxxxxx2JzS2fwzxxxxxkU.p3xxxkCIyFexxxxP50WwZYfhw5_wg1xxxxV5F-8xxXc",
-      "oxy_rt_zxxxxiY2xxZWWxxxxlU-tROxxxxx2JzS2fwzxxxxxkU.p3xxxkCIyFexxxxP50WwZYfhw5_wg1xxxxV5F-8xxXc"
+      "oxy_rt_zxxxxiY2xxZWWxxxxlU-tROxxxxx2JzS2fwzxxxxxkU.p3xxxkCIyFexxxxP50WwZYfhw5_wg1xxxxV5F-8xxXc",
+      "4ebbc9190ae410443d65b4c2faca9811",
+      "4782d2d827276688bf4758bed55dbdd4bbe79a78",
+      "uplv3hfyt5kcwoymrgnajnbl1ow5qxlz4sqhev6hl3xosz5dejrtyl2jre6",
+      "US"
     );
   } else {
     account_cart_add = account_cart_add_create(
@@ -261,6 +271,12 @@ account_cart_add_t* instantiate_account_cart_add(int include_optional) {
       "bbca57d8ff3c3677128112c15556d9e3",
       "860f3a6fc87632301a42cd88e4b5ab3d",
       "gmz3iz45x2",
+      "1276777",
+      "6a46494b4d746576554646626775617a577542774850636375464d6a736d5598",
+      "137968",
+      "EAAPP06rM2n8BO4mZBuMPnu9zS0MaMbN7ue8aUkcxw4zewU987mVVb5br",
+      "CN",
+      "production",
       "igse8e4rdmzkxdi937qe69d59en1imw",
       "gmz3iz45x2",
       "SWSCS3O1RJBSRNBYQLFIYJN2ZQ",
@@ -336,7 +352,11 @@ account_cart_add_t* instantiate_account_cart_add(int include_optional) {
       "1bxxxcf9-5xx4-xxx-bxxf-929b8xxxxe11",
       "8x88axxxc25e1fxxxa1c06fxxx150xx5",
       "oxy_rt_zxxxxiY2xxZWWxxxxlU-tROxxxxx2JzS2fwzxxxxxkU.p3xxxkCIyFexxxxP50WwZYfhw5_wg1xxxxV5F-8xxXc",
-      "oxy_rt_zxxxxiY2xxZWWxxxxlU-tROxxxxx2JzS2fwzxxxxxkU.p3xxxkCIyFexxxxP50WwZYfhw5_wg1xxxxV5F-8xxXc"
+      "oxy_rt_zxxxxiY2xxZWWxxxxlU-tROxxxxx2JzS2fwzxxxxxkU.p3xxxkCIyFexxxxP50WwZYfhw5_wg1xxxxV5F-8xxXc",
+      "4ebbc9190ae410443d65b4c2faca9811",
+      "4782d2d827276688bf4758bed55dbdd4bbe79a78",
+      "uplv3hfyt5kcwoymrgnajnbl1ow5qxlz4sqhev6hl3xosz5dejrtyl2jre6",
+      "US"
     );
   }
 

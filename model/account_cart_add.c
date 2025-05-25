@@ -5,13 +5,13 @@
 
 
 char* account_cart_add_cart_id_ToString(api2cart_openapi_account_cart_add_CARTID_e cart_id) {
-    char* cart_idArray[] =  { "NULL", "3DCart", "3DCartApi", "AceShop", "AmazonSP", "AspDotNetStorefront", "BigCartel", "BigcommerceApi", "Bol", "CommerceHQ", "Creloaded", "Cscart", "Cubecart", "Demandware", "EBay", "Ecwid", "EtsyAPIv3", "Flipkart", "Gambio", "Hybris", "JooCart", "Lazada", "LightSpeed", "Magento1212", "Magento2Api", "MercadoLibre", "MijoShop", "Miva", "Neto", "Opencart14", "Oscmax2", "Oscommerce22ms2", "Otto", "Oxid", "Pinnacle", "Prestashop", "PrestashopApi", "SSPremium", "Salla", "Shopify", "Shoplazza", "Shopline", "Shopware", "ShopwareApi", "Square", "Squarespace", "Tiendanube", "TikTokShop", "Tomatocart", "Ubercart", "Virtuemart", "Volusion", "WPecommerce", "Walmart", "WebAsyst", "Wix", "Woocommerce", "WoocommerceApi", "Xcart", "Xtcommerce", "XtcommerceVeyton", "Zencart137", "Zid", "Zoey", "Zoho" };
+    char* cart_idArray[] =  { "NULL", "3DCart", "3DCartApi", "AceShop", "AmazonSP", "AspDotNetStorefront", "BigCartel", "BigcommerceApi", "Bol", "CommerceHQ", "Creloaded", "Cscart", "Cubecart", "Demandware", "EBay", "Ecwid", "EtsyAPIv3", "Flipkart", "Gambio", "Hybris", "JooCart", "Lazada", "LightSpeed", "Magento1212", "Magento2Api", "MercadoLibre", "MijoShop", "Miva", "Neto", "Opencart14", "Oscmax2", "Oscommerce22ms2", "Otto", "Oxid", "Pinnacle", "Prestashop", "PrestashopApi", "SSPremium", "Salla", "Shopify", "Shopee", "Shoplazza", "Shopline", "Shopware", "ShopwareApi", "Square", "Squarespace", "Tiendanube", "TikTokShop", "Tomatocart", "Ubercart", "Virtuemart", "Volusion", "WPecommerce", "Walmart", "WebAsyst", "Wix", "Woocommerce", "WoocommerceApi", "Xcart", "Xtcommerce", "XtcommerceVeyton", "Zencart137", "Zid", "Zoey", "Zoho" };
     return cart_idArray[cart_id];
 }
 
 api2cart_openapi_account_cart_add_CARTID_e account_cart_add_cart_id_FromString(char* cart_id){
     int stringToReturn = 0;
-    char *cart_idArray[] =  { "NULL", "3DCart", "3DCartApi", "AceShop", "AmazonSP", "AspDotNetStorefront", "BigCartel", "BigcommerceApi", "Bol", "CommerceHQ", "Creloaded", "Cscart", "Cubecart", "Demandware", "EBay", "Ecwid", "EtsyAPIv3", "Flipkart", "Gambio", "Hybris", "JooCart", "Lazada", "LightSpeed", "Magento1212", "Magento2Api", "MercadoLibre", "MijoShop", "Miva", "Neto", "Opencart14", "Oscmax2", "Oscommerce22ms2", "Otto", "Oxid", "Pinnacle", "Prestashop", "PrestashopApi", "SSPremium", "Salla", "Shopify", "Shoplazza", "Shopline", "Shopware", "ShopwareApi", "Square", "Squarespace", "Tiendanube", "TikTokShop", "Tomatocart", "Ubercart", "Virtuemart", "Volusion", "WPecommerce", "Walmart", "WebAsyst", "Wix", "Woocommerce", "WoocommerceApi", "Xcart", "Xtcommerce", "XtcommerceVeyton", "Zencart137", "Zid", "Zoey", "Zoho" };
+    char *cart_idArray[] =  { "NULL", "3DCart", "3DCartApi", "AceShop", "AmazonSP", "AspDotNetStorefront", "BigCartel", "BigcommerceApi", "Bol", "CommerceHQ", "Creloaded", "Cscart", "Cubecart", "Demandware", "EBay", "Ecwid", "EtsyAPIv3", "Flipkart", "Gambio", "Hybris", "JooCart", "Lazada", "LightSpeed", "Magento1212", "Magento2Api", "MercadoLibre", "MijoShop", "Miva", "Neto", "Opencart14", "Oscmax2", "Oscommerce22ms2", "Otto", "Oxid", "Pinnacle", "Prestashop", "PrestashopApi", "SSPremium", "Salla", "Shopify", "Shopee", "Shoplazza", "Shopline", "Shopware", "ShopwareApi", "Square", "Squarespace", "Tiendanube", "TikTokShop", "Tomatocart", "Ubercart", "Virtuemart", "Volusion", "WPecommerce", "Walmart", "WebAsyst", "Wix", "Woocommerce", "WoocommerceApi", "Xcart", "Xtcommerce", "XtcommerceVeyton", "Zencart137", "Zid", "Zoey", "Zoho" };
     size_t sizeofArray = sizeof(cart_idArray) / sizeof(cart_idArray[0]);
     while(stringToReturn < sizeofArray) {
         if(strcmp(cart_id, cart_idArray[stringToReturn]) == 0) {
@@ -103,6 +103,12 @@ static account_cart_add_t *account_cart_add_create_internal(
     char *shopify_api_key,
     char *shopify_api_password,
     char *shopify_shared_secret,
+    char *shopee_partner_id,
+    char *shopee_partner_key,
+    char *shopee_shop_id,
+    char *shopee_refresh_token,
+    char *shopee_region,
+    char *shopee_environment,
     char *shoplazza_access_token,
     char *shoplazza_shared_secret,
     char *shopware_access_key,
@@ -173,7 +179,11 @@ static account_cart_add_t *account_cart_add_create_internal(
     char *salla_client_id,
     char *salla_client_secret,
     char *salla_refresh_token,
-    char *salla_access_token
+    char *salla_access_token,
+    char *temu_app_key,
+    char *temu_app_secret,
+    char *temu_access_token,
+    char *temu_region
     ) {
     account_cart_add_t *account_cart_add_local_var = malloc(sizeof(account_cart_add_t));
     if (!account_cart_add_local_var) {
@@ -259,6 +269,12 @@ static account_cart_add_t *account_cart_add_create_internal(
     account_cart_add_local_var->shopify_api_key = shopify_api_key;
     account_cart_add_local_var->shopify_api_password = shopify_api_password;
     account_cart_add_local_var->shopify_shared_secret = shopify_shared_secret;
+    account_cart_add_local_var->shopee_partner_id = shopee_partner_id;
+    account_cart_add_local_var->shopee_partner_key = shopee_partner_key;
+    account_cart_add_local_var->shopee_shop_id = shopee_shop_id;
+    account_cart_add_local_var->shopee_refresh_token = shopee_refresh_token;
+    account_cart_add_local_var->shopee_region = shopee_region;
+    account_cart_add_local_var->shopee_environment = shopee_environment;
     account_cart_add_local_var->shoplazza_access_token = shoplazza_access_token;
     account_cart_add_local_var->shoplazza_shared_secret = shoplazza_shared_secret;
     account_cart_add_local_var->shopware_access_key = shopware_access_key;
@@ -330,6 +346,10 @@ static account_cart_add_t *account_cart_add_create_internal(
     account_cart_add_local_var->salla_client_secret = salla_client_secret;
     account_cart_add_local_var->salla_refresh_token = salla_refresh_token;
     account_cart_add_local_var->salla_access_token = salla_access_token;
+    account_cart_add_local_var->temu_app_key = temu_app_key;
+    account_cart_add_local_var->temu_app_secret = temu_app_secret;
+    account_cart_add_local_var->temu_access_token = temu_access_token;
+    account_cart_add_local_var->temu_region = temu_region;
 
     account_cart_add_local_var->_library_owned = 1;
     return account_cart_add_local_var;
@@ -416,6 +436,12 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     char *shopify_api_key,
     char *shopify_api_password,
     char *shopify_shared_secret,
+    char *shopee_partner_id,
+    char *shopee_partner_key,
+    char *shopee_shop_id,
+    char *shopee_refresh_token,
+    char *shopee_region,
+    char *shopee_environment,
     char *shoplazza_access_token,
     char *shoplazza_shared_secret,
     char *shopware_access_key,
@@ -486,7 +512,11 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     char *salla_client_id,
     char *salla_client_secret,
     char *salla_refresh_token,
-    char *salla_access_token
+    char *salla_access_token,
+    char *temu_app_key,
+    char *temu_app_secret,
+    char *temu_access_token,
+    char *temu_region
     ) {
     return account_cart_add_create_internal (
         cart_id,
@@ -569,6 +599,12 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
         shopify_api_key,
         shopify_api_password,
         shopify_shared_secret,
+        shopee_partner_id,
+        shopee_partner_key,
+        shopee_shop_id,
+        shopee_refresh_token,
+        shopee_region,
+        shopee_environment,
         shoplazza_access_token,
         shoplazza_shared_secret,
         shopware_access_key,
@@ -639,7 +675,11 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
         salla_client_id,
         salla_client_secret,
         salla_refresh_token,
-        salla_access_token
+        salla_access_token,
+        temu_app_key,
+        temu_app_secret,
+        temu_access_token,
+        temu_region
         );
 }
 
@@ -948,6 +988,30 @@ void account_cart_add_free(account_cart_add_t *account_cart_add) {
         free(account_cart_add->shopify_shared_secret);
         account_cart_add->shopify_shared_secret = NULL;
     }
+    if (account_cart_add->shopee_partner_id) {
+        free(account_cart_add->shopee_partner_id);
+        account_cart_add->shopee_partner_id = NULL;
+    }
+    if (account_cart_add->shopee_partner_key) {
+        free(account_cart_add->shopee_partner_key);
+        account_cart_add->shopee_partner_key = NULL;
+    }
+    if (account_cart_add->shopee_shop_id) {
+        free(account_cart_add->shopee_shop_id);
+        account_cart_add->shopee_shop_id = NULL;
+    }
+    if (account_cart_add->shopee_refresh_token) {
+        free(account_cart_add->shopee_refresh_token);
+        account_cart_add->shopee_refresh_token = NULL;
+    }
+    if (account_cart_add->shopee_region) {
+        free(account_cart_add->shopee_region);
+        account_cart_add->shopee_region = NULL;
+    }
+    if (account_cart_add->shopee_environment) {
+        free(account_cart_add->shopee_environment);
+        account_cart_add->shopee_environment = NULL;
+    }
     if (account_cart_add->shoplazza_access_token) {
         free(account_cart_add->shoplazza_access_token);
         account_cart_add->shoplazza_access_token = NULL;
@@ -1226,6 +1290,22 @@ void account_cart_add_free(account_cart_add_t *account_cart_add) {
     if (account_cart_add->salla_access_token) {
         free(account_cart_add->salla_access_token);
         account_cart_add->salla_access_token = NULL;
+    }
+    if (account_cart_add->temu_app_key) {
+        free(account_cart_add->temu_app_key);
+        account_cart_add->temu_app_key = NULL;
+    }
+    if (account_cart_add->temu_app_secret) {
+        free(account_cart_add->temu_app_secret);
+        account_cart_add->temu_app_secret = NULL;
+    }
+    if (account_cart_add->temu_access_token) {
+        free(account_cart_add->temu_access_token);
+        account_cart_add->temu_access_token = NULL;
+    }
+    if (account_cart_add->temu_region) {
+        free(account_cart_add->temu_region);
+        account_cart_add->temu_region = NULL;
     }
     free(account_cart_add);
 }
@@ -1877,6 +1957,54 @@ cJSON *account_cart_add_convertToJSON(account_cart_add_t *account_cart_add) {
     }
 
 
+    // account_cart_add->shopee_partner_id
+    if(account_cart_add->shopee_partner_id) {
+    if(cJSON_AddStringToObject(item, "shopee_partner_id", account_cart_add->shopee_partner_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // account_cart_add->shopee_partner_key
+    if(account_cart_add->shopee_partner_key) {
+    if(cJSON_AddStringToObject(item, "shopee_partner_key", account_cart_add->shopee_partner_key) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // account_cart_add->shopee_shop_id
+    if(account_cart_add->shopee_shop_id) {
+    if(cJSON_AddStringToObject(item, "shopee_shop_id", account_cart_add->shopee_shop_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // account_cart_add->shopee_refresh_token
+    if(account_cart_add->shopee_refresh_token) {
+    if(cJSON_AddStringToObject(item, "shopee_refresh_token", account_cart_add->shopee_refresh_token) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // account_cart_add->shopee_region
+    if(account_cart_add->shopee_region) {
+    if(cJSON_AddStringToObject(item, "shopee_region", account_cart_add->shopee_region) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // account_cart_add->shopee_environment
+    if(account_cart_add->shopee_environment) {
+    if(cJSON_AddStringToObject(item, "shopee_environment", account_cart_add->shopee_environment) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
     // account_cart_add->shoplazza_access_token
     if(account_cart_add->shoplazza_access_token) {
     if(cJSON_AddStringToObject(item, "shoplazza_access_token", account_cart_add->shoplazza_access_token) == NULL) {
@@ -2454,6 +2582,39 @@ cJSON *account_cart_add_convertToJSON(account_cart_add_t *account_cart_add) {
     // account_cart_add->salla_access_token
     if(account_cart_add->salla_access_token) {
     if(cJSON_AddStringToObject(item, "salla_access_token", account_cart_add->salla_access_token) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // account_cart_add->temu_app_key
+    if(account_cart_add->temu_app_key) {
+    if(cJSON_AddStringToObject(item, "temu_app_key", account_cart_add->temu_app_key) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // account_cart_add->temu_app_secret
+    if(account_cart_add->temu_app_secret) {
+    if(cJSON_AddStringToObject(item, "temu_app_secret", account_cart_add->temu_app_secret) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // account_cart_add->temu_access_token
+    if (!account_cart_add->temu_access_token) {
+        goto fail;
+    }
+    if(cJSON_AddStringToObject(item, "temu_access_token", account_cart_add->temu_access_token) == NULL) {
+    goto fail; //String
+    }
+
+
+    // account_cart_add->temu_region
+    if(account_cart_add->temu_region) {
+    if(cJSON_AddStringToObject(item, "temu_region", account_cart_add->temu_region) == NULL) {
     goto fail; //String
     }
     }
@@ -3444,6 +3605,78 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     }
     }
 
+    // account_cart_add->shopee_partner_id
+    cJSON *shopee_partner_id = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "shopee_partner_id");
+    if (cJSON_IsNull(shopee_partner_id)) {
+        shopee_partner_id = NULL;
+    }
+    if (shopee_partner_id) { 
+    if(!cJSON_IsString(shopee_partner_id) && !cJSON_IsNull(shopee_partner_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // account_cart_add->shopee_partner_key
+    cJSON *shopee_partner_key = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "shopee_partner_key");
+    if (cJSON_IsNull(shopee_partner_key)) {
+        shopee_partner_key = NULL;
+    }
+    if (shopee_partner_key) { 
+    if(!cJSON_IsString(shopee_partner_key) && !cJSON_IsNull(shopee_partner_key))
+    {
+    goto end; //String
+    }
+    }
+
+    // account_cart_add->shopee_shop_id
+    cJSON *shopee_shop_id = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "shopee_shop_id");
+    if (cJSON_IsNull(shopee_shop_id)) {
+        shopee_shop_id = NULL;
+    }
+    if (shopee_shop_id) { 
+    if(!cJSON_IsString(shopee_shop_id) && !cJSON_IsNull(shopee_shop_id))
+    {
+    goto end; //String
+    }
+    }
+
+    // account_cart_add->shopee_refresh_token
+    cJSON *shopee_refresh_token = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "shopee_refresh_token");
+    if (cJSON_IsNull(shopee_refresh_token)) {
+        shopee_refresh_token = NULL;
+    }
+    if (shopee_refresh_token) { 
+    if(!cJSON_IsString(shopee_refresh_token) && !cJSON_IsNull(shopee_refresh_token))
+    {
+    goto end; //String
+    }
+    }
+
+    // account_cart_add->shopee_region
+    cJSON *shopee_region = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "shopee_region");
+    if (cJSON_IsNull(shopee_region)) {
+        shopee_region = NULL;
+    }
+    if (shopee_region) { 
+    if(!cJSON_IsString(shopee_region) && !cJSON_IsNull(shopee_region))
+    {
+    goto end; //String
+    }
+    }
+
+    // account_cart_add->shopee_environment
+    cJSON *shopee_environment = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "shopee_environment");
+    if (cJSON_IsNull(shopee_environment)) {
+        shopee_environment = NULL;
+    }
+    if (shopee_environment) { 
+    if(!cJSON_IsString(shopee_environment) && !cJSON_IsNull(shopee_environment))
+    {
+    goto end; //String
+    }
+    }
+
     // account_cart_add->shoplazza_access_token
     cJSON *shoplazza_access_token = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "shoplazza_access_token");
     if (cJSON_IsNull(shoplazza_access_token)) {
@@ -4314,6 +4547,57 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     }
     }
 
+    // account_cart_add->temu_app_key
+    cJSON *temu_app_key = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "temu_app_key");
+    if (cJSON_IsNull(temu_app_key)) {
+        temu_app_key = NULL;
+    }
+    if (temu_app_key) { 
+    if(!cJSON_IsString(temu_app_key) && !cJSON_IsNull(temu_app_key))
+    {
+    goto end; //String
+    }
+    }
+
+    // account_cart_add->temu_app_secret
+    cJSON *temu_app_secret = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "temu_app_secret");
+    if (cJSON_IsNull(temu_app_secret)) {
+        temu_app_secret = NULL;
+    }
+    if (temu_app_secret) { 
+    if(!cJSON_IsString(temu_app_secret) && !cJSON_IsNull(temu_app_secret))
+    {
+    goto end; //String
+    }
+    }
+
+    // account_cart_add->temu_access_token
+    cJSON *temu_access_token = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "temu_access_token");
+    if (cJSON_IsNull(temu_access_token)) {
+        temu_access_token = NULL;
+    }
+    if (!temu_access_token) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(temu_access_token))
+    {
+    goto end; //String
+    }
+
+    // account_cart_add->temu_region
+    cJSON *temu_region = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "temu_region");
+    if (cJSON_IsNull(temu_region)) {
+        temu_region = NULL;
+    }
+    if (temu_region) { 
+    if(!cJSON_IsString(temu_region) && !cJSON_IsNull(temu_region))
+    {
+    goto end; //String
+    }
+    }
+
 
     account_cart_add_local_var = account_cart_add_create_internal (
         cart_idVariable,
@@ -4396,6 +4680,12 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
         shopify_api_key && !cJSON_IsNull(shopify_api_key) ? strdup(shopify_api_key->valuestring) : NULL,
         shopify_api_password && !cJSON_IsNull(shopify_api_password) ? strdup(shopify_api_password->valuestring) : NULL,
         shopify_shared_secret && !cJSON_IsNull(shopify_shared_secret) ? strdup(shopify_shared_secret->valuestring) : NULL,
+        shopee_partner_id && !cJSON_IsNull(shopee_partner_id) ? strdup(shopee_partner_id->valuestring) : NULL,
+        shopee_partner_key && !cJSON_IsNull(shopee_partner_key) ? strdup(shopee_partner_key->valuestring) : NULL,
+        shopee_shop_id && !cJSON_IsNull(shopee_shop_id) ? strdup(shopee_shop_id->valuestring) : NULL,
+        shopee_refresh_token && !cJSON_IsNull(shopee_refresh_token) ? strdup(shopee_refresh_token->valuestring) : NULL,
+        shopee_region && !cJSON_IsNull(shopee_region) ? strdup(shopee_region->valuestring) : NULL,
+        shopee_environment && !cJSON_IsNull(shopee_environment) ? strdup(shopee_environment->valuestring) : NULL,
         shoplazza_access_token && !cJSON_IsNull(shoplazza_access_token) ? strdup(shoplazza_access_token->valuestring) : NULL,
         shoplazza_shared_secret && !cJSON_IsNull(shoplazza_shared_secret) ? strdup(shoplazza_shared_secret->valuestring) : NULL,
         shopware_access_key && !cJSON_IsNull(shopware_access_key) ? strdup(shopware_access_key->valuestring) : NULL,
@@ -4466,7 +4756,11 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
         salla_client_id && !cJSON_IsNull(salla_client_id) ? strdup(salla_client_id->valuestring) : NULL,
         salla_client_secret && !cJSON_IsNull(salla_client_secret) ? strdup(salla_client_secret->valuestring) : NULL,
         salla_refresh_token && !cJSON_IsNull(salla_refresh_token) ? strdup(salla_refresh_token->valuestring) : NULL,
-        salla_access_token && !cJSON_IsNull(salla_access_token) ? strdup(salla_access_token->valuestring) : NULL
+        salla_access_token && !cJSON_IsNull(salla_access_token) ? strdup(salla_access_token->valuestring) : NULL,
+        temu_app_key && !cJSON_IsNull(temu_app_key) ? strdup(temu_app_key->valuestring) : NULL,
+        temu_app_secret && !cJSON_IsNull(temu_app_secret) ? strdup(temu_app_secret->valuestring) : NULL,
+        strdup(temu_access_token->valuestring),
+        temu_region && !cJSON_IsNull(temu_region) ? strdup(temu_region->valuestring) : NULL
         );
 
     return account_cart_add_local_var;

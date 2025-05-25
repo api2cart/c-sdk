@@ -312,7 +312,7 @@ end:
 // Use this method to automate the change of credentials used to connect online stores. The list of supported parameters differs depending on the platform.
 //
 account_config_update_200_response_t*
-AccountAPI_accountConfigUpdate(apiClient_t *apiClient, int *replace_parameters, char *new_store_url, char *new_store_key, char *bridge_url, char *store_root, char *db_tables_prefix, char *user_agent, char *_3dcart_private_key, char *_3dcart_access_token, char *_3dcartapi_api_key, char *amazon_sp_client_id, char *amazon_sp_client_secret, char *amazon_sp_refresh_token, char *amazon_sp_aws_region, char *amazon_sp_api_environment, char *amazon_seller_id, char *aspdotnetstorefront_api_user, char *aspdotnetstorefront_api_pass, char *bigcommerceapi_admin_account, char *bigcommerceapi_api_path, char *bigcommerceapi_api_key, char *bigcommerceapi_client_id, char *bigcommerceapi_access_token, char *bigcommerceapi_context, char *bol_api_key, char *bol_api_secret, int *bol_retailer_id, char *demandware_client_id, char *demandware_api_password, char *demandware_user_name, char *demandware_user_password, char *ebay_client_id, char *ebay_client_secret, char *ebay_runame, char *ebay_access_token, char *ebay_refresh_token, char *ebay_environment, int *ebay_site_id, char *ecwid_acess_token, char *ecwid_store_id, char *lazada_app_id, char *lazada_app_secret, char *lazada_refresh_token, char *lazada_region, char *etsy_keystring, char *etsy_shared_secret, char *etsy_access_token, char *etsy_token_secret, char *etsy_client_id, char *etsy_refresh_token, char *facebook_app_id, char *facebook_app_secret, char *facebook_access_token, char *facebook_business_id, char *neto_api_key, char *neto_api_username, char *shopline_access_token, char *shopline_app_key, char *shopline_app_secret, char *shopline_shared_secret, char *shopify_access_token, char *shopify_api_key, char *shopify_api_password, char *shopify_shared_secret, char *shoplazza_access_token, char *shoplazza_shared_secret, char *miva_access_token, char *miva_signature, char *shopware_access_key, char *shopware_api_key, char *shopware_api_secret, char *bigcartel_user_name, char *bigcartel_password, char *volusion_login, char *volusion_password, char *walmart_client_id, char *walmart_client_secret, char *walmart_environment, char *walmart_channel_type, char *walmart_region, char *square_client_id, char *square_client_secret, char *square_refresh_token, char *squarespace_api_key, char *squarespace_client_id, char *squarespace_client_secret, char *squarespace_access_token, char *squarespace_refresh_token, char *hybris_client_id, char *hybris_client_secret, char *hybris_username, char *hybris_password, list_t *hybris_websites, char *lightspeed_api_key, char *lightspeed_api_secret, char *commercehq_api_key, char *commercehq_api_password, char *wc_consumer_key, char *wc_consumer_secret, char *magento_consumer_key, char *magento_consumer_secret, char *magento_access_token, char *magento_token_secret, char *prestashop_webservice_key, char *wix_app_id, char *wix_app_secret_key, char *wix_instance_id, char *wix_refresh_token, char *mercado_libre_app_id, char *mercado_libre_app_secret_key, char *mercado_libre_refresh_token, int *zid_client_id, char *zid_client_secret, char *zid_access_token, char *zid_authorization, char *zid_refresh_token, char *flipkart_client_id, char *flipkart_client_secret, char *allegro_client_id, char *allegro_client_secret, char *allegro_access_token, char *allegro_refresh_token, char *allegro_environment, char *zoho_client_id, char *zoho_client_secret, char *zoho_refresh_token, char *zoho_region, int *tiendanube_user_id, char *tiendanube_access_token, char *tiendanube_client_secret, char *otto_client_id, char *otto_client_secret, char *otto_app_id, char *otto_refresh_token, char *otto_environment, char *otto_access_token, char *tiktokshop_app_key, char *tiktokshop_app_secret, char *tiktokshop_refresh_token, char *tiktokshop_access_token, char *salla_client_id, char *salla_client_secret, char *salla_refresh_token, char *salla_access_token)
+AccountAPI_accountConfigUpdate(apiClient_t *apiClient, int *replace_parameters, char *new_store_url, char *new_store_key, char *bridge_url, char *store_root, char *db_tables_prefix, char *user_agent, char *_3dcart_private_key, char *_3dcart_access_token, char *_3dcartapi_api_key, char *amazon_sp_client_id, char *amazon_sp_client_secret, char *amazon_sp_refresh_token, char *amazon_sp_aws_region, char *amazon_sp_api_environment, char *amazon_seller_id, char *aspdotnetstorefront_api_user, char *aspdotnetstorefront_api_pass, char *bigcommerceapi_admin_account, char *bigcommerceapi_api_path, char *bigcommerceapi_api_key, char *bigcommerceapi_client_id, char *bigcommerceapi_access_token, char *bigcommerceapi_context, char *bol_api_key, char *bol_api_secret, int *bol_retailer_id, char *demandware_client_id, char *demandware_api_password, char *demandware_user_name, char *demandware_user_password, char *ebay_client_id, char *ebay_client_secret, char *ebay_runame, char *ebay_access_token, char *ebay_refresh_token, char *ebay_environment, int *ebay_site_id, char *ecwid_acess_token, char *ecwid_store_id, char *lazada_app_id, char *lazada_app_secret, char *lazada_refresh_token, char *lazada_region, char *etsy_keystring, char *etsy_shared_secret, char *etsy_access_token, char *etsy_token_secret, char *etsy_client_id, char *etsy_refresh_token, char *facebook_app_id, char *facebook_app_secret, char *facebook_access_token, char *facebook_business_id, char *neto_api_key, char *neto_api_username, char *shopline_access_token, char *shopline_app_key, char *shopline_app_secret, char *shopline_shared_secret, char *shopify_access_token, char *shopify_api_key, char *shopify_api_password, char *shopify_shared_secret, char *shopee_partner_id, char *shopee_partner_key, char *shopee_shop_id, char *shopee_refresh_token, char *shopee_region, char *shopee_environment, char *shoplazza_access_token, char *shoplazza_shared_secret, char *miva_access_token, char *miva_signature, char *shopware_access_key, char *shopware_api_key, char *shopware_api_secret, char *bigcartel_user_name, char *bigcartel_password, char *volusion_login, char *volusion_password, char *walmart_client_id, char *walmart_client_secret, char *walmart_environment, char *walmart_channel_type, char *walmart_region, char *square_client_id, char *square_client_secret, char *square_refresh_token, char *squarespace_api_key, char *squarespace_client_id, char *squarespace_client_secret, char *squarespace_access_token, char *squarespace_refresh_token, char *hybris_client_id, char *hybris_client_secret, char *hybris_username, char *hybris_password, list_t *hybris_websites, char *lightspeed_api_key, char *lightspeed_api_secret, char *commercehq_api_key, char *commercehq_api_password, char *wc_consumer_key, char *wc_consumer_secret, char *magento_consumer_key, char *magento_consumer_secret, char *magento_access_token, char *magento_token_secret, char *prestashop_webservice_key, char *wix_app_id, char *wix_app_secret_key, char *wix_instance_id, char *wix_refresh_token, char *mercado_libre_app_id, char *mercado_libre_app_secret_key, char *mercado_libre_refresh_token, int *zid_client_id, char *zid_client_secret, char *zid_access_token, char *zid_authorization, char *zid_refresh_token, char *flipkart_client_id, char *flipkart_client_secret, char *allegro_client_id, char *allegro_client_secret, char *allegro_access_token, char *allegro_refresh_token, char *allegro_environment, char *zoho_client_id, char *zoho_client_secret, char *zoho_refresh_token, char *zoho_region, int *tiendanube_user_id, char *tiendanube_access_token, char *tiendanube_client_secret, char *otto_client_id, char *otto_client_secret, char *otto_app_id, char *otto_refresh_token, char *otto_environment, char *otto_access_token, char *tiktokshop_app_key, char *tiktokshop_app_secret, char *tiktokshop_refresh_token, char *tiktokshop_access_token, char *salla_client_id, char *salla_client_secret, char *salla_refresh_token, char *salla_access_token, char *temu_app_key, char *temu_app_secret, char *temu_access_token, char *temu_region)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1101,6 +1101,78 @@ AccountAPI_accountConfigUpdate(apiClient_t *apiClient, int *replace_parameters, 
         valueQuery_shopify_shared_secret = strdup((shopify_shared_secret));
         keyPairQuery_shopify_shared_secret = keyValuePair_create(keyQuery_shopify_shared_secret, valueQuery_shopify_shared_secret);
         list_addElement(localVarQueryParameters,keyPairQuery_shopify_shared_secret);
+    }
+
+    // query parameters
+    char *keyQuery_shopee_partner_id = NULL;
+    char * valueQuery_shopee_partner_id = NULL;
+    keyValuePair_t *keyPairQuery_shopee_partner_id = 0;
+    if (shopee_partner_id)
+    {
+        keyQuery_shopee_partner_id = strdup("shopee_partner_id");
+        valueQuery_shopee_partner_id = strdup((shopee_partner_id));
+        keyPairQuery_shopee_partner_id = keyValuePair_create(keyQuery_shopee_partner_id, valueQuery_shopee_partner_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_shopee_partner_id);
+    }
+
+    // query parameters
+    char *keyQuery_shopee_partner_key = NULL;
+    char * valueQuery_shopee_partner_key = NULL;
+    keyValuePair_t *keyPairQuery_shopee_partner_key = 0;
+    if (shopee_partner_key)
+    {
+        keyQuery_shopee_partner_key = strdup("shopee_partner_key");
+        valueQuery_shopee_partner_key = strdup((shopee_partner_key));
+        keyPairQuery_shopee_partner_key = keyValuePair_create(keyQuery_shopee_partner_key, valueQuery_shopee_partner_key);
+        list_addElement(localVarQueryParameters,keyPairQuery_shopee_partner_key);
+    }
+
+    // query parameters
+    char *keyQuery_shopee_shop_id = NULL;
+    char * valueQuery_shopee_shop_id = NULL;
+    keyValuePair_t *keyPairQuery_shopee_shop_id = 0;
+    if (shopee_shop_id)
+    {
+        keyQuery_shopee_shop_id = strdup("shopee_shop_id");
+        valueQuery_shopee_shop_id = strdup((shopee_shop_id));
+        keyPairQuery_shopee_shop_id = keyValuePair_create(keyQuery_shopee_shop_id, valueQuery_shopee_shop_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_shopee_shop_id);
+    }
+
+    // query parameters
+    char *keyQuery_shopee_refresh_token = NULL;
+    char * valueQuery_shopee_refresh_token = NULL;
+    keyValuePair_t *keyPairQuery_shopee_refresh_token = 0;
+    if (shopee_refresh_token)
+    {
+        keyQuery_shopee_refresh_token = strdup("shopee_refresh_token");
+        valueQuery_shopee_refresh_token = strdup((shopee_refresh_token));
+        keyPairQuery_shopee_refresh_token = keyValuePair_create(keyQuery_shopee_refresh_token, valueQuery_shopee_refresh_token);
+        list_addElement(localVarQueryParameters,keyPairQuery_shopee_refresh_token);
+    }
+
+    // query parameters
+    char *keyQuery_shopee_region = NULL;
+    char * valueQuery_shopee_region = NULL;
+    keyValuePair_t *keyPairQuery_shopee_region = 0;
+    if (shopee_region)
+    {
+        keyQuery_shopee_region = strdup("shopee_region");
+        valueQuery_shopee_region = strdup((shopee_region));
+        keyPairQuery_shopee_region = keyValuePair_create(keyQuery_shopee_region, valueQuery_shopee_region);
+        list_addElement(localVarQueryParameters,keyPairQuery_shopee_region);
+    }
+
+    // query parameters
+    char *keyQuery_shopee_environment = NULL;
+    char * valueQuery_shopee_environment = NULL;
+    keyValuePair_t *keyPairQuery_shopee_environment = 0;
+    if (shopee_environment)
+    {
+        keyQuery_shopee_environment = strdup("shopee_environment");
+        valueQuery_shopee_environment = strdup((shopee_environment));
+        keyPairQuery_shopee_environment = keyValuePair_create(keyQuery_shopee_environment, valueQuery_shopee_environment);
+        list_addElement(localVarQueryParameters,keyPairQuery_shopee_environment);
     }
 
     // query parameters
@@ -2058,6 +2130,54 @@ AccountAPI_accountConfigUpdate(apiClient_t *apiClient, int *replace_parameters, 
         keyPairQuery_salla_access_token = keyValuePair_create(keyQuery_salla_access_token, valueQuery_salla_access_token);
         list_addElement(localVarQueryParameters,keyPairQuery_salla_access_token);
     }
+
+    // query parameters
+    char *keyQuery_temu_app_key = NULL;
+    char * valueQuery_temu_app_key = NULL;
+    keyValuePair_t *keyPairQuery_temu_app_key = 0;
+    if (temu_app_key)
+    {
+        keyQuery_temu_app_key = strdup("temu_app_key");
+        valueQuery_temu_app_key = strdup((temu_app_key));
+        keyPairQuery_temu_app_key = keyValuePair_create(keyQuery_temu_app_key, valueQuery_temu_app_key);
+        list_addElement(localVarQueryParameters,keyPairQuery_temu_app_key);
+    }
+
+    // query parameters
+    char *keyQuery_temu_app_secret = NULL;
+    char * valueQuery_temu_app_secret = NULL;
+    keyValuePair_t *keyPairQuery_temu_app_secret = 0;
+    if (temu_app_secret)
+    {
+        keyQuery_temu_app_secret = strdup("temu_app_secret");
+        valueQuery_temu_app_secret = strdup((temu_app_secret));
+        keyPairQuery_temu_app_secret = keyValuePair_create(keyQuery_temu_app_secret, valueQuery_temu_app_secret);
+        list_addElement(localVarQueryParameters,keyPairQuery_temu_app_secret);
+    }
+
+    // query parameters
+    char *keyQuery_temu_access_token = NULL;
+    char * valueQuery_temu_access_token = NULL;
+    keyValuePair_t *keyPairQuery_temu_access_token = 0;
+    if (temu_access_token)
+    {
+        keyQuery_temu_access_token = strdup("temu_access_token");
+        valueQuery_temu_access_token = strdup((temu_access_token));
+        keyPairQuery_temu_access_token = keyValuePair_create(keyQuery_temu_access_token, valueQuery_temu_access_token);
+        list_addElement(localVarQueryParameters,keyPairQuery_temu_access_token);
+    }
+
+    // query parameters
+    char *keyQuery_temu_region = NULL;
+    char * valueQuery_temu_region = NULL;
+    keyValuePair_t *keyPairQuery_temu_region = 0;
+    if (temu_region)
+    {
+        keyQuery_temu_region = strdup("temu_region");
+        valueQuery_temu_region = strdup((temu_region));
+        keyPairQuery_temu_region = keyValuePair_create(keyQuery_temu_region, valueQuery_temu_region);
+        list_addElement(localVarQueryParameters,keyPairQuery_temu_region);
+    }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
                     localVarPath,
@@ -2864,6 +2984,78 @@ AccountAPI_accountConfigUpdate(apiClient_t *apiClient, int *replace_parameters, 
     if(keyPairQuery_shopify_shared_secret){
         keyValuePair_free(keyPairQuery_shopify_shared_secret);
         keyPairQuery_shopify_shared_secret = NULL;
+    }
+    if(keyQuery_shopee_partner_id){
+        free(keyQuery_shopee_partner_id);
+        keyQuery_shopee_partner_id = NULL;
+    }
+    if(valueQuery_shopee_partner_id){
+        free(valueQuery_shopee_partner_id);
+        valueQuery_shopee_partner_id = NULL;
+    }
+    if(keyPairQuery_shopee_partner_id){
+        keyValuePair_free(keyPairQuery_shopee_partner_id);
+        keyPairQuery_shopee_partner_id = NULL;
+    }
+    if(keyQuery_shopee_partner_key){
+        free(keyQuery_shopee_partner_key);
+        keyQuery_shopee_partner_key = NULL;
+    }
+    if(valueQuery_shopee_partner_key){
+        free(valueQuery_shopee_partner_key);
+        valueQuery_shopee_partner_key = NULL;
+    }
+    if(keyPairQuery_shopee_partner_key){
+        keyValuePair_free(keyPairQuery_shopee_partner_key);
+        keyPairQuery_shopee_partner_key = NULL;
+    }
+    if(keyQuery_shopee_shop_id){
+        free(keyQuery_shopee_shop_id);
+        keyQuery_shopee_shop_id = NULL;
+    }
+    if(valueQuery_shopee_shop_id){
+        free(valueQuery_shopee_shop_id);
+        valueQuery_shopee_shop_id = NULL;
+    }
+    if(keyPairQuery_shopee_shop_id){
+        keyValuePair_free(keyPairQuery_shopee_shop_id);
+        keyPairQuery_shopee_shop_id = NULL;
+    }
+    if(keyQuery_shopee_refresh_token){
+        free(keyQuery_shopee_refresh_token);
+        keyQuery_shopee_refresh_token = NULL;
+    }
+    if(valueQuery_shopee_refresh_token){
+        free(valueQuery_shopee_refresh_token);
+        valueQuery_shopee_refresh_token = NULL;
+    }
+    if(keyPairQuery_shopee_refresh_token){
+        keyValuePair_free(keyPairQuery_shopee_refresh_token);
+        keyPairQuery_shopee_refresh_token = NULL;
+    }
+    if(keyQuery_shopee_region){
+        free(keyQuery_shopee_region);
+        keyQuery_shopee_region = NULL;
+    }
+    if(valueQuery_shopee_region){
+        free(valueQuery_shopee_region);
+        valueQuery_shopee_region = NULL;
+    }
+    if(keyPairQuery_shopee_region){
+        keyValuePair_free(keyPairQuery_shopee_region);
+        keyPairQuery_shopee_region = NULL;
+    }
+    if(keyQuery_shopee_environment){
+        free(keyQuery_shopee_environment);
+        keyQuery_shopee_environment = NULL;
+    }
+    if(valueQuery_shopee_environment){
+        free(valueQuery_shopee_environment);
+        valueQuery_shopee_environment = NULL;
+    }
+    if(keyPairQuery_shopee_environment){
+        keyValuePair_free(keyPairQuery_shopee_environment);
+        keyPairQuery_shopee_environment = NULL;
     }
     if(keyQuery_shoplazza_access_token){
         free(keyQuery_shoplazza_access_token);
@@ -3812,6 +4004,54 @@ AccountAPI_accountConfigUpdate(apiClient_t *apiClient, int *replace_parameters, 
     if(keyPairQuery_salla_access_token){
         keyValuePair_free(keyPairQuery_salla_access_token);
         keyPairQuery_salla_access_token = NULL;
+    }
+    if(keyQuery_temu_app_key){
+        free(keyQuery_temu_app_key);
+        keyQuery_temu_app_key = NULL;
+    }
+    if(valueQuery_temu_app_key){
+        free(valueQuery_temu_app_key);
+        valueQuery_temu_app_key = NULL;
+    }
+    if(keyPairQuery_temu_app_key){
+        keyValuePair_free(keyPairQuery_temu_app_key);
+        keyPairQuery_temu_app_key = NULL;
+    }
+    if(keyQuery_temu_app_secret){
+        free(keyQuery_temu_app_secret);
+        keyQuery_temu_app_secret = NULL;
+    }
+    if(valueQuery_temu_app_secret){
+        free(valueQuery_temu_app_secret);
+        valueQuery_temu_app_secret = NULL;
+    }
+    if(keyPairQuery_temu_app_secret){
+        keyValuePair_free(keyPairQuery_temu_app_secret);
+        keyPairQuery_temu_app_secret = NULL;
+    }
+    if(keyQuery_temu_access_token){
+        free(keyQuery_temu_access_token);
+        keyQuery_temu_access_token = NULL;
+    }
+    if(valueQuery_temu_access_token){
+        free(valueQuery_temu_access_token);
+        valueQuery_temu_access_token = NULL;
+    }
+    if(keyPairQuery_temu_access_token){
+        keyValuePair_free(keyPairQuery_temu_access_token);
+        keyPairQuery_temu_access_token = NULL;
+    }
+    if(keyQuery_temu_region){
+        free(keyQuery_temu_region);
+        keyQuery_temu_region = NULL;
+    }
+    if(valueQuery_temu_region){
+        free(valueQuery_temu_region);
+        valueQuery_temu_region = NULL;
+    }
+    if(keyPairQuery_temu_region){
+        keyValuePair_free(keyPairQuery_temu_region);
+        keyPairQuery_temu_region = NULL;
     }
     return elementToReturn;
 end:
