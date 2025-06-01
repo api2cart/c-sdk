@@ -187,7 +187,7 @@ account_cart_add_t* instantiate_account_cart_add(int include_optional) {
       "4ebbc9190ae410443d65b4c2faca9811",
       "4782d2d827276688bf4758bed55dbdd4bbe79a78",
       "uplv3hfyt5kcwoymrgnajnbl1ow5qxlz4sqhev6hl3xosz5dejrtyl2jre6",
-      "US"
+      api2cart_openapi_account_cart_add_TEMUREGION_"US"
     );
   } else {
     account_cart_add = account_cart_add_create(
@@ -356,7 +356,7 @@ account_cart_add_t* instantiate_account_cart_add(int include_optional) {
       "4ebbc9190ae410443d65b4c2faca9811",
       "4782d2d827276688bf4758bed55dbdd4bbe79a78",
       "uplv3hfyt5kcwoymrgnajnbl1ow5qxlz4sqhev6hl3xosz5dejrtyl2jre6",
-      "US"
+      api2cart_openapi_account_cart_add_TEMUREGION_"US"
     );
   }
 

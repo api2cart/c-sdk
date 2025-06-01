@@ -25,6 +25,14 @@ char* account_cart_add_cart_id_ToString(api2cart_openapi_account_cart_add_CARTID
 
 api2cart_openapi_account_cart_add_CARTID_e account_cart_add_cart_id_FromString(char* cart_id);
 
+// Enum TEMUREGION for account_cart_add
+
+typedef enum  { api2cart_openapi_account_cart_add_TEMUREGION_NULL = 0, api2cart_openapi_account_cart_add_TEMUREGION_US, api2cart_openapi_account_cart_add_TEMUREGION_EU, api2cart_openapi_account_cart_add_TEMUREGION_GLOBAL } api2cart_openapi_account_cart_add_TEMUREGION_e;
+
+char* account_cart_add_temu_region_ToString(api2cart_openapi_account_cart_add_TEMUREGION_e temu_region);
+
+api2cart_openapi_account_cart_add_TEMUREGION_e account_cart_add_temu_region_FromString(char* temu_region);
+
 
 
 typedef struct account_cart_add_t {
@@ -188,7 +196,7 @@ typedef struct account_cart_add_t {
     char *temu_app_key; // string
     char *temu_app_secret; // string
     char *temu_access_token; // string
-    char *temu_region; // string
+    api2cart_openapi_account_cart_add_TEMUREGION_e temu_region; //enum
 
     int _library_owned; // Is the library responsible for freeing this object?
 } account_cart_add_t;
@@ -354,7 +362,7 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     char *temu_app_key,
     char *temu_app_secret,
     char *temu_access_token,
-    char *temu_region
+    api2cart_openapi_account_cart_add_TEMUREGION_e temu_region
 );
 
 void account_cart_add_free(account_cart_add_t *account_cart_add);

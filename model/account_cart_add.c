@@ -21,6 +21,23 @@ api2cart_openapi_account_cart_add_CARTID_e account_cart_add_cart_id_FromString(c
     }
     return 0;
 }
+char* account_cart_add_temu_region_ToString(api2cart_openapi_account_cart_add_TEMUREGION_e temu_region) {
+    char* temu_regionArray[] =  { "NULL", "US", "EU", "GLOBAL" };
+    return temu_regionArray[temu_region];
+}
+
+api2cart_openapi_account_cart_add_TEMUREGION_e account_cart_add_temu_region_FromString(char* temu_region){
+    int stringToReturn = 0;
+    char *temu_regionArray[] =  { "NULL", "US", "EU", "GLOBAL" };
+    size_t sizeofArray = sizeof(temu_regionArray) / sizeof(temu_regionArray[0]);
+    while(stringToReturn < sizeofArray) {
+        if(strcmp(temu_region, temu_regionArray[stringToReturn]) == 0) {
+            return stringToReturn;
+        }
+        stringToReturn++;
+    }
+    return 0;
+}
 
 static account_cart_add_t *account_cart_add_create_internal(
     api2cart_openapi_account_cart_add_CARTID_e cart_id,
@@ -183,7 +200,7 @@ static account_cart_add_t *account_cart_add_create_internal(
     char *temu_app_key,
     char *temu_app_secret,
     char *temu_access_token,
-    char *temu_region
+    api2cart_openapi_account_cart_add_TEMUREGION_e temu_region
     ) {
     account_cart_add_t *account_cart_add_local_var = malloc(sizeof(account_cart_add_t));
     if (!account_cart_add_local_var) {
@@ -516,7 +533,7 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     char *temu_app_key,
     char *temu_app_secret,
     char *temu_access_token,
-    char *temu_region
+    api2cart_openapi_account_cart_add_TEMUREGION_e temu_region
     ) {
     return account_cart_add_create_internal (
         cart_id,
@@ -1302,10 +1319,6 @@ void account_cart_add_free(account_cart_add_t *account_cart_add) {
     if (account_cart_add->temu_access_token) {
         free(account_cart_add->temu_access_token);
         account_cart_add->temu_access_token = NULL;
-    }
-    if (account_cart_add->temu_region) {
-        free(account_cart_add->temu_region);
-        account_cart_add->temu_region = NULL;
     }
     free(account_cart_add);
 }
@@ -2613,10 +2626,12 @@ cJSON *account_cart_add_convertToJSON(account_cart_add_t *account_cart_add) {
 
 
     // account_cart_add->temu_region
-    if(account_cart_add->temu_region) {
-    if(cJSON_AddStringToObject(item, "temu_region", account_cart_add->temu_region) == NULL) {
-    goto fail; //String
+    if (api2cart_openapi_account_cart_add_TEMUREGION_NULL == account_cart_add->temu_region) {
+        goto fail;
     }
+    if(cJSON_AddStringToObject(item, "temu_region", account_cart_add_temu_region_ToString(account_cart_add->temu_region)) == NULL)
+    {
+    goto fail; //Enum
     }
 
     return item;
@@ -4591,12 +4606,17 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(temu_region)) {
         temu_region = NULL;
     }
-    if (temu_region) { 
-    if(!cJSON_IsString(temu_region) && !cJSON_IsNull(temu_region))
+    if (!temu_region) {
+        goto end;
+    }
+
+    api2cart_openapi_account_cart_add_TEMUREGION_e temu_regionVariable;
+    
+    if(!cJSON_IsString(temu_region))
     {
-    goto end; //String
+    goto end; //Enum
     }
-    }
+    temu_regionVariable = account_cart_add_temu_region_FromString(temu_region->valuestring);
 
 
     account_cart_add_local_var = account_cart_add_create_internal (
@@ -4760,7 +4780,7 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
         temu_app_key && !cJSON_IsNull(temu_app_key) ? strdup(temu_app_key->valuestring) : NULL,
         temu_app_secret && !cJSON_IsNull(temu_app_secret) ? strdup(temu_app_secret->valuestring) : NULL,
         strdup(temu_access_token->valuestring),
-        temu_region && !cJSON_IsNull(temu_region) ? strdup(temu_region->valuestring) : NULL
+        temu_regionVariable
         );
 
     return account_cart_add_local_var;
