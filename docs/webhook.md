@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | [optional] 
 **label** | **char \*** |  | [optional] 
 **store_id** | **char \*** |  | [optional] 
+**lang_id** | **char \*** |  | [optional] 
 **active** | **int** |  | [optional] 
 **callback** | **char \*** |  | [optional] 
 **fields** | **char \*** |  | [optional] 

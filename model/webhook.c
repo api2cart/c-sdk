@@ -9,6 +9,7 @@ static webhook_t *webhook_create_internal(
     int id,
     char *label,
     char *store_id,
+    char *lang_id,
     int active,
     char *callback,
     char *fields,
@@ -26,6 +27,7 @@ static webhook_t *webhook_create_internal(
     webhook_local_var->id = id;
     webhook_local_var->label = label;
     webhook_local_var->store_id = store_id;
+    webhook_local_var->lang_id = lang_id;
     webhook_local_var->active = active;
     webhook_local_var->callback = callback;
     webhook_local_var->fields = fields;
@@ -44,6 +46,7 @@ __attribute__((deprecated)) webhook_t *webhook_create(
     int id,
     char *label,
     char *store_id,
+    char *lang_id,
     int active,
     char *callback,
     char *fields,
@@ -58,6 +61,7 @@ __attribute__((deprecated)) webhook_t *webhook_create(
         id,
         label,
         store_id,
+        lang_id,
         active,
         callback,
         fields,
@@ -86,6 +90,10 @@ void webhook_free(webhook_t *webhook) {
     if (webhook->store_id) {
         free(webhook->store_id);
         webhook->store_id = NULL;
+    }
+    if (webhook->lang_id) {
+        free(webhook->lang_id);
+        webhook->lang_id = NULL;
     }
     if (webhook->callback) {
         free(webhook->callback);
@@ -144,6 +152,14 @@ cJSON *webhook_convertToJSON(webhook_t *webhook) {
     // webhook->store_id
     if(webhook->store_id) {
     if(cJSON_AddStringToObject(item, "store_id", webhook->store_id) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // webhook->lang_id
+    if(webhook->lang_id) {
+    if(cJSON_AddStringToObject(item, "lang_id", webhook->lang_id) == NULL) {
     goto fail; //String
     }
     }
@@ -278,6 +294,18 @@ webhook_t *webhook_parseFromJSON(cJSON *webhookJSON){
     }
     }
 
+    // webhook->lang_id
+    cJSON *lang_id = cJSON_GetObjectItemCaseSensitive(webhookJSON, "lang_id");
+    if (cJSON_IsNull(lang_id)) {
+        lang_id = NULL;
+    }
+    if (lang_id) { 
+    if(!cJSON_IsString(lang_id) && !cJSON_IsNull(lang_id))
+    {
+    goto end; //String
+    }
+    }
+
     // webhook->active
     cJSON *active = cJSON_GetObjectItemCaseSensitive(webhookJSON, "active");
     if (cJSON_IsNull(active)) {
@@ -387,6 +415,7 @@ webhook_t *webhook_parseFromJSON(cJSON *webhookJSON){
         id ? id->valuedouble : 0,
         label && !cJSON_IsNull(label) ? strdup(label->valuestring) : NULL,
         store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
+        lang_id && !cJSON_IsNull(lang_id) ? strdup(lang_id->valuestring) : NULL,
         active ? active->valueint : 0,
         callback && !cJSON_IsNull(callback) ? strdup(callback->valuestring) : NULL,
         fields && !cJSON_IsNull(fields) ? strdup(fields->valuestring) : NULL,

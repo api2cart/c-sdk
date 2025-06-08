@@ -155,7 +155,7 @@ end:
 // Create webhook on the store and subscribe to it.
 //
 basket_live_shipping_service_create_200_response_t*
-WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, char *callback, char *label, char *fields, int *active, char *store_id)
+WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, char *callback, char *label, char *fields, int *active, char *lang_id, char *store_id)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -246,6 +246,18 @@ WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, cha
         snprintf(valueQuery_active, MAX_NUMBER_LENGTH, "%d", *active);
         keyPairQuery_active = keyValuePair_create(keyQuery_active, valueQuery_active);
         list_addElement(localVarQueryParameters,keyPairQuery_active);
+    }
+
+    // query parameters
+    char *keyQuery_lang_id = NULL;
+    char * valueQuery_lang_id = NULL;
+    keyValuePair_t *keyPairQuery_lang_id = 0;
+    if (lang_id)
+    {
+        keyQuery_lang_id = strdup("lang_id");
+        valueQuery_lang_id = strdup((lang_id));
+        keyPairQuery_lang_id = keyValuePair_create(keyQuery_lang_id, valueQuery_lang_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_lang_id);
     }
 
     // query parameters
@@ -369,6 +381,18 @@ WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, cha
     if(keyPairQuery_active){
         keyValuePair_free(keyPairQuery_active);
         keyPairQuery_active = NULL;
+    }
+    if(keyQuery_lang_id){
+        free(keyQuery_lang_id);
+        keyQuery_lang_id = NULL;
+    }
+    if(valueQuery_lang_id){
+        free(valueQuery_lang_id);
+        valueQuery_lang_id = NULL;
+    }
+    if(keyPairQuery_lang_id){
+        keyValuePair_free(keyPairQuery_lang_id);
+        keyPairQuery_lang_id = NULL;
     }
     if(keyQuery_store_id){
         free(keyQuery_store_id);
@@ -799,7 +823,7 @@ end:
 // Update Webhooks parameters.
 //
 product_image_update_200_response_t*
-WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char *label, char *fields, int *active)
+WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char *label, char *fields, int *active, char *lang_id)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -878,6 +902,18 @@ WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char 
         snprintf(valueQuery_active, MAX_NUMBER_LENGTH, "%d", *active);
         keyPairQuery_active = keyValuePair_create(keyQuery_active, valueQuery_active);
         list_addElement(localVarQueryParameters,keyPairQuery_active);
+    }
+
+    // query parameters
+    char *keyQuery_lang_id = NULL;
+    char * valueQuery_lang_id = NULL;
+    keyValuePair_t *keyPairQuery_lang_id = 0;
+    if (lang_id)
+    {
+        keyQuery_lang_id = strdup("lang_id");
+        valueQuery_lang_id = strdup((lang_id));
+        keyPairQuery_lang_id = keyValuePair_create(keyQuery_lang_id, valueQuery_lang_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_lang_id);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -977,6 +1013,18 @@ WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char 
     if(keyPairQuery_active){
         keyValuePair_free(keyPairQuery_active);
         keyPairQuery_active = NULL;
+    }
+    if(keyQuery_lang_id){
+        free(keyQuery_lang_id);
+        keyQuery_lang_id = NULL;
+    }
+    if(valueQuery_lang_id){
+        free(valueQuery_lang_id);
+        valueQuery_lang_id = NULL;
+    }
+    if(keyPairQuery_lang_id){
+        keyValuePair_free(keyPairQuery_lang_id);
+        keyPairQuery_lang_id = NULL;
     }
     return elementToReturn;
 end:

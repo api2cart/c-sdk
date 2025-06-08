@@ -25,6 +25,7 @@ webhook_t* instantiate_webhook(int include_optional) {
       56,
       "0",
       "0",
+      "0",
       1,
       "0",
       "0",
@@ -38,6 +39,7 @@ webhook_t* instantiate_webhook(int include_optional) {
   } else {
     webhook = webhook_create(
       56,
+      "0",
       "0",
       "0",
       1,
