@@ -13,6 +13,7 @@ static webhook_t *webhook_create_internal(
     int active,
     char *callback,
     char *fields,
+    char *response_fields,
     char *created_at,
     char *updated_at,
     char *entity,
@@ -31,6 +32,7 @@ static webhook_t *webhook_create_internal(
     webhook_local_var->active = active;
     webhook_local_var->callback = callback;
     webhook_local_var->fields = fields;
+    webhook_local_var->response_fields = response_fields;
     webhook_local_var->created_at = created_at;
     webhook_local_var->updated_at = updated_at;
     webhook_local_var->entity = entity;
@@ -50,6 +52,7 @@ __attribute__((deprecated)) webhook_t *webhook_create(
     int active,
     char *callback,
     char *fields,
+    char *response_fields,
     char *created_at,
     char *updated_at,
     char *entity,
@@ -65,6 +68,7 @@ __attribute__((deprecated)) webhook_t *webhook_create(
         active,
         callback,
         fields,
+        response_fields,
         created_at,
         updated_at,
         entity,
@@ -102,6 +106,10 @@ void webhook_free(webhook_t *webhook) {
     if (webhook->fields) {
         free(webhook->fields);
         webhook->fields = NULL;
+    }
+    if (webhook->response_fields) {
+        free(webhook->response_fields);
+        webhook->response_fields = NULL;
     }
     if (webhook->created_at) {
         free(webhook->created_at);
@@ -184,6 +192,14 @@ cJSON *webhook_convertToJSON(webhook_t *webhook) {
     // webhook->fields
     if(webhook->fields) {
     if(cJSON_AddStringToObject(item, "fields", webhook->fields) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // webhook->response_fields
+    if(webhook->response_fields) {
+    if(cJSON_AddStringToObject(item, "response_fields", webhook->response_fields) == NULL) {
     goto fail; //String
     }
     }
@@ -342,6 +358,18 @@ webhook_t *webhook_parseFromJSON(cJSON *webhookJSON){
     }
     }
 
+    // webhook->response_fields
+    cJSON *response_fields = cJSON_GetObjectItemCaseSensitive(webhookJSON, "response_fields");
+    if (cJSON_IsNull(response_fields)) {
+        response_fields = NULL;
+    }
+    if (response_fields) { 
+    if(!cJSON_IsString(response_fields) && !cJSON_IsNull(response_fields))
+    {
+    goto end; //String
+    }
+    }
+
     // webhook->created_at
     cJSON *created_at = cJSON_GetObjectItemCaseSensitive(webhookJSON, "created_at");
     if (cJSON_IsNull(created_at)) {
@@ -419,6 +447,7 @@ webhook_t *webhook_parseFromJSON(cJSON *webhookJSON){
         active ? active->valueint : 0,
         callback && !cJSON_IsNull(callback) ? strdup(callback->valuestring) : NULL,
         fields && !cJSON_IsNull(fields) ? strdup(fields->valuestring) : NULL,
+        response_fields && !cJSON_IsNull(response_fields) ? strdup(response_fields->valuestring) : NULL,
         created_at && !cJSON_IsNull(created_at) ? strdup(created_at->valuestring) : NULL,
         updated_at && !cJSON_IsNull(updated_at) ? strdup(updated_at->valuestring) : NULL,
         entity && !cJSON_IsNull(entity) ? strdup(entity->valuestring) : NULL,

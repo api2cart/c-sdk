@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **active** | **int** |  | [optional] 
 **callback** | **char \*** |  | [optional] 
 **fields** | **char \*** |  | [optional] 
+**response_fields** | **char \*** |  | [optional] 
 **created_at** | **char \*** |  | [optional] 
 **updated_at** | **char \*** |  | [optional] 
 **entity** | **char \*** |  | [optional] 

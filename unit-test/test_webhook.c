@@ -33,6 +33,7 @@ webhook_t* instantiate_webhook(int include_optional) {
       "0",
       "0",
       "0",
+      "0",
       0,
       0
     );
@@ -43,6 +44,7 @@ webhook_t* instantiate_webhook(int include_optional) {
       "0",
       "0",
       1,
+      "0",
       "0",
       "0",
       "0",

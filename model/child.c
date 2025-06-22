@@ -33,6 +33,7 @@ static child_t *child_create_internal(
     int avail_for_sale,
     int allow_backorders,
     int in_stock,
+    int on_sale,
     int manage_stock,
     double inventory_level,
     list_t *inventory,
@@ -84,6 +85,7 @@ static child_t *child_create_internal(
     child_local_var->avail_for_sale = avail_for_sale;
     child_local_var->allow_backorders = allow_backorders;
     child_local_var->in_stock = in_stock;
+    child_local_var->on_sale = on_sale;
     child_local_var->manage_stock = manage_stock;
     child_local_var->inventory_level = inventory_level;
     child_local_var->inventory = inventory;
@@ -136,6 +138,7 @@ __attribute__((deprecated)) child_t *child_create(
     int avail_for_sale,
     int allow_backorders,
     int in_stock,
+    int on_sale,
     int manage_stock,
     double inventory_level,
     list_t *inventory,
@@ -184,6 +187,7 @@ __attribute__((deprecated)) child_t *child_create(
         avail_for_sale,
         allow_backorders,
         in_stock,
+        on_sale,
         manage_stock,
         inventory_level,
         inventory,
@@ -605,6 +609,14 @@ cJSON *child_convertToJSON(child_t *child) {
     // child->in_stock
     if(child->in_stock) {
     if(cJSON_AddBoolToObject(item, "in_stock", child->in_stock) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // child->on_sale
+    if(child->on_sale) {
+    if(cJSON_AddBoolToObject(item, "on_sale", child->on_sale) == NULL) {
     goto fail; //Bool
     }
     }
@@ -1182,6 +1194,18 @@ child_t *child_parseFromJSON(cJSON *childJSON){
     }
     }
 
+    // child->on_sale
+    cJSON *on_sale = cJSON_GetObjectItemCaseSensitive(childJSON, "on_sale");
+    if (cJSON_IsNull(on_sale)) {
+        on_sale = NULL;
+    }
+    if (on_sale) { 
+    if(!cJSON_IsBool(on_sale))
+    {
+    goto end; //Bool
+    }
+    }
+
     // child->manage_stock
     cJSON *manage_stock = cJSON_GetObjectItemCaseSensitive(childJSON, "manage_stock");
     if (cJSON_IsNull(manage_stock)) {
@@ -1459,6 +1483,7 @@ child_t *child_parseFromJSON(cJSON *childJSON){
         avail_for_sale ? avail_for_sale->valueint : 0,
         allow_backorders ? allow_backorders->valueint : 0,
         in_stock ? in_stock->valueint : 0,
+        on_sale ? on_sale->valueint : 0,
         manage_stock ? manage_stock->valueint : 0,
         inventory_level ? inventory_level->valuedouble : 0,
         inventory ? inventoryList : NULL,

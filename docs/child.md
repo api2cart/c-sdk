@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **avail_for_sale** | **int** |  | [optional] 
 **allow_backorders** | **int** |  | [optional] 
 **in_stock** | **int** |  | [optional] 
+**on_sale** | **int** |  | [optional] 
 **manage_stock** | **int** |  | [optional] 
 **inventory_level** | **double** |  | [optional] 
 **inventory** | [**list_t**](product_inventory.md) \* |  | [optional] 

@@ -26,7 +26,7 @@ WebhookAPI_webhookCount(apiClient_t *apiClient, char *entity, char *action, int 
 // Create webhook on the store and subscribe to it.
 //
 basket_live_shipping_service_create_200_response_t*
-WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, char *callback, char *label, char *fields, int *active, char *lang_id, char *store_id);
+WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, char *callback, char *label, char *fields, char *response_fields, int *active, char *lang_id, char *store_id);
 
 
 // webhook.delete
@@ -58,6 +58,6 @@ WebhookAPI_webhookList(apiClient_t *apiClient, int *start, int *count, char *ent
 // Update Webhooks parameters.
 //
 product_image_update_200_response_t*
-WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char *label, char *fields, int *active, char *lang_id);
+WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char *label, char *fields, char *response_fields, int *active, char *lang_id);
 
 

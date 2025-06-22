@@ -155,7 +155,7 @@ end:
 // Create webhook on the store and subscribe to it.
 //
 basket_live_shipping_service_create_200_response_t*
-WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, char *callback, char *label, char *fields, int *active, char *lang_id, char *store_id)
+WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, char *callback, char *label, char *fields, char *response_fields, int *active, char *lang_id, char *store_id)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -233,6 +233,18 @@ WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, cha
         valueQuery_fields = strdup((fields));
         keyPairQuery_fields = keyValuePair_create(keyQuery_fields, valueQuery_fields);
         list_addElement(localVarQueryParameters,keyPairQuery_fields);
+    }
+
+    // query parameters
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
+    {
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -369,6 +381,18 @@ WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, cha
     if(keyPairQuery_fields){
         keyValuePair_free(keyPairQuery_fields);
         keyPairQuery_fields = NULL;
+    }
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
+    }
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
+    }
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_active){
         free(keyQuery_active);
@@ -823,7 +847,7 @@ end:
 // Update Webhooks parameters.
 //
 product_image_update_200_response_t*
-WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char *label, char *fields, int *active, char *lang_id)
+WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char *label, char *fields, char *response_fields, int *active, char *lang_id)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -889,6 +913,18 @@ WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char 
         valueQuery_fields = strdup((fields));
         keyPairQuery_fields = keyValuePair_create(keyQuery_fields, valueQuery_fields);
         list_addElement(localVarQueryParameters,keyPairQuery_fields);
+    }
+
+    // query parameters
+    char *keyQuery_response_fields = NULL;
+    char * valueQuery_response_fields = NULL;
+    keyValuePair_t *keyPairQuery_response_fields = 0;
+    if (response_fields)
+    {
+        keyQuery_response_fields = strdup("response_fields");
+        valueQuery_response_fields = strdup((response_fields));
+        keyPairQuery_response_fields = keyValuePair_create(keyQuery_response_fields, valueQuery_response_fields);
+        list_addElement(localVarQueryParameters,keyPairQuery_response_fields);
     }
 
     // query parameters
@@ -1001,6 +1037,18 @@ WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char 
     if(keyPairQuery_fields){
         keyValuePair_free(keyPairQuery_fields);
         keyPairQuery_fields = NULL;
+    }
+    if(keyQuery_response_fields){
+        free(keyQuery_response_fields);
+        keyQuery_response_fields = NULL;
+    }
+    if(valueQuery_response_fields){
+        free(valueQuery_response_fields);
+        valueQuery_response_fields = NULL;
+    }
+    if(keyPairQuery_response_fields){
+        keyValuePair_free(keyPairQuery_response_fields);
+        keyPairQuery_response_fields = NULL;
     }
     if(keyQuery_active){
         free(keyQuery_active);

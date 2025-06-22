@@ -27,6 +27,7 @@ typedef struct webhook_t {
     int active; //boolean
     char *callback; // string
     char *fields; // string
+    char *response_fields; // string
     char *created_at; // string
     char *updated_at; // string
     char *entity; // string
@@ -45,6 +46,7 @@ __attribute__((deprecated)) webhook_t *webhook_create(
     int active,
     char *callback,
     char *fields,
+    char *response_fields,
     char *created_at,
     char *updated_at,
     char *entity,

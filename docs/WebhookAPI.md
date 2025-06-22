@@ -51,7 +51,7 @@ Name | Type | Description  | Notes
 //
 // Create webhook on the store and subscribe to it.
 //
-basket_live_shipping_service_create_200_response_t* WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, char *callback, char *label, char *fields, int *active, char *lang_id, char *store_id);
+basket_live_shipping_service_create_200_response_t* WebhookAPI_webhookCreate(apiClient_t *apiClient, char *entity, char *action, char *callback, char *label, char *fields, char *response_fields, int *active, char *lang_id, char *store_id);
 ```
 
 ### Parameters
@@ -63,6 +63,7 @@ Name | Type | Description  | Notes
 **callback** | **char \*** | Callback url that returns shipping rates. It should be able to accept POST requests with json data. | [optional] 
 **label** | **char \*** | The name you give to the webhook | [optional] 
 **fields** | **char \*** | Fields the webhook should send | [optional] [default to &#39;force_all&#39;]
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **active** | **int \*** | Webhook status | [optional] [default to true]
 **lang_id** | **char \*** | Language id | [optional] 
 **store_id** | **char \*** | Defines store id where the webhook should be assigned | [optional] 
@@ -187,7 +188,7 @@ Name | Type | Description  | Notes
 //
 // Update Webhooks parameters.
 //
-product_image_update_200_response_t* WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char *label, char *fields, int *active, char *lang_id);
+product_image_update_200_response_t* WebhookAPI_webhookUpdate(apiClient_t *apiClient, char *id, char *callback, char *label, char *fields, char *response_fields, int *active, char *lang_id);
 ```
 
 ### Parameters
@@ -198,6 +199,7 @@ Name | Type | Description  | Notes
 **callback** | **char \*** | Callback url that returns shipping rates. It should be able to accept POST requests with json data. | [optional] 
 **label** | **char \*** | The name you give to the webhook | [optional] 
 **fields** | **char \*** | Fields the webhook should send | [optional] 
+**response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **active** | **int \*** | Webhook status | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
 

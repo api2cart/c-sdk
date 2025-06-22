@@ -53,6 +53,7 @@ typedef struct child_t {
     int avail_for_sale; //boolean
     int allow_backorders; //boolean
     int in_stock; //boolean
+    int on_sale; //boolean
     int manage_stock; //boolean
     double inventory_level; //numeric
     list_t *inventory; //nonprimitive container
@@ -104,6 +105,7 @@ __attribute__((deprecated)) child_t *child_create(
     int avail_for_sale,
     int allow_backorders,
     int in_stock,
+    int on_sale,
     int manage_stock,
     double inventory_level,
     list_t *inventory,
