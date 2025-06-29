@@ -11,6 +11,7 @@ static product_add_specifics_inner_t *product_add_specifics_inner_create_interna
     list_t *values,
     int used_for_variations,
     int scale_id,
+    char *input_value,
     product_add_specifics_inner_food_details_t *food_details,
     list_t *group_products_details,
     product_add_specifics_inner_booking_details_t *booking_details
@@ -24,6 +25,7 @@ static product_add_specifics_inner_t *product_add_specifics_inner_create_interna
     product_add_specifics_inner_local_var->values = values;
     product_add_specifics_inner_local_var->used_for_variations = used_for_variations;
     product_add_specifics_inner_local_var->scale_id = scale_id;
+    product_add_specifics_inner_local_var->input_value = input_value;
     product_add_specifics_inner_local_var->food_details = food_details;
     product_add_specifics_inner_local_var->group_products_details = group_products_details;
     product_add_specifics_inner_local_var->booking_details = booking_details;
@@ -38,6 +40,7 @@ __attribute__((deprecated)) product_add_specifics_inner_t *product_add_specifics
     list_t *values,
     int used_for_variations,
     int scale_id,
+    char *input_value,
     product_add_specifics_inner_food_details_t *food_details,
     list_t *group_products_details,
     product_add_specifics_inner_booking_details_t *booking_details
@@ -48,6 +51,7 @@ __attribute__((deprecated)) product_add_specifics_inner_t *product_add_specifics
         values,
         used_for_variations,
         scale_id,
+        input_value,
         food_details,
         group_products_details,
         booking_details
@@ -77,6 +81,10 @@ void product_add_specifics_inner_free(product_add_specifics_inner_t *product_add
         }
         list_freeList(product_add_specifics_inner->values);
         product_add_specifics_inner->values = NULL;
+    }
+    if (product_add_specifics_inner->input_value) {
+        free(product_add_specifics_inner->input_value);
+        product_add_specifics_inner->input_value = NULL;
     }
     if (product_add_specifics_inner->food_details) {
         product_add_specifics_inner_food_details_free(product_add_specifics_inner->food_details);
@@ -144,6 +152,14 @@ cJSON *product_add_specifics_inner_convertToJSON(product_add_specifics_inner_t *
     if(product_add_specifics_inner->scale_id) {
     if(cJSON_AddNumberToObject(item, "scale_id", product_add_specifics_inner->scale_id) == NULL) {
     goto fail; //Numeric
+    }
+    }
+
+
+    // product_add_specifics_inner->input_value
+    if(product_add_specifics_inner->input_value) {
+    if(cJSON_AddStringToObject(item, "input_value", product_add_specifics_inner->input_value) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -287,6 +303,18 @@ product_add_specifics_inner_t *product_add_specifics_inner_parseFromJSON(cJSON *
     }
     }
 
+    // product_add_specifics_inner->input_value
+    cJSON *input_value = cJSON_GetObjectItemCaseSensitive(product_add_specifics_innerJSON, "input_value");
+    if (cJSON_IsNull(input_value)) {
+        input_value = NULL;
+    }
+    if (input_value) { 
+    if(!cJSON_IsString(input_value) && !cJSON_IsNull(input_value))
+    {
+    goto end; //String
+    }
+    }
+
     // product_add_specifics_inner->food_details
     cJSON *food_details = cJSON_GetObjectItemCaseSensitive(product_add_specifics_innerJSON, "food_details");
     if (cJSON_IsNull(food_details)) {
@@ -336,6 +364,7 @@ product_add_specifics_inner_t *product_add_specifics_inner_parseFromJSON(cJSON *
         values ? valuesList : NULL,
         used_for_variations ? used_for_variations->valueint : 0,
         scale_id ? scale_id->valuedouble : 0,
+        input_value && !cJSON_IsNull(input_value) ? strdup(input_value->valuestring) : NULL,
         food_details ? food_details_local_nonprim : NULL,
         group_products_details ? group_products_detailsList : NULL,
         booking_details ? booking_details_local_nonprim : NULL

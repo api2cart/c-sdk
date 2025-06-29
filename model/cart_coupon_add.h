@@ -60,6 +60,7 @@ typedef struct cart_coupon_add_t {
     char *action_condition_value; // string
     int include_tax; //boolean
     char *store_id; // string
+    int free_cash_on_delivery; //boolean
 
     int _library_owned; // Is the library responsible for freeing this object?
 } cart_coupon_add_t;
@@ -81,7 +82,8 @@ __attribute__((deprecated)) cart_coupon_add_t *cart_coupon_add_create(
     char *action_condition_operator,
     char *action_condition_value,
     int include_tax,
-    char *store_id
+    char *store_id,
+    int free_cash_on_delivery
 );
 
 void cart_coupon_add_free(cart_coupon_add_t *cart_coupon_add);

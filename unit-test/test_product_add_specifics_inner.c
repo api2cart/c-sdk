@@ -29,6 +29,7 @@ product_add_specifics_inner_t* instantiate_product_add_specifics_inner(int inclu
       list_createList(),
       1,
       56,
+      "0",
        // false, not to have infinite recursion
       instantiate_product_add_specifics_inner_food_details(0),
       list_createList(),
@@ -42,6 +43,7 @@ product_add_specifics_inner_t* instantiate_product_add_specifics_inner(int inclu
       list_createList(),
       1,
       56,
+      "0",
       NULL,
       list_createList(),
       NULL

@@ -73,7 +73,8 @@ static cart_coupon_add_t *cart_coupon_add_create_internal(
     char *action_condition_operator,
     char *action_condition_value,
     int include_tax,
-    char *store_id
+    char *store_id,
+    int free_cash_on_delivery
     ) {
     cart_coupon_add_t *cart_coupon_add_local_var = malloc(sizeof(cart_coupon_add_t));
     if (!cart_coupon_add_local_var) {
@@ -96,6 +97,7 @@ static cart_coupon_add_t *cart_coupon_add_create_internal(
     cart_coupon_add_local_var->action_condition_value = action_condition_value;
     cart_coupon_add_local_var->include_tax = include_tax;
     cart_coupon_add_local_var->store_id = store_id;
+    cart_coupon_add_local_var->free_cash_on_delivery = free_cash_on_delivery;
 
     cart_coupon_add_local_var->_library_owned = 1;
     return cart_coupon_add_local_var;
@@ -118,7 +120,8 @@ __attribute__((deprecated)) cart_coupon_add_t *cart_coupon_add_create(
     char *action_condition_operator,
     char *action_condition_value,
     int include_tax,
-    char *store_id
+    char *store_id,
+    int free_cash_on_delivery
     ) {
     return cart_coupon_add_create_internal (
         code,
@@ -137,7 +140,8 @@ __attribute__((deprecated)) cart_coupon_add_t *cart_coupon_add_create(
         action_condition_operator,
         action_condition_value,
         include_tax,
-        store_id
+        store_id,
+        free_cash_on_delivery
         );
 }
 
@@ -348,6 +352,14 @@ cJSON *cart_coupon_add_convertToJSON(cart_coupon_add_t *cart_coupon_add) {
     if(cart_coupon_add->store_id) {
     if(cJSON_AddStringToObject(item, "store_id", cart_coupon_add->store_id) == NULL) {
     goto fail; //String
+    }
+    }
+
+
+    // cart_coupon_add->free_cash_on_delivery
+    if(cart_coupon_add->free_cash_on_delivery) {
+    if(cJSON_AddBoolToObject(item, "free_cash_on_delivery", cart_coupon_add->free_cash_on_delivery) == NULL) {
+    goto fail; //Bool
     }
     }
 
@@ -601,6 +613,18 @@ cart_coupon_add_t *cart_coupon_add_parseFromJSON(cJSON *cart_coupon_addJSON){
     }
     }
 
+    // cart_coupon_add->free_cash_on_delivery
+    cJSON *free_cash_on_delivery = cJSON_GetObjectItemCaseSensitive(cart_coupon_addJSON, "free_cash_on_delivery");
+    if (cJSON_IsNull(free_cash_on_delivery)) {
+        free_cash_on_delivery = NULL;
+    }
+    if (free_cash_on_delivery) { 
+    if(!cJSON_IsBool(free_cash_on_delivery))
+    {
+    goto end; //Bool
+    }
+    }
+
 
     cart_coupon_add_local_var = cart_coupon_add_create_internal (
         strdup(code->valuestring),
@@ -619,7 +643,8 @@ cart_coupon_add_t *cart_coupon_add_parseFromJSON(cJSON *cart_coupon_addJSON){
         action_condition_operator && !cJSON_IsNull(action_condition_operator) ? strdup(action_condition_operator->valuestring) : NULL,
         action_condition_value && !cJSON_IsNull(action_condition_value) ? strdup(action_condition_value->valuestring) : NULL,
         include_tax ? include_tax->valueint : 0,
-        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL
+        store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
+        free_cash_on_delivery ? free_cash_on_delivery->valueint : 0
         );
 
     return cart_coupon_add_local_var;

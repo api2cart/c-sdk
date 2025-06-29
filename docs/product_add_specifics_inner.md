@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **values** | **list_t \*** |  | [optional] 
 **used_for_variations** | **int** |  | [optional] [default to false]
 **scale_id** | **int** |  | [optional] 
+**input_value** | **char \*** |  | [optional] 
 **food_details** | [**product_add_specifics_inner_food_details_t**](product_add_specifics_inner_food_details.md) \* |  | [optional] 
 **group_products_details** | [**list_t**](product_add_specifics_inner_group_products_details_inner.md) \* |  | [optional] 
 **booking_details** | [**product_add_specifics_inner_booking_details_t**](product_add_specifics_inner_booking_details.md) \* |  | [optional] 

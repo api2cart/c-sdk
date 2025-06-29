@@ -656,7 +656,7 @@ Name | Type | Description  | Notes
 ```c
 // order.shipment.list
 //
-// Get list of shipments by orders.
+// Get list of shipments per order.
 //
 model_response_order_shipment_list_t* OrderAPI_orderShipmentList(apiClient_t *apiClient, char *order_id, int *start, int *count, char *page_cursor, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *response_fields, char *params, char *exclude);
 ```

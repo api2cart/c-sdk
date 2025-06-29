@@ -136,6 +136,7 @@ product_add_t* instantiate_product_add(int include_optional) {
       list_createList(),
       "Days_3",
       "FixedPrice",
+      "Apparel",
       true,
        // false, not to have infinite recursion
       instantiate_product_add_seller_profiles(0),
@@ -257,6 +258,7 @@ product_add_t* instantiate_product_add(int include_optional) {
       list_createList(),
       "Days_3",
       "FixedPrice",
+      "Apparel",
       true,
       NULL,
       "public",

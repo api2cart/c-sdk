@@ -136,6 +136,7 @@ typedef struct product_add_t {
     list_t *logistic_info; //nonprimitive container
     char *listing_duration; // string
     char *listing_type; // string
+    char *category_type; // string
     int return_accepted; //boolean
     struct product_add_seller_profiles_t *seller_profiles; //model
     char *auction_confidentiality_level; // string
@@ -256,6 +257,7 @@ __attribute__((deprecated)) product_add_t *product_add_create(
     list_t *logistic_info,
     char *listing_duration,
     char *listing_type,
+    char *category_type,
     int return_accepted,
     product_add_seller_profiles_t *seller_profiles,
     char *auction_confidentiality_level,

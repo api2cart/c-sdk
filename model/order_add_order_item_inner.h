@@ -29,6 +29,7 @@ typedef struct order_add_order_item_inner_t {
     double order_item_weight; //numeric
     char *order_item_variant_id; // string
     double order_item_tax; //numeric
+    char *order_item_tax_class; // string
     int order_item_price_includes_tax; //boolean
     int order_item_parent; //numeric
     char *order_item_parent_option_name; // string
@@ -49,6 +50,7 @@ __attribute__((deprecated)) order_add_order_item_inner_t *order_add_order_item_i
     double order_item_weight,
     char *order_item_variant_id,
     double order_item_tax,
+    char *order_item_tax_class,
     int order_item_price_includes_tax,
     int order_item_parent,
     char *order_item_parent_option_name,

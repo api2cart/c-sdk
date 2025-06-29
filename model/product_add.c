@@ -109,6 +109,7 @@ static product_add_t *product_add_create_internal(
     list_t *logistic_info,
     char *listing_duration,
     char *listing_type,
+    char *category_type,
     int return_accepted,
     product_add_seller_profiles_t *seller_profiles,
     char *auction_confidentiality_level,
@@ -229,6 +230,7 @@ static product_add_t *product_add_create_internal(
     product_add_local_var->logistic_info = logistic_info;
     product_add_local_var->listing_duration = listing_duration;
     product_add_local_var->listing_type = listing_type;
+    product_add_local_var->category_type = category_type;
     product_add_local_var->return_accepted = return_accepted;
     product_add_local_var->seller_profiles = seller_profiles;
     product_add_local_var->auction_confidentiality_level = auction_confidentiality_level;
@@ -350,6 +352,7 @@ __attribute__((deprecated)) product_add_t *product_add_create(
     list_t *logistic_info,
     char *listing_duration,
     char *listing_type,
+    char *category_type,
     int return_accepted,
     product_add_seller_profiles_t *seller_profiles,
     char *auction_confidentiality_level,
@@ -467,6 +470,7 @@ __attribute__((deprecated)) product_add_t *product_add_create(
         logistic_info,
         listing_duration,
         listing_type,
+        category_type,
         return_accepted,
         seller_profiles,
         auction_confidentiality_level,
@@ -820,6 +824,10 @@ void product_add_free(product_add_t *product_add) {
     if (product_add->listing_type) {
         free(product_add->listing_type);
         product_add->listing_type = NULL;
+    }
+    if (product_add->category_type) {
+        free(product_add->category_type);
+        product_add->category_type = NULL;
     }
     if (product_add->seller_profiles) {
         product_add_seller_profiles_free(product_add->seller_profiles);
@@ -1805,6 +1813,14 @@ cJSON *product_add_convertToJSON(product_add_t *product_add) {
     // product_add->listing_type
     if(product_add->listing_type) {
     if(cJSON_AddStringToObject(item, "listing_type", product_add->listing_type) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_add->category_type
+    if(product_add->category_type) {
+    if(cJSON_AddStringToObject(item, "category_type", product_add->category_type) == NULL) {
     goto fail; //String
     }
     }
@@ -3333,6 +3349,18 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
     }
     }
 
+    // product_add->category_type
+    cJSON *category_type = cJSON_GetObjectItemCaseSensitive(product_addJSON, "category_type");
+    if (cJSON_IsNull(category_type)) {
+        category_type = NULL;
+    }
+    if (category_type) { 
+    if(!cJSON_IsString(category_type) && !cJSON_IsNull(category_type))
+    {
+    goto end; //String
+    }
+    }
+
     // product_add->return_accepted
     cJSON *return_accepted = cJSON_GetObjectItemCaseSensitive(product_addJSON, "return_accepted");
     if (cJSON_IsNull(return_accepted)) {
@@ -3573,6 +3601,7 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
         logistic_info ? logistic_infoList : NULL,
         listing_duration && !cJSON_IsNull(listing_duration) ? strdup(listing_duration->valuestring) : NULL,
         listing_type && !cJSON_IsNull(listing_type) ? strdup(listing_type->valuestring) : NULL,
+        category_type && !cJSON_IsNull(category_type) ? strdup(category_type->valuestring) : NULL,
         return_accepted ? return_accepted->valueint : 0,
         seller_profiles ? seller_profiles_local_nonprim : NULL,
         auction_confidentiality_level && !cJSON_IsNull(auction_confidentiality_level) ? strdup(auction_confidentiality_level->valuestring) : NULL,

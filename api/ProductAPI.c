@@ -2657,7 +2657,7 @@ end:
 // Count products in store.
 //
 product_count_200_response_t*
-ProductAPI_productCount(apiClient_t *apiClient, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, char *report_request_id, int *return_global, int *disable_report_cache, int *use_latest_api_version)
+ProductAPI_productCount(apiClient_t *apiClient, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *brand_name, list_t *product_attributes, char *status, char *type, char *visible, char *find_value, char *find_where, char *report_request_id, int *return_global, int *disable_report_cache, int *use_latest_api_version)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -2863,6 +2863,18 @@ ProductAPI_productCount(apiClient_t *apiClient, char *product_ids, char *since_i
         valueQuery_type = strdup((type));
         keyPairQuery_type = keyValuePair_create(keyQuery_type, valueQuery_type);
         list_addElement(localVarQueryParameters,keyPairQuery_type);
+    }
+
+    // query parameters
+    char *keyQuery_visible = NULL;
+    char * valueQuery_visible = NULL;
+    keyValuePair_t *keyPairQuery_visible = 0;
+    if (visible)
+    {
+        keyQuery_visible = strdup("visible");
+        valueQuery_visible = strdup((visible));
+        keyPairQuery_visible = keyValuePair_create(keyQuery_visible, valueQuery_visible);
+        list_addElement(localVarQueryParameters,keyPairQuery_visible);
     }
 
     // query parameters
@@ -3157,6 +3169,18 @@ ProductAPI_productCount(apiClient_t *apiClient, char *product_ids, char *since_i
     if(keyPairQuery_type){
         keyValuePair_free(keyPairQuery_type);
         keyPairQuery_type = NULL;
+    }
+    if(keyQuery_visible){
+        free(keyQuery_visible);
+        keyQuery_visible = NULL;
+    }
+    if(valueQuery_visible){
+        free(valueQuery_visible);
+        valueQuery_visible = NULL;
+    }
+    if(keyPairQuery_visible){
+        keyValuePair_free(keyPairQuery_visible);
+        keyPairQuery_visible = NULL;
     }
     if(keyQuery_find_value){
         free(keyQuery_find_value);
@@ -5084,7 +5108,7 @@ end:
 // Get list of products from your store. Returns 10 products by default.
 //
 model_response_product_list_t*
-ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, char *currency_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sku, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, int *return_global, char *params, char *response_fields, char *exclude, char *sort_by, char *sort_direction, char *report_request_id, int *disable_cache, int *disable_report_cache, int *use_latest_api_version)
+ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, char *currency_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sku, char *brand_name, list_t *product_attributes, char *status, char *type, char *visible, char *find_value, char *find_where, int *return_global, char *params, char *response_fields, char *exclude, char *sort_by, char *sort_direction, char *report_request_id, int *disable_cache, int *disable_report_cache, int *use_latest_api_version)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -5352,6 +5376,18 @@ ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *pag
         valueQuery_type = strdup((type));
         keyPairQuery_type = keyValuePair_create(keyQuery_type, valueQuery_type);
         list_addElement(localVarQueryParameters,keyPairQuery_type);
+    }
+
+    // query parameters
+    char *keyQuery_visible = NULL;
+    char * valueQuery_visible = NULL;
+    keyValuePair_t *keyPairQuery_visible = 0;
+    if (visible)
+    {
+        keyQuery_visible = strdup("visible");
+        valueQuery_visible = strdup((visible));
+        keyPairQuery_visible = keyValuePair_create(keyQuery_visible, valueQuery_visible);
+        list_addElement(localVarQueryParameters,keyPairQuery_visible);
     }
 
     // query parameters
@@ -5779,6 +5815,18 @@ ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *pag
     if(keyPairQuery_type){
         keyValuePair_free(keyPairQuery_type);
         keyPairQuery_type = NULL;
+    }
+    if(keyQuery_visible){
+        free(keyQuery_visible);
+        keyQuery_visible = NULL;
+    }
+    if(valueQuery_visible){
+        free(valueQuery_visible);
+        valueQuery_visible = NULL;
+    }
+    if(keyPairQuery_visible){
+        keyValuePair_free(keyPairQuery_visible);
+        keyPairQuery_visible = NULL;
     }
     if(keyQuery_find_value){
         free(keyQuery_find_value);

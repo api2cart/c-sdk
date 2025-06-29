@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
 //
 // Count products in store.
 //
-product_count_200_response_t* ProductAPI_productCount(apiClient_t *apiClient, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, char *report_request_id, int *return_global, int *disable_report_cache, int *use_latest_api_version);
+product_count_200_response_t* ProductAPI_productCount(apiClient_t *apiClient, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *brand_name, list_t *product_attributes, char *status, char *type, char *visible, char *find_value, char *find_where, char *report_request_id, int *return_global, int *disable_report_cache, int *use_latest_api_version);
 ```
 
 ### Parameters
@@ -441,6 +441,7 @@ Name | Type | Description  | Notes
 **product_attributes** | **[list_t](char.md) \*** | Defines product attributes | [optional] 
 **status** | **char \*** | Defines product&#39;s status | [optional] 
 **type** | **char \*** | Defines products&#39;s type | [optional] 
+**visible** | **char \*** | Filter items by visibility status | [optional] [default to &#39;everywhere&#39;]
 **find_value** | **char \*** | Entity search that is specified by some value | [optional] 
 **find_where** | **char \*** | Counts products that are searched specified by field | [optional] 
 **report_request_id** | **char \*** | Report request id | [optional] 
@@ -818,7 +819,7 @@ Name | Type | Description  | Notes
 //
 // Get list of products from your store. Returns 10 products by default.
 //
-model_response_product_list_t* ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, char *currency_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sku, char *brand_name, list_t *product_attributes, char *status, char *type, char *find_value, char *find_where, int *return_global, char *params, char *response_fields, char *exclude, char *sort_by, char *sort_direction, char *report_request_id, int *disable_cache, int *disable_report_cache, int *use_latest_api_version);
+model_response_product_list_t* ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, char *currency_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sku, char *brand_name, list_t *product_attributes, char *status, char *type, char *visible, char *find_value, char *find_where, int *return_global, char *params, char *response_fields, char *exclude, char *sort_by, char *sort_direction, char *report_request_id, int *disable_cache, int *disable_report_cache, int *use_latest_api_version);
 ```
 
 ### Parameters
@@ -846,6 +847,7 @@ Name | Type | Description  | Notes
 **product_attributes** | **[list_t](char.md) \*** | Defines product attributes | [optional] 
 **status** | **char \*** | Defines product&#39;s status | [optional] 
 **type** | **char \*** | Defines products&#39;s type | [optional] 
+**visible** | **char \*** | Filter items by visibility status | [optional] [default to &#39;everywhere&#39;]
 **find_value** | **char \*** | Entity search that is specified by some value | [optional] 
 **find_where** | **char \*** | Product search that is specified by field | [optional] 
 **return_global** | **int \*** | Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. | [optional] [default to false]

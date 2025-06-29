@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **order_item_weight** | **double** | Defines orders specified by order item weight | [optional] 
 **order_item_variant_id** | **char \*** | Ordered product variant. Where x is order item ID | [optional] 
 **order_item_tax** | **double** | Percentage of tax for product order | [optional] [default to 0]
+**order_item_tax_class** | **char \*** | Id of the tax class of product. | [optional] 
 **order_item_price_includes_tax** | **int** | Defines if item price includes tax | [optional] [default to false]
 **order_item_parent** | **int** | Index of the parent grouped/bundle product | [optional] 
 **order_item_parent_option_name** | **char \*** | Option name of the parent grouped/bundle product | [optional] 

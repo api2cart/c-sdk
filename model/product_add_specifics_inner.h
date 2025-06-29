@@ -27,6 +27,7 @@ typedef struct product_add_specifics_inner_t {
     list_t *values; //primitive container
     int used_for_variations; //boolean
     int scale_id; //numeric
+    char *input_value; // string
     struct product_add_specifics_inner_food_details_t *food_details; //model
     list_t *group_products_details; //nonprimitive container
     struct product_add_specifics_inner_booking_details_t *booking_details; //model
@@ -40,6 +41,7 @@ __attribute__((deprecated)) product_add_specifics_inner_t *product_add_specifics
     list_t *values,
     int used_for_variations,
     int scale_id,
+    char *input_value,
     product_add_specifics_inner_food_details_t *food_details,
     list_t *group_products_details,
     product_add_specifics_inner_booking_details_t *booking_details

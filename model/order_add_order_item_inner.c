@@ -14,6 +14,7 @@ static order_add_order_item_inner_t *order_add_order_item_inner_create_internal(
     double order_item_weight,
     char *order_item_variant_id,
     double order_item_tax,
+    char *order_item_tax_class,
     int order_item_price_includes_tax,
     int order_item_parent,
     char *order_item_parent_option_name,
@@ -34,6 +35,7 @@ static order_add_order_item_inner_t *order_add_order_item_inner_create_internal(
     order_add_order_item_inner_local_var->order_item_weight = order_item_weight;
     order_add_order_item_inner_local_var->order_item_variant_id = order_item_variant_id;
     order_add_order_item_inner_local_var->order_item_tax = order_item_tax;
+    order_add_order_item_inner_local_var->order_item_tax_class = order_item_tax_class;
     order_add_order_item_inner_local_var->order_item_price_includes_tax = order_item_price_includes_tax;
     order_add_order_item_inner_local_var->order_item_parent = order_item_parent;
     order_add_order_item_inner_local_var->order_item_parent_option_name = order_item_parent_option_name;
@@ -55,6 +57,7 @@ __attribute__((deprecated)) order_add_order_item_inner_t *order_add_order_item_i
     double order_item_weight,
     char *order_item_variant_id,
     double order_item_tax,
+    char *order_item_tax_class,
     int order_item_price_includes_tax,
     int order_item_parent,
     char *order_item_parent_option_name,
@@ -72,6 +75,7 @@ __attribute__((deprecated)) order_add_order_item_inner_t *order_add_order_item_i
         order_item_weight,
         order_item_variant_id,
         order_item_tax,
+        order_item_tax_class,
         order_item_price_includes_tax,
         order_item_parent,
         order_item_parent_option_name,
@@ -106,6 +110,10 @@ void order_add_order_item_inner_free(order_add_order_item_inner_t *order_add_ord
     if (order_add_order_item_inner->order_item_variant_id) {
         free(order_add_order_item_inner->order_item_variant_id);
         order_add_order_item_inner->order_item_variant_id = NULL;
+    }
+    if (order_add_order_item_inner->order_item_tax_class) {
+        free(order_add_order_item_inner->order_item_tax_class);
+        order_add_order_item_inner->order_item_tax_class = NULL;
     }
     if (order_add_order_item_inner->order_item_parent_option_name) {
         free(order_add_order_item_inner->order_item_parent_option_name);
@@ -195,6 +203,14 @@ cJSON *order_add_order_item_inner_convertToJSON(order_add_order_item_inner_t *or
     if(order_add_order_item_inner->order_item_tax) {
     if(cJSON_AddNumberToObject(item, "order_item_tax", order_add_order_item_inner->order_item_tax) == NULL) {
     goto fail; //Numeric
+    }
+    }
+
+
+    // order_add_order_item_inner->order_item_tax_class
+    if(order_add_order_item_inner->order_item_tax_class) {
+    if(cJSON_AddStringToObject(item, "order_item_tax_class", order_add_order_item_inner->order_item_tax_class) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -404,6 +420,18 @@ order_add_order_item_inner_t *order_add_order_item_inner_parseFromJSON(cJSON *or
     }
     }
 
+    // order_add_order_item_inner->order_item_tax_class
+    cJSON *order_item_tax_class = cJSON_GetObjectItemCaseSensitive(order_add_order_item_innerJSON, "order_item_tax_class");
+    if (cJSON_IsNull(order_item_tax_class)) {
+        order_item_tax_class = NULL;
+    }
+    if (order_item_tax_class) { 
+    if(!cJSON_IsString(order_item_tax_class) && !cJSON_IsNull(order_item_tax_class))
+    {
+    goto end; //String
+    }
+    }
+
     // order_add_order_item_inner->order_item_price_includes_tax
     cJSON *order_item_price_includes_tax = cJSON_GetObjectItemCaseSensitive(order_add_order_item_innerJSON, "order_item_price_includes_tax");
     if (cJSON_IsNull(order_item_price_includes_tax)) {
@@ -522,6 +550,7 @@ order_add_order_item_inner_t *order_add_order_item_inner_parseFromJSON(cJSON *or
         order_item_weight ? order_item_weight->valuedouble : 0,
         order_item_variant_id && !cJSON_IsNull(order_item_variant_id) ? strdup(order_item_variant_id->valuestring) : NULL,
         order_item_tax ? order_item_tax->valuedouble : 0,
+        order_item_tax_class && !cJSON_IsNull(order_item_tax_class) ? strdup(order_item_tax_class->valuestring) : NULL,
         order_item_price_includes_tax ? order_item_price_includes_tax->valueint : 0,
         order_item_parent ? order_item_parent->valuedouble : 0,
         order_item_parent_option_name && !cJSON_IsNull(order_item_parent_option_name) ? strdup(order_item_parent_option_name->valuestring) : NULL,
