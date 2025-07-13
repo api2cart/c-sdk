@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 //
 // Get number of customers from store.
 //
-customer_count_200_response_t* CustomerAPI_customerCount(apiClient_t *apiClient, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to);
+customer_count_200_response_t* CustomerAPI_customerCount(apiClient_t *apiClient, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, int *include_guests, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to);
 ```
 
 ### Parameters
@@ -137,6 +137,7 @@ Name | Type | Description  | Notes
 **group_id** | **char \*** | Customer group_id | [optional] 
 **store_id** | **char \*** | Counts customer specified by store id | [optional] 
 **avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
+**include_guests** | **int \*** | Indicates whether to include guest customers in the total count. | [optional] [default to false]
 **find_value** | **char \*** | Entity search that is specified by some value | [optional] 
 **find_where** | **char \*** | Counts customers that are searched specified by field | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
@@ -197,7 +198,7 @@ Name | Type | Description  | Notes
 //
 // Find customers in store.
 //
-customer_find_200_response_t* CustomerAPI_customerFind(apiClient_t *apiClient, char *find_value, char *find_where, char *find_params, char *store_id);
+customer_find_200_response_t* CustomerAPI_customerFind(apiClient_t *apiClient, char *find_value, char *find_where, char *find_params, char *store_id, int *include_guests);
 ```
 
 ### Parameters
@@ -208,6 +209,7 @@ Name | Type | Description  | Notes
 **find_where** | **char \*** | Entity search that is specified by the comma-separated unique fields | [optional] [default to &#39;email&#39;]
 **find_params** | **char \*** | Entity search that is specified by comma-separated parameters | [optional] [default to &#39;whole_words&#39;]
 **store_id** | **char \*** | Store Id | [optional] 
+**include_guests** | **int \*** | Indicates whether to search among guest customers when looking up a customer. | [optional] [default to false]
 
 ### Return type
 
@@ -339,7 +341,7 @@ Name | Type | Description  | Notes
 //
 // Get list of customers from store.
 //
-model_response_customer_list_t* CustomerAPI_customerList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude);
+model_response_customer_list_t* CustomerAPI_customerList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, int *include_guests, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -355,6 +357,7 @@ Name | Type | Description  | Notes
 **group_id** | **char \*** | Customer group_id | [optional] 
 **store_id** | **char \*** | Retrieves customers specified by store id | [optional] 
 **avail** | **int \*** | Defines category&#39;s visibility status | [optional] [default to true]
+**include_guests** | **int \*** | Indicates whether to include guest customers in the list results. | [optional] [default to false]
 **find_value** | **char \*** | Entity search that is specified by some value | [optional] 
 **find_where** | **char \*** | Customer search that is specified by field | [optional] 
 **created_from** | **char \*** | Retrieve entities from their creation date | [optional] 

@@ -36,6 +36,7 @@ typedef struct customer_t {
     struct a2_c_date_time_t *last_login; //model
     struct a2_c_date_time_t *birth_day; //model
     char *status; // string
+    int is_guest; //boolean
     int news_letter_subscription; //boolean
     list_t *consents; //nonprimitive container
     char *gender; // string
@@ -67,6 +68,7 @@ __attribute__((deprecated)) customer_t *customer_create(
     a2_c_date_time_t *last_login,
     a2_c_date_time_t *birth_day,
     char *status,
+    int is_guest,
     int news_letter_subscription,
     list_t *consents,
     char *gender,

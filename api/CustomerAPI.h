@@ -51,7 +51,7 @@ CustomerAPI_customerAttributeList(apiClient_t *apiClient, char *customer_id, int
 // Get number of customers from store.
 //
 customer_count_200_response_t*
-CustomerAPI_customerCount(apiClient_t *apiClient, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to);
+CustomerAPI_customerCount(apiClient_t *apiClient, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, int *include_guests, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to);
 
 
 // customer.delete
@@ -67,7 +67,7 @@ CustomerAPI_customerDelete(apiClient_t *apiClient, char *id);
 // Find customers in store.
 //
 customer_find_200_response_t*
-CustomerAPI_customerFind(apiClient_t *apiClient, char *find_value, char *find_where, char *find_params, char *store_id);
+CustomerAPI_customerFind(apiClient_t *apiClient, char *find_value, char *find_where, char *find_params, char *store_id, int *include_guests);
 
 
 // customer.group.add
@@ -99,7 +99,7 @@ CustomerAPI_customerInfo(apiClient_t *apiClient, char *id, char *store_id, char 
 // Get list of customers from store.
 //
 model_response_customer_list_t*
-CustomerAPI_customerList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude);
+CustomerAPI_customerList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, int *include_guests, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude);
 
 
 // customer.update

@@ -18,6 +18,7 @@ static customer_t *customer_create_internal(
     a2_c_date_time_t *last_login,
     a2_c_date_time_t *birth_day,
     char *status,
+    int is_guest,
     int news_letter_subscription,
     list_t *consents,
     char *gender,
@@ -49,6 +50,7 @@ static customer_t *customer_create_internal(
     customer_local_var->last_login = last_login;
     customer_local_var->birth_day = birth_day;
     customer_local_var->status = status;
+    customer_local_var->is_guest = is_guest;
     customer_local_var->news_letter_subscription = news_letter_subscription;
     customer_local_var->consents = consents;
     customer_local_var->gender = gender;
@@ -81,6 +83,7 @@ __attribute__((deprecated)) customer_t *customer_create(
     a2_c_date_time_t *last_login,
     a2_c_date_time_t *birth_day,
     char *status,
+    int is_guest,
     int news_letter_subscription,
     list_t *consents,
     char *gender,
@@ -109,6 +112,7 @@ __attribute__((deprecated)) customer_t *customer_create(
         last_login,
         birth_day,
         status,
+        is_guest,
         news_letter_subscription,
         consents,
         gender,
@@ -373,6 +377,14 @@ cJSON *customer_convertToJSON(customer_t *customer) {
     if(customer->status) {
     if(cJSON_AddStringToObject(item, "status", customer->status) == NULL) {
     goto fail; //String
+    }
+    }
+
+
+    // customer->is_guest
+    if(customer->is_guest) {
+    if(cJSON_AddBoolToObject(item, "is_guest", customer->is_guest) == NULL) {
+    goto fail; //Bool
     }
     }
 
@@ -711,6 +723,18 @@ customer_t *customer_parseFromJSON(cJSON *customerJSON){
     }
     }
 
+    // customer->is_guest
+    cJSON *is_guest = cJSON_GetObjectItemCaseSensitive(customerJSON, "is_guest");
+    if (cJSON_IsNull(is_guest)) {
+        is_guest = NULL;
+    }
+    if (is_guest) { 
+    if(!cJSON_IsBool(is_guest))
+    {
+    goto end; //Bool
+    }
+    }
+
     // customer->news_letter_subscription
     cJSON *news_letter_subscription = cJSON_GetObjectItemCaseSensitive(customerJSON, "news_letter_subscription");
     if (cJSON_IsNull(news_letter_subscription)) {
@@ -923,6 +947,7 @@ customer_t *customer_parseFromJSON(cJSON *customerJSON){
         last_login ? last_login_local_nonprim : NULL,
         birth_day ? birth_day_local_nonprim : NULL,
         status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
+        is_guest ? is_guest->valueint : 0,
         news_letter_subscription ? news_letter_subscription->valueint : 0,
         consents ? consentsList : NULL,
         gender && !cJSON_IsNull(gender) ? strdup(gender->valuestring) : NULL,

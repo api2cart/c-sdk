@@ -447,7 +447,7 @@ end:
 // Get number of customers from store.
 //
 customer_count_200_response_t*
-CustomerAPI_customerCount(apiClient_t *apiClient, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to)
+CustomerAPI_customerCount(apiClient_t *apiClient, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, int *include_guests, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -538,6 +538,19 @@ CustomerAPI_customerCount(apiClient_t *apiClient, char *ids, char *since_id, cha
         snprintf(valueQuery_avail, MAX_NUMBER_LENGTH, "%d", *avail);
         keyPairQuery_avail = keyValuePair_create(keyQuery_avail, valueQuery_avail);
         list_addElement(localVarQueryParameters,keyPairQuery_avail);
+    }
+
+    // query parameters
+    char *keyQuery_include_guests = NULL;
+    char * valueQuery_include_guests = NULL;
+    keyValuePair_t *keyPairQuery_include_guests = 0;
+    if (include_guests)
+    {
+        keyQuery_include_guests = strdup("include_guests");
+        valueQuery_include_guests = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_include_guests, MAX_NUMBER_LENGTH, "%d", *include_guests);
+        keyPairQuery_include_guests = keyValuePair_create(keyQuery_include_guests, valueQuery_include_guests);
+        list_addElement(localVarQueryParameters,keyPairQuery_include_guests);
     }
 
     // query parameters
@@ -722,6 +735,18 @@ CustomerAPI_customerCount(apiClient_t *apiClient, char *ids, char *since_id, cha
         keyValuePair_free(keyPairQuery_avail);
         keyPairQuery_avail = NULL;
     }
+    if(keyQuery_include_guests){
+        free(keyQuery_include_guests);
+        keyQuery_include_guests = NULL;
+    }
+    if(valueQuery_include_guests){
+        free(valueQuery_include_guests);
+        valueQuery_include_guests = NULL;
+    }
+    if(keyPairQuery_include_guests){
+        keyValuePair_free(keyPairQuery_include_guests);
+        keyPairQuery_include_guests = NULL;
+    }
     if(keyQuery_find_value){
         free(keyQuery_find_value);
         keyQuery_find_value = NULL;
@@ -900,7 +925,7 @@ end:
 // Find customers in store.
 //
 customer_find_200_response_t*
-CustomerAPI_customerFind(apiClient_t *apiClient, char *find_value, char *find_where, char *find_params, char *store_id)
+CustomerAPI_customerFind(apiClient_t *apiClient, char *find_value, char *find_where, char *find_params, char *store_id, int *include_guests)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -966,6 +991,19 @@ CustomerAPI_customerFind(apiClient_t *apiClient, char *find_value, char *find_wh
         valueQuery_store_id = strdup((store_id));
         keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
         list_addElement(localVarQueryParameters,keyPairQuery_store_id);
+    }
+
+    // query parameters
+    char *keyQuery_include_guests = NULL;
+    char * valueQuery_include_guests = NULL;
+    keyValuePair_t *keyPairQuery_include_guests = 0;
+    if (include_guests)
+    {
+        keyQuery_include_guests = strdup("include_guests");
+        valueQuery_include_guests = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_include_guests, MAX_NUMBER_LENGTH, "%d", *include_guests);
+        keyPairQuery_include_guests = keyValuePair_create(keyQuery_include_guests, valueQuery_include_guests);
+        list_addElement(localVarQueryParameters,keyPairQuery_include_guests);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -1053,6 +1091,18 @@ CustomerAPI_customerFind(apiClient_t *apiClient, char *find_value, char *find_wh
     if(keyPairQuery_store_id){
         keyValuePair_free(keyPairQuery_store_id);
         keyPairQuery_store_id = NULL;
+    }
+    if(keyQuery_include_guests){
+        free(keyQuery_include_guests);
+        keyQuery_include_guests = NULL;
+    }
+    if(valueQuery_include_guests){
+        free(valueQuery_include_guests);
+        valueQuery_include_guests = NULL;
+    }
+    if(keyPairQuery_include_guests){
+        keyValuePair_free(keyPairQuery_include_guests);
+        keyPairQuery_include_guests = NULL;
     }
     return elementToReturn;
 end:
@@ -1711,7 +1761,7 @@ end:
 // Get list of customers from store.
 //
 model_response_customer_list_t*
-CustomerAPI_customerList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude)
+CustomerAPI_customerList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *since_id, char *customer_list_id, char *group_id, char *store_id, int *avail, int *include_guests, char *find_value, char *find_where, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1840,6 +1890,19 @@ CustomerAPI_customerList(apiClient_t *apiClient, int *start, int *count, char *p
         snprintf(valueQuery_avail, MAX_NUMBER_LENGTH, "%d", *avail);
         keyPairQuery_avail = keyValuePair_create(keyQuery_avail, valueQuery_avail);
         list_addElement(localVarQueryParameters,keyPairQuery_avail);
+    }
+
+    // query parameters
+    char *keyQuery_include_guests = NULL;
+    char * valueQuery_include_guests = NULL;
+    keyValuePair_t *keyPairQuery_include_guests = 0;
+    if (include_guests)
+    {
+        keyQuery_include_guests = strdup("include_guests");
+        valueQuery_include_guests = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_include_guests, MAX_NUMBER_LENGTH, "%d", *include_guests);
+        keyPairQuery_include_guests = keyValuePair_create(keyQuery_include_guests, valueQuery_include_guests);
+        list_addElement(localVarQueryParameters,keyPairQuery_include_guests);
     }
 
     // query parameters
@@ -2119,6 +2182,18 @@ CustomerAPI_customerList(apiClient_t *apiClient, int *start, int *count, char *p
     if(keyPairQuery_avail){
         keyValuePair_free(keyPairQuery_avail);
         keyPairQuery_avail = NULL;
+    }
+    if(keyQuery_include_guests){
+        free(keyQuery_include_guests);
+        keyQuery_include_guests = NULL;
+    }
+    if(valueQuery_include_guests){
+        free(valueQuery_include_guests);
+        valueQuery_include_guests = NULL;
+    }
+    if(keyPairQuery_include_guests){
+        keyValuePair_free(keyPairQuery_include_guests);
+        keyPairQuery_include_guests = NULL;
     }
     if(keyQuery_find_value){
         free(keyQuery_find_value);

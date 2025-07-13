@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **last_login** | [**a2_c_date_time_t**](a2_c_date_time.md) \* |  | [optional] 
 **birth_day** | [**a2_c_date_time_t**](a2_c_date_time.md) \* |  | [optional] 
 **status** | **char \*** |  | [optional] 
+**is_guest** | **int** |  | [optional] 
 **news_letter_subscription** | **int** |  | [optional] 
 **consents** | [**list_t**](customer_consent.md) \* |  | [optional] 
 **gender** | **char \*** |  | [optional] 
