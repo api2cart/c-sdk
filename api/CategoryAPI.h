@@ -7,10 +7,10 @@
 #include "../include/binary.h"
 #include "../model/account_config_update_200_response.h"
 #include "../model/attribute_delete_200_response.h"
-#include "../model/cart_config_update_200_response.h"
 #include "../model/category_add_200_response.h"
 #include "../model/category_add_batch.h"
 #include "../model/category_add_batch_200_response.h"
+#include "../model/category_assign_200_response.h"
 #include "../model/category_count_200_response.h"
 #include "../model/category_delete_200_response.h"
 #include "../model/category_find_200_response.h"
@@ -42,7 +42,7 @@ CategoryAPI_categoryAddBatch(apiClient_t *apiClient, category_add_batch_t *categ
 //
 // Assign category to product
 //
-cart_config_update_200_response_t*
+category_assign_200_response_t*
 CategoryAPI_categoryAssign(apiClient_t *apiClient, char *category_id, char *product_id, char *store_id);
 
 
@@ -106,7 +106,7 @@ CategoryAPI_categoryList(apiClient_t *apiClient, int *start, int *count, char *p
 //
 // Unassign category to product
 //
-cart_config_update_200_response_t*
+category_assign_200_response_t*
 CategoryAPI_categoryUnassign(apiClient_t *apiClient, char *category_id, char *product_id, char *store_id);
 
 

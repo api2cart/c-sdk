@@ -1,6 +1,6 @@
 # CategoryAPI
 
-All URIs are relative to *https://api.api2cart.com/v1.1*
+All URIs are relative to *https://api.api2cart.local.com/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 //
 // Assign category to product
 //
-cart_config_update_200_response_t* CategoryAPI_categoryAssign(apiClient_t *apiClient, char *category_id, char *product_id, char *store_id);
+category_assign_200_response_t* CategoryAPI_categoryAssign(apiClient_t *apiClient, char *category_id, char *product_id, char *store_id);
 ```
 
 ### Parameters
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[cart_config_update_200_response_t](cart_config_update_200_response.md) *
+[category_assign_200_response_t](category_assign_200_response.md) *
 
 
 ### Authorization
@@ -403,7 +403,7 @@ Name | Type | Description  | Notes
 //
 // Unassign category to product
 //
-cart_config_update_200_response_t* CategoryAPI_categoryUnassign(apiClient_t *apiClient, char *category_id, char *product_id, char *store_id);
+category_assign_200_response_t* CategoryAPI_categoryUnassign(apiClient_t *apiClient, char *category_id, char *product_id, char *store_id);
 ```
 
 ### Parameters
@@ -416,7 +416,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[cart_config_update_200_response_t](cart_config_update_200_response.md) *
+[category_assign_200_response_t](category_assign_200_response.md) *
 
 
 ### Authorization

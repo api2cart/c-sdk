@@ -76,6 +76,10 @@ static account_cart_add_t *account_cart_add_create_internal(
     int bol_retailer_id,
     char *bigcartel_user_name,
     char *bigcartel_password,
+    char *bricklink_consumer_key,
+    char *bricklink_consumer_secret,
+    char *bricklink_token,
+    char *bricklink_token_secret,
     char *demandware_client_id,
     char *demandware_api_password,
     char *demandware_user_name,
@@ -242,6 +246,10 @@ static account_cart_add_t *account_cart_add_create_internal(
     account_cart_add_local_var->bol_retailer_id = bol_retailer_id;
     account_cart_add_local_var->bigcartel_user_name = bigcartel_user_name;
     account_cart_add_local_var->bigcartel_password = bigcartel_password;
+    account_cart_add_local_var->bricklink_consumer_key = bricklink_consumer_key;
+    account_cart_add_local_var->bricklink_consumer_secret = bricklink_consumer_secret;
+    account_cart_add_local_var->bricklink_token = bricklink_token;
+    account_cart_add_local_var->bricklink_token_secret = bricklink_token_secret;
     account_cart_add_local_var->demandware_client_id = demandware_client_id;
     account_cart_add_local_var->demandware_api_password = demandware_api_password;
     account_cart_add_local_var->demandware_user_name = demandware_user_name;
@@ -409,6 +417,10 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     int bol_retailer_id,
     char *bigcartel_user_name,
     char *bigcartel_password,
+    char *bricklink_consumer_key,
+    char *bricklink_consumer_secret,
+    char *bricklink_token,
+    char *bricklink_token_secret,
     char *demandware_client_id,
     char *demandware_api_password,
     char *demandware_user_name,
@@ -572,6 +584,10 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
         bol_retailer_id,
         bigcartel_user_name,
         bigcartel_password,
+        bricklink_consumer_key,
+        bricklink_consumer_secret,
+        bricklink_token,
+        bricklink_token_secret,
         demandware_client_id,
         demandware_api_password,
         demandware_user_name,
@@ -832,6 +848,22 @@ void account_cart_add_free(account_cart_add_t *account_cart_add) {
     if (account_cart_add->bigcartel_password) {
         free(account_cart_add->bigcartel_password);
         account_cart_add->bigcartel_password = NULL;
+    }
+    if (account_cart_add->bricklink_consumer_key) {
+        free(account_cart_add->bricklink_consumer_key);
+        account_cart_add->bricklink_consumer_key = NULL;
+    }
+    if (account_cart_add->bricklink_consumer_secret) {
+        free(account_cart_add->bricklink_consumer_secret);
+        account_cart_add->bricklink_consumer_secret = NULL;
+    }
+    if (account_cart_add->bricklink_token) {
+        free(account_cart_add->bricklink_token);
+        account_cart_add->bricklink_token = NULL;
+    }
+    if (account_cart_add->bricklink_token_secret) {
+        free(account_cart_add->bricklink_token_secret);
+        account_cart_add->bricklink_token_secret = NULL;
     }
     if (account_cart_add->demandware_client_id) {
         free(account_cart_add->demandware_client_id);
@@ -1614,6 +1646,42 @@ cJSON *account_cart_add_convertToJSON(account_cart_add_t *account_cart_add) {
         goto fail;
     }
     if(cJSON_AddStringToObject(item, "bigcartel_password", account_cart_add->bigcartel_password) == NULL) {
+    goto fail; //String
+    }
+
+
+    // account_cart_add->bricklink_consumer_key
+    if (!account_cart_add->bricklink_consumer_key) {
+        goto fail;
+    }
+    if(cJSON_AddStringToObject(item, "bricklink_consumer_key", account_cart_add->bricklink_consumer_key) == NULL) {
+    goto fail; //String
+    }
+
+
+    // account_cart_add->bricklink_consumer_secret
+    if (!account_cart_add->bricklink_consumer_secret) {
+        goto fail;
+    }
+    if(cJSON_AddStringToObject(item, "bricklink_consumer_secret", account_cart_add->bricklink_consumer_secret) == NULL) {
+    goto fail; //String
+    }
+
+
+    // account_cart_add->bricklink_token
+    if (!account_cart_add->bricklink_token) {
+        goto fail;
+    }
+    if(cJSON_AddStringToObject(item, "bricklink_token", account_cart_add->bricklink_token) == NULL) {
+    goto fail; //String
+    }
+
+
+    // account_cart_add->bricklink_token_secret
+    if (!account_cart_add->bricklink_token_secret) {
+        goto fail;
+    }
+    if(cJSON_AddStringToObject(item, "bricklink_token_secret", account_cart_add->bricklink_token_secret) == NULL) {
     goto fail; //String
     }
 
@@ -3088,6 +3156,66 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
 
     
     if(!cJSON_IsString(bigcartel_password))
+    {
+    goto end; //String
+    }
+
+    // account_cart_add->bricklink_consumer_key
+    cJSON *bricklink_consumer_key = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "bricklink_consumer_key");
+    if (cJSON_IsNull(bricklink_consumer_key)) {
+        bricklink_consumer_key = NULL;
+    }
+    if (!bricklink_consumer_key) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(bricklink_consumer_key))
+    {
+    goto end; //String
+    }
+
+    // account_cart_add->bricklink_consumer_secret
+    cJSON *bricklink_consumer_secret = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "bricklink_consumer_secret");
+    if (cJSON_IsNull(bricklink_consumer_secret)) {
+        bricklink_consumer_secret = NULL;
+    }
+    if (!bricklink_consumer_secret) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(bricklink_consumer_secret))
+    {
+    goto end; //String
+    }
+
+    // account_cart_add->bricklink_token
+    cJSON *bricklink_token = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "bricklink_token");
+    if (cJSON_IsNull(bricklink_token)) {
+        bricklink_token = NULL;
+    }
+    if (!bricklink_token) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(bricklink_token))
+    {
+    goto end; //String
+    }
+
+    // account_cart_add->bricklink_token_secret
+    cJSON *bricklink_token_secret = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "bricklink_token_secret");
+    if (cJSON_IsNull(bricklink_token_secret)) {
+        bricklink_token_secret = NULL;
+    }
+    if (!bricklink_token_secret) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(bricklink_token_secret))
     {
     goto end; //String
     }
@@ -4656,6 +4784,10 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
         bol_retailer_id ? bol_retailer_id->valuedouble : 0,
         strdup(bigcartel_user_name->valuestring),
         strdup(bigcartel_password->valuestring),
+        strdup(bricklink_consumer_key->valuestring),
+        strdup(bricklink_consumer_secret->valuestring),
+        strdup(bricklink_token->valuestring),
+        strdup(bricklink_token_secret->valuestring),
         demandware_client_id && !cJSON_IsNull(demandware_client_id) ? strdup(demandware_client_id->valuestring) : NULL,
         demandware_api_password && !cJSON_IsNull(demandware_api_password) ? strdup(demandware_api_password->valuestring) : NULL,
         demandware_user_name && !cJSON_IsNull(demandware_user_name) ? strdup(demandware_user_name->valuestring) : NULL,

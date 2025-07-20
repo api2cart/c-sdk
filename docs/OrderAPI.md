@@ -1,6 +1,6 @@
 # OrderAPI
 
-All URIs are relative to *https://api.api2cart.com/v1.1*
+All URIs are relative to *https://api.api2cart.local.com/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**OrderAPI_orderAdd**](OrderAPI.md#OrderAPI_orderAdd) | **POST** /order.add.json | order.add
 [**OrderAPI_orderCount**](OrderAPI.md#OrderAPI_orderCount) | **GET** /order.count.json | order.count
 [**OrderAPI_orderFinancialStatusList**](OrderAPI.md#OrderAPI_orderFinancialStatusList) | **GET** /order.financial_status.list.json | order.financial_status.list
-[**OrderAPI_orderFind**](OrderAPI.md#OrderAPI_orderFind) | **GET** /order.find.json | order.find
 [**OrderAPI_orderFulfillmentStatusList**](OrderAPI.md#OrderAPI_orderFulfillmentStatusList) | **GET** /order.fulfillment_status.list.json | order.fulfillment_status.list
 [**OrderAPI_orderInfo**](OrderAPI.md#OrderAPI_orderInfo) | **GET** /order.info.json | order.info
 [**OrderAPI_orderList**](OrderAPI.md#OrderAPI_orderList) | **GET** /order.list.json | order.list
@@ -171,48 +170,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [order_financial_status_list_200_response_t](order_financial_status_list_200_response.md) *
-
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **OrderAPI_orderFind**
-```c
-// order.find
-//
-// This method is deprecated and won't be supported in the future. Please use \"order.list\" instead.
-//
-order_find_200_response_t* OrderAPI_orderFind(apiClient_t *apiClient, int *start, int *count, char *customer_id, char *customer_email, char *order_status, char *financial_status, char *created_to, char *created_from, char *modified_to, char *modified_from, char *params, char *exclude);
-```
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**apiClient** | **apiClient_t \*** | context containing the client configuration |
-**start** | **int \*** | This parameter sets the number from which you want to get entities | [optional] [default to 0]
-**count** | **int \*** | This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
-**customer_id** | **char \*** | Retrieves orders specified by customer id | [optional] 
-**customer_email** | **char \*** | Retrieves orders specified by customer email | [optional] 
-**order_status** | **char \*** | Retrieves orders specified by order status | [optional] 
-**financial_status** | **char \*** | Retrieves orders specified by financial status | [optional] 
-**created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
-**created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
-**modified_to** | **char \*** | Retrieve entities to their modification date | [optional] 
-**modified_from** | **char \*** | Retrieve entities from their modification date | [optional] 
-**params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;order_id,customer,totals,address,items,bundles,status&#39;]
-**exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-
-### Return type
-
-[order_find_200_response_t](order_find_200_response.md) *
 
 
 ### Authorization

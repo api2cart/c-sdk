@@ -104,35 +104,21 @@ set(SRCS
     model/brand.c
     model/carrier.c
     model/cart.c
-    model/cart_bridge_200_response.c
-    model/cart_bridge_200_response_result.c
     model/cart_catalog_price_rules_count_200_response.c
     model/cart_catalog_price_rules_count_200_response_result.c
     model/cart_channel.c
-    model/cart_clear_cache_200_response.c
-    model/cart_clear_cache_200_response_result.c
-    model/cart_config_200_response.c
-    model/cart_config_200_response_result.c
-    model/cart_config_update.c
-    model/cart_config_update_200_response.c
     model/cart_coupon_add.c
     model/cart_coupon_add_200_response.c
     model/cart_coupon_add_200_response_result.c
     model/cart_coupon_count_200_response.c
     model/cart_coupon_count_200_response_result.c
-    model/cart_create.c
     model/cart_delete_200_response.c
     model/cart_delete_200_response_result.c
-    model/cart_disconnect_200_response.c
-    model/cart_disconnect_200_response_result.c
     model/cart_giftcard_add_200_response.c
     model/cart_giftcard_add_200_response_result.c
     model/cart_giftcard_count_200_response.c
     model/cart_giftcard_count_200_response_result.c
     model/cart_info_200_response.c
-    model/cart_list_200_response.c
-    model/cart_list_200_response_result.c
-    model/cart_list_200_response_result_supported_carts_inner.c
     model/cart_meta_data.c
     model/cart_methods_200_response.c
     model/cart_methods_200_response_result.c
@@ -158,6 +144,7 @@ set(SRCS
     model/category_add_batch_200_response_result.c
     model/category_add_batch_payload_inner.c
     model/category_add_batch_payload_inner_images_inner.c
+    model/category_assign_200_response.c
     model/category_count_200_response.c
     model/category_count_200_response_result.c
     model/category_delete_200_response.c
@@ -255,8 +242,6 @@ set(SRCS
     model/order_financial_status_list_200_response.c
     model/order_financial_status_list_200_response_result.c
     model/order_financial_status_list_200_response_result_order_financial_statuses_inner.c
-    model/order_find_200_response.c
-    model/order_find_200_response_result.c
     model/order_fulfillment_status_list_200_response.c
     model/order_fulfillment_status_list_200_response_result.c
     model/order_info_200_response.c
@@ -399,15 +384,11 @@ set(SRCS
     model/product_variant_add_batch.c
     model/product_variant_add_batch_payload_inner.c
     model/product_variant_add_batch_payload_inner_combination_inner.c
-    model/product_variant_count_200_response.c
-    model/product_variant_count_200_response_result.c
     model/product_variant_delete_batch.c
     model/product_variant_delete_batch_payload_inner.c
     model/product_variant_image_add.c
     model/product_variant_image_add_200_response.c
     model/product_variant_image_add_200_response_result.c
-    model/product_variant_list_200_response.c
-    model/product_variant_list_200_response_result.c
     model/product_variant_price_add.c
     model/product_variant_price_update.c
     model/product_variant_update.c
@@ -568,35 +549,21 @@ set(HDRS
     model/brand.h
     model/carrier.h
     model/cart.h
-    model/cart_bridge_200_response.h
-    model/cart_bridge_200_response_result.h
     model/cart_catalog_price_rules_count_200_response.h
     model/cart_catalog_price_rules_count_200_response_result.h
     model/cart_channel.h
-    model/cart_clear_cache_200_response.h
-    model/cart_clear_cache_200_response_result.h
-    model/cart_config_200_response.h
-    model/cart_config_200_response_result.h
-    model/cart_config_update.h
-    model/cart_config_update_200_response.h
     model/cart_coupon_add.h
     model/cart_coupon_add_200_response.h
     model/cart_coupon_add_200_response_result.h
     model/cart_coupon_count_200_response.h
     model/cart_coupon_count_200_response_result.h
-    model/cart_create.h
     model/cart_delete_200_response.h
     model/cart_delete_200_response_result.h
-    model/cart_disconnect_200_response.h
-    model/cart_disconnect_200_response_result.h
     model/cart_giftcard_add_200_response.h
     model/cart_giftcard_add_200_response_result.h
     model/cart_giftcard_count_200_response.h
     model/cart_giftcard_count_200_response_result.h
     model/cart_info_200_response.h
-    model/cart_list_200_response.h
-    model/cart_list_200_response_result.h
-    model/cart_list_200_response_result_supported_carts_inner.h
     model/cart_meta_data.h
     model/cart_methods_200_response.h
     model/cart_methods_200_response_result.h
@@ -622,6 +589,7 @@ set(HDRS
     model/category_add_batch_200_response_result.h
     model/category_add_batch_payload_inner.h
     model/category_add_batch_payload_inner_images_inner.h
+    model/category_assign_200_response.h
     model/category_count_200_response.h
     model/category_count_200_response_result.h
     model/category_delete_200_response.h
@@ -719,8 +687,6 @@ set(HDRS
     model/order_financial_status_list_200_response.h
     model/order_financial_status_list_200_response_result.h
     model/order_financial_status_list_200_response_result_order_financial_statuses_inner.h
-    model/order_find_200_response.h
-    model/order_find_200_response_result.h
     model/order_fulfillment_status_list_200_response.h
     model/order_fulfillment_status_list_200_response_result.h
     model/order_info_200_response.h
@@ -863,15 +829,11 @@ set(HDRS
     model/product_variant_add_batch.h
     model/product_variant_add_batch_payload_inner.h
     model/product_variant_add_batch_payload_inner_combination_inner.h
-    model/product_variant_count_200_response.h
-    model/product_variant_count_200_response_result.h
     model/product_variant_delete_batch.h
     model/product_variant_delete_batch_payload_inner.h
     model/product_variant_image_add.h
     model/product_variant_image_add_200_response.h
     model/product_variant_image_add_200_response_result.h
-    model/product_variant_list_200_response.h
-    model/product_variant_list_200_response_result.h
     model/product_variant_price_add.h
     model/product_variant_price_update.h
     model/product_variant_update.h

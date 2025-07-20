@@ -61,7 +61,7 @@ Note: You don't need to specify includes for models and include folder separatel
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.api2cart.com/v1.1*
+All URIs are relative to *https://api.api2cart.local.com/v1.1*
 
 Category | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -96,26 +96,19 @@ Category | Method | HTTP request | Description
 *BridgeAPI* | [**BridgeAPI_bridgeDelete**](docs/BridgeAPI.md#BridgeAPI_bridgeDelete) | **POST** /bridge.delete.json | bridge.delete
 *BridgeAPI* | [**BridgeAPI_bridgeDownload**](docs/BridgeAPI.md#BridgeAPI_bridgeDownload) | **GET** /bridge.download.file | bridge.download
 *BridgeAPI* | [**BridgeAPI_bridgeUpdate**](docs/BridgeAPI.md#BridgeAPI_bridgeUpdate) | **POST** /bridge.update.json | bridge.update
-*CartAPI* | [**CartAPI_cartBridge**](docs/CartAPI.md#CartAPI_cartBridge) | **GET** /cart.bridge.json | cart.bridge
 *CartAPI* | [**CartAPI_cartCatalogPriceRulesCount**](docs/CartAPI.md#CartAPI_cartCatalogPriceRulesCount) | **GET** /cart.catalog_price_rules.count.json | cart.catalog_price_rules.count
 *CartAPI* | [**CartAPI_cartCatalogPriceRulesList**](docs/CartAPI.md#CartAPI_cartCatalogPriceRulesList) | **GET** /cart.catalog_price_rules.list.json | cart.catalog_price_rules.list
-*CartAPI* | [**CartAPI_cartClearCache**](docs/CartAPI.md#CartAPI_cartClearCache) | **POST** /cart.clear_cache.json | cart.clear_cache
-*CartAPI* | [**CartAPI_cartConfig**](docs/CartAPI.md#CartAPI_cartConfig) | **GET** /cart.config.json | cart.config
-*CartAPI* | [**CartAPI_cartConfigUpdate**](docs/CartAPI.md#CartAPI_cartConfigUpdate) | **PUT** /cart.config.update.json | cart.config.update
 *CartAPI* | [**CartAPI_cartCouponAdd**](docs/CartAPI.md#CartAPI_cartCouponAdd) | **POST** /cart.coupon.add.json | cart.coupon.add
 *CartAPI* | [**CartAPI_cartCouponConditionAdd**](docs/CartAPI.md#CartAPI_cartCouponConditionAdd) | **POST** /cart.coupon.condition.add.json | cart.coupon.condition.add
 *CartAPI* | [**CartAPI_cartCouponCount**](docs/CartAPI.md#CartAPI_cartCouponCount) | **GET** /cart.coupon.count.json | cart.coupon.count
 *CartAPI* | [**CartAPI_cartCouponDelete**](docs/CartAPI.md#CartAPI_cartCouponDelete) | **DELETE** /cart.coupon.delete.json | cart.coupon.delete
 *CartAPI* | [**CartAPI_cartCouponList**](docs/CartAPI.md#CartAPI_cartCouponList) | **GET** /cart.coupon.list.json | cart.coupon.list
-*CartAPI* | [**CartAPI_cartCreate**](docs/CartAPI.md#CartAPI_cartCreate) | **POST** /cart.create.json | cart.create
 *CartAPI* | [**CartAPI_cartDelete**](docs/CartAPI.md#CartAPI_cartDelete) | **DELETE** /cart.delete.json | cart.delete
-*CartAPI* | [**CartAPI_cartDisconnect**](docs/CartAPI.md#CartAPI_cartDisconnect) | **GET** /cart.disconnect.json | cart.disconnect
 *CartAPI* | [**CartAPI_cartGiftcardAdd**](docs/CartAPI.md#CartAPI_cartGiftcardAdd) | **POST** /cart.giftcard.add.json | cart.giftcard.add
 *CartAPI* | [**CartAPI_cartGiftcardCount**](docs/CartAPI.md#CartAPI_cartGiftcardCount) | **GET** /cart.giftcard.count.json | cart.giftcard.count
 *CartAPI* | [**CartAPI_cartGiftcardDelete**](docs/CartAPI.md#CartAPI_cartGiftcardDelete) | **DELETE** /cart.giftcard.delete.json | cart.giftcard.delete
 *CartAPI* | [**CartAPI_cartGiftcardList**](docs/CartAPI.md#CartAPI_cartGiftcardList) | **GET** /cart.giftcard.list.json | cart.giftcard.list
 *CartAPI* | [**CartAPI_cartInfo**](docs/CartAPI.md#CartAPI_cartInfo) | **GET** /cart.info.json | cart.info
-*CartAPI* | [**CartAPI_cartList**](docs/CartAPI.md#CartAPI_cartList) | **GET** /cart.list.json | cart.list
 *CartAPI* | [**CartAPI_cartMetaDataList**](docs/CartAPI.md#CartAPI_cartMetaDataList) | **GET** /cart.meta_data.list.json | cart.meta_data.list
 *CartAPI* | [**CartAPI_cartMetaDataSet**](docs/CartAPI.md#CartAPI_cartMetaDataSet) | **POST** /cart.meta_data.set.json | cart.meta_data.set
 *CartAPI* | [**CartAPI_cartMetaDataUnset**](docs/CartAPI.md#CartAPI_cartMetaDataUnset) | **DELETE** /cart.meta_data.unset.json | cart.meta_data.unset
@@ -155,7 +148,6 @@ Category | Method | HTTP request | Description
 *OrderAPI* | [**OrderAPI_orderAdd**](docs/OrderAPI.md#OrderAPI_orderAdd) | **POST** /order.add.json | order.add
 *OrderAPI* | [**OrderAPI_orderCount**](docs/OrderAPI.md#OrderAPI_orderCount) | **GET** /order.count.json | order.count
 *OrderAPI* | [**OrderAPI_orderFinancialStatusList**](docs/OrderAPI.md#OrderAPI_orderFinancialStatusList) | **GET** /order.financial_status.list.json | order.financial_status.list
-*OrderAPI* | [**OrderAPI_orderFind**](docs/OrderAPI.md#OrderAPI_orderFind) | **GET** /order.find.json | order.find
 *OrderAPI* | [**OrderAPI_orderFulfillmentStatusList**](docs/OrderAPI.md#OrderAPI_orderFulfillmentStatusList) | **GET** /order.fulfillment_status.list.json | order.fulfillment_status.list
 *OrderAPI* | [**OrderAPI_orderInfo**](docs/OrderAPI.md#OrderAPI_orderInfo) | **GET** /order.info.json | order.info
 *OrderAPI* | [**OrderAPI_orderList**](docs/OrderAPI.md#OrderAPI_orderList) | **GET** /order.list.json | order.list
@@ -188,7 +180,6 @@ Category | Method | HTTP request | Description
 *ProductAPI* | [**ProductAPI_productCurrencyList**](docs/ProductAPI.md#ProductAPI_productCurrencyList) | **GET** /product.currency.list.json | product.currency.list
 *ProductAPI* | [**ProductAPI_productDelete**](docs/ProductAPI.md#ProductAPI_productDelete) | **DELETE** /product.delete.json | product.delete
 *ProductAPI* | [**ProductAPI_productDeleteBatch**](docs/ProductAPI.md#ProductAPI_productDeleteBatch) | **POST** /product.delete.batch.json | product.delete.batch
-*ProductAPI* | [**ProductAPI_productFields**](docs/ProductAPI.md#ProductAPI_productFields) | **GET** /product.fields.json | product.fields
 *ProductAPI* | [**ProductAPI_productFind**](docs/ProductAPI.md#ProductAPI_productFind) | **GET** /product.find.json | product.find
 *ProductAPI* | [**ProductAPI_productImageAdd**](docs/ProductAPI.md#ProductAPI_productImageAdd) | **POST** /product.image.add.json | product.image.add
 *ProductAPI* | [**ProductAPI_productImageDelete**](docs/ProductAPI.md#ProductAPI_productImageDelete) | **DELETE** /product.image.delete.json | product.image.delete
@@ -214,13 +205,10 @@ Category | Method | HTTP request | Description
 *ProductAPI* | [**ProductAPI_productUpdateBatch**](docs/ProductAPI.md#ProductAPI_productUpdateBatch) | **POST** /product.update.batch.json | product.update.batch
 *ProductAPI* | [**ProductAPI_productVariantAdd**](docs/ProductAPI.md#ProductAPI_productVariantAdd) | **POST** /product.variant.add.json | product.variant.add
 *ProductAPI* | [**ProductAPI_productVariantAddBatch**](docs/ProductAPI.md#ProductAPI_productVariantAddBatch) | **POST** /product.variant.add.batch.json | product.variant.add.batch
-*ProductAPI* | [**ProductAPI_productVariantCount**](docs/ProductAPI.md#ProductAPI_productVariantCount) | **GET** /product.variant.count.json | product.variant.count
 *ProductAPI* | [**ProductAPI_productVariantDelete**](docs/ProductAPI.md#ProductAPI_productVariantDelete) | **DELETE** /product.variant.delete.json | product.variant.delete
 *ProductAPI* | [**ProductAPI_productVariantDeleteBatch**](docs/ProductAPI.md#ProductAPI_productVariantDeleteBatch) | **POST** /product.variant.delete.batch.json | product.variant.delete.batch
 *ProductAPI* | [**ProductAPI_productVariantImageAdd**](docs/ProductAPI.md#ProductAPI_productVariantImageAdd) | **POST** /product.variant.image.add.json | product.variant.image.add
 *ProductAPI* | [**ProductAPI_productVariantImageDelete**](docs/ProductAPI.md#ProductAPI_productVariantImageDelete) | **DELETE** /product.variant.image.delete.json | product.variant.image.delete
-*ProductAPI* | [**ProductAPI_productVariantInfo**](docs/ProductAPI.md#ProductAPI_productVariantInfo) | **GET** /product.variant.info.json | product.variant.info
-*ProductAPI* | [**ProductAPI_productVariantList**](docs/ProductAPI.md#ProductAPI_productVariantList) | **GET** /product.variant.list.json | product.variant.list
 *ProductAPI* | [**ProductAPI_productVariantPriceAdd**](docs/ProductAPI.md#ProductAPI_productVariantPriceAdd) | **POST** /product.variant.price.add.json | product.variant.price.add
 *ProductAPI* | [**ProductAPI_productVariantPriceDelete**](docs/ProductAPI.md#ProductAPI_productVariantPriceDelete) | **DELETE** /product.variant.price.delete.json | product.variant.price.delete
 *ProductAPI* | [**ProductAPI_productVariantPriceUpdate**](docs/ProductAPI.md#ProductAPI_productVariantPriceUpdate) | **PUT** /product.variant.price.update.json | product.variant.price.update
@@ -301,35 +289,21 @@ Category | Method | HTTP request | Description
  - [brand_t](docs/brand.md)
  - [carrier_t](docs/carrier.md)
  - [cart_t](docs/cart.md)
- - [cart_bridge_200_response_t](docs/cart_bridge_200_response.md)
- - [cart_bridge_200_response_result_t](docs/cart_bridge_200_response_result.md)
  - [cart_catalog_price_rules_count_200_response_t](docs/cart_catalog_price_rules_count_200_response.md)
  - [cart_catalog_price_rules_count_200_response_result_t](docs/cart_catalog_price_rules_count_200_response_result.md)
  - [cart_channel_t](docs/cart_channel.md)
- - [cart_clear_cache_200_response_t](docs/cart_clear_cache_200_response.md)
- - [cart_clear_cache_200_response_result_t](docs/cart_clear_cache_200_response_result.md)
- - [cart_config_200_response_t](docs/cart_config_200_response.md)
- - [cart_config_200_response_result_t](docs/cart_config_200_response_result.md)
- - [cart_config_update_t](docs/cart_config_update.md)
- - [cart_config_update_200_response_t](docs/cart_config_update_200_response.md)
  - [cart_coupon_add_t](docs/cart_coupon_add.md)
  - [cart_coupon_add_200_response_t](docs/cart_coupon_add_200_response.md)
  - [cart_coupon_add_200_response_result_t](docs/cart_coupon_add_200_response_result.md)
  - [cart_coupon_count_200_response_t](docs/cart_coupon_count_200_response.md)
  - [cart_coupon_count_200_response_result_t](docs/cart_coupon_count_200_response_result.md)
- - [cart_create_t](docs/cart_create.md)
  - [cart_delete_200_response_t](docs/cart_delete_200_response.md)
  - [cart_delete_200_response_result_t](docs/cart_delete_200_response_result.md)
- - [cart_disconnect_200_response_t](docs/cart_disconnect_200_response.md)
- - [cart_disconnect_200_response_result_t](docs/cart_disconnect_200_response_result.md)
  - [cart_giftcard_add_200_response_t](docs/cart_giftcard_add_200_response.md)
  - [cart_giftcard_add_200_response_result_t](docs/cart_giftcard_add_200_response_result.md)
  - [cart_giftcard_count_200_response_t](docs/cart_giftcard_count_200_response.md)
  - [cart_giftcard_count_200_response_result_t](docs/cart_giftcard_count_200_response_result.md)
  - [cart_info_200_response_t](docs/cart_info_200_response.md)
- - [cart_list_200_response_t](docs/cart_list_200_response.md)
- - [cart_list_200_response_result_t](docs/cart_list_200_response_result.md)
- - [cart_list_200_response_result_supported_carts_inner_t](docs/cart_list_200_response_result_supported_carts_inner.md)
  - [cart_meta_data_t](docs/cart_meta_data.md)
  - [cart_methods_200_response_t](docs/cart_methods_200_response.md)
  - [cart_methods_200_response_result_t](docs/cart_methods_200_response_result.md)
@@ -355,6 +329,7 @@ Category | Method | HTTP request | Description
  - [category_add_batch_200_response_result_t](docs/category_add_batch_200_response_result.md)
  - [category_add_batch_payload_inner_t](docs/category_add_batch_payload_inner.md)
  - [category_add_batch_payload_inner_images_inner_t](docs/category_add_batch_payload_inner_images_inner.md)
+ - [category_assign_200_response_t](docs/category_assign_200_response.md)
  - [category_count_200_response_t](docs/category_count_200_response.md)
  - [category_count_200_response_result_t](docs/category_count_200_response_result.md)
  - [category_delete_200_response_t](docs/category_delete_200_response.md)
@@ -452,8 +427,6 @@ Category | Method | HTTP request | Description
  - [order_financial_status_list_200_response_t](docs/order_financial_status_list_200_response.md)
  - [order_financial_status_list_200_response_result_t](docs/order_financial_status_list_200_response_result.md)
  - [order_financial_status_list_200_response_result_order_financial_statuses_inner_t](docs/order_financial_status_list_200_response_result_order_financial_statuses_inner.md)
- - [order_find_200_response_t](docs/order_find_200_response.md)
- - [order_find_200_response_result_t](docs/order_find_200_response_result.md)
  - [order_fulfillment_status_list_200_response_t](docs/order_fulfillment_status_list_200_response.md)
  - [order_fulfillment_status_list_200_response_result_t](docs/order_fulfillment_status_list_200_response_result.md)
  - [order_info_200_response_t](docs/order_info_200_response.md)
@@ -596,15 +569,11 @@ Category | Method | HTTP request | Description
  - [product_variant_add_batch_t](docs/product_variant_add_batch.md)
  - [product_variant_add_batch_payload_inner_t](docs/product_variant_add_batch_payload_inner.md)
  - [product_variant_add_batch_payload_inner_combination_inner_t](docs/product_variant_add_batch_payload_inner_combination_inner.md)
- - [product_variant_count_200_response_t](docs/product_variant_count_200_response.md)
- - [product_variant_count_200_response_result_t](docs/product_variant_count_200_response_result.md)
  - [product_variant_delete_batch_t](docs/product_variant_delete_batch.md)
  - [product_variant_delete_batch_payload_inner_t](docs/product_variant_delete_batch_payload_inner.md)
  - [product_variant_image_add_t](docs/product_variant_image_add.md)
  - [product_variant_image_add_200_response_t](docs/product_variant_image_add_200_response.md)
  - [product_variant_image_add_200_response_result_t](docs/product_variant_image_add_200_response_result.md)
- - [product_variant_list_200_response_t](docs/product_variant_list_200_response.md)
- - [product_variant_list_200_response_result_t](docs/product_variant_list_200_response_result.md)
  - [product_variant_price_add_t](docs/product_variant_price_add.md)
  - [product_variant_price_update_t](docs/product_variant_price_update.md)
  - [product_variant_update_t](docs/product_variant_update.md)

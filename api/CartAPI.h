@@ -5,26 +5,17 @@
 #include "../external/cJSON.h"
 #include "../include/keyValuePair.h"
 #include "../include/binary.h"
-#include "../model/account_cart_add_200_response.h"
 #include "../model/attribute_add_200_response.h"
 #include "../model/attribute_delete_200_response.h"
 #include "../model/basket_live_shipping_service_delete_200_response.h"
-#include "../model/cart_bridge_200_response.h"
 #include "../model/cart_catalog_price_rules_count_200_response.h"
-#include "../model/cart_clear_cache_200_response.h"
-#include "../model/cart_config_200_response.h"
-#include "../model/cart_config_update.h"
-#include "../model/cart_config_update_200_response.h"
 #include "../model/cart_coupon_add.h"
 #include "../model/cart_coupon_add_200_response.h"
 #include "../model/cart_coupon_count_200_response.h"
-#include "../model/cart_create.h"
 #include "../model/cart_delete_200_response.h"
-#include "../model/cart_disconnect_200_response.h"
 #include "../model/cart_giftcard_add_200_response.h"
 #include "../model/cart_giftcard_count_200_response.h"
 #include "../model/cart_info_200_response.h"
-#include "../model/cart_list_200_response.h"
 #include "../model/cart_methods_200_response.h"
 #include "../model/cart_plugin_list_200_response.h"
 #include "../model/cart_script_add_200_response.h"
@@ -43,14 +34,6 @@ typedef enum  { api2cart_openapi_cartCouponConditionAdd_ENTITY_NULL = 0, api2car
 typedef enum  { api2cart_openapi_cartCouponConditionAdd_KEY_NULL = 0, api2cart_openapi_cartCouponConditionAdd_KEY_total, api2cart_openapi_cartCouponConditionAdd_KEY_subtotal, api2cart_openapi_cartCouponConditionAdd_KEY_shipping_total, api2cart_openapi_cartCouponConditionAdd_KEY_total_quantity, api2cart_openapi_cartCouponConditionAdd_KEY_total_weight, api2cart_openapi_cartCouponConditionAdd_KEY_country, api2cart_openapi_cartCouponConditionAdd_KEY_product_id, api2cart_openapi_cartCouponConditionAdd_KEY_variant_id, api2cart_openapi_cartCouponConditionAdd_KEY_category_id, api2cart_openapi_cartCouponConditionAdd_KEY_customer_id, api2cart_openapi_cartCouponConditionAdd_KEY_item_price, api2cart_openapi_cartCouponConditionAdd_KEY_item_total_price, api2cart_openapi_cartCouponConditionAdd_KEY_item_quantity, api2cart_openapi_cartCouponConditionAdd_KEY_carrier_id } api2cart_openapi_cartCouponConditionAdd_key_e;
 
 
-// cart.bridge
-//
-// Get bridge key and store key
-//
-cart_bridge_200_response_t*
-CartAPI_cartBridge(apiClient_t *apiClient);
-
-
 // cart.catalog_price_rules.count
 //
 // Get count of cart catalog price rules discounts.
@@ -65,30 +48,6 @@ CartAPI_cartCatalogPriceRulesCount(apiClient_t *apiClient);
 //
 model_response_cart_catalog_price_rules_list_t*
 CartAPI_cartCatalogPriceRulesList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *ids, char *response_fields, char *params, char *exclude);
-
-
-// cart.clear_cache
-//
-// Clear cache on store.
-//
-cart_clear_cache_200_response_t*
-CartAPI_cartClearCache(apiClient_t *apiClient, char *cache_type);
-
-
-// cart.config
-//
-// Get list of cart configs
-//
-cart_config_200_response_t*
-CartAPI_cartConfig(apiClient_t *apiClient, char *params, char *exclude);
-
-
-// cart.config.update
-//
-// Use this API method to update custom data in client database.
-//
-cart_config_update_200_response_t*
-CartAPI_cartConfigUpdate(apiClient_t *apiClient, cart_config_update_t *cart_config_update);
 
 
 // cart.coupon.add
@@ -131,28 +90,12 @@ model_response_cart_coupon_list_t*
 CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *coupons_ids, char *store_id, char *lang_id, int *avail, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, char *response_fields, char *params, char *exclude);
 
 
-// cart.create
-//
-// Add store to the account
-//
-account_cart_add_200_response_t*
-CartAPI_cartCreate(apiClient_t *apiClient, cart_create_t *cart_create);
-
-
 // cart.delete
 //
 // Remove store from API2Cart
 //
 cart_delete_200_response_t*
 CartAPI_cartDelete(apiClient_t *apiClient, int *delete_bridge);
-
-
-// cart.disconnect
-//
-// Disconnect with the store and clear store session data.
-//
-cart_disconnect_200_response_t*
-CartAPI_cartDisconnect(apiClient_t *apiClient, int *delete_bridge);
 
 
 // cart.giftcard.add
@@ -193,14 +136,6 @@ CartAPI_cartGiftcardList(apiClient_t *apiClient, int *start, int *count, char *p
 //
 cart_info_200_response_t*
 CartAPI_cartInfo(apiClient_t *apiClient, char *store_id, char *response_fields, char *params, char *exclude);
-
-
-// cart.list
-//
-// Get list of supported carts
-//
-cart_list_200_response_t*
-CartAPI_cartList(apiClient_t *apiClient);
 
 
 // cart.meta_data.list

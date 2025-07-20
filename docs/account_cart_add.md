@@ -39,6 +39,10 @@ Name | Type | Description | Notes
 **bol_retailer_id** | **int** | Bol Retailer ID | [optional] 
 **bigcartel_user_name** | **char \*** | Subdomain of store | 
 **bigcartel_password** | **char \*** | BigCartel account password | 
+**bricklink_consumer_key** | **char \*** | Bricklink Consumer Key | 
+**bricklink_consumer_secret** | **char \*** | Bricklink Consumer Secret | 
+**bricklink_token** | **char \*** | Bricklink Access Token | 
+**bricklink_token_secret** | **char \*** | Bricklink Access Token Secret | 
 **demandware_client_id** | **char \*** | Demandware client id | [optional] 
 **demandware_api_password** | **char \*** | Demandware api password | [optional] 
 **demandware_user_name** | **char \*** | Demandware user name | [optional] 

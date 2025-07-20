@@ -72,6 +72,10 @@ typedef struct account_cart_add_t {
     int bol_retailer_id; //numeric
     char *bigcartel_user_name; // string
     char *bigcartel_password; // string
+    char *bricklink_consumer_key; // string
+    char *bricklink_consumer_secret; // string
+    char *bricklink_token; // string
+    char *bricklink_token_secret; // string
     char *demandware_client_id; // string
     char *demandware_api_password; // string
     char *demandware_user_name; // string
@@ -238,6 +242,10 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     int bol_retailer_id,
     char *bigcartel_user_name,
     char *bigcartel_password,
+    char *bricklink_consumer_key,
+    char *bricklink_consumer_secret,
+    char *bricklink_token,
+    char *bricklink_token_secret,
     char *demandware_client_id,
     char *demandware_api_password,
     char *demandware_user_name,

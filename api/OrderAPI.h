@@ -18,7 +18,6 @@
 #include "../model/order_add_200_response.h"
 #include "../model/order_count_200_response.h"
 #include "../model/order_financial_status_list_200_response.h"
-#include "../model/order_find_200_response.h"
 #include "../model/order_fulfillment_status_list_200_response.h"
 #include "../model/order_info_200_response.h"
 #include "../model/order_preestimate_shipping_list.h"
@@ -67,14 +66,6 @@ OrderAPI_orderCount(apiClient_t *apiClient, char *order_ids, char *ids, char *cu
 //
 order_financial_status_list_200_response_t*
 OrderAPI_orderFinancialStatusList(apiClient_t *apiClient);
-
-
-// order.find
-//
-// This method is deprecated and won't be supported in the future. Please use \"order.list\" instead.
-//
-order_find_200_response_t*
-OrderAPI_orderFind(apiClient_t *apiClient, int *start, int *count, char *customer_id, char *customer_email, char *order_status, char *financial_status, char *created_to, char *created_from, char *modified_to, char *modified_from, char *params, char *exclude);
 
 
 // order.fulfillment_status.list

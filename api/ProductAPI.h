@@ -8,7 +8,6 @@
 #include "../model/account_config_update_200_response.h"
 #include "../model/attribute_delete_200_response.h"
 #include "../model/attribute_value_delete_200_response.h"
-#include "../model/cart_config_update_200_response.h"
 #include "../model/cart_validate_200_response.h"
 #include "../model/category_add_batch_200_response.h"
 #include "../model/customer_delete_200_response.h"
@@ -49,11 +48,9 @@
 #include "../model/product_variant_add.h"
 #include "../model/product_variant_add_200_response.h"
 #include "../model/product_variant_add_batch.h"
-#include "../model/product_variant_count_200_response.h"
 #include "../model/product_variant_delete_batch.h"
 #include "../model/product_variant_image_add.h"
 #include "../model/product_variant_image_add_200_response.h"
-#include "../model/product_variant_list_200_response.h"
 #include "../model/product_variant_price_add.h"
 #include "../model/product_variant_price_update.h"
 #include "../model/product_variant_update.h"
@@ -170,14 +167,6 @@ ProductAPI_productDelete(apiClient_t *apiClient, char *id, char *store_id);
 //
 category_add_batch_200_response_t*
 ProductAPI_productDeleteBatch(apiClient_t *apiClient, product_delete_batch_t *product_delete_batch);
-
-
-// product.fields
-//
-// Retrieve all available fields for product item in store.
-//
-cart_config_update_200_response_t*
-ProductAPI_productFields(apiClient_t *apiClient);
 
 
 // product.find
@@ -380,14 +369,6 @@ category_add_batch_200_response_t*
 ProductAPI_productVariantAddBatch(apiClient_t *apiClient, product_variant_add_batch_t *product_variant_add_batch);
 
 
-// product.variant.count
-//
-// Get count variants.
-//
-product_variant_count_200_response_t*
-ProductAPI_productVariantCount(apiClient_t *apiClient, char *product_id, char *category_id, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to);
-
-
 // product.variant.delete
 //
 // Delete variant.
@@ -418,22 +399,6 @@ ProductAPI_productVariantImageAdd(apiClient_t *apiClient, product_variant_image_
 //
 attribute_delete_200_response_t*
 ProductAPI_productVariantImageDelete(apiClient_t *apiClient, char *product_id, char *product_variant_id, char *id, char *store_id);
-
-
-// product.variant.info
-//
-// Get variant info. This method is deprecated, and its development is stopped. Please use \"product.child_item.info\" instead.
-//
-product_info_200_response_t*
-ProductAPI_productVariantInfo(apiClient_t *apiClient, char *id, char *store_id, char *params, char *exclude);
-
-
-// product.variant.list
-//
-// Get a list of variants. This method is deprecated, and its development is stopped. Please use \"product.child_item.list\" instead.
-//
-product_variant_list_200_response_t*
-ProductAPI_productVariantList(apiClient_t *apiClient, int *start, int *count, char *product_id, char *category_id, char *store_id, char *created_from, char *created_to, char *modified_from, char *modified_to, char *params, char *exclude);
 
 
 // product.variant.price.add

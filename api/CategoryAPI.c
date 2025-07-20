@@ -581,7 +581,7 @@ end:
 //
 // Assign category to product
 //
-cart_config_update_200_response_t*
+category_assign_200_response_t*
 CategoryAPI_categoryAssign(apiClient_t *apiClient, char *category_id, char *product_id, char *store_id)
 {
     list_t    *localVarQueryParameters = list_createList();
@@ -654,10 +654,10 @@ CategoryAPI_categoryAssign(apiClient_t *apiClient, char *category_id, char *prod
     //    printf("%s\n","successful operation");
     //}
     //nonprimitive not container
-    cart_config_update_200_response_t *elementToReturn = NULL;
+    category_assign_200_response_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *CategoryAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = cart_config_update_200_response_parseFromJSON(CategoryAPIlocalVarJSON);
+        elementToReturn = category_assign_200_response_parseFromJSON(CategoryAPIlocalVarJSON);
         cJSON_Delete(CategoryAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -2659,7 +2659,7 @@ end:
 //
 // Unassign category to product
 //
-cart_config_update_200_response_t*
+category_assign_200_response_t*
 CategoryAPI_categoryUnassign(apiClient_t *apiClient, char *category_id, char *product_id, char *store_id)
 {
     list_t    *localVarQueryParameters = list_createList();
@@ -2732,10 +2732,10 @@ CategoryAPI_categoryUnassign(apiClient_t *apiClient, char *category_id, char *pr
     //    printf("%s\n","successful operation");
     //}
     //nonprimitive not container
-    cart_config_update_200_response_t *elementToReturn = NULL;
+    category_assign_200_response_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *CategoryAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = cart_config_update_200_response_parseFromJSON(CategoryAPIlocalVarJSON);
+        elementToReturn = category_assign_200_response_parseFromJSON(CategoryAPIlocalVarJSON);
         cJSON_Delete(CategoryAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
