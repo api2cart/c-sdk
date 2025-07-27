@@ -33,6 +33,7 @@ typedef struct product_variant_update_t {
     char *visible; // string
     char *status; // string
     char *backorder_status; // string
+    double low_stock_threshold; //numeric
     int available_for_sale; //boolean
     int avail; //boolean
     int is_default; //boolean
@@ -91,6 +92,7 @@ __attribute__((deprecated)) product_variant_update_t *product_variant_update_cre
     char *visible,
     char *status,
     char *backorder_status,
+    double low_stock_threshold,
     int available_for_sale,
     int avail,
     int is_default,

@@ -35,6 +35,7 @@ Name | Type | Description | Notes
 **inventory_level** | **double** |  | [optional] 
 **inventory** | [**list_t**](product_inventory.md) \* |  | [optional] 
 **min_quantity** | **double** |  | [optional] 
+**low_stock_threshold** | **double** |  | [optional] 
 **default_qty_in_pack** | **double** |  | [optional] 
 **is_qty_in_pack_fixed** | **int** |  | [optional] 
 **weight_unit** | **char \*** |  | [optional] 

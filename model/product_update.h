@@ -61,6 +61,7 @@ typedef struct product_update_t {
     char *backorder_status; // string
     double increase_quantity; //numeric
     double reduce_quantity; //numeric
+    double low_stock_threshold; //numeric
     char *warehouse_id; // string
     double weight; //numeric
     char *weight_unit; // string
@@ -151,6 +152,7 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     char *backorder_status,
     double increase_quantity,
     double reduce_quantity,
+    double low_stock_threshold,
     char *warehouse_id,
     double weight,
     char *weight_unit,

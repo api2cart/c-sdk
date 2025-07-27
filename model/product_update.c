@@ -43,6 +43,7 @@ static product_update_t *product_update_create_internal(
     char *backorder_status,
     double increase_quantity,
     double reduce_quantity,
+    double low_stock_threshold,
     char *warehouse_id,
     double weight,
     char *weight_unit,
@@ -133,6 +134,7 @@ static product_update_t *product_update_create_internal(
     product_update_local_var->backorder_status = backorder_status;
     product_update_local_var->increase_quantity = increase_quantity;
     product_update_local_var->reduce_quantity = reduce_quantity;
+    product_update_local_var->low_stock_threshold = low_stock_threshold;
     product_update_local_var->warehouse_id = warehouse_id;
     product_update_local_var->weight = weight;
     product_update_local_var->weight_unit = weight_unit;
@@ -224,6 +226,7 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     char *backorder_status,
     double increase_quantity,
     double reduce_quantity,
+    double low_stock_threshold,
     char *warehouse_id,
     double weight,
     char *weight_unit,
@@ -311,6 +314,7 @@ __attribute__((deprecated)) product_update_t *product_update_create(
         backorder_status,
         increase_quantity,
         reduce_quantity,
+        low_stock_threshold,
         warehouse_id,
         weight,
         weight_unit,
@@ -897,6 +901,14 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     // product_update->reduce_quantity
     if(product_update->reduce_quantity) {
     if(cJSON_AddNumberToObject(item, "reduce_quantity", product_update->reduce_quantity) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_update->low_stock_threshold
+    if(product_update->low_stock_threshold) {
+    if(cJSON_AddNumberToObject(item, "low_stock_threshold", product_update->low_stock_threshold) == NULL) {
     goto fail; //Numeric
     }
     }
@@ -1807,6 +1819,18 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
+    // product_update->low_stock_threshold
+    cJSON *low_stock_threshold = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "low_stock_threshold");
+    if (cJSON_IsNull(low_stock_threshold)) {
+        low_stock_threshold = NULL;
+    }
+    if (low_stock_threshold) { 
+    if(!cJSON_IsNumber(low_stock_threshold))
+    {
+    goto end; //Numeric
+    }
+    }
+
     // product_update->warehouse_id
     cJSON *warehouse_id = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "warehouse_id");
     if (cJSON_IsNull(warehouse_id)) {
@@ -2435,6 +2459,7 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
         backorder_status && !cJSON_IsNull(backorder_status) ? strdup(backorder_status->valuestring) : NULL,
         increase_quantity ? increase_quantity->valuedouble : 0,
         reduce_quantity ? reduce_quantity->valuedouble : 0,
+        low_stock_threshold ? low_stock_threshold->valuedouble : 0,
         warehouse_id && !cJSON_IsNull(warehouse_id) ? strdup(warehouse_id->valuestring) : NULL,
         weight ? weight->valuedouble : 0,
         weight_unit && !cJSON_IsNull(weight_unit) ? strdup(weight_unit->valuestring) : NULL,

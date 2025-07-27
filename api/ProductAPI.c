@@ -5038,7 +5038,7 @@ end:
 // Get list of products from your store. Returns 10 products by default.
 //
 model_response_product_list_t*
-ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, char *currency_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sku, char *brand_name, list_t *product_attributes, char *status, char *type, char *visible, char *find_value, char *find_where, int *return_global, char *params, char *response_fields, char *exclude, char *sort_by, char *sort_direction, char *report_request_id, int *disable_cache, int *disable_report_cache, int *use_latest_api_version)
+ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, char *currency_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sku, char *brand_name, list_t *product_attributes, char *status, char *type, char *visible, char *find_value, char *find_where, int *return_global, char *params, char *response_fields, char *exclude, char *sort_by, char *sort_direction, char *report_request_id, int *disable_cache, int *disable_report_cache, int *use_latest_api_version, char *product_type)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -5466,6 +5466,18 @@ ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *pag
         snprintf(valueQuery_use_latest_api_version, MAX_NUMBER_LENGTH, "%d", *use_latest_api_version);
         keyPairQuery_use_latest_api_version = keyValuePair_create(keyQuery_use_latest_api_version, valueQuery_use_latest_api_version);
         list_addElement(localVarQueryParameters,keyPairQuery_use_latest_api_version);
+    }
+
+    // query parameters
+    char *keyQuery_product_type = NULL;
+    char * valueQuery_product_type = NULL;
+    keyValuePair_t *keyPairQuery_product_type = 0;
+    if (product_type)
+    {
+        keyQuery_product_type = strdup("product_type");
+        valueQuery_product_type = strdup((product_type));
+        keyPairQuery_product_type = keyValuePair_create(keyQuery_product_type, valueQuery_product_type);
+        list_addElement(localVarQueryParameters,keyPairQuery_product_type);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -5901,6 +5913,18 @@ ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *pag
     if(keyPairQuery_use_latest_api_version){
         keyValuePair_free(keyPairQuery_use_latest_api_version);
         keyPairQuery_use_latest_api_version = NULL;
+    }
+    if(keyQuery_product_type){
+        free(keyQuery_product_type);
+        keyQuery_product_type = NULL;
+    }
+    if(valueQuery_product_type){
+        free(valueQuery_product_type);
+        valueQuery_product_type = NULL;
+    }
+    if(keyPairQuery_product_type){
+        keyValuePair_free(keyPairQuery_product_type);
+        keyPairQuery_product_type = NULL;
     }
     return elementToReturn;
 end:

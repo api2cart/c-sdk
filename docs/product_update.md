@@ -40,6 +40,7 @@ Name | Type | Description | Notes
 **backorder_status** | **char \*** | Set backorder status | [optional] 
 **increase_quantity** | **double** | Defines the incremental changes in product quantity | [optional] 
 **reduce_quantity** | **double** | Defines the decrement changes in product quantity | [optional] 
+**low_stock_threshold** | **double** | Specify the quantity threshold below which the product is considered low in stock | [optional] 
 **warehouse_id** | **char \*** | This parameter is used for selecting a warehouse where you need to set/modify a product quantity. | [optional] 
 **weight** | **double** | Weight | [optional] 
 **weight_unit** | **char \*** | Weight Unit | [optional] 

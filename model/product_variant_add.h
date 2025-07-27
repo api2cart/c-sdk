@@ -47,6 +47,7 @@ typedef struct product_variant_add_t {
     int in_stock; //boolean
     char *backorder_status; // string
     int manage_stock; //boolean
+    double low_stock_threshold; //numeric
     double weight; //numeric
     double width; //numeric
     double height; //numeric
@@ -104,6 +105,7 @@ __attribute__((deprecated)) product_variant_add_t *product_variant_add_create(
     int in_stock,
     char *backorder_status,
     int manage_stock,
+    double low_stock_threshold,
     double weight,
     double width,
     double height,

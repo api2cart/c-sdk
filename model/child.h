@@ -58,6 +58,7 @@ typedef struct child_t {
     double inventory_level; //numeric
     list_t *inventory; //nonprimitive container
     double min_quantity; //numeric
+    double low_stock_threshold; //numeric
     double default_qty_in_pack; //numeric
     int is_qty_in_pack_fixed; //boolean
     char *weight_unit; // string
@@ -110,6 +111,7 @@ __attribute__((deprecated)) child_t *child_create(
     double inventory_level,
     list_t *inventory,
     double min_quantity,
+    double low_stock_threshold,
     double default_qty_in_pack,
     int is_qty_in_pack_fixed,
     char *weight_unit,

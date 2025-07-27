@@ -19,6 +19,7 @@ static product_variant_update_t *product_variant_update_create_internal(
     char *visible,
     char *status,
     char *backorder_status,
+    double low_stock_threshold,
     int available_for_sale,
     int avail,
     int is_default,
@@ -77,6 +78,7 @@ static product_variant_update_t *product_variant_update_create_internal(
     product_variant_update_local_var->visible = visible;
     product_variant_update_local_var->status = status;
     product_variant_update_local_var->backorder_status = backorder_status;
+    product_variant_update_local_var->low_stock_threshold = low_stock_threshold;
     product_variant_update_local_var->available_for_sale = available_for_sale;
     product_variant_update_local_var->avail = avail;
     product_variant_update_local_var->is_default = is_default;
@@ -136,6 +138,7 @@ __attribute__((deprecated)) product_variant_update_t *product_variant_update_cre
     char *visible,
     char *status,
     char *backorder_status,
+    double low_stock_threshold,
     int available_for_sale,
     int avail,
     int is_default,
@@ -191,6 +194,7 @@ __attribute__((deprecated)) product_variant_update_t *product_variant_update_cre
         visible,
         status,
         backorder_status,
+        low_stock_threshold,
         available_for_sale,
         avail,
         is_default,
@@ -480,6 +484,14 @@ cJSON *product_variant_update_convertToJSON(product_variant_update_t *product_va
     if(product_variant_update->backorder_status) {
     if(cJSON_AddStringToObject(item, "backorder_status", product_variant_update->backorder_status) == NULL) {
     goto fail; //String
+    }
+    }
+
+
+    // product_variant_update->low_stock_threshold
+    if(product_variant_update->low_stock_threshold) {
+    if(cJSON_AddNumberToObject(item, "low_stock_threshold", product_variant_update->low_stock_threshold) == NULL) {
+    goto fail; //Numeric
     }
     }
 
@@ -986,6 +998,18 @@ product_variant_update_t *product_variant_update_parseFromJSON(cJSON *product_va
     }
     }
 
+    // product_variant_update->low_stock_threshold
+    cJSON *low_stock_threshold = cJSON_GetObjectItemCaseSensitive(product_variant_updateJSON, "low_stock_threshold");
+    if (cJSON_IsNull(low_stock_threshold)) {
+        low_stock_threshold = NULL;
+    }
+    if (low_stock_threshold) { 
+    if(!cJSON_IsNumber(low_stock_threshold))
+    {
+    goto end; //Numeric
+    }
+    }
+
     // product_variant_update->available_for_sale
     cJSON *available_for_sale = cJSON_GetObjectItemCaseSensitive(product_variant_updateJSON, "available_for_sale");
     if (cJSON_IsNull(available_for_sale)) {
@@ -1481,6 +1505,7 @@ product_variant_update_t *product_variant_update_parseFromJSON(cJSON *product_va
         visible && !cJSON_IsNull(visible) ? strdup(visible->valuestring) : NULL,
         status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
         backorder_status && !cJSON_IsNull(backorder_status) ? strdup(backorder_status->valuestring) : NULL,
+        low_stock_threshold ? low_stock_threshold->valuedouble : 0,
         available_for_sale ? available_for_sale->valueint : 0,
         avail ? avail->valueint : 0,
         is_default ? is_default->valueint : 0,

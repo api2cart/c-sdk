@@ -32,6 +32,7 @@ static product_variant_add_t *product_variant_add_create_internal(
     int in_stock,
     char *backorder_status,
     int manage_stock,
+    double low_stock_threshold,
     double weight,
     double width,
     double height,
@@ -89,6 +90,7 @@ static product_variant_add_t *product_variant_add_create_internal(
     product_variant_add_local_var->in_stock = in_stock;
     product_variant_add_local_var->backorder_status = backorder_status;
     product_variant_add_local_var->manage_stock = manage_stock;
+    product_variant_add_local_var->low_stock_threshold = low_stock_threshold;
     product_variant_add_local_var->weight = weight;
     product_variant_add_local_var->width = width;
     product_variant_add_local_var->height = height;
@@ -147,6 +149,7 @@ __attribute__((deprecated)) product_variant_add_t *product_variant_add_create(
     int in_stock,
     char *backorder_status,
     int manage_stock,
+    double low_stock_threshold,
     double weight,
     double width,
     double height,
@@ -201,6 +204,7 @@ __attribute__((deprecated)) product_variant_add_t *product_variant_add_create(
         in_stock,
         backorder_status,
         manage_stock,
+        low_stock_threshold,
         weight,
         width,
         height,
@@ -612,6 +616,14 @@ cJSON *product_variant_add_convertToJSON(product_variant_add_t *product_variant_
     if(product_variant_add->manage_stock) {
     if(cJSON_AddBoolToObject(item, "manage_stock", product_variant_add->manage_stock) == NULL) {
     goto fail; //Bool
+    }
+    }
+
+
+    // product_variant_add->low_stock_threshold
+    if(product_variant_add->low_stock_threshold) {
+    if(cJSON_AddNumberToObject(item, "low_stock_threshold", product_variant_add->low_stock_threshold) == NULL) {
+    goto fail; //Numeric
     }
     }
 
@@ -1180,6 +1192,18 @@ product_variant_add_t *product_variant_add_parseFromJSON(cJSON *product_variant_
     }
     }
 
+    // product_variant_add->low_stock_threshold
+    cJSON *low_stock_threshold = cJSON_GetObjectItemCaseSensitive(product_variant_addJSON, "low_stock_threshold");
+    if (cJSON_IsNull(low_stock_threshold)) {
+        low_stock_threshold = NULL;
+    }
+    if (low_stock_threshold) { 
+    if(!cJSON_IsNumber(low_stock_threshold))
+    {
+    goto end; //Numeric
+    }
+    }
+
     // product_variant_add->weight
     cJSON *weight = cJSON_GetObjectItemCaseSensitive(product_variant_addJSON, "weight");
     if (cJSON_IsNull(weight)) {
@@ -1520,6 +1544,7 @@ product_variant_add_t *product_variant_add_parseFromJSON(cJSON *product_variant_
         in_stock ? in_stock->valueint : 0,
         backorder_status && !cJSON_IsNull(backorder_status) ? strdup(backorder_status->valuestring) : NULL,
         manage_stock ? manage_stock->valueint : 0,
+        low_stock_threshold ? low_stock_threshold->valuedouble : 0,
         weight ? weight->valuedouble : 0,
         width ? width->valuedouble : 0,
         height ? height->valuedouble : 0,

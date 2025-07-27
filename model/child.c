@@ -38,6 +38,7 @@ static child_t *child_create_internal(
     double inventory_level,
     list_t *inventory,
     double min_quantity,
+    double low_stock_threshold,
     double default_qty_in_pack,
     int is_qty_in_pack_fixed,
     char *weight_unit,
@@ -90,6 +91,7 @@ static child_t *child_create_internal(
     child_local_var->inventory_level = inventory_level;
     child_local_var->inventory = inventory;
     child_local_var->min_quantity = min_quantity;
+    child_local_var->low_stock_threshold = low_stock_threshold;
     child_local_var->default_qty_in_pack = default_qty_in_pack;
     child_local_var->is_qty_in_pack_fixed = is_qty_in_pack_fixed;
     child_local_var->weight_unit = weight_unit;
@@ -143,6 +145,7 @@ __attribute__((deprecated)) child_t *child_create(
     double inventory_level,
     list_t *inventory,
     double min_quantity,
+    double low_stock_threshold,
     double default_qty_in_pack,
     int is_qty_in_pack_fixed,
     char *weight_unit,
@@ -192,6 +195,7 @@ __attribute__((deprecated)) child_t *child_create(
         inventory_level,
         inventory,
         min_quantity,
+        low_stock_threshold,
         default_qty_in_pack,
         is_qty_in_pack_fixed,
         weight_unit,
@@ -661,6 +665,14 @@ cJSON *child_convertToJSON(child_t *child) {
     // child->min_quantity
     if(child->min_quantity) {
     if(cJSON_AddNumberToObject(item, "min_quantity", child->min_quantity) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // child->low_stock_threshold
+    if(child->low_stock_threshold) {
+    if(cJSON_AddNumberToObject(item, "low_stock_threshold", child->low_stock_threshold) == NULL) {
     goto fail; //Numeric
     }
     }
@@ -1266,6 +1278,18 @@ child_t *child_parseFromJSON(cJSON *childJSON){
     }
     }
 
+    // child->low_stock_threshold
+    cJSON *low_stock_threshold = cJSON_GetObjectItemCaseSensitive(childJSON, "low_stock_threshold");
+    if (cJSON_IsNull(low_stock_threshold)) {
+        low_stock_threshold = NULL;
+    }
+    if (low_stock_threshold) { 
+    if(!cJSON_IsNumber(low_stock_threshold))
+    {
+    goto end; //Numeric
+    }
+    }
+
     // child->default_qty_in_pack
     cJSON *default_qty_in_pack = cJSON_GetObjectItemCaseSensitive(childJSON, "default_qty_in_pack");
     if (cJSON_IsNull(default_qty_in_pack)) {
@@ -1488,6 +1512,7 @@ child_t *child_parseFromJSON(cJSON *childJSON){
         inventory_level ? inventory_level->valuedouble : 0,
         inventory ? inventoryList : NULL,
         min_quantity ? min_quantity->valuedouble : 0,
+        low_stock_threshold ? low_stock_threshold->valuedouble : 0,
         default_qty_in_pack ? default_qty_in_pack->valuedouble : 0,
         is_qty_in_pack_fixed ? is_qty_in_pack_fixed->valueint : 0,
         weight_unit && !cJSON_IsNull(weight_unit) ? strdup(weight_unit->valuestring) : NULL,

@@ -43,6 +43,7 @@ static product_add_t *product_add_create_internal(
     char *backorder_status,
     double min_order_quantity,
     double max_order_quantity,
+    double low_stock_threshold,
     double weight,
     char *weight_unit,
     double width,
@@ -164,6 +165,7 @@ static product_add_t *product_add_create_internal(
     product_add_local_var->backorder_status = backorder_status;
     product_add_local_var->min_order_quantity = min_order_quantity;
     product_add_local_var->max_order_quantity = max_order_quantity;
+    product_add_local_var->low_stock_threshold = low_stock_threshold;
     product_add_local_var->weight = weight;
     product_add_local_var->weight_unit = weight_unit;
     product_add_local_var->width = width;
@@ -286,6 +288,7 @@ __attribute__((deprecated)) product_add_t *product_add_create(
     char *backorder_status,
     double min_order_quantity,
     double max_order_quantity,
+    double low_stock_threshold,
     double weight,
     char *weight_unit,
     double width,
@@ -404,6 +407,7 @@ __attribute__((deprecated)) product_add_t *product_add_create(
         backorder_status,
         min_order_quantity,
         max_order_quantity,
+        low_stock_threshold,
         weight,
         weight_unit,
         width,
@@ -1178,6 +1182,14 @@ cJSON *product_add_convertToJSON(product_add_t *product_add) {
     // product_add->max_order_quantity
     if(product_add->max_order_quantity) {
     if(cJSON_AddNumberToObject(item, "max_order_quantity", product_add->max_order_quantity) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // product_add->low_stock_threshold
+    if(product_add->low_stock_threshold) {
+    if(cJSON_AddNumberToObject(item, "low_stock_threshold", product_add->low_stock_threshold) == NULL) {
     goto fail; //Numeric
     }
     }
@@ -2479,6 +2491,18 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
     }
     }
 
+    // product_add->low_stock_threshold
+    cJSON *low_stock_threshold = cJSON_GetObjectItemCaseSensitive(product_addJSON, "low_stock_threshold");
+    if (cJSON_IsNull(low_stock_threshold)) {
+        low_stock_threshold = NULL;
+    }
+    if (low_stock_threshold) { 
+    if(!cJSON_IsNumber(low_stock_threshold))
+    {
+    goto end; //Numeric
+    }
+    }
+
     // product_add->weight
     cJSON *weight = cJSON_GetObjectItemCaseSensitive(product_addJSON, "weight");
     if (cJSON_IsNull(weight)) {
@@ -3535,6 +3559,7 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
         backorder_status && !cJSON_IsNull(backorder_status) ? strdup(backorder_status->valuestring) : NULL,
         min_order_quantity ? min_order_quantity->valuedouble : 0,
         max_order_quantity ? max_order_quantity->valuedouble : 0,
+        low_stock_threshold ? low_stock_threshold->valuedouble : 0,
         weight ? weight->valuedouble : 0,
         weight_unit && !cJSON_IsNull(weight_unit) ? strdup(weight_unit->valuestring) : NULL,
         width ? width->valuedouble : 0,

@@ -785,7 +785,7 @@ Name | Type | Description  | Notes
 //
 // Get list of products from your store. Returns 10 products by default.
 //
-model_response_product_list_t* ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, char *currency_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sku, char *brand_name, list_t *product_attributes, char *status, char *type, char *visible, char *find_value, char *find_where, int *return_global, char *params, char *response_fields, char *exclude, char *sort_by, char *sort_direction, char *report_request_id, int *disable_cache, int *disable_report_cache, int *use_latest_api_version);
+model_response_product_list_t* ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *product_ids, char *since_id, char *categories_ids, char *category_id, char *store_id, char *lang_id, char *currency_id, int *avail_view, int *avail_sale, char *created_from, char *created_to, char *modified_from, char *modified_to, char *sku, char *brand_name, list_t *product_attributes, char *status, char *type, char *visible, char *find_value, char *find_where, int *return_global, char *params, char *response_fields, char *exclude, char *sort_by, char *sort_direction, char *report_request_id, int *disable_cache, int *disable_report_cache, int *use_latest_api_version, char *product_type);
 ```
 
 ### Parameters
@@ -826,6 +826,7 @@ Name | Type | Description  | Notes
 **disable_cache** | **int \*** | Disable cache for current request | [optional] [default to false]
 **disable_report_cache** | **int \*** | Disable report cache for current request | [optional] [default to false]
 **use_latest_api_version** | **int \*** | Use the latest platform API version | [optional] [default to false]
+**product_type** | **char \*** | A categorization for the product | [optional] 
 
 ### Return type
 

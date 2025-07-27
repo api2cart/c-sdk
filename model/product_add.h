@@ -70,6 +70,7 @@ typedef struct product_add_t {
     char *backorder_status; // string
     double min_order_quantity; //numeric
     double max_order_quantity; //numeric
+    double low_stock_threshold; //numeric
     double weight; //numeric
     char *weight_unit; // string
     double width; //numeric
@@ -191,6 +192,7 @@ __attribute__((deprecated)) product_add_t *product_add_create(
     char *backorder_status,
     double min_order_quantity,
     double max_order_quantity,
+    double low_stock_threshold,
     double weight,
     char *weight_unit,
     double width,
