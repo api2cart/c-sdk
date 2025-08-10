@@ -26,6 +26,7 @@ cart_t* instantiate_cart(int include_optional) {
       "0",
       "0",
       "0",
+      "0",
       list_createList(),
       list_createList(),
       list_createList(),
@@ -34,6 +35,7 @@ cart_t* instantiate_cart(int include_optional) {
     );
   } else {
     cart = cart_create(
+      "0",
       "0",
       "0",
       "0",

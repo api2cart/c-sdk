@@ -21,23 +21,6 @@ api2cart_openapi_account_cart_add_CARTID_e account_cart_add_cart_id_FromString(c
     }
     return 0;
 }
-char* account_cart_add_temu_region_ToString(api2cart_openapi_account_cart_add_TEMUREGION_e temu_region) {
-    char* temu_regionArray[] =  { "NULL", "US", "EU", "GLOBAL" };
-    return temu_regionArray[temu_region];
-}
-
-api2cart_openapi_account_cart_add_TEMUREGION_e account_cart_add_temu_region_FromString(char* temu_region){
-    int stringToReturn = 0;
-    char *temu_regionArray[] =  { "NULL", "US", "EU", "GLOBAL" };
-    size_t sizeofArray = sizeof(temu_regionArray) / sizeof(temu_regionArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(temu_region, temu_regionArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
 
 static account_cart_add_t *account_cart_add_create_internal(
     api2cart_openapi_account_cart_add_CARTID_e cart_id,
@@ -204,7 +187,7 @@ static account_cart_add_t *account_cart_add_create_internal(
     char *temu_app_key,
     char *temu_app_secret,
     char *temu_access_token,
-    api2cart_openapi_account_cart_add_TEMUREGION_e temu_region
+    char *temu_region
     ) {
     account_cart_add_t *account_cart_add_local_var = malloc(sizeof(account_cart_add_t));
     if (!account_cart_add_local_var) {
@@ -545,7 +528,7 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     char *temu_app_key,
     char *temu_app_secret,
     char *temu_access_token,
-    api2cart_openapi_account_cart_add_TEMUREGION_e temu_region
+    char *temu_region
     ) {
     return account_cart_add_create_internal (
         cart_id,
@@ -1352,6 +1335,10 @@ void account_cart_add_free(account_cart_add_t *account_cart_add) {
         free(account_cart_add->temu_access_token);
         account_cart_add->temu_access_token = NULL;
     }
+    if (account_cart_add->temu_region) {
+        free(account_cart_add->temu_region);
+        account_cart_add->temu_region = NULL;
+    }
     free(account_cart_add);
 }
 
@@ -1633,56 +1620,50 @@ cJSON *account_cart_add_convertToJSON(account_cart_add_t *account_cart_add) {
 
 
     // account_cart_add->bigcartel_user_name
-    if (!account_cart_add->bigcartel_user_name) {
-        goto fail;
-    }
+    if(account_cart_add->bigcartel_user_name) {
     if(cJSON_AddStringToObject(item, "bigcartel_user_name", account_cart_add->bigcartel_user_name) == NULL) {
     goto fail; //String
+    }
     }
 
 
     // account_cart_add->bigcartel_password
-    if (!account_cart_add->bigcartel_password) {
-        goto fail;
-    }
+    if(account_cart_add->bigcartel_password) {
     if(cJSON_AddStringToObject(item, "bigcartel_password", account_cart_add->bigcartel_password) == NULL) {
     goto fail; //String
+    }
     }
 
 
     // account_cart_add->bricklink_consumer_key
-    if (!account_cart_add->bricklink_consumer_key) {
-        goto fail;
-    }
+    if(account_cart_add->bricklink_consumer_key) {
     if(cJSON_AddStringToObject(item, "bricklink_consumer_key", account_cart_add->bricklink_consumer_key) == NULL) {
     goto fail; //String
+    }
     }
 
 
     // account_cart_add->bricklink_consumer_secret
-    if (!account_cart_add->bricklink_consumer_secret) {
-        goto fail;
-    }
+    if(account_cart_add->bricklink_consumer_secret) {
     if(cJSON_AddStringToObject(item, "bricklink_consumer_secret", account_cart_add->bricklink_consumer_secret) == NULL) {
     goto fail; //String
+    }
     }
 
 
     // account_cart_add->bricklink_token
-    if (!account_cart_add->bricklink_token) {
-        goto fail;
-    }
+    if(account_cart_add->bricklink_token) {
     if(cJSON_AddStringToObject(item, "bricklink_token", account_cart_add->bricklink_token) == NULL) {
     goto fail; //String
+    }
     }
 
 
     // account_cart_add->bricklink_token_secret
-    if (!account_cart_add->bricklink_token_secret) {
-        goto fail;
-    }
+    if(account_cart_add->bricklink_token_secret) {
     if(cJSON_AddStringToObject(item, "bricklink_token_secret", account_cart_add->bricklink_token_secret) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -2371,20 +2352,18 @@ cJSON *account_cart_add_convertToJSON(account_cart_add_t *account_cart_add) {
 
 
     // account_cart_add->wix_app_id
-    if (!account_cart_add->wix_app_id) {
-        goto fail;
-    }
+    if(account_cart_add->wix_app_id) {
     if(cJSON_AddStringToObject(item, "wix_app_id", account_cart_add->wix_app_id) == NULL) {
     goto fail; //String
+    }
     }
 
 
     // account_cart_add->wix_app_secret_key
-    if (!account_cart_add->wix_app_secret_key) {
-        goto fail;
-    }
+    if(account_cart_add->wix_app_secret_key) {
     if(cJSON_AddStringToObject(item, "wix_app_secret_key", account_cart_add->wix_app_secret_key) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -2685,21 +2664,18 @@ cJSON *account_cart_add_convertToJSON(account_cart_add_t *account_cart_add) {
 
 
     // account_cart_add->temu_access_token
-    if (!account_cart_add->temu_access_token) {
-        goto fail;
-    }
+    if(account_cart_add->temu_access_token) {
     if(cJSON_AddStringToObject(item, "temu_access_token", account_cart_add->temu_access_token) == NULL) {
     goto fail; //String
+    }
     }
 
 
     // account_cart_add->temu_region
-    if (api2cart_openapi_account_cart_add_TEMUREGION_NULL == account_cart_add->temu_region) {
-        goto fail;
+    if(account_cart_add->temu_region) {
+    if(cJSON_AddStringToObject(item, "temu_region", account_cart_add->temu_region) == NULL) {
+    goto fail; //String
     }
-    if(cJSON_AddStringToObject(item, "temu_region", account_cart_add_temu_region_ToString(account_cart_add->temu_region)) == NULL)
-    {
-    goto fail; //Enum
     }
 
     return item;
@@ -3135,14 +3111,11 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(bigcartel_user_name)) {
         bigcartel_user_name = NULL;
     }
-    if (!bigcartel_user_name) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(bigcartel_user_name))
+    if (bigcartel_user_name) { 
+    if(!cJSON_IsString(bigcartel_user_name) && !cJSON_IsNull(bigcartel_user_name))
     {
     goto end; //String
+    }
     }
 
     // account_cart_add->bigcartel_password
@@ -3150,14 +3123,11 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(bigcartel_password)) {
         bigcartel_password = NULL;
     }
-    if (!bigcartel_password) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(bigcartel_password))
+    if (bigcartel_password) { 
+    if(!cJSON_IsString(bigcartel_password) && !cJSON_IsNull(bigcartel_password))
     {
     goto end; //String
+    }
     }
 
     // account_cart_add->bricklink_consumer_key
@@ -3165,14 +3135,11 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(bricklink_consumer_key)) {
         bricklink_consumer_key = NULL;
     }
-    if (!bricklink_consumer_key) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(bricklink_consumer_key))
+    if (bricklink_consumer_key) { 
+    if(!cJSON_IsString(bricklink_consumer_key) && !cJSON_IsNull(bricklink_consumer_key))
     {
     goto end; //String
+    }
     }
 
     // account_cart_add->bricklink_consumer_secret
@@ -3180,14 +3147,11 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(bricklink_consumer_secret)) {
         bricklink_consumer_secret = NULL;
     }
-    if (!bricklink_consumer_secret) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(bricklink_consumer_secret))
+    if (bricklink_consumer_secret) { 
+    if(!cJSON_IsString(bricklink_consumer_secret) && !cJSON_IsNull(bricklink_consumer_secret))
     {
     goto end; //String
+    }
     }
 
     // account_cart_add->bricklink_token
@@ -3195,14 +3159,11 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(bricklink_token)) {
         bricklink_token = NULL;
     }
-    if (!bricklink_token) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(bricklink_token))
+    if (bricklink_token) { 
+    if(!cJSON_IsString(bricklink_token) && !cJSON_IsNull(bricklink_token))
     {
     goto end; //String
+    }
     }
 
     // account_cart_add->bricklink_token_secret
@@ -3210,14 +3171,11 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(bricklink_token_secret)) {
         bricklink_token_secret = NULL;
     }
-    if (!bricklink_token_secret) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(bricklink_token_secret))
+    if (bricklink_token_secret) { 
+    if(!cJSON_IsString(bricklink_token_secret) && !cJSON_IsNull(bricklink_token_secret))
     {
     goto end; //String
+    }
     }
 
     // account_cart_add->demandware_client_id
@@ -4245,14 +4203,11 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(wix_app_id)) {
         wix_app_id = NULL;
     }
-    if (!wix_app_id) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(wix_app_id))
+    if (wix_app_id) { 
+    if(!cJSON_IsString(wix_app_id) && !cJSON_IsNull(wix_app_id))
     {
     goto end; //String
+    }
     }
 
     // account_cart_add->wix_app_secret_key
@@ -4260,14 +4215,11 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(wix_app_secret_key)) {
         wix_app_secret_key = NULL;
     }
-    if (!wix_app_secret_key) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(wix_app_secret_key))
+    if (wix_app_secret_key) { 
+    if(!cJSON_IsString(wix_app_secret_key) && !cJSON_IsNull(wix_app_secret_key))
     {
     goto end; //String
+    }
     }
 
     // account_cart_add->wix_instance_id
@@ -4719,14 +4671,11 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(temu_access_token)) {
         temu_access_token = NULL;
     }
-    if (!temu_access_token) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(temu_access_token))
+    if (temu_access_token) { 
+    if(!cJSON_IsString(temu_access_token) && !cJSON_IsNull(temu_access_token))
     {
     goto end; //String
+    }
     }
 
     // account_cart_add->temu_region
@@ -4734,17 +4683,12 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     if (cJSON_IsNull(temu_region)) {
         temu_region = NULL;
     }
-    if (!temu_region) {
-        goto end;
-    }
-
-    api2cart_openapi_account_cart_add_TEMUREGION_e temu_regionVariable;
-    
-    if(!cJSON_IsString(temu_region))
+    if (temu_region) { 
+    if(!cJSON_IsString(temu_region) && !cJSON_IsNull(temu_region))
     {
-    goto end; //Enum
+    goto end; //String
     }
-    temu_regionVariable = account_cart_add_temu_region_FromString(temu_region->valuestring);
+    }
 
 
     account_cart_add_local_var = account_cart_add_create_internal (
@@ -4782,12 +4726,12 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
         bol_api_key && !cJSON_IsNull(bol_api_key) ? strdup(bol_api_key->valuestring) : NULL,
         bol_api_secret && !cJSON_IsNull(bol_api_secret) ? strdup(bol_api_secret->valuestring) : NULL,
         bol_retailer_id ? bol_retailer_id->valuedouble : 0,
-        strdup(bigcartel_user_name->valuestring),
-        strdup(bigcartel_password->valuestring),
-        strdup(bricklink_consumer_key->valuestring),
-        strdup(bricklink_consumer_secret->valuestring),
-        strdup(bricklink_token->valuestring),
-        strdup(bricklink_token_secret->valuestring),
+        bigcartel_user_name && !cJSON_IsNull(bigcartel_user_name) ? strdup(bigcartel_user_name->valuestring) : NULL,
+        bigcartel_password && !cJSON_IsNull(bigcartel_password) ? strdup(bigcartel_password->valuestring) : NULL,
+        bricklink_consumer_key && !cJSON_IsNull(bricklink_consumer_key) ? strdup(bricklink_consumer_key->valuestring) : NULL,
+        bricklink_consumer_secret && !cJSON_IsNull(bricklink_consumer_secret) ? strdup(bricklink_consumer_secret->valuestring) : NULL,
+        bricklink_token && !cJSON_IsNull(bricklink_token) ? strdup(bricklink_token->valuestring) : NULL,
+        bricklink_token_secret && !cJSON_IsNull(bricklink_token_secret) ? strdup(bricklink_token_secret->valuestring) : NULL,
         demandware_client_id && !cJSON_IsNull(demandware_client_id) ? strdup(demandware_client_id->valuestring) : NULL,
         demandware_api_password && !cJSON_IsNull(demandware_api_password) ? strdup(demandware_api_password->valuestring) : NULL,
         demandware_user_name && !cJSON_IsNull(demandware_user_name) ? strdup(demandware_user_name->valuestring) : NULL,
@@ -4872,8 +4816,8 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
         magento_access_token && !cJSON_IsNull(magento_access_token) ? strdup(magento_access_token->valuestring) : NULL,
         magento_token_secret && !cJSON_IsNull(magento_token_secret) ? strdup(magento_token_secret->valuestring) : NULL,
         prestashop_webservice_key && !cJSON_IsNull(prestashop_webservice_key) ? strdup(prestashop_webservice_key->valuestring) : NULL,
-        strdup(wix_app_id->valuestring),
-        strdup(wix_app_secret_key->valuestring),
+        wix_app_id && !cJSON_IsNull(wix_app_id) ? strdup(wix_app_id->valuestring) : NULL,
+        wix_app_secret_key && !cJSON_IsNull(wix_app_secret_key) ? strdup(wix_app_secret_key->valuestring) : NULL,
         wix_instance_id && !cJSON_IsNull(wix_instance_id) ? strdup(wix_instance_id->valuestring) : NULL,
         wix_refresh_token && !cJSON_IsNull(wix_refresh_token) ? strdup(wix_refresh_token->valuestring) : NULL,
         mercado_libre_app_id && !cJSON_IsNull(mercado_libre_app_id) ? strdup(mercado_libre_app_id->valuestring) : NULL,
@@ -4911,8 +4855,8 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
         salla_access_token && !cJSON_IsNull(salla_access_token) ? strdup(salla_access_token->valuestring) : NULL,
         temu_app_key && !cJSON_IsNull(temu_app_key) ? strdup(temu_app_key->valuestring) : NULL,
         temu_app_secret && !cJSON_IsNull(temu_app_secret) ? strdup(temu_app_secret->valuestring) : NULL,
-        strdup(temu_access_token->valuestring),
-        temu_regionVariable
+        temu_access_token && !cJSON_IsNull(temu_access_token) ? strdup(temu_access_token->valuestring) : NULL,
+        temu_region && !cJSON_IsNull(temu_region) ? strdup(temu_region->valuestring) : NULL
         );
 
     return account_cart_add_local_var;

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **name** | **char \*** |  | [optional] 
 **url** | **char \*** |  | [optional] 
 **version** | **char \*** |  | [optional] 
+**bridge_version** | **char \*** |  | [optional] 
 **db_prefix** | **char \*** |  | [optional] 
 **stores_info** | [**list_t**](cart_store_info.md) \* |  | [optional] 
 **warehouses** | [**list_t**](cart_warehouse.md) \* |  | [optional] 

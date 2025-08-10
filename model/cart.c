@@ -9,6 +9,7 @@ static cart_t *cart_create_internal(
     char *name,
     char *url,
     char *version,
+    char *bridge_version,
     char *db_prefix,
     list_t *stores_info,
     list_t *warehouses,
@@ -23,6 +24,7 @@ static cart_t *cart_create_internal(
     cart_local_var->name = name;
     cart_local_var->url = url;
     cart_local_var->version = version;
+    cart_local_var->bridge_version = bridge_version;
     cart_local_var->db_prefix = db_prefix;
     cart_local_var->stores_info = stores_info;
     cart_local_var->warehouses = warehouses;
@@ -38,6 +40,7 @@ __attribute__((deprecated)) cart_t *cart_create(
     char *name,
     char *url,
     char *version,
+    char *bridge_version,
     char *db_prefix,
     list_t *stores_info,
     list_t *warehouses,
@@ -49,6 +52,7 @@ __attribute__((deprecated)) cart_t *cart_create(
         name,
         url,
         version,
+        bridge_version,
         db_prefix,
         stores_info,
         warehouses,
@@ -78,6 +82,10 @@ void cart_free(cart_t *cart) {
     if (cart->version) {
         free(cart->version);
         cart->version = NULL;
+    }
+    if (cart->bridge_version) {
+        free(cart->bridge_version);
+        cart->bridge_version = NULL;
     }
     if (cart->db_prefix) {
         free(cart->db_prefix);
@@ -137,6 +145,14 @@ cJSON *cart_convertToJSON(cart_t *cart) {
     // cart->version
     if(cart->version) {
     if(cJSON_AddStringToObject(item, "version", cart->version) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // cart->bridge_version
+    if(cart->bridge_version) {
+    if(cJSON_AddStringToObject(item, "bridge_version", cart->bridge_version) == NULL) {
     goto fail; //String
     }
     }
@@ -292,6 +308,18 @@ cart_t *cart_parseFromJSON(cJSON *cartJSON){
     }
     }
 
+    // cart->bridge_version
+    cJSON *bridge_version = cJSON_GetObjectItemCaseSensitive(cartJSON, "bridge_version");
+    if (cJSON_IsNull(bridge_version)) {
+        bridge_version = NULL;
+    }
+    if (bridge_version) { 
+    if(!cJSON_IsString(bridge_version) && !cJSON_IsNull(bridge_version))
+    {
+    goto end; //String
+    }
+    }
+
     // cart->db_prefix
     cJSON *db_prefix = cJSON_GetObjectItemCaseSensitive(cartJSON, "db_prefix");
     if (cJSON_IsNull(db_prefix)) {
@@ -401,6 +429,7 @@ cart_t *cart_parseFromJSON(cJSON *cartJSON){
         name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
         url && !cJSON_IsNull(url) ? strdup(url->valuestring) : NULL,
         version && !cJSON_IsNull(version) ? strdup(version->valuestring) : NULL,
+        bridge_version && !cJSON_IsNull(bridge_version) ? strdup(bridge_version->valuestring) : NULL,
         db_prefix && !cJSON_IsNull(db_prefix) ? strdup(db_prefix->valuestring) : NULL,
         stores_info ? stores_infoList : NULL,
         warehouses ? warehousesList : NULL,

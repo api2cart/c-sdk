@@ -26,6 +26,7 @@ typedef struct cart_t {
     char *name; // string
     char *url; // string
     char *version; // string
+    char *bridge_version; // string
     char *db_prefix; // string
     list_t *stores_info; //nonprimitive container
     list_t *warehouses; //nonprimitive container
@@ -40,6 +41,7 @@ __attribute__((deprecated)) cart_t *cart_create(
     char *name,
     char *url,
     char *version,
+    char *bridge_version,
     char *db_prefix,
     list_t *stores_info,
     list_t *warehouses,

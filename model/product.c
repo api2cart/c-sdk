@@ -36,10 +36,10 @@ static product_t *product_create_internal(
     char *weight_unit,
     int sort_order,
     int in_stock,
-    int on_sale,
     char *backorders,
     char *manage_stock,
     int is_stock_managed,
+    int on_sale,
     a2_c_date_time_t *create_at,
     a2_c_date_time_t *modified_at,
     char *tax_class_id,
@@ -98,10 +98,10 @@ static product_t *product_create_internal(
     product_local_var->weight_unit = weight_unit;
     product_local_var->sort_order = sort_order;
     product_local_var->in_stock = in_stock;
-    product_local_var->on_sale = on_sale;
     product_local_var->backorders = backorders;
     product_local_var->manage_stock = manage_stock;
     product_local_var->is_stock_managed = is_stock_managed;
+    product_local_var->on_sale = on_sale;
     product_local_var->create_at = create_at;
     product_local_var->modified_at = modified_at;
     product_local_var->tax_class_id = tax_class_id;
@@ -161,10 +161,10 @@ __attribute__((deprecated)) product_t *product_create(
     char *weight_unit,
     int sort_order,
     int in_stock,
-    int on_sale,
     char *backorders,
     char *manage_stock,
     int is_stock_managed,
+    int on_sale,
     a2_c_date_time_t *create_at,
     a2_c_date_time_t *modified_at,
     char *tax_class_id,
@@ -220,10 +220,10 @@ __attribute__((deprecated)) product_t *product_create(
         weight_unit,
         sort_order,
         in_stock,
-        on_sale,
         backorders,
         manage_stock,
         is_stock_managed,
+        on_sale,
         create_at,
         modified_at,
         tax_class_id,
@@ -766,14 +766,6 @@ cJSON *product_convertToJSON(product_t *product) {
     }
 
 
-    // product->on_sale
-    if(product->on_sale) {
-    if(cJSON_AddBoolToObject(item, "on_sale", product->on_sale) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
     // product->backorders
     if(product->backorders) {
     if(cJSON_AddStringToObject(item, "backorders", product->backorders) == NULL) {
@@ -793,6 +785,14 @@ cJSON *product_convertToJSON(product_t *product) {
     // product->is_stock_managed
     if(product->is_stock_managed) {
     if(cJSON_AddBoolToObject(item, "is_stock_managed", product->is_stock_managed) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // product->on_sale
+    if(product->on_sale) {
+    if(cJSON_AddBoolToObject(item, "on_sale", product->on_sale) == NULL) {
     goto fail; //Bool
     }
     }
@@ -1569,18 +1569,6 @@ product_t *product_parseFromJSON(cJSON *productJSON){
     }
     }
 
-    // product->on_sale
-    cJSON *on_sale = cJSON_GetObjectItemCaseSensitive(productJSON, "on_sale");
-    if (cJSON_IsNull(on_sale)) {
-        on_sale = NULL;
-    }
-    if (on_sale) { 
-    if(!cJSON_IsBool(on_sale))
-    {
-    goto end; //Bool
-    }
-    }
-
     // product->backorders
     cJSON *backorders = cJSON_GetObjectItemCaseSensitive(productJSON, "backorders");
     if (cJSON_IsNull(backorders)) {
@@ -1612,6 +1600,18 @@ product_t *product_parseFromJSON(cJSON *productJSON){
     }
     if (is_stock_managed) { 
     if(!cJSON_IsBool(is_stock_managed))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // product->on_sale
+    cJSON *on_sale = cJSON_GetObjectItemCaseSensitive(productJSON, "on_sale");
+    if (cJSON_IsNull(on_sale)) {
+        on_sale = NULL;
+    }
+    if (on_sale) { 
+    if(!cJSON_IsBool(on_sale))
     {
     goto end; //Bool
     }
@@ -2002,10 +2002,10 @@ product_t *product_parseFromJSON(cJSON *productJSON){
         weight_unit && !cJSON_IsNull(weight_unit) ? strdup(weight_unit->valuestring) : NULL,
         sort_order ? sort_order->valuedouble : 0,
         in_stock ? in_stock->valueint : 0,
-        on_sale ? on_sale->valueint : 0,
         backorders && !cJSON_IsNull(backorders) ? strdup(backorders->valuestring) : NULL,
         manage_stock && !cJSON_IsNull(manage_stock) ? strdup(manage_stock->valuestring) : NULL,
         is_stock_managed ? is_stock_managed->valueint : 0,
+        on_sale ? on_sale->valueint : 0,
         create_at ? create_at_local_nonprim : NULL,
         modified_at ? modified_at_local_nonprim : NULL,
         tax_class_id && !cJSON_IsNull(tax_class_id) ? strdup(tax_class_id->valuestring) : NULL,

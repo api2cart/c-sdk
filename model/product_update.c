@@ -91,7 +91,9 @@ static product_update_t *product_update_create_internal(
     int check_process_status,
     list_t *specifics,
     int shop_section_id,
-    product_add_personalization_details_t *personalization_details
+    product_add_personalization_details_t *personalization_details,
+    char *marketplace_item_properties,
+    double min_order_quantity
     ) {
     product_update_t *product_update_local_var = malloc(sizeof(product_update_t));
     if (!product_update_local_var) {
@@ -183,6 +185,8 @@ static product_update_t *product_update_create_internal(
     product_update_local_var->specifics = specifics;
     product_update_local_var->shop_section_id = shop_section_id;
     product_update_local_var->personalization_details = personalization_details;
+    product_update_local_var->marketplace_item_properties = marketplace_item_properties;
+    product_update_local_var->min_order_quantity = min_order_quantity;
 
     product_update_local_var->_library_owned = 1;
     return product_update_local_var;
@@ -274,7 +278,9 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     int check_process_status,
     list_t *specifics,
     int shop_section_id,
-    product_add_personalization_details_t *personalization_details
+    product_add_personalization_details_t *personalization_details,
+    char *marketplace_item_properties,
+    double min_order_quantity
     ) {
     return product_update_create_internal (
         id,
@@ -362,7 +368,9 @@ __attribute__((deprecated)) product_update_t *product_update_create(
         check_process_status,
         specifics,
         shop_section_id,
-        personalization_details
+        personalization_details,
+        marketplace_item_properties,
+        min_order_quantity
         );
 }
 
@@ -591,6 +599,10 @@ void product_update_free(product_update_t *product_update) {
     if (product_update->personalization_details) {
         product_add_personalization_details_free(product_update->personalization_details);
         product_update->personalization_details = NULL;
+    }
+    if (product_update->marketplace_item_properties) {
+        free(product_update->marketplace_item_properties);
+        product_update->marketplace_item_properties = NULL;
     }
     free(product_update);
 }
@@ -1330,6 +1342,22 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     cJSON_AddItemToObject(item, "personalization_details", personalization_details_local_JSON);
     if(item->child == NULL) {
     goto fail;
+    }
+    }
+
+
+    // product_update->marketplace_item_properties
+    if(product_update->marketplace_item_properties) {
+    if(cJSON_AddStringToObject(item, "marketplace_item_properties", product_update->marketplace_item_properties) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->min_order_quantity
+    if(product_update->min_order_quantity) {
+    if(cJSON_AddNumberToObject(item, "min_order_quantity", product_update->min_order_quantity) == NULL) {
+    goto fail; //Numeric
     }
     }
 
@@ -2420,6 +2448,30 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     personalization_details_local_nonprim = product_add_personalization_details_parseFromJSON(personalization_details); //nonprimitive
     }
 
+    // product_update->marketplace_item_properties
+    cJSON *marketplace_item_properties = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "marketplace_item_properties");
+    if (cJSON_IsNull(marketplace_item_properties)) {
+        marketplace_item_properties = NULL;
+    }
+    if (marketplace_item_properties) { 
+    if(!cJSON_IsString(marketplace_item_properties) && !cJSON_IsNull(marketplace_item_properties))
+    {
+    goto end; //String
+    }
+    }
+
+    // product_update->min_order_quantity
+    cJSON *min_order_quantity = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "min_order_quantity");
+    if (cJSON_IsNull(min_order_quantity)) {
+        min_order_quantity = NULL;
+    }
+    if (min_order_quantity) { 
+    if(!cJSON_IsNumber(min_order_quantity))
+    {
+    goto end; //Numeric
+    }
+    }
+
 
     product_update_local_var = product_update_create_internal (
         id && !cJSON_IsNull(id) ? strdup(id->valuestring) : NULL,
@@ -2507,7 +2559,9 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
         check_process_status ? check_process_status->valueint : 0,
         specifics ? specificsList : NULL,
         shop_section_id ? shop_section_id->valuedouble : 0,
-        personalization_details ? personalization_details_local_nonprim : NULL
+        personalization_details ? personalization_details_local_nonprim : NULL,
+        marketplace_item_properties && !cJSON_IsNull(marketplace_item_properties) ? strdup(marketplace_item_properties->valuestring) : NULL,
+        min_order_quantity ? min_order_quantity->valuedouble : 0
         );
 
     return product_update_local_var;

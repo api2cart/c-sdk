@@ -14,6 +14,7 @@ static product_variant_add_t *product_variant_add_create_internal(
     char *short_description,
     int available_for_view,
     int available_for_sale,
+    char *status,
     int is_virtual,
     int is_default,
     char *store_id,
@@ -45,6 +46,7 @@ static product_variant_add_t *product_variant_add_create_internal(
     char *ean,
     char *mpn,
     char *isbn,
+    char *seo_url,
     char *manufacturer,
     char *created_at,
     char *meta_title,
@@ -72,6 +74,7 @@ static product_variant_add_t *product_variant_add_create_internal(
     product_variant_add_local_var->short_description = short_description;
     product_variant_add_local_var->available_for_view = available_for_view;
     product_variant_add_local_var->available_for_sale = available_for_sale;
+    product_variant_add_local_var->status = status;
     product_variant_add_local_var->is_virtual = is_virtual;
     product_variant_add_local_var->is_default = is_default;
     product_variant_add_local_var->store_id = store_id;
@@ -103,6 +106,7 @@ static product_variant_add_t *product_variant_add_create_internal(
     product_variant_add_local_var->ean = ean;
     product_variant_add_local_var->mpn = mpn;
     product_variant_add_local_var->isbn = isbn;
+    product_variant_add_local_var->seo_url = seo_url;
     product_variant_add_local_var->manufacturer = manufacturer;
     product_variant_add_local_var->created_at = created_at;
     product_variant_add_local_var->meta_title = meta_title;
@@ -131,6 +135,7 @@ __attribute__((deprecated)) product_variant_add_t *product_variant_add_create(
     char *short_description,
     int available_for_view,
     int available_for_sale,
+    char *status,
     int is_virtual,
     int is_default,
     char *store_id,
@@ -162,6 +167,7 @@ __attribute__((deprecated)) product_variant_add_t *product_variant_add_create(
     char *ean,
     char *mpn,
     char *isbn,
+    char *seo_url,
     char *manufacturer,
     char *created_at,
     char *meta_title,
@@ -186,6 +192,7 @@ __attribute__((deprecated)) product_variant_add_t *product_variant_add_create(
         short_description,
         available_for_view,
         available_for_sale,
+        status,
         is_virtual,
         is_default,
         store_id,
@@ -217,6 +224,7 @@ __attribute__((deprecated)) product_variant_add_t *product_variant_add_create(
         ean,
         mpn,
         isbn,
+        seo_url,
         manufacturer,
         created_at,
         meta_title,
@@ -269,6 +277,10 @@ void product_variant_add_free(product_variant_add_t *product_variant_add) {
     if (product_variant_add->short_description) {
         free(product_variant_add->short_description);
         product_variant_add->short_description = NULL;
+    }
+    if (product_variant_add->status) {
+        free(product_variant_add->status);
+        product_variant_add->status = NULL;
     }
     if (product_variant_add->store_id) {
         free(product_variant_add->store_id);
@@ -340,6 +352,10 @@ void product_variant_add_free(product_variant_add_t *product_variant_add) {
     if (product_variant_add->isbn) {
         free(product_variant_add->isbn);
         product_variant_add->isbn = NULL;
+    }
+    if (product_variant_add->seo_url) {
+        free(product_variant_add->seo_url);
+        product_variant_add->seo_url = NULL;
     }
     if (product_variant_add->manufacturer) {
         free(product_variant_add->manufacturer);
@@ -460,6 +476,14 @@ cJSON *product_variant_add_convertToJSON(product_variant_add_t *product_variant_
     if(product_variant_add->available_for_sale) {
     if(cJSON_AddBoolToObject(item, "available_for_sale", product_variant_add->available_for_sale) == NULL) {
     goto fail; //Bool
+    }
+    }
+
+
+    // product_variant_add->status
+    if(product_variant_add->status) {
+    if(cJSON_AddStringToObject(item, "status", product_variant_add->status) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -724,6 +748,14 @@ cJSON *product_variant_add_convertToJSON(product_variant_add_t *product_variant_
     }
 
 
+    // product_variant_add->seo_url
+    if(product_variant_add->seo_url) {
+    if(cJSON_AddStringToObject(item, "seo_url", product_variant_add->seo_url) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
     // product_variant_add->manufacturer
     if(product_variant_add->manufacturer) {
     if(cJSON_AddStringToObject(item, "manufacturer", product_variant_add->manufacturer) == NULL) {
@@ -961,6 +993,18 @@ product_variant_add_t *product_variant_add_parseFromJSON(cJSON *product_variant_
     if(!cJSON_IsBool(available_for_sale))
     {
     goto end; //Bool
+    }
+    }
+
+    // product_variant_add->status
+    cJSON *status = cJSON_GetObjectItemCaseSensitive(product_variant_addJSON, "status");
+    if (cJSON_IsNull(status)) {
+        status = NULL;
+    }
+    if (status) { 
+    if(!cJSON_IsString(status) && !cJSON_IsNull(status))
+    {
+    goto end; //String
     }
     }
 
@@ -1348,6 +1392,18 @@ product_variant_add_t *product_variant_add_parseFromJSON(cJSON *product_variant_
     }
     }
 
+    // product_variant_add->seo_url
+    cJSON *seo_url = cJSON_GetObjectItemCaseSensitive(product_variant_addJSON, "seo_url");
+    if (cJSON_IsNull(seo_url)) {
+        seo_url = NULL;
+    }
+    if (seo_url) { 
+    if(!cJSON_IsString(seo_url) && !cJSON_IsNull(seo_url))
+    {
+    goto end; //String
+    }
+    }
+
     // product_variant_add->manufacturer
     cJSON *manufacturer = cJSON_GetObjectItemCaseSensitive(product_variant_addJSON, "manufacturer");
     if (cJSON_IsNull(manufacturer)) {
@@ -1526,6 +1582,7 @@ product_variant_add_t *product_variant_add_parseFromJSON(cJSON *product_variant_
         short_description && !cJSON_IsNull(short_description) ? strdup(short_description->valuestring) : NULL,
         available_for_view ? available_for_view->valueint : 0,
         available_for_sale ? available_for_sale->valueint : 0,
+        status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
         is_virtual ? is_virtual->valueint : 0,
         is_default ? is_default->valueint : 0,
         store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
@@ -1557,6 +1614,7 @@ product_variant_add_t *product_variant_add_parseFromJSON(cJSON *product_variant_
         ean && !cJSON_IsNull(ean) ? strdup(ean->valuestring) : NULL,
         mpn && !cJSON_IsNull(mpn) ? strdup(mpn->valuestring) : NULL,
         isbn && !cJSON_IsNull(isbn) ? strdup(isbn->valuestring) : NULL,
+        seo_url && !cJSON_IsNull(seo_url) ? strdup(seo_url->valuestring) : NULL,
         manufacturer && !cJSON_IsNull(manufacturer) ? strdup(manufacturer->valuestring) : NULL,
         created_at && !cJSON_IsNull(created_at) ? strdup(created_at->valuestring) : NULL,
         meta_title && !cJSON_IsNull(meta_title) ? strdup(meta_title->valuestring) : NULL,

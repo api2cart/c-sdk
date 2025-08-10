@@ -60,10 +60,10 @@ typedef struct product_t {
     char *weight_unit; // string
     int sort_order; //numeric
     int in_stock; //boolean
-    int on_sale; //boolean
     char *backorders; // string
     char *manage_stock; // string
     int is_stock_managed; //boolean
+    int on_sale; //boolean
     struct a2_c_date_time_t *create_at; //model
     struct a2_c_date_time_t *modified_at; //model
     char *tax_class_id; // string
@@ -122,10 +122,10 @@ __attribute__((deprecated)) product_t *product_create(
     char *weight_unit,
     int sort_order,
     int in_stock,
-    int on_sale,
     char *backorders,
     char *manage_stock,
     int is_stock_managed,
+    int on_sale,
     a2_c_date_time_t *create_at,
     a2_c_date_time_t *modified_at,
     char *tax_class_id,

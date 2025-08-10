@@ -110,6 +110,8 @@ typedef struct product_update_t {
     list_t *specifics; //nonprimitive container
     int shop_section_id; //numeric
     struct product_add_personalization_details_t *personalization_details; //model
+    char *marketplace_item_properties; // string
+    double min_order_quantity; //numeric
 
     int _library_owned; // Is the library responsible for freeing this object?
 } product_update_t;
@@ -200,7 +202,9 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     int check_process_status,
     list_t *specifics,
     int shop_section_id,
-    product_add_personalization_details_t *personalization_details
+    product_add_personalization_details_t *personalization_details,
+    char *marketplace_item_properties,
+    double min_order_quantity
 );
 
 void product_update_free(product_update_t *product_update);

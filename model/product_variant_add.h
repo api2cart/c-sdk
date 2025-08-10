@@ -29,6 +29,7 @@ typedef struct product_variant_add_t {
     char *short_description; // string
     int available_for_view; //boolean
     int available_for_sale; //boolean
+    char *status; // string
     int is_virtual; //boolean
     int is_default; //boolean
     char *store_id; // string
@@ -60,6 +61,7 @@ typedef struct product_variant_add_t {
     char *ean; // string
     char *mpn; // string
     char *isbn; // string
+    char *seo_url; // string
     char *manufacturer; // string
     char *created_at; // string
     char *meta_title; // string
@@ -87,6 +89,7 @@ __attribute__((deprecated)) product_variant_add_t *product_variant_add_create(
     char *short_description,
     int available_for_view,
     int available_for_sale,
+    char *status,
     int is_virtual,
     int is_default,
     char *store_id,
@@ -118,6 +121,7 @@ __attribute__((deprecated)) product_variant_add_t *product_variant_add_create(
     char *ean,
     char *mpn,
     char *isbn,
+    char *seo_url,
     char *manufacturer,
     char *created_at,
     char *meta_title,
