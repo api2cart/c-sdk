@@ -85,6 +85,7 @@ typedef struct product_add_t {
     char *mpn; // string
     char *asin; // string
     char *product_reference; // string
+    char *external_product_link; // string
     char *harmonized_system_code; // string
     char *country_of_origin; // string
     char *manufacturer; // string
@@ -207,6 +208,7 @@ __attribute__((deprecated)) product_add_t *product_add_create(
     char *mpn,
     char *asin,
     char *product_reference,
+    char *external_product_link,
     char *harmonized_system_code,
     char *country_of_origin,
     char *manufacturer,

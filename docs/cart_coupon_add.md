@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **include_tax** | **int** | Indicates whether to apply a discount for taxes. | [optional] [default to false]
 **store_id** | **char \*** | Store Id | [optional] 
 **free_cash_on_delivery** | **int** | Defines whether the coupon provides free cash on delivery | [optional] 
+**customer_id** | **char \*** | Retrieves orders specified by customer id | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 //
 // Get cart coupon discounts.
 //
-model_response_cart_coupon_list_t* CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *coupons_ids, char *store_id, char *lang_id, int *avail, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, char *response_fields, char *params, char *exclude);
+model_response_cart_coupon_list_t* CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *coupons_ids, char *store_id, char *lang_id, int *avail, char *status, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -254,6 +254,7 @@ Name | Type | Description  | Notes
 **store_id** | **char \*** | Filter coupons by store id | [optional] 
 **lang_id** | **char \*** | Language id | [optional] 
 **avail** | **int \*** | Filter coupons by avail status | [optional] 
+**status** | **char \*** | Defines coupon&#39;s status | [optional] 
 **date_start_from** | **char \*** | Filter entity by date_start (greater or equal) | [optional] 
 **date_start_to** | **char \*** | Filter entity by date_start (less or equal) | [optional] 
 **date_end_from** | **char \*** | Filter entity by date_end (greater or equal) | [optional] 

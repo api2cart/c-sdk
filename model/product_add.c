@@ -58,6 +58,7 @@ static product_add_t *product_add_create_internal(
     char *mpn,
     char *asin,
     char *product_reference,
+    char *external_product_link,
     char *harmonized_system_code,
     char *country_of_origin,
     char *manufacturer,
@@ -180,6 +181,7 @@ static product_add_t *product_add_create_internal(
     product_add_local_var->mpn = mpn;
     product_add_local_var->asin = asin;
     product_add_local_var->product_reference = product_reference;
+    product_add_local_var->external_product_link = external_product_link;
     product_add_local_var->harmonized_system_code = harmonized_system_code;
     product_add_local_var->country_of_origin = country_of_origin;
     product_add_local_var->manufacturer = manufacturer;
@@ -303,6 +305,7 @@ __attribute__((deprecated)) product_add_t *product_add_create(
     char *mpn,
     char *asin,
     char *product_reference,
+    char *external_product_link,
     char *harmonized_system_code,
     char *country_of_origin,
     char *manufacturer,
@@ -422,6 +425,7 @@ __attribute__((deprecated)) product_add_t *product_add_create(
         mpn,
         asin,
         product_reference,
+        external_product_link,
         harmonized_system_code,
         country_of_origin,
         manufacturer,
@@ -620,6 +624,10 @@ void product_add_free(product_add_t *product_add) {
     if (product_add->product_reference) {
         free(product_add->product_reference);
         product_add->product_reference = NULL;
+    }
+    if (product_add->external_product_link) {
+        free(product_add->external_product_link);
+        product_add->external_product_link = NULL;
     }
     if (product_add->harmonized_system_code) {
         free(product_add->harmonized_system_code);
@@ -1302,6 +1310,14 @@ cJSON *product_add_convertToJSON(product_add_t *product_add) {
     // product_add->product_reference
     if(product_add->product_reference) {
     if(cJSON_AddStringToObject(item, "product_reference", product_add->product_reference) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_add->external_product_link
+    if(product_add->external_product_link) {
+    if(cJSON_AddStringToObject(item, "external_product_link", product_add->external_product_link) == NULL) {
     goto fail; //String
     }
     }
@@ -2671,6 +2687,18 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
     }
     }
 
+    // product_add->external_product_link
+    cJSON *external_product_link = cJSON_GetObjectItemCaseSensitive(product_addJSON, "external_product_link");
+    if (cJSON_IsNull(external_product_link)) {
+        external_product_link = NULL;
+    }
+    if (external_product_link) { 
+    if(!cJSON_IsString(external_product_link) && !cJSON_IsNull(external_product_link))
+    {
+    goto end; //String
+    }
+    }
+
     // product_add->harmonized_system_code
     cJSON *harmonized_system_code = cJSON_GetObjectItemCaseSensitive(product_addJSON, "harmonized_system_code");
     if (cJSON_IsNull(harmonized_system_code)) {
@@ -3574,6 +3602,7 @@ product_add_t *product_add_parseFromJSON(cJSON *product_addJSON){
         mpn && !cJSON_IsNull(mpn) ? strdup(mpn->valuestring) : NULL,
         asin && !cJSON_IsNull(asin) ? strdup(asin->valuestring) : NULL,
         product_reference && !cJSON_IsNull(product_reference) ? strdup(product_reference->valuestring) : NULL,
+        external_product_link && !cJSON_IsNull(external_product_link) ? strdup(external_product_link->valuestring) : NULL,
         harmonized_system_code && !cJSON_IsNull(harmonized_system_code) ? strdup(harmonized_system_code->valuestring) : NULL,
         country_of_origin && !cJSON_IsNull(country_of_origin) ? strdup(country_of_origin->valuestring) : NULL,
         manufacturer && !cJSON_IsNull(manufacturer) ? strdup(manufacturer->valuestring) : NULL,

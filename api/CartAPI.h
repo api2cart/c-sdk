@@ -87,7 +87,7 @@ CartAPI_cartCouponDelete(apiClient_t *apiClient, char *id, char *store_id);
 // Get cart coupon discounts.
 //
 model_response_cart_coupon_list_t*
-CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *coupons_ids, char *store_id, char *lang_id, int *avail, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, char *response_fields, char *params, char *exclude);
+CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *coupons_ids, char *store_id, char *lang_id, int *avail, char *status, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, char *response_fields, char *params, char *exclude);
 
 
 // cart.delete

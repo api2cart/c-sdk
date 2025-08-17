@@ -39,7 +39,8 @@ cart_coupon_add_t* instantiate_cart_coupon_add(int include_optional) {
       "17834222,45466663",
       true,
       "1",
-      true
+      true,
+      "5"
     );
   } else {
     cart_coupon_add = cart_coupon_add_create(
@@ -60,7 +61,8 @@ cart_coupon_add_t* instantiate_cart_coupon_add(int include_optional) {
       "17834222,45466663",
       true,
       "1",
-      true
+      true,
+      "5"
     );
   }
 

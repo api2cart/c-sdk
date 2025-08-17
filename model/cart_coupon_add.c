@@ -74,7 +74,8 @@ static cart_coupon_add_t *cart_coupon_add_create_internal(
     char *action_condition_value,
     int include_tax,
     char *store_id,
-    int free_cash_on_delivery
+    int free_cash_on_delivery,
+    char *customer_id
     ) {
     cart_coupon_add_t *cart_coupon_add_local_var = malloc(sizeof(cart_coupon_add_t));
     if (!cart_coupon_add_local_var) {
@@ -98,6 +99,7 @@ static cart_coupon_add_t *cart_coupon_add_create_internal(
     cart_coupon_add_local_var->include_tax = include_tax;
     cart_coupon_add_local_var->store_id = store_id;
     cart_coupon_add_local_var->free_cash_on_delivery = free_cash_on_delivery;
+    cart_coupon_add_local_var->customer_id = customer_id;
 
     cart_coupon_add_local_var->_library_owned = 1;
     return cart_coupon_add_local_var;
@@ -121,7 +123,8 @@ __attribute__((deprecated)) cart_coupon_add_t *cart_coupon_add_create(
     char *action_condition_value,
     int include_tax,
     char *store_id,
-    int free_cash_on_delivery
+    int free_cash_on_delivery,
+    char *customer_id
     ) {
     return cart_coupon_add_create_internal (
         code,
@@ -141,7 +144,8 @@ __attribute__((deprecated)) cart_coupon_add_t *cart_coupon_add_create(
         action_condition_value,
         include_tax,
         store_id,
-        free_cash_on_delivery
+        free_cash_on_delivery,
+        customer_id
         );
 }
 
@@ -196,6 +200,10 @@ void cart_coupon_add_free(cart_coupon_add_t *cart_coupon_add) {
     if (cart_coupon_add->store_id) {
         free(cart_coupon_add->store_id);
         cart_coupon_add->store_id = NULL;
+    }
+    if (cart_coupon_add->customer_id) {
+        free(cart_coupon_add->customer_id);
+        cart_coupon_add->customer_id = NULL;
     }
     free(cart_coupon_add);
 }
@@ -360,6 +368,14 @@ cJSON *cart_coupon_add_convertToJSON(cart_coupon_add_t *cart_coupon_add) {
     if(cart_coupon_add->free_cash_on_delivery) {
     if(cJSON_AddBoolToObject(item, "free_cash_on_delivery", cart_coupon_add->free_cash_on_delivery) == NULL) {
     goto fail; //Bool
+    }
+    }
+
+
+    // cart_coupon_add->customer_id
+    if(cart_coupon_add->customer_id) {
+    if(cJSON_AddStringToObject(item, "customer_id", cart_coupon_add->customer_id) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -625,6 +641,18 @@ cart_coupon_add_t *cart_coupon_add_parseFromJSON(cJSON *cart_coupon_addJSON){
     }
     }
 
+    // cart_coupon_add->customer_id
+    cJSON *customer_id = cJSON_GetObjectItemCaseSensitive(cart_coupon_addJSON, "customer_id");
+    if (cJSON_IsNull(customer_id)) {
+        customer_id = NULL;
+    }
+    if (customer_id) { 
+    if(!cJSON_IsString(customer_id) && !cJSON_IsNull(customer_id))
+    {
+    goto end; //String
+    }
+    }
+
 
     cart_coupon_add_local_var = cart_coupon_add_create_internal (
         strdup(code->valuestring),
@@ -644,7 +672,8 @@ cart_coupon_add_t *cart_coupon_add_parseFromJSON(cJSON *cart_coupon_addJSON){
         action_condition_value && !cJSON_IsNull(action_condition_value) ? strdup(action_condition_value->valuestring) : NULL,
         include_tax ? include_tax->valueint : 0,
         store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,
-        free_cash_on_delivery ? free_cash_on_delivery->valueint : 0
+        free_cash_on_delivery ? free_cash_on_delivery->valueint : 0,
+        customer_id && !cJSON_IsNull(customer_id) ? strdup(customer_id->valuestring) : NULL
         );
 
     return cart_coupon_add_local_var;

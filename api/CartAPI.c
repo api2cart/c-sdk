@@ -1127,7 +1127,7 @@ end:
 // Get cart coupon discounts.
 //
 model_response_cart_coupon_list_t*
-CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *coupons_ids, char *store_id, char *lang_id, int *avail, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, char *response_fields, char *params, char *exclude)
+CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *page_cursor, char *coupons_ids, char *store_id, char *lang_id, int *avail, char *status, char *date_start_from, char *date_start_to, char *date_end_from, char *date_end_to, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1232,6 +1232,18 @@ CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *pag
         snprintf(valueQuery_avail, MAX_NUMBER_LENGTH, "%d", *avail);
         keyPairQuery_avail = keyValuePair_create(keyQuery_avail, valueQuery_avail);
         list_addElement(localVarQueryParameters,keyPairQuery_avail);
+    }
+
+    // query parameters
+    char *keyQuery_status = NULL;
+    char * valueQuery_status = NULL;
+    keyValuePair_t *keyPairQuery_status = 0;
+    if (status)
+    {
+        keyQuery_status = strdup("status");
+        valueQuery_status = strdup((status));
+        keyPairQuery_status = keyValuePair_create(keyQuery_status, valueQuery_status);
+        list_addElement(localVarQueryParameters,keyPairQuery_status);
     }
 
     // query parameters
@@ -1439,6 +1451,18 @@ CartAPI_cartCouponList(apiClient_t *apiClient, int *start, int *count, char *pag
     if(keyPairQuery_avail){
         keyValuePair_free(keyPairQuery_avail);
         keyPairQuery_avail = NULL;
+    }
+    if(keyQuery_status){
+        free(keyQuery_status);
+        keyQuery_status = NULL;
+    }
+    if(valueQuery_status){
+        free(valueQuery_status);
+        valueQuery_status = NULL;
+    }
+    if(keyPairQuery_status){
+        keyValuePair_free(keyPairQuery_status);
+        keyPairQuery_status = NULL;
     }
     if(keyQuery_date_start_from){
         free(keyQuery_date_start_from);
