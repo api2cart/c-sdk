@@ -114,6 +114,7 @@ product_update_t* instantiate_product_update(int include_optional) {
       `12345678`,
        // false, not to have infinite recursion
       instantiate_product_add_personalization_details(0),
+      "http://example.com/t-shirt",
       "{"color":["Silver"],"manufacturer":"Philips","features":["3 way"],"countPerPack":1,"watts":{"unit":"W","measure":40}}",
       1
     );
@@ -205,6 +206,7 @@ product_update_t* instantiate_product_update(int include_optional) {
       list_createList(),
       `12345678`,
       NULL,
+      "http://example.com/t-shirt",
       "{"color":["Silver"],"manufacturer":"Philips","features":["3 way"],"countPerPack":1,"watts":{"unit":"W","measure":40}}",
       1
     );

@@ -92,6 +92,7 @@ static product_update_t *product_update_create_internal(
     list_t *specifics,
     int shop_section_id,
     product_add_personalization_details_t *personalization_details,
+    char *external_product_link,
     char *marketplace_item_properties,
     double min_order_quantity
     ) {
@@ -185,6 +186,7 @@ static product_update_t *product_update_create_internal(
     product_update_local_var->specifics = specifics;
     product_update_local_var->shop_section_id = shop_section_id;
     product_update_local_var->personalization_details = personalization_details;
+    product_update_local_var->external_product_link = external_product_link;
     product_update_local_var->marketplace_item_properties = marketplace_item_properties;
     product_update_local_var->min_order_quantity = min_order_quantity;
 
@@ -279,6 +281,7 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     list_t *specifics,
     int shop_section_id,
     product_add_personalization_details_t *personalization_details,
+    char *external_product_link,
     char *marketplace_item_properties,
     double min_order_quantity
     ) {
@@ -369,6 +372,7 @@ __attribute__((deprecated)) product_update_t *product_update_create(
         specifics,
         shop_section_id,
         personalization_details,
+        external_product_link,
         marketplace_item_properties,
         min_order_quantity
         );
@@ -599,6 +603,10 @@ void product_update_free(product_update_t *product_update) {
     if (product_update->personalization_details) {
         product_add_personalization_details_free(product_update->personalization_details);
         product_update->personalization_details = NULL;
+    }
+    if (product_update->external_product_link) {
+        free(product_update->external_product_link);
+        product_update->external_product_link = NULL;
     }
     if (product_update->marketplace_item_properties) {
         free(product_update->marketplace_item_properties);
@@ -1342,6 +1350,14 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     cJSON_AddItemToObject(item, "personalization_details", personalization_details_local_JSON);
     if(item->child == NULL) {
     goto fail;
+    }
+    }
+
+
+    // product_update->external_product_link
+    if(product_update->external_product_link) {
+    if(cJSON_AddStringToObject(item, "external_product_link", product_update->external_product_link) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -2448,6 +2464,18 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     personalization_details_local_nonprim = product_add_personalization_details_parseFromJSON(personalization_details); //nonprimitive
     }
 
+    // product_update->external_product_link
+    cJSON *external_product_link = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "external_product_link");
+    if (cJSON_IsNull(external_product_link)) {
+        external_product_link = NULL;
+    }
+    if (external_product_link) { 
+    if(!cJSON_IsString(external_product_link) && !cJSON_IsNull(external_product_link))
+    {
+    goto end; //String
+    }
+    }
+
     // product_update->marketplace_item_properties
     cJSON *marketplace_item_properties = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "marketplace_item_properties");
     if (cJSON_IsNull(marketplace_item_properties)) {
@@ -2560,6 +2588,7 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
         specifics ? specificsList : NULL,
         shop_section_id ? shop_section_id->valuedouble : 0,
         personalization_details ? personalization_details_local_nonprim : NULL,
+        external_product_link && !cJSON_IsNull(external_product_link) ? strdup(external_product_link->valuestring) : NULL,
         marketplace_item_properties && !cJSON_IsNull(marketplace_item_properties) ? strdup(marketplace_item_properties->valuestring) : NULL,
         min_order_quantity ? min_order_quantity->valuedouble : 0
         );

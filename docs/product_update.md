@@ -89,6 +89,7 @@ Name | Type | Description | Notes
 **specifics** | [**list_t**](product_add_specifics_inner.md) \* | An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.         The list of possible specifications can be obtained using the category.info method (additional_fields-&gt;product_specifics).         &lt;b&gt;The structure of the parameter is different for specific platforms.&lt;/b&gt; | [optional] 
 **shop_section_id** | **int** | Add Shop Section Id | [optional] 
 **personalization_details** | [**product_add_personalization_details_t**](product_add_personalization_details.md) \* |  | [optional] 
+**external_product_link** | **char \*** | External product link | [optional] 
 **marketplace_item_properties** | **char \*** | String containing the JSON representation of the supplied data | [optional] 
 **min_order_quantity** | **double** | The minimum quantity an order must contain, to be eligible to purchase this product. | [optional] 
 
