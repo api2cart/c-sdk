@@ -850,7 +850,7 @@ Name | Type | Description  | Notes
 //
 // Add manufacturer to store and assign to product
 //
-product_manufacturer_add_200_response_t* ProductAPI_productManufacturerAdd(apiClient_t *apiClient, char *product_id, char *manufacturer, char *store_id);
+product_manufacturer_add_200_response_t* ProductAPI_productManufacturerAdd(apiClient_t *apiClient, char *product_id, char *manufacturer, char *store_id, char *meta_title, char *meta_keywords, char *meta_description, char *search_keywords, char *image_url, char *seo_url);
 ```
 
 ### Parameters
@@ -860,6 +860,12 @@ Name | Type | Description  | Notes
 **product_id** | **char \*** | Defines products specified by product id | 
 **manufacturer** | **char \*** | Defines product’s manufacturer&#39;s name | 
 **store_id** | **char \*** | Store Id | [optional] 
+**meta_title** | **char \*** | Defines unique meta title for each entity | [optional] 
+**meta_keywords** | **char \*** | Defines unique meta keywords for each entity | [optional] 
+**meta_description** | **char \*** | Defines unique meta description of a entity | [optional] 
+**search_keywords** | **char \*** | Defines unique search keywords | [optional] 
+**image_url** | **char \*** | Image Url | [optional] 
+**seo_url** | **char \*** | Defines unique URL for SEO | [optional] 
 
 ### Return type
 
@@ -1258,7 +1264,7 @@ Name | Type | Description  | Notes
 //
 // Get reviews of a specific product.
 //
-model_response_product_review_list_t* ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *start, int *count, char *page_cursor, char *ids, char *store_id, char *status, char *response_fields, char *params, char *exclude);
+model_response_product_review_list_t* ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *start, int *count, char *page_cursor, char *ids, char *store_id, char *lang_id, char *status, char *created_from, char *created_to, char *customer_id, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude);
 ```
 
 ### Parameters
@@ -1271,7 +1277,13 @@ Name | Type | Description  | Notes
 **page_cursor** | **char \*** | Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
 **ids** | **char \*** | Retrieves reviews specified by ids | [optional] 
 **store_id** | **char \*** | Store Id | [optional] 
+**lang_id** | **char \*** | Language id | [optional] 
 **status** | **char \*** | Defines status | [optional] 
+**created_from** | **char \*** | Retrieve entities from their creation date | [optional] 
+**created_to** | **char \*** | Retrieve entities to their creation date | [optional] 
+**customer_id** | **char \*** | Retrieves orders specified by customer id | [optional] 
+**sort_by** | **char \*** | Set field to sort by | [optional] [default to &#39;id&#39;]
+**sort_direction** | **char \*** | Set sorting direction | [optional] [default to &#39;asc&#39;]
 **response_fields** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 **params** | **char \*** | Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &#39;id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time&#39;]
 **exclude** | **char \*** | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 

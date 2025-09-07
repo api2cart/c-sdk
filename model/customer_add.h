@@ -26,6 +26,7 @@ typedef struct customer_add_t {
     char *last_name; // string
     char *password; // string
     char *group; // string
+    char *group_id; // string
     char *group_ids; // string
     char *status; // string
     char *created_time; // string
@@ -54,6 +55,7 @@ __attribute__((deprecated)) customer_add_t *customer_add_create(
     char *last_name,
     char *password,
     char *group,
+    char *group_id,
     char *group_ids,
     char *status,
     char *created_time,

@@ -146,6 +146,7 @@ Category | Method | HTTP request | Description
 *MarketplaceAPI* | [**MarketplaceAPI_marketplaceProductFind**](docs/MarketplaceAPI.md#MarketplaceAPI_marketplaceProductFind) | **GET** /marketplace.product.find.json | marketplace.product.find
 *OrderAPI* | [**OrderAPI_orderAbandonedList**](docs/OrderAPI.md#OrderAPI_orderAbandonedList) | **GET** /order.abandoned.list.json | order.abandoned.list
 *OrderAPI* | [**OrderAPI_orderAdd**](docs/OrderAPI.md#OrderAPI_orderAdd) | **POST** /order.add.json | order.add
+*OrderAPI* | [**OrderAPI_orderCalculate**](docs/OrderAPI.md#OrderAPI_orderCalculate) | **POST** /order.calculate.json | order.calculate
 *OrderAPI* | [**OrderAPI_orderCount**](docs/OrderAPI.md#OrderAPI_orderCount) | **GET** /order.count.json | order.count
 *OrderAPI* | [**OrderAPI_orderFinancialStatusList**](docs/OrderAPI.md#OrderAPI_orderFinancialStatusList) | **GET** /order.financial_status.list.json | order.financial_status.list
 *OrderAPI* | [**OrderAPI_orderFulfillmentStatusList**](docs/OrderAPI.md#OrderAPI_orderFulfillmentStatusList) | **GET** /order.fulfillment_status.list.json | order.fulfillment_status.list
@@ -422,6 +423,15 @@ Category | Method | HTTP request | Description
  - [order_add_order_item_inner_t](docs/order_add_order_item_inner.md)
  - [order_add_order_item_inner_order_item_option_inner_t](docs/order_add_order_item_inner_order_item_option_inner.md)
  - [order_add_order_item_inner_order_item_property_inner_t](docs/order_add_order_item_inner_order_item_property_inner.md)
+ - [order_calculate_t](docs/order_calculate.md)
+ - [order_calculate_200_response_t](docs/order_calculate_200_response.md)
+ - [order_calculate_discount_t](docs/order_calculate_discount.md)
+ - [order_calculate_item_t](docs/order_calculate_item.md)
+ - [order_calculate_order_item_inner_t](docs/order_calculate_order_item_inner.md)
+ - [order_calculate_order_item_inner_order_item_option_inner_t](docs/order_calculate_order_item_inner_order_item_option_inner.md)
+ - [order_calculate_shipping_rate_t](docs/order_calculate_shipping_rate.md)
+ - [order_calculate_subtotal_t](docs/order_calculate_subtotal.md)
+ - [order_calculate_tax_t](docs/order_calculate_tax.md)
  - [order_count_200_response_t](docs/order_count_200_response.md)
  - [order_count_200_response_result_t](docs/order_count_200_response_result.md)
  - [order_financial_status_list_200_response_t](docs/order_financial_status_list_200_response.md)

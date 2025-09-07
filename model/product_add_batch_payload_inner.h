@@ -46,6 +46,7 @@ typedef struct product_add_batch_payload_inner_t {
     int manage_stock; //boolean
     char *product_type; // string
     object_t *marketplace_item_properties; //object
+    object_t *specifics; //object
     int is_free_shipping; //boolean
     int taxable; //boolean
     char *status; // string
@@ -80,6 +81,7 @@ typedef struct product_add_batch_payload_inner_t {
     char *harmonized_system_code; // string
     char *url; // string
     char *seo_url; // string
+    char *external_product_link; // string
     char *manufacturer; // string
     char *manufacturer_id; // string
     char *backorder_status; // string
@@ -114,6 +116,7 @@ __attribute__((deprecated)) product_add_batch_payload_inner_t *product_add_batch
     int manage_stock,
     char *product_type,
     object_t *marketplace_item_properties,
+    object_t *specifics,
     int is_free_shipping,
     int taxable,
     char *status,
@@ -148,6 +151,7 @@ __attribute__((deprecated)) product_add_batch_payload_inner_t *product_add_batch
     char *harmonized_system_code,
     char *url,
     char *seo_url,
+    char *external_product_link,
     char *manufacturer,
     char *manufacturer_id,
     char *backorder_status,

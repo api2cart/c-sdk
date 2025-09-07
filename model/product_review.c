@@ -17,6 +17,7 @@ static product_review_t *product_review_create_internal(
     list_t *ratings,
     char *status,
     a2_c_date_time_t *created_time,
+    a2_c_date_time_t *modified_time,
     list_t *medias,
     object_t *additional_fields,
     object_t *custom_fields
@@ -36,6 +37,7 @@ static product_review_t *product_review_create_internal(
     product_review_local_var->ratings = ratings;
     product_review_local_var->status = status;
     product_review_local_var->created_time = created_time;
+    product_review_local_var->modified_time = modified_time;
     product_review_local_var->medias = medias;
     product_review_local_var->additional_fields = additional_fields;
     product_review_local_var->custom_fields = custom_fields;
@@ -56,6 +58,7 @@ __attribute__((deprecated)) product_review_t *product_review_create(
     list_t *ratings,
     char *status,
     a2_c_date_time_t *created_time,
+    a2_c_date_time_t *modified_time,
     list_t *medias,
     object_t *additional_fields,
     object_t *custom_fields
@@ -72,6 +75,7 @@ __attribute__((deprecated)) product_review_t *product_review_create(
         ratings,
         status,
         created_time,
+        modified_time,
         medias,
         additional_fields,
         custom_fields
@@ -129,6 +133,10 @@ void product_review_free(product_review_t *product_review) {
     if (product_review->created_time) {
         a2_c_date_time_free(product_review->created_time);
         product_review->created_time = NULL;
+    }
+    if (product_review->modified_time) {
+        a2_c_date_time_free(product_review->modified_time);
+        product_review->modified_time = NULL;
     }
     if (product_review->medias) {
         list_ForEach(listEntry, product_review->medias) {
@@ -256,6 +264,19 @@ cJSON *product_review_convertToJSON(product_review_t *product_review) {
     }
 
 
+    // product_review->modified_time
+    if(product_review->modified_time) {
+    cJSON *modified_time_local_JSON = a2_c_date_time_convertToJSON(product_review->modified_time);
+    if(modified_time_local_JSON == NULL) {
+    goto fail; //model
+    }
+    cJSON_AddItemToObject(item, "modified_time", modified_time_local_JSON);
+    if(item->child == NULL) {
+    goto fail;
+    }
+    }
+
+
     // product_review->medias
     if(product_review->medias) {
     cJSON *medias = cJSON_AddArrayToObject(item, "medias");
@@ -318,6 +339,9 @@ product_review_t *product_review_parseFromJSON(cJSON *product_reviewJSON){
 
     // define the local variable for product_review->created_time
     a2_c_date_time_t *created_time_local_nonprim = NULL;
+
+    // define the local variable for product_review->modified_time
+    a2_c_date_time_t *modified_time_local_nonprim = NULL;
 
     // define the local list for product_review->medias
     list_t *mediasList = NULL;
@@ -463,6 +487,15 @@ product_review_t *product_review_parseFromJSON(cJSON *product_reviewJSON){
     created_time_local_nonprim = a2_c_date_time_parseFromJSON(created_time); //nonprimitive
     }
 
+    // product_review->modified_time
+    cJSON *modified_time = cJSON_GetObjectItemCaseSensitive(product_reviewJSON, "modified_time");
+    if (cJSON_IsNull(modified_time)) {
+        modified_time = NULL;
+    }
+    if (modified_time) { 
+    modified_time_local_nonprim = a2_c_date_time_parseFromJSON(modified_time); //nonprimitive
+    }
+
     // product_review->medias
     cJSON *medias = cJSON_GetObjectItemCaseSensitive(product_reviewJSON, "medias");
     if (cJSON_IsNull(medias)) {
@@ -520,6 +553,7 @@ product_review_t *product_review_parseFromJSON(cJSON *product_reviewJSON){
         ratings ? ratingsList : NULL,
         status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
         created_time ? created_time_local_nonprim : NULL,
+        modified_time ? modified_time_local_nonprim : NULL,
         medias ? mediasList : NULL,
         additional_fields ? additional_fields_local_object : NULL,
         custom_fields ? custom_fields_local_object : NULL
@@ -539,6 +573,10 @@ end:
     if (created_time_local_nonprim) {
         a2_c_date_time_free(created_time_local_nonprim);
         created_time_local_nonprim = NULL;
+    }
+    if (modified_time_local_nonprim) {
+        a2_c_date_time_free(modified_time_local_nonprim);
+        modified_time_local_nonprim = NULL;
     }
     if (mediasList) {
         listEntry_t *listEntry = NULL;

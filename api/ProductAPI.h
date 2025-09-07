@@ -222,7 +222,7 @@ ProductAPI_productList(apiClient_t *apiClient, int *start, int *count, char *pag
 // Add manufacturer to store and assign to product
 //
 product_manufacturer_add_200_response_t*
-ProductAPI_productManufacturerAdd(apiClient_t *apiClient, char *product_id, char *manufacturer, char *store_id);
+ProductAPI_productManufacturerAdd(apiClient_t *apiClient, char *product_id, char *manufacturer, char *store_id, char *meta_title, char *meta_keywords, char *meta_description, char *search_keywords, char *image_url, char *seo_url);
 
 
 // product.option.add
@@ -318,7 +318,7 @@ ProductAPI_productPriceUpdate(apiClient_t *apiClient, product_price_update_t *pr
 // Get reviews of a specific product.
 //
 model_response_product_review_list_t*
-ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *start, int *count, char *page_cursor, char *ids, char *store_id, char *status, char *response_fields, char *params, char *exclude);
+ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *start, int *count, char *page_cursor, char *ids, char *store_id, char *lang_id, char *status, char *created_from, char *created_to, char *customer_id, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude);
 
 
 // product.store.assign

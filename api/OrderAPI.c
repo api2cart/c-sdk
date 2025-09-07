@@ -502,6 +502,92 @@ end:
 
 }
 
+// order.calculate
+//
+// <p>Calculates the total cost of an order for a given customer and a set of products, as well as the available shipping methods based on the specified address. The calculation takes into account store product prices, discounts, taxes, shipping costs, and other store settings. The result includes a detailed breakdown of the final order cost by its components.</p> <p>Note that the final totals, taxes, and other amounts must include the corresponding values for the selected shipping method.</p><p>The result of this method can be used when creating an order using the <strong>order.add</strong> method.</p>
+//
+order_calculate_200_response_t*
+OrderAPI_orderCalculate(apiClient_t *apiClient, order_calculate_t *order_calculate)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = list_createList();
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/order.calculate.json");
+
+
+
+
+
+    // Body Param
+    cJSON *localVarSingleItemJSON_order_calculate = NULL;
+    if (order_calculate != NULL)
+    {
+        //not string, not binary
+        localVarSingleItemJSON_order_calculate = order_calculate_convertToJSON(order_calculate);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_order_calculate);
+        localVarBodyLength = strlen(localVarBodyParameters);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/json"); //consumes
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "POST");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","successful operation");
+    //}
+    //nonprimitive not container
+    order_calculate_200_response_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *OrderAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = order_calculate_200_response_parseFromJSON(OrderAPIlocalVarJSON);
+        cJSON_Delete(OrderAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    list_freeList(localVarContentType);
+    free(localVarPath);
+    if (localVarSingleItemJSON_order_calculate) {
+        cJSON_Delete(localVarSingleItemJSON_order_calculate);
+        localVarSingleItemJSON_order_calculate = NULL;
+    }
+    free(localVarBodyParameters);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
 // order.count
 //
 // Count orders in store

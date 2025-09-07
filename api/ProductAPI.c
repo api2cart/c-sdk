@@ -5938,7 +5938,7 @@ end:
 // Add manufacturer to store and assign to product
 //
 product_manufacturer_add_200_response_t*
-ProductAPI_productManufacturerAdd(apiClient_t *apiClient, char *product_id, char *manufacturer, char *store_id)
+ProductAPI_productManufacturerAdd(apiClient_t *apiClient, char *product_id, char *manufacturer, char *store_id, char *meta_title, char *meta_keywords, char *meta_description, char *search_keywords, char *image_url, char *seo_url)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -5992,6 +5992,78 @@ ProductAPI_productManufacturerAdd(apiClient_t *apiClient, char *product_id, char
         valueQuery_store_id = strdup((store_id));
         keyPairQuery_store_id = keyValuePair_create(keyQuery_store_id, valueQuery_store_id);
         list_addElement(localVarQueryParameters,keyPairQuery_store_id);
+    }
+
+    // query parameters
+    char *keyQuery_meta_title = NULL;
+    char * valueQuery_meta_title = NULL;
+    keyValuePair_t *keyPairQuery_meta_title = 0;
+    if (meta_title)
+    {
+        keyQuery_meta_title = strdup("meta_title");
+        valueQuery_meta_title = strdup((meta_title));
+        keyPairQuery_meta_title = keyValuePair_create(keyQuery_meta_title, valueQuery_meta_title);
+        list_addElement(localVarQueryParameters,keyPairQuery_meta_title);
+    }
+
+    // query parameters
+    char *keyQuery_meta_keywords = NULL;
+    char * valueQuery_meta_keywords = NULL;
+    keyValuePair_t *keyPairQuery_meta_keywords = 0;
+    if (meta_keywords)
+    {
+        keyQuery_meta_keywords = strdup("meta_keywords");
+        valueQuery_meta_keywords = strdup((meta_keywords));
+        keyPairQuery_meta_keywords = keyValuePair_create(keyQuery_meta_keywords, valueQuery_meta_keywords);
+        list_addElement(localVarQueryParameters,keyPairQuery_meta_keywords);
+    }
+
+    // query parameters
+    char *keyQuery_meta_description = NULL;
+    char * valueQuery_meta_description = NULL;
+    keyValuePair_t *keyPairQuery_meta_description = 0;
+    if (meta_description)
+    {
+        keyQuery_meta_description = strdup("meta_description");
+        valueQuery_meta_description = strdup((meta_description));
+        keyPairQuery_meta_description = keyValuePair_create(keyQuery_meta_description, valueQuery_meta_description);
+        list_addElement(localVarQueryParameters,keyPairQuery_meta_description);
+    }
+
+    // query parameters
+    char *keyQuery_search_keywords = NULL;
+    char * valueQuery_search_keywords = NULL;
+    keyValuePair_t *keyPairQuery_search_keywords = 0;
+    if (search_keywords)
+    {
+        keyQuery_search_keywords = strdup("search_keywords");
+        valueQuery_search_keywords = strdup((search_keywords));
+        keyPairQuery_search_keywords = keyValuePair_create(keyQuery_search_keywords, valueQuery_search_keywords);
+        list_addElement(localVarQueryParameters,keyPairQuery_search_keywords);
+    }
+
+    // query parameters
+    char *keyQuery_image_url = NULL;
+    char * valueQuery_image_url = NULL;
+    keyValuePair_t *keyPairQuery_image_url = 0;
+    if (image_url)
+    {
+        keyQuery_image_url = strdup("image_url");
+        valueQuery_image_url = strdup((image_url));
+        keyPairQuery_image_url = keyValuePair_create(keyQuery_image_url, valueQuery_image_url);
+        list_addElement(localVarQueryParameters,keyPairQuery_image_url);
+    }
+
+    // query parameters
+    char *keyQuery_seo_url = NULL;
+    char * valueQuery_seo_url = NULL;
+    keyValuePair_t *keyPairQuery_seo_url = 0;
+    if (seo_url)
+    {
+        keyQuery_seo_url = strdup("seo_url");
+        valueQuery_seo_url = strdup((seo_url));
+        keyPairQuery_seo_url = keyValuePair_create(keyQuery_seo_url, valueQuery_seo_url);
+        list_addElement(localVarQueryParameters,keyPairQuery_seo_url);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -6067,6 +6139,78 @@ ProductAPI_productManufacturerAdd(apiClient_t *apiClient, char *product_id, char
     if(keyPairQuery_store_id){
         keyValuePair_free(keyPairQuery_store_id);
         keyPairQuery_store_id = NULL;
+    }
+    if(keyQuery_meta_title){
+        free(keyQuery_meta_title);
+        keyQuery_meta_title = NULL;
+    }
+    if(valueQuery_meta_title){
+        free(valueQuery_meta_title);
+        valueQuery_meta_title = NULL;
+    }
+    if(keyPairQuery_meta_title){
+        keyValuePair_free(keyPairQuery_meta_title);
+        keyPairQuery_meta_title = NULL;
+    }
+    if(keyQuery_meta_keywords){
+        free(keyQuery_meta_keywords);
+        keyQuery_meta_keywords = NULL;
+    }
+    if(valueQuery_meta_keywords){
+        free(valueQuery_meta_keywords);
+        valueQuery_meta_keywords = NULL;
+    }
+    if(keyPairQuery_meta_keywords){
+        keyValuePair_free(keyPairQuery_meta_keywords);
+        keyPairQuery_meta_keywords = NULL;
+    }
+    if(keyQuery_meta_description){
+        free(keyQuery_meta_description);
+        keyQuery_meta_description = NULL;
+    }
+    if(valueQuery_meta_description){
+        free(valueQuery_meta_description);
+        valueQuery_meta_description = NULL;
+    }
+    if(keyPairQuery_meta_description){
+        keyValuePair_free(keyPairQuery_meta_description);
+        keyPairQuery_meta_description = NULL;
+    }
+    if(keyQuery_search_keywords){
+        free(keyQuery_search_keywords);
+        keyQuery_search_keywords = NULL;
+    }
+    if(valueQuery_search_keywords){
+        free(valueQuery_search_keywords);
+        valueQuery_search_keywords = NULL;
+    }
+    if(keyPairQuery_search_keywords){
+        keyValuePair_free(keyPairQuery_search_keywords);
+        keyPairQuery_search_keywords = NULL;
+    }
+    if(keyQuery_image_url){
+        free(keyQuery_image_url);
+        keyQuery_image_url = NULL;
+    }
+    if(valueQuery_image_url){
+        free(valueQuery_image_url);
+        valueQuery_image_url = NULL;
+    }
+    if(keyPairQuery_image_url){
+        keyValuePair_free(keyPairQuery_image_url);
+        keyPairQuery_image_url = NULL;
+    }
+    if(keyQuery_seo_url){
+        free(keyQuery_seo_url);
+        keyQuery_seo_url = NULL;
+    }
+    if(valueQuery_seo_url){
+        free(valueQuery_seo_url);
+        valueQuery_seo_url = NULL;
+    }
+    if(keyPairQuery_seo_url){
+        keyValuePair_free(keyPairQuery_seo_url);
+        keyPairQuery_seo_url = NULL;
     }
     return elementToReturn;
 end:
@@ -7909,7 +8053,7 @@ end:
 // Get reviews of a specific product.
 //
 model_response_product_review_list_t*
-ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *start, int *count, char *page_cursor, char *ids, char *store_id, char *status, char *response_fields, char *params, char *exclude)
+ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *start, int *count, char *page_cursor, char *ids, char *store_id, char *lang_id, char *status, char *created_from, char *created_to, char *customer_id, char *sort_by, char *sort_direction, char *response_fields, char *params, char *exclude)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -8004,6 +8148,18 @@ ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *star
     }
 
     // query parameters
+    char *keyQuery_lang_id = NULL;
+    char * valueQuery_lang_id = NULL;
+    keyValuePair_t *keyPairQuery_lang_id = 0;
+    if (lang_id)
+    {
+        keyQuery_lang_id = strdup("lang_id");
+        valueQuery_lang_id = strdup((lang_id));
+        keyPairQuery_lang_id = keyValuePair_create(keyQuery_lang_id, valueQuery_lang_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_lang_id);
+    }
+
+    // query parameters
     char *keyQuery_status = NULL;
     char * valueQuery_status = NULL;
     keyValuePair_t *keyPairQuery_status = 0;
@@ -8013,6 +8169,66 @@ ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *star
         valueQuery_status = strdup((status));
         keyPairQuery_status = keyValuePair_create(keyQuery_status, valueQuery_status);
         list_addElement(localVarQueryParameters,keyPairQuery_status);
+    }
+
+    // query parameters
+    char *keyQuery_created_from = NULL;
+    char * valueQuery_created_from = NULL;
+    keyValuePair_t *keyPairQuery_created_from = 0;
+    if (created_from)
+    {
+        keyQuery_created_from = strdup("created_from");
+        valueQuery_created_from = strdup((created_from));
+        keyPairQuery_created_from = keyValuePair_create(keyQuery_created_from, valueQuery_created_from);
+        list_addElement(localVarQueryParameters,keyPairQuery_created_from);
+    }
+
+    // query parameters
+    char *keyQuery_created_to = NULL;
+    char * valueQuery_created_to = NULL;
+    keyValuePair_t *keyPairQuery_created_to = 0;
+    if (created_to)
+    {
+        keyQuery_created_to = strdup("created_to");
+        valueQuery_created_to = strdup((created_to));
+        keyPairQuery_created_to = keyValuePair_create(keyQuery_created_to, valueQuery_created_to);
+        list_addElement(localVarQueryParameters,keyPairQuery_created_to);
+    }
+
+    // query parameters
+    char *keyQuery_customer_id = NULL;
+    char * valueQuery_customer_id = NULL;
+    keyValuePair_t *keyPairQuery_customer_id = 0;
+    if (customer_id)
+    {
+        keyQuery_customer_id = strdup("customer_id");
+        valueQuery_customer_id = strdup((customer_id));
+        keyPairQuery_customer_id = keyValuePair_create(keyQuery_customer_id, valueQuery_customer_id);
+        list_addElement(localVarQueryParameters,keyPairQuery_customer_id);
+    }
+
+    // query parameters
+    char *keyQuery_sort_by = NULL;
+    char * valueQuery_sort_by = NULL;
+    keyValuePair_t *keyPairQuery_sort_by = 0;
+    if (sort_by)
+    {
+        keyQuery_sort_by = strdup("sort_by");
+        valueQuery_sort_by = strdup((sort_by));
+        keyPairQuery_sort_by = keyValuePair_create(keyQuery_sort_by, valueQuery_sort_by);
+        list_addElement(localVarQueryParameters,keyPairQuery_sort_by);
+    }
+
+    // query parameters
+    char *keyQuery_sort_direction = NULL;
+    char * valueQuery_sort_direction = NULL;
+    keyValuePair_t *keyPairQuery_sort_direction = 0;
+    if (sort_direction)
+    {
+        keyQuery_sort_direction = strdup("sort_direction");
+        valueQuery_sort_direction = strdup((sort_direction));
+        keyPairQuery_sort_direction = keyValuePair_create(keyQuery_sort_direction, valueQuery_sort_direction);
+        list_addElement(localVarQueryParameters,keyPairQuery_sort_direction);
     }
 
     // query parameters
@@ -8161,6 +8377,18 @@ ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *star
         keyValuePair_free(keyPairQuery_store_id);
         keyPairQuery_store_id = NULL;
     }
+    if(keyQuery_lang_id){
+        free(keyQuery_lang_id);
+        keyQuery_lang_id = NULL;
+    }
+    if(valueQuery_lang_id){
+        free(valueQuery_lang_id);
+        valueQuery_lang_id = NULL;
+    }
+    if(keyPairQuery_lang_id){
+        keyValuePair_free(keyPairQuery_lang_id);
+        keyPairQuery_lang_id = NULL;
+    }
     if(keyQuery_status){
         free(keyQuery_status);
         keyQuery_status = NULL;
@@ -8172,6 +8400,66 @@ ProductAPI_productReviewList(apiClient_t *apiClient, char *product_id, int *star
     if(keyPairQuery_status){
         keyValuePair_free(keyPairQuery_status);
         keyPairQuery_status = NULL;
+    }
+    if(keyQuery_created_from){
+        free(keyQuery_created_from);
+        keyQuery_created_from = NULL;
+    }
+    if(valueQuery_created_from){
+        free(valueQuery_created_from);
+        valueQuery_created_from = NULL;
+    }
+    if(keyPairQuery_created_from){
+        keyValuePair_free(keyPairQuery_created_from);
+        keyPairQuery_created_from = NULL;
+    }
+    if(keyQuery_created_to){
+        free(keyQuery_created_to);
+        keyQuery_created_to = NULL;
+    }
+    if(valueQuery_created_to){
+        free(valueQuery_created_to);
+        valueQuery_created_to = NULL;
+    }
+    if(keyPairQuery_created_to){
+        keyValuePair_free(keyPairQuery_created_to);
+        keyPairQuery_created_to = NULL;
+    }
+    if(keyQuery_customer_id){
+        free(keyQuery_customer_id);
+        keyQuery_customer_id = NULL;
+    }
+    if(valueQuery_customer_id){
+        free(valueQuery_customer_id);
+        valueQuery_customer_id = NULL;
+    }
+    if(keyPairQuery_customer_id){
+        keyValuePair_free(keyPairQuery_customer_id);
+        keyPairQuery_customer_id = NULL;
+    }
+    if(keyQuery_sort_by){
+        free(keyQuery_sort_by);
+        keyQuery_sort_by = NULL;
+    }
+    if(valueQuery_sort_by){
+        free(valueQuery_sort_by);
+        valueQuery_sort_by = NULL;
+    }
+    if(keyPairQuery_sort_by){
+        keyValuePair_free(keyPairQuery_sort_by);
+        keyPairQuery_sort_by = NULL;
+    }
+    if(keyQuery_sort_direction){
+        free(keyQuery_sort_direction);
+        keyQuery_sort_direction = NULL;
+    }
+    if(valueQuery_sort_direction){
+        free(valueQuery_sort_direction);
+        valueQuery_sort_direction = NULL;
+    }
+    if(keyPairQuery_sort_direction){
+        keyValuePair_free(keyPairQuery_sort_direction);
+        keyPairQuery_sort_direction = NULL;
     }
     if(keyQuery_response_fields){
         free(keyQuery_response_fields);

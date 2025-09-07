@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **last_name** | **char \*** | Defines customer&#39;s last name | [optional] 
 **password** | **char \*** | Defines customer&#39;s unique password | [optional] 
 **group** | **char \*** | Defines the group where the customer | [optional] 
+**group_id** | **char \*** | Customer group_id | [optional] 
 **group_ids** | **char \*** | Groups that will be assigned to a customer | [optional] 
 **status** | **char \*** | Defines customer&#39;s status | [optional] [default to 'enabled']
 **created_time** | **char \*** | Entity&#39;s date creation | [optional] 

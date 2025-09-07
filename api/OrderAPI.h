@@ -16,6 +16,8 @@
 #include "../model/model_response_order_transaction_list.h"
 #include "../model/order_add.h"
 #include "../model/order_add_200_response.h"
+#include "../model/order_calculate.h"
+#include "../model/order_calculate_200_response.h"
 #include "../model/order_count_200_response.h"
 #include "../model/order_financial_status_list_200_response.h"
 #include "../model/order_fulfillment_status_list_200_response.h"
@@ -50,6 +52,14 @@ OrderAPI_orderAbandonedList(apiClient_t *apiClient, int *start, int *count, char
 //
 order_add_200_response_t*
 OrderAPI_orderAdd(apiClient_t *apiClient, order_add_t *order_add);
+
+
+// order.calculate
+//
+// <p>Calculates the total cost of an order for a given customer and a set of products, as well as the available shipping methods based on the specified address. The calculation takes into account store product prices, discounts, taxes, shipping costs, and other store settings. The result includes a detailed breakdown of the final order cost by its components.</p> <p>Note that the final totals, taxes, and other amounts must include the corresponding values for the selected shipping method.</p><p>The result of this method can be used when creating an order using the <strong>order.add</strong> method.</p>
+//
+order_calculate_200_response_t*
+OrderAPI_orderCalculate(apiClient_t *apiClient, order_calculate_t *order_calculate);
 
 
 // order.count

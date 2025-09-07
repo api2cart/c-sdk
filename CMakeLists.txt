@@ -237,6 +237,15 @@ set(SRCS
     model/order_add_order_item_inner.c
     model/order_add_order_item_inner_order_item_option_inner.c
     model/order_add_order_item_inner_order_item_property_inner.c
+    model/order_calculate.c
+    model/order_calculate_200_response.c
+    model/order_calculate_discount.c
+    model/order_calculate_item.c
+    model/order_calculate_order_item_inner.c
+    model/order_calculate_order_item_inner_order_item_option_inner.c
+    model/order_calculate_shipping_rate.c
+    model/order_calculate_subtotal.c
+    model/order_calculate_tax.c
     model/order_count_200_response.c
     model/order_count_200_response_result.c
     model/order_financial_status_list_200_response.c
@@ -682,6 +691,15 @@ set(HDRS
     model/order_add_order_item_inner.h
     model/order_add_order_item_inner_order_item_option_inner.h
     model/order_add_order_item_inner_order_item_property_inner.h
+    model/order_calculate.h
+    model/order_calculate_200_response.h
+    model/order_calculate_discount.h
+    model/order_calculate_item.h
+    model/order_calculate_order_item_inner.h
+    model/order_calculate_order_item_inner_order_item_option_inner.h
+    model/order_calculate_shipping_rate.h
+    model/order_calculate_subtotal.h
+    model/order_calculate_tax.h
     model/order_count_200_response.h
     model/order_count_200_response_result.h
     model/order_financial_status_list_200_response.h

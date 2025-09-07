@@ -34,6 +34,7 @@ typedef struct product_review_t {
     list_t *ratings; //nonprimitive container
     char *status; // string
     struct a2_c_date_time_t *created_time; //model
+    struct a2_c_date_time_t *modified_time; //model
     list_t *medias; //nonprimitive container
     object_t *additional_fields; //object
     object_t *custom_fields; //object
@@ -53,6 +54,7 @@ __attribute__((deprecated)) product_review_t *product_review_create(
     list_t *ratings,
     char *status,
     a2_c_date_time_t *created_time,
+    a2_c_date_time_t *modified_time,
     list_t *medias,
     object_t *additional_fields,
     object_t *custom_fields

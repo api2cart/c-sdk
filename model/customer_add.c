@@ -11,6 +11,7 @@ static customer_add_t *customer_add_create_internal(
     char *last_name,
     char *password,
     char *group,
+    char *group_id,
     char *group_ids,
     char *status,
     char *created_time,
@@ -39,6 +40,7 @@ static customer_add_t *customer_add_create_internal(
     customer_add_local_var->last_name = last_name;
     customer_add_local_var->password = password;
     customer_add_local_var->group = group;
+    customer_add_local_var->group_id = group_id;
     customer_add_local_var->group_ids = group_ids;
     customer_add_local_var->status = status;
     customer_add_local_var->created_time = created_time;
@@ -68,6 +70,7 @@ __attribute__((deprecated)) customer_add_t *customer_add_create(
     char *last_name,
     char *password,
     char *group,
+    char *group_id,
     char *group_ids,
     char *status,
     char *created_time,
@@ -93,6 +96,7 @@ __attribute__((deprecated)) customer_add_t *customer_add_create(
         last_name,
         password,
         group,
+        group_id,
         group_ids,
         status,
         created_time,
@@ -142,6 +146,10 @@ void customer_add_free(customer_add_t *customer_add) {
     if (customer_add->group) {
         free(customer_add->group);
         customer_add->group = NULL;
+    }
+    if (customer_add->group_id) {
+        free(customer_add->group_id);
+        customer_add->group_id = NULL;
     }
     if (customer_add->group_ids) {
         free(customer_add->group_ids);
@@ -259,6 +267,14 @@ cJSON *customer_add_convertToJSON(customer_add_t *customer_add) {
     // customer_add->group
     if(customer_add->group) {
     if(cJSON_AddStringToObject(item, "group", customer_add->group) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // customer_add->group_id
+    if(customer_add->group_id) {
+    if(cJSON_AddStringToObject(item, "group_id", customer_add->group_id) == NULL) {
     goto fail; //String
     }
     }
@@ -512,6 +528,18 @@ customer_add_t *customer_add_parseFromJSON(cJSON *customer_addJSON){
     }
     }
 
+    // customer_add->group_id
+    cJSON *group_id = cJSON_GetObjectItemCaseSensitive(customer_addJSON, "group_id");
+    if (cJSON_IsNull(group_id)) {
+        group_id = NULL;
+    }
+    if (group_id) { 
+    if(!cJSON_IsString(group_id) && !cJSON_IsNull(group_id))
+    {
+    goto end; //String
+    }
+    }
+
     // customer_add->group_ids
     cJSON *group_ids = cJSON_GetObjectItemCaseSensitive(customer_addJSON, "group_ids");
     if (cJSON_IsNull(group_ids)) {
@@ -759,6 +787,7 @@ customer_add_t *customer_add_parseFromJSON(cJSON *customer_addJSON){
         last_name && !cJSON_IsNull(last_name) ? strdup(last_name->valuestring) : NULL,
         password && !cJSON_IsNull(password) ? strdup(password->valuestring) : NULL,
         group && !cJSON_IsNull(group) ? strdup(group->valuestring) : NULL,
+        group_id && !cJSON_IsNull(group_id) ? strdup(group_id->valuestring) : NULL,
         group_ids && !cJSON_IsNull(group_ids) ? strdup(group_ids->valuestring) : NULL,
         status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
         created_time && !cJSON_IsNull(created_time) ? strdup(created_time->valuestring) : NULL,

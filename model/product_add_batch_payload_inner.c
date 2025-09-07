@@ -29,6 +29,7 @@ static product_add_batch_payload_inner_t *product_add_batch_payload_inner_create
     int manage_stock,
     char *product_type,
     object_t *marketplace_item_properties,
+    object_t *specifics,
     int is_free_shipping,
     int taxable,
     char *status,
@@ -63,6 +64,7 @@ static product_add_batch_payload_inner_t *product_add_batch_payload_inner_create
     char *harmonized_system_code,
     char *url,
     char *seo_url,
+    char *external_product_link,
     char *manufacturer,
     char *manufacturer_id,
     char *backorder_status,
@@ -97,6 +99,7 @@ static product_add_batch_payload_inner_t *product_add_batch_payload_inner_create
     product_add_batch_payload_inner_local_var->manage_stock = manage_stock;
     product_add_batch_payload_inner_local_var->product_type = product_type;
     product_add_batch_payload_inner_local_var->marketplace_item_properties = marketplace_item_properties;
+    product_add_batch_payload_inner_local_var->specifics = specifics;
     product_add_batch_payload_inner_local_var->is_free_shipping = is_free_shipping;
     product_add_batch_payload_inner_local_var->taxable = taxable;
     product_add_batch_payload_inner_local_var->status = status;
@@ -131,6 +134,7 @@ static product_add_batch_payload_inner_t *product_add_batch_payload_inner_create
     product_add_batch_payload_inner_local_var->harmonized_system_code = harmonized_system_code;
     product_add_batch_payload_inner_local_var->url = url;
     product_add_batch_payload_inner_local_var->seo_url = seo_url;
+    product_add_batch_payload_inner_local_var->external_product_link = external_product_link;
     product_add_batch_payload_inner_local_var->manufacturer = manufacturer;
     product_add_batch_payload_inner_local_var->manufacturer_id = manufacturer_id;
     product_add_batch_payload_inner_local_var->backorder_status = backorder_status;
@@ -166,6 +170,7 @@ __attribute__((deprecated)) product_add_batch_payload_inner_t *product_add_batch
     int manage_stock,
     char *product_type,
     object_t *marketplace_item_properties,
+    object_t *specifics,
     int is_free_shipping,
     int taxable,
     char *status,
@@ -200,6 +205,7 @@ __attribute__((deprecated)) product_add_batch_payload_inner_t *product_add_batch
     char *harmonized_system_code,
     char *url,
     char *seo_url,
+    char *external_product_link,
     char *manufacturer,
     char *manufacturer_id,
     char *backorder_status,
@@ -231,6 +237,7 @@ __attribute__((deprecated)) product_add_batch_payload_inner_t *product_add_batch
         manage_stock,
         product_type,
         marketplace_item_properties,
+        specifics,
         is_free_shipping,
         taxable,
         status,
@@ -265,6 +272,7 @@ __attribute__((deprecated)) product_add_batch_payload_inner_t *product_add_batch
         harmonized_system_code,
         url,
         seo_url,
+        external_product_link,
         manufacturer,
         manufacturer_id,
         backorder_status,
@@ -349,6 +357,10 @@ void product_add_batch_payload_inner_free(product_add_batch_payload_inner_t *pro
     if (product_add_batch_payload_inner->marketplace_item_properties) {
         object_free(product_add_batch_payload_inner->marketplace_item_properties);
         product_add_batch_payload_inner->marketplace_item_properties = NULL;
+    }
+    if (product_add_batch_payload_inner->specifics) {
+        object_free(product_add_batch_payload_inner->specifics);
+        product_add_batch_payload_inner->specifics = NULL;
     }
     if (product_add_batch_payload_inner->status) {
         free(product_add_batch_payload_inner->status);
@@ -462,6 +474,10 @@ void product_add_batch_payload_inner_free(product_add_batch_payload_inner_t *pro
     if (product_add_batch_payload_inner->seo_url) {
         free(product_add_batch_payload_inner->seo_url);
         product_add_batch_payload_inner->seo_url = NULL;
+    }
+    if (product_add_batch_payload_inner->external_product_link) {
+        free(product_add_batch_payload_inner->external_product_link);
+        product_add_batch_payload_inner->external_product_link = NULL;
     }
     if (product_add_batch_payload_inner->manufacturer) {
         free(product_add_batch_payload_inner->manufacturer);
@@ -697,6 +713,19 @@ cJSON *product_add_batch_payload_inner_convertToJSON(product_add_batch_payload_i
     goto fail; //model
     }
     cJSON_AddItemToObject(item, "marketplace_item_properties", marketplace_item_properties_object);
+    if(item->child == NULL) {
+    goto fail;
+    }
+    }
+
+
+    // product_add_batch_payload_inner->specifics
+    if(product_add_batch_payload_inner->specifics) {
+    cJSON *specifics_object = object_convertToJSON(product_add_batch_payload_inner->specifics);
+    if(specifics_object == NULL) {
+    goto fail; //model
+    }
+    cJSON_AddItemToObject(item, "specifics", specifics_object);
     if(item->child == NULL) {
     goto fail;
     }
@@ -1033,6 +1062,14 @@ cJSON *product_add_batch_payload_inner_convertToJSON(product_add_batch_payload_i
     // product_add_batch_payload_inner->seo_url
     if(product_add_batch_payload_inner->seo_url) {
     if(cJSON_AddStringToObject(item, "seo_url", product_add_batch_payload_inner->seo_url) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_add_batch_payload_inner->external_product_link
+    if(product_add_batch_payload_inner->external_product_link) {
+    if(cJSON_AddStringToObject(item, "external_product_link", product_add_batch_payload_inner->external_product_link) == NULL) {
     goto fail; //String
     }
     }
@@ -1447,6 +1484,16 @@ product_add_batch_payload_inner_t *product_add_batch_payload_inner_parseFromJSON
     object_t *marketplace_item_properties_local_object = NULL;
     if (marketplace_item_properties) { 
     marketplace_item_properties_local_object = object_parseFromJSON(marketplace_item_properties); //object
+    }
+
+    // product_add_batch_payload_inner->specifics
+    cJSON *specifics = cJSON_GetObjectItemCaseSensitive(product_add_batch_payload_innerJSON, "specifics");
+    if (cJSON_IsNull(specifics)) {
+        specifics = NULL;
+    }
+    object_t *specifics_local_object = NULL;
+    if (specifics) { 
+    specifics_local_object = object_parseFromJSON(specifics); //object
     }
 
     // product_add_batch_payload_inner->is_free_shipping
@@ -1927,6 +1974,18 @@ product_add_batch_payload_inner_t *product_add_batch_payload_inner_parseFromJSON
     }
     }
 
+    // product_add_batch_payload_inner->external_product_link
+    cJSON *external_product_link = cJSON_GetObjectItemCaseSensitive(product_add_batch_payload_innerJSON, "external_product_link");
+    if (cJSON_IsNull(external_product_link)) {
+        external_product_link = NULL;
+    }
+    if (external_product_link) { 
+    if(!cJSON_IsString(external_product_link) && !cJSON_IsNull(external_product_link))
+    {
+    goto end; //String
+    }
+    }
+
     // product_add_batch_payload_inner->manufacturer
     cJSON *manufacturer = cJSON_GetObjectItemCaseSensitive(product_add_batch_payload_innerJSON, "manufacturer");
     if (cJSON_IsNull(manufacturer)) {
@@ -2058,6 +2117,7 @@ product_add_batch_payload_inner_t *product_add_batch_payload_inner_parseFromJSON
         manage_stock ? manage_stock->valueint : 0,
         product_type && !cJSON_IsNull(product_type) ? strdup(product_type->valuestring) : NULL,
         marketplace_item_properties ? marketplace_item_properties_local_object : NULL,
+        specifics ? specifics_local_object : NULL,
         is_free_shipping ? is_free_shipping->valueint : 0,
         taxable ? taxable->valueint : 0,
         status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
@@ -2092,6 +2152,7 @@ product_add_batch_payload_inner_t *product_add_batch_payload_inner_parseFromJSON
         harmonized_system_code && !cJSON_IsNull(harmonized_system_code) ? strdup(harmonized_system_code->valuestring) : NULL,
         url && !cJSON_IsNull(url) ? strdup(url->valuestring) : NULL,
         seo_url && !cJSON_IsNull(seo_url) ? strdup(seo_url->valuestring) : NULL,
+        external_product_link && !cJSON_IsNull(external_product_link) ? strdup(external_product_link->valuestring) : NULL,
         manufacturer && !cJSON_IsNull(manufacturer) ? strdup(manufacturer->valuestring) : NULL,
         manufacturer_id && !cJSON_IsNull(manufacturer_id) ? strdup(manufacturer_id->valuestring) : NULL,
         backorder_status && !cJSON_IsNull(backorder_status) ? strdup(backorder_status->valuestring) : NULL,

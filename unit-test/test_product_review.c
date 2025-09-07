@@ -17,6 +17,7 @@
 product_review_t* instantiate_product_review(int include_optional);
 
 #include "test_a2_c_date_time.c"
+#include "test_a2_c_date_time.c"
 
 
 product_review_t* instantiate_product_review(int include_optional) {
@@ -35,6 +36,8 @@ product_review_t* instantiate_product_review(int include_optional) {
       "0",
        // false, not to have infinite recursion
       instantiate_a2_c_date_time(0),
+       // false, not to have infinite recursion
+      instantiate_a2_c_date_time(0),
       list_createList(),
       0,
       0
@@ -51,6 +54,7 @@ product_review_t* instantiate_product_review(int include_optional) {
       1.337,
       list_createList(),
       "0",
+      NULL,
       NULL,
       list_createList(),
       0,

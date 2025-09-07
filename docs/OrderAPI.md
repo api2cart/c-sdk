@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**OrderAPI_orderAbandonedList**](OrderAPI.md#OrderAPI_orderAbandonedList) | **GET** /order.abandoned.list.json | order.abandoned.list
 [**OrderAPI_orderAdd**](OrderAPI.md#OrderAPI_orderAdd) | **POST** /order.add.json | order.add
+[**OrderAPI_orderCalculate**](OrderAPI.md#OrderAPI_orderCalculate) | **POST** /order.calculate.json | order.calculate
 [**OrderAPI_orderCount**](OrderAPI.md#OrderAPI_orderCount) | **GET** /order.count.json | order.count
 [**OrderAPI_orderFinancialStatusList**](OrderAPI.md#OrderAPI_orderFinancialStatusList) | **GET** /order.financial_status.list.json | order.financial_status.list
 [**OrderAPI_orderFulfillmentStatusList**](OrderAPI.md#OrderAPI_orderFulfillmentStatusList) | **GET** /order.fulfillment_status.list.json | order.fulfillment_status.list
@@ -90,6 +91,37 @@ Name | Type | Description  | Notes
 ### Return type
 
 [order_add_200_response_t](order_add_200_response.md) *
+
+
+### Authorization
+
+[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **OrderAPI_orderCalculate**
+```c
+// order.calculate
+//
+// <p>Calculates the total cost of an order for a given customer and a set of products, as well as the available shipping methods based on the specified address. The calculation takes into account store product prices, discounts, taxes, shipping costs, and other store settings. The result includes a detailed breakdown of the final order cost by its components.</p> <p>Note that the final totals, taxes, and other amounts must include the corresponding values for the selected shipping method.</p><p>The result of this method can be used when creating an order using the <strong>order.add</strong> method.</p>
+//
+order_calculate_200_response_t* OrderAPI_orderCalculate(apiClient_t *apiClient, order_calculate_t *order_calculate);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**order_calculate** | **[order_calculate_t](order_calculate.md) \*** |  | 
+
+### Return type
+
+[order_calculate_200_response_t](order_calculate_200_response.md) *
 
 
 ### Authorization

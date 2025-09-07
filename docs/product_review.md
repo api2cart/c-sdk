@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **ratings** | [**list_t**](product_review_rating.md) \* |  | [optional] 
 **status** | **char \*** |  | [optional] 
 **created_time** | [**a2_c_date_time_t**](a2_c_date_time.md) \* |  | [optional] 
+**modified_time** | [**a2_c_date_time_t**](a2_c_date_time.md) \* |  | [optional] 
 **medias** | [**list_t**](media.md) \* |  | [optional] 
 **additional_fields** | [**object_t**](.md) \* |  | [optional] 
 **custom_fields** | [**object_t**](.md) \* |  | [optional] 
