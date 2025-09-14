@@ -44,6 +44,7 @@ typedef struct product_update_batch_payload_inner_t {
     char *status; // string
     char *type; // string
     char *condition; // string
+    char *condition_description; // string
     char *visible; // string
     int available_for_view; //boolean
     int available_for_sale; //boolean
@@ -112,6 +113,7 @@ __attribute__((deprecated)) product_update_batch_payload_inner_t *product_update
     char *status,
     char *type,
     char *condition,
+    char *condition_description,
     char *visible,
     int available_for_view,
     int available_for_sale,

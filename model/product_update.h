@@ -51,6 +51,7 @@ typedef struct product_update_t {
     int avail; //boolean
     char *avail_from; // string
     char *product_class; // string
+    char *brand_name; // string
     int available_for_view; //boolean
     char *stores_ids; // string
     char *store_id; // string
@@ -145,6 +146,7 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     int avail,
     char *avail_from,
     char *product_class,
+    char *brand_name,
     int available_for_view,
     char *stores_ids,
     char *store_id,

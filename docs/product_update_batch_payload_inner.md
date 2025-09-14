@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **status** | **char \*** |  | [optional] 
 **type** | **char \*** |  | [optional] 
 **condition** | **char \*** |  | [optional] 
+**condition_description** | **char \*** |  | [optional] 
 **visible** | **char \*** |  | [optional] 
 **available_for_view** | **int** |  | [optional] 
 **available_for_sale** | **int** |  | [optional] 

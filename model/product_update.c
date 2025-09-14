@@ -33,6 +33,7 @@ static product_update_t *product_update_create_internal(
     int avail,
     char *avail_from,
     char *product_class,
+    char *brand_name,
     int available_for_view,
     char *stores_ids,
     char *store_id,
@@ -127,6 +128,7 @@ static product_update_t *product_update_create_internal(
     product_update_local_var->avail = avail;
     product_update_local_var->avail_from = avail_from;
     product_update_local_var->product_class = product_class;
+    product_update_local_var->brand_name = brand_name;
     product_update_local_var->available_for_view = available_for_view;
     product_update_local_var->stores_ids = stores_ids;
     product_update_local_var->store_id = store_id;
@@ -222,6 +224,7 @@ __attribute__((deprecated)) product_update_t *product_update_create(
     int avail,
     char *avail_from,
     char *product_class,
+    char *brand_name,
     int available_for_view,
     char *stores_ids,
     char *store_id,
@@ -313,6 +316,7 @@ __attribute__((deprecated)) product_update_t *product_update_create(
         avail,
         avail_from,
         product_class,
+        brand_name,
         available_for_view,
         stores_ids,
         store_id,
@@ -453,6 +457,10 @@ void product_update_free(product_update_t *product_update) {
     if (product_update->product_class) {
         free(product_update->product_class);
         product_update->product_class = NULL;
+    }
+    if (product_update->brand_name) {
+        free(product_update->brand_name);
+        product_update->brand_name = NULL;
     }
     if (product_update->stores_ids) {
         free(product_update->stores_ids);
@@ -841,6 +849,14 @@ cJSON *product_update_convertToJSON(product_update_t *product_update) {
     // product_update->product_class
     if(product_update->product_class) {
     if(cJSON_AddStringToObject(item, "product_class", product_update->product_class) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update->brand_name
+    if(product_update->brand_name) {
+    if(cJSON_AddStringToObject(item, "brand_name", product_update->brand_name) == NULL) {
     goto fail; //String
     }
     }
@@ -1743,6 +1759,18 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
     }
     }
 
+    // product_update->brand_name
+    cJSON *brand_name = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "brand_name");
+    if (cJSON_IsNull(brand_name)) {
+        brand_name = NULL;
+    }
+    if (brand_name) { 
+    if(!cJSON_IsString(brand_name) && !cJSON_IsNull(brand_name))
+    {
+    goto end; //String
+    }
+    }
+
     // product_update->available_for_view
     cJSON *available_for_view = cJSON_GetObjectItemCaseSensitive(product_updateJSON, "available_for_view");
     if (cJSON_IsNull(available_for_view)) {
@@ -2529,6 +2557,7 @@ product_update_t *product_update_parseFromJSON(cJSON *product_updateJSON){
         avail ? avail->valueint : 0,
         avail_from && !cJSON_IsNull(avail_from) ? strdup(avail_from->valuestring) : NULL,
         product_class && !cJSON_IsNull(product_class) ? strdup(product_class->valuestring) : NULL,
+        brand_name && !cJSON_IsNull(brand_name) ? strdup(brand_name->valuestring) : NULL,
         available_for_view ? available_for_view->valueint : 0,
         stores_ids && !cJSON_IsNull(stores_ids) ? strdup(stores_ids->valuestring) : NULL,
         store_id && !cJSON_IsNull(store_id) ? strdup(store_id->valuestring) : NULL,

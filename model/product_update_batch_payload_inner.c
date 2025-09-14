@@ -29,6 +29,7 @@ static product_update_batch_payload_inner_t *product_update_batch_payload_inner_
     char *status,
     char *type,
     char *condition,
+    char *condition_description,
     char *visible,
     int available_for_view,
     int available_for_sale,
@@ -97,6 +98,7 @@ static product_update_batch_payload_inner_t *product_update_batch_payload_inner_
     product_update_batch_payload_inner_local_var->status = status;
     product_update_batch_payload_inner_local_var->type = type;
     product_update_batch_payload_inner_local_var->condition = condition;
+    product_update_batch_payload_inner_local_var->condition_description = condition_description;
     product_update_batch_payload_inner_local_var->visible = visible;
     product_update_batch_payload_inner_local_var->available_for_view = available_for_view;
     product_update_batch_payload_inner_local_var->available_for_sale = available_for_sale;
@@ -166,6 +168,7 @@ __attribute__((deprecated)) product_update_batch_payload_inner_t *product_update
     char *status,
     char *type,
     char *condition,
+    char *condition_description,
     char *visible,
     int available_for_view,
     int available_for_sale,
@@ -231,6 +234,7 @@ __attribute__((deprecated)) product_update_batch_payload_inner_t *product_update
         status,
         type,
         condition,
+        condition_description,
         visible,
         available_for_view,
         available_for_sale,
@@ -341,6 +345,10 @@ void product_update_batch_payload_inner_free(product_update_batch_payload_inner_
     if (product_update_batch_payload_inner->condition) {
         free(product_update_batch_payload_inner->condition);
         product_update_batch_payload_inner->condition = NULL;
+    }
+    if (product_update_batch_payload_inner->condition_description) {
+        free(product_update_batch_payload_inner->condition_description);
+        product_update_batch_payload_inner->condition_description = NULL;
     }
     if (product_update_batch_payload_inner->visible) {
         free(product_update_batch_payload_inner->visible);
@@ -676,6 +684,14 @@ cJSON *product_update_batch_payload_inner_convertToJSON(product_update_batch_pay
     // product_update_batch_payload_inner->condition
     if(product_update_batch_payload_inner->condition) {
     if(cJSON_AddStringToObject(item, "condition", product_update_batch_payload_inner->condition) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_update_batch_payload_inner->condition_description
+    if(product_update_batch_payload_inner->condition_description) {
+    if(cJSON_AddStringToObject(item, "condition_description", product_update_batch_payload_inner->condition_description) == NULL) {
     goto fail; //String
     }
     }
@@ -1405,6 +1421,18 @@ product_update_batch_payload_inner_t *product_update_batch_payload_inner_parseFr
     }
     }
 
+    // product_update_batch_payload_inner->condition_description
+    cJSON *condition_description = cJSON_GetObjectItemCaseSensitive(product_update_batch_payload_innerJSON, "condition_description");
+    if (cJSON_IsNull(condition_description)) {
+        condition_description = NULL;
+    }
+    if (condition_description) { 
+    if(!cJSON_IsString(condition_description) && !cJSON_IsNull(condition_description))
+    {
+    goto end; //String
+    }
+    }
+
     // product_update_batch_payload_inner->visible
     cJSON *visible = cJSON_GetObjectItemCaseSensitive(product_update_batch_payload_innerJSON, "visible");
     if (cJSON_IsNull(visible)) {
@@ -1992,6 +2020,7 @@ product_update_batch_payload_inner_t *product_update_batch_payload_inner_parseFr
         status && !cJSON_IsNull(status) ? strdup(status->valuestring) : NULL,
         type && !cJSON_IsNull(type) ? strdup(type->valuestring) : NULL,
         condition && !cJSON_IsNull(condition) ? strdup(condition->valuestring) : NULL,
+        condition_description && !cJSON_IsNull(condition_description) ? strdup(condition_description->valuestring) : NULL,
         visible && !cJSON_IsNull(visible) ? strdup(visible->valuestring) : NULL,
         available_for_view ? available_for_view->valueint : 0,
         available_for_sale ? available_for_sale->valueint : 0,
