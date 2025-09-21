@@ -74,6 +74,7 @@ product_variant_update_t* instantiate_product_variant_update(int include_optiona
       "category,test",
       "category,test",
       "category,test",
+      "Samsung",
       false,
       false
     );
@@ -131,6 +132,7 @@ product_variant_update_t* instantiate_product_variant_update(int include_optiona
       "category,test",
       "category,test",
       "category,test",
+      "Samsung",
       false,
       false
     );

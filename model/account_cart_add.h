@@ -121,6 +121,7 @@ typedef struct account_cart_add_t {
     char *shoplazza_access_token; // string
     char *shoplazza_shared_secret; // string
     char *shopware_access_key; // string
+    char *unas_api_key; // string
     char *shopware_api_key; // string
     char *shopware_api_secret; // string
     char *miva_access_token; // string
@@ -291,6 +292,7 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     char *shoplazza_access_token,
     char *shoplazza_shared_secret,
     char *shopware_access_key,
+    char *unas_api_key,
     char *shopware_api_key,
     char *shopware_api_secret,
     char *miva_access_token,

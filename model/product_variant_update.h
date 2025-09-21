@@ -72,6 +72,7 @@ typedef struct product_variant_update_t {
     char *meta_title; // string
     char *meta_description; // string
     char *meta_keywords; // string
+    char *manufacturer; // string
     int reindex; //boolean
     int clear_cache; //boolean
 
@@ -131,6 +132,7 @@ __attribute__((deprecated)) product_variant_update_t *product_variant_update_cre
     char *meta_title,
     char *meta_description,
     char *meta_keywords,
+    char *manufacturer,
     int reindex,
     int clear_cache
 );

@@ -116,6 +116,7 @@ static account_cart_add_t *account_cart_add_create_internal(
     char *shoplazza_access_token,
     char *shoplazza_shared_secret,
     char *shopware_access_key,
+    char *unas_api_key,
     char *shopware_api_key,
     char *shopware_api_secret,
     char *miva_access_token,
@@ -286,6 +287,7 @@ static account_cart_add_t *account_cart_add_create_internal(
     account_cart_add_local_var->shoplazza_access_token = shoplazza_access_token;
     account_cart_add_local_var->shoplazza_shared_secret = shoplazza_shared_secret;
     account_cart_add_local_var->shopware_access_key = shopware_access_key;
+    account_cart_add_local_var->unas_api_key = unas_api_key;
     account_cart_add_local_var->shopware_api_key = shopware_api_key;
     account_cart_add_local_var->shopware_api_secret = shopware_api_secret;
     account_cart_add_local_var->miva_access_token = miva_access_token;
@@ -457,6 +459,7 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
     char *shoplazza_access_token,
     char *shoplazza_shared_secret,
     char *shopware_access_key,
+    char *unas_api_key,
     char *shopware_api_key,
     char *shopware_api_secret,
     char *miva_access_token,
@@ -624,6 +627,7 @@ __attribute__((deprecated)) account_cart_add_t *account_cart_add_create(
         shoplazza_access_token,
         shoplazza_shared_secret,
         shopware_access_key,
+        unas_api_key,
         shopware_api_key,
         shopware_api_secret,
         miva_access_token,
@@ -1055,6 +1059,10 @@ void account_cart_add_free(account_cart_add_t *account_cart_add) {
     if (account_cart_add->shopware_access_key) {
         free(account_cart_add->shopware_access_key);
         account_cart_add->shopware_access_key = NULL;
+    }
+    if (account_cart_add->unas_api_key) {
+        free(account_cart_add->unas_api_key);
+        account_cart_add->unas_api_key = NULL;
     }
     if (account_cart_add->shopware_api_key) {
         free(account_cart_add->shopware_api_key);
@@ -2086,6 +2094,14 @@ cJSON *account_cart_add_convertToJSON(account_cart_add_t *account_cart_add) {
     // account_cart_add->shopware_access_key
     if(account_cart_add->shopware_access_key) {
     if(cJSON_AddStringToObject(item, "shopware_access_key", account_cart_add->shopware_access_key) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // account_cart_add->unas_api_key
+    if(account_cart_add->unas_api_key) {
+    if(cJSON_AddStringToObject(item, "unas_api_key", account_cart_add->unas_api_key) == NULL) {
     goto fail; //String
     }
     }
@@ -3814,6 +3830,18 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
     }
     }
 
+    // account_cart_add->unas_api_key
+    cJSON *unas_api_key = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "unas_api_key");
+    if (cJSON_IsNull(unas_api_key)) {
+        unas_api_key = NULL;
+    }
+    if (unas_api_key) { 
+    if(!cJSON_IsString(unas_api_key) && !cJSON_IsNull(unas_api_key))
+    {
+    goto end; //String
+    }
+    }
+
     // account_cart_add->shopware_api_key
     cJSON *shopware_api_key = cJSON_GetObjectItemCaseSensitive(account_cart_addJSON, "shopware_api_key");
     if (cJSON_IsNull(shopware_api_key)) {
@@ -4785,6 +4813,7 @@ account_cart_add_t *account_cart_add_parseFromJSON(cJSON *account_cart_addJSON){
         shoplazza_access_token && !cJSON_IsNull(shoplazza_access_token) ? strdup(shoplazza_access_token->valuestring) : NULL,
         shoplazza_shared_secret && !cJSON_IsNull(shoplazza_shared_secret) ? strdup(shoplazza_shared_secret->valuestring) : NULL,
         shopware_access_key && !cJSON_IsNull(shopware_access_key) ? strdup(shopware_access_key->valuestring) : NULL,
+        unas_api_key && !cJSON_IsNull(unas_api_key) ? strdup(unas_api_key->valuestring) : NULL,
         shopware_api_key && !cJSON_IsNull(shopware_api_key) ? strdup(shopware_api_key->valuestring) : NULL,
         shopware_api_secret && !cJSON_IsNull(shopware_api_secret) ? strdup(shopware_api_secret->valuestring) : NULL,
         miva_access_token && !cJSON_IsNull(miva_access_token) ? strdup(miva_access_token->valuestring) : NULL,

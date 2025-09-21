@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **tier_prices** | [**list_t**](product_add_tier_prices_inner.md) \* | Defines product&#39;s tier prices | [optional] 
 **reserve_price** | **double** | Defines reserve price value | [optional] 
 **buyitnow_price** | **double** | Defines buy it now value | [optional] 
-**taxable** | **int** | Specifies whether a tax is charged | [optional] [default to true]
+**taxable** | **int** | Specifies whether a tax is charged | [optional] 
 **tax_class_id** | **char \*** | Defines tax classes where entity has to be added | [optional] 
 **type** | **char \*** | Defines product&#39;s type | [optional] 
 **status** | **char \*** | Defines product&#39;s status | [optional] 

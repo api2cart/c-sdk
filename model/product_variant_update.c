@@ -58,6 +58,7 @@ static product_variant_update_t *product_variant_update_create_internal(
     char *meta_title,
     char *meta_description,
     char *meta_keywords,
+    char *manufacturer,
     int reindex,
     int clear_cache
     ) {
@@ -117,6 +118,7 @@ static product_variant_update_t *product_variant_update_create_internal(
     product_variant_update_local_var->meta_title = meta_title;
     product_variant_update_local_var->meta_description = meta_description;
     product_variant_update_local_var->meta_keywords = meta_keywords;
+    product_variant_update_local_var->manufacturer = manufacturer;
     product_variant_update_local_var->reindex = reindex;
     product_variant_update_local_var->clear_cache = clear_cache;
 
@@ -177,6 +179,7 @@ __attribute__((deprecated)) product_variant_update_t *product_variant_update_cre
     char *meta_title,
     char *meta_description,
     char *meta_keywords,
+    char *manufacturer,
     int reindex,
     int clear_cache
     ) {
@@ -233,6 +236,7 @@ __attribute__((deprecated)) product_variant_update_t *product_variant_update_cre
         meta_title,
         meta_description,
         meta_keywords,
+        manufacturer,
         reindex,
         clear_cache
         );
@@ -365,6 +369,10 @@ void product_variant_update_free(product_variant_update_t *product_variant_updat
     if (product_variant_update->meta_keywords) {
         free(product_variant_update->meta_keywords);
         product_variant_update->meta_keywords = NULL;
+    }
+    if (product_variant_update->manufacturer) {
+        free(product_variant_update->manufacturer);
+        product_variant_update->manufacturer = NULL;
     }
     free(product_variant_update);
 }
@@ -795,6 +803,14 @@ cJSON *product_variant_update_convertToJSON(product_variant_update_t *product_va
     // product_variant_update->meta_keywords
     if(product_variant_update->meta_keywords) {
     if(cJSON_AddStringToObject(item, "meta_keywords", product_variant_update->meta_keywords) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // product_variant_update->manufacturer
+    if(product_variant_update->manufacturer) {
+    if(cJSON_AddStringToObject(item, "manufacturer", product_variant_update->manufacturer) == NULL) {
     goto fail; //String
     }
     }
@@ -1466,6 +1482,18 @@ product_variant_update_t *product_variant_update_parseFromJSON(cJSON *product_va
     }
     }
 
+    // product_variant_update->manufacturer
+    cJSON *manufacturer = cJSON_GetObjectItemCaseSensitive(product_variant_updateJSON, "manufacturer");
+    if (cJSON_IsNull(manufacturer)) {
+        manufacturer = NULL;
+    }
+    if (manufacturer) { 
+    if(!cJSON_IsString(manufacturer) && !cJSON_IsNull(manufacturer))
+    {
+    goto end; //String
+    }
+    }
+
     // product_variant_update->reindex
     cJSON *reindex = cJSON_GetObjectItemCaseSensitive(product_variant_updateJSON, "reindex");
     if (cJSON_IsNull(reindex)) {
@@ -1544,6 +1572,7 @@ product_variant_update_t *product_variant_update_parseFromJSON(cJSON *product_va
         meta_title && !cJSON_IsNull(meta_title) ? strdup(meta_title->valuestring) : NULL,
         meta_description && !cJSON_IsNull(meta_description) ? strdup(meta_description->valuestring) : NULL,
         meta_keywords && !cJSON_IsNull(meta_keywords) ? strdup(meta_keywords->valuestring) : NULL,
+        manufacturer && !cJSON_IsNull(manufacturer) ? strdup(manufacturer->valuestring) : NULL,
         reindex ? reindex->valueint : 0,
         clear_cache ? clear_cache->valueint : 0
         );
